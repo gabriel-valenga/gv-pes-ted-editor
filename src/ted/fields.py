@@ -1,18 +1,3 @@
-#!/usr/bin/env python3
-# PES GV - PES 2021 TED logical reader/editor
-# Phase 1: player record fields extracted from TEditor's Jd schema.
-# Does not rebuild records: modifies only the bytes of the fields that are explicitly edited.
-
-from __future__ import annotations
-import argparse
-import json
-import struct
-from pathlib import Path
-
-PLAYER_RECORD_LEN = 312
-MAX_PLAYERS = 40
-PLAYERS_START = 2328
-EXPECTED_TED_SIZE = 14820
 POS_ORDER = ["GK", "CB", "LB", "RB", "DMF", "CMF", "LMF", "RMF", "AMF", "LWF", "RWF", "SS", "CF"]
 
 PLAYER_FIELDS = [
@@ -922,39 +907,13 @@ PLAYER_FIELDS = [
     }
 ]
 
-def decrypt_ted(raw: bytes) -> bytearray:
-    """Decrypts the data region used by the original script."""
-    if len(raw) < 80:
-        raise ValueError("TED file too small (less than 80 bytes).")
-    e = 5
-    key = raw[64 + e:80] + raw[48:64 + e]
-    if len(key) != 32:
-        raise ValueError(f"Unexpected XOR key: {len(key)} bytes (expected 32).")
-    dec = bytearray(len(raw))
-    # The TEditor/base script treats the first 80 bytes as a header.
-    dec[:80] = raw[:48] + b"\x00" * 32
-    for i in range(80, len(raw)):
-        dec[i] = raw[i] ^ key[(i - 80) % 32]
-    return dec
-
-def encrypt_ted(data: bytes | bytearray, original_raw: bytes) -> bytes:
-    """Re-apply XOR to the edited data, preserving the original 80 bytes of the header."""
-    if len(data) != len(original_raw):
-        raise ValueError("The size of the edited data differs from the original from TED.")
-    e = 5
-    key = original_raw[64 + e:80] + original_raw[48:64 + e]
-    if len(key) != 32:
-        raise ValueError("It was not possible to reconstruct the 32-byte XOR key.")
-    out = bytearray(original_raw)
-    for i in range(80, len(data)):
-        out[i] = data[i] ^ key[(i - 80) % 32]
-    return bytes(out)
 
 def read_string(data: bytes | bytearray, offset: int, length: int) -> str:
     chunk = bytes(data[offset:offset + length])
     chunk = chunk.split(b"\x00", 1)[0]
     # UTF-8 is the behavior of the original script; fallback helps with diagnostics.
     return chunk.decode("utf-8", errors="replace").strip()
+
 
 def read_bitfield(data, byte_offset: int, bit_offset: int, bit_length: int, signed=False) -> int:
     value = 0
@@ -969,6 +928,7 @@ def read_bitfield(data, byte_offset: int, bit_offset: int, bit_length: int, sign
     if signed and value & (1 << (bit_length - 1)):
         value -= 1 << bit_length
     return value
+
 
 def write_bitfield(data, byte_offset: int, bit_offset: int, bit_length: int, value: int) -> None:
     value = int(value)
@@ -986,6 +946,7 @@ def write_bitfield(data, byte_offset: int, bit_offset: int, bit_length: int, val
             data[byte_idx] |= mask
         else:
             data[byte_idx] &= ~mask
+
 
 def transform_from_raw(raw_value, transform):
     if transform == "P1":
@@ -1009,6 +970,7 @@ def transform_from_raw(raw_value, transform):
             19: "extraFrontman", 20: "offensiveGoalkeeper", 21: "defensiveGoalkeeper"
         }.get(raw_value, raw_value)
     return raw_value
+
 
 def transform_to_raw(value, transform):
     if transform == "P1":
@@ -1040,6 +1002,7 @@ def transform_to_raw(value, transform):
         return mapping.get(str(value), int(value) if str(value).isdigit() else value)
     return value
 
+
 def get_field(record: bytes | bytearray, field: dict):
     key = field["key"]
     offset = field.get("startByte", 0)
@@ -1058,6 +1021,7 @@ def get_field(record: bytes | bytearray, field: dict):
         value = int.from_bytes(chunk, "little", signed=field.get("signed", False))
         return transform_from_raw(value, field.get("transform"))
     return None
+
 
 def set_field(record: bytearray, field: dict, value) -> None:
     key = field["key"]
@@ -1094,136 +1058,3 @@ def set_field(record: bytearray, field: dict, value) -> None:
     raise ValueError(f"Field {key} not supported for writing.")
 
 FIELD_BY_NAME = {f["key"]: f for f in PLAYER_FIELDS}
-
-def extract_players(data: bytearray):
-    players = []
-    for index in range(MAX_PLAYERS):
-        start = PLAYERS_START + index * PLAYER_RECORD_LEN
-        if start + PLAYER_RECORD_LEN > len(data):
-            break
-        rec = data[start:start + PLAYER_RECORD_LEN]
-        player_id = int.from_bytes(rec[0:4], "little")
-        if player_id == 0:
-            continue
-        item = {"index": index}
-        for field in PLAYER_FIELDS:
-            try:
-                item[field["key"]] = get_field(rec, field)
-            except Exception as exc:
-                item[field["key"]] = {"read_error": str(exc)}
-        item["_recordOffset"] = start
-        players.append(item)
-    return players
-
-def get_team_summary(data):
-    # Known fields from the initial script; the complete schema for the team/tactics will be a separate step.
-    team_start = 80
-    assignment = data[756:1040]
-    shirt_numbers = list(struct.unpack_from("<40H", assignment, 164)) if len(assignment) >= 244 else []
-    return {
-        "teamName": read_string(data, team_start + 104, 70),
-        "shortName": read_string(data, team_start + 174, 4),
-        "stadium": read_string(data, team_start + 178, 120),
-        "shirtNumbers": shirt_numbers,
-        "formationRaw": list(data[1044:1055]) if len(data) >= 1055 else [],
-    }
-
-def apply_edit(data: bytearray, player_index: int, field_name: str, value_text: str):
-    if field_name not in FIELD_BY_NAME:
-        raise KeyError(f"Unknown field: {field_name}")
-    field = FIELD_BY_NAME[field_name]
-    start = PLAYERS_START + player_index * PLAYER_RECORD_LEN
-    if player_index < 0 or start + PLAYER_RECORD_LEN > len(data):
-        raise IndexError("Player index out of file range.")
-    rec = bytearray(data[start:start + PLAYER_RECORD_LEN])
-    if int.from_bytes(rec[0:4], "little") == 0:
-        raise ValueError(f"Player index not exists: {player_index}.")
-    # JSON parsing allows numbers, booleans, null, and strings with spaces.
-    try:
-        value = json.loads(value_text)
-    except json.JSONDecodeError:
-        value = value_text
-    set_field(rec, field, value)
-    data[start:start + PLAYER_RECORD_LEN] = rec
-
-def main():
-    parser = argparse.ArgumentParser(description="Reads and edits player fields in PES 2021 TED files.")
-    parser.add_argument("ted", nargs="?", help="Path to the encrypted .ted file")
-    parser.add_argument("--json", dest="json_out", help="Save JSON dump of read operation")
-    parser.add_argument("--decrypted", help="Save decrypted buffer for debugging")
-    parser.add_argument("--set", action="append", default=[], metavar="INDEX:FIELD=VALUE",
-                        help='Edit field. Ex.: --set "0:speed=90" ou --set "0:playerName=Gabriel Valenga"')
-    parser.add_argument("--out", help="Save the edited, encrypted TED (use a copy for testing)")
-    parser.add_argument("--list-fields", action="store_true", help="List the recognized player fields")
-    args = parser.parse_args()
-
-    if args.list_fields:
-        print(json.dumps(PLAYER_FIELDS, ensure_ascii=False, indent=2))
-        if not args.ted:
-            return
-
-    if not args.ted:
-        parser.error("Specify the TED path, or use --list-fields.")
-    path = Path(args.ted)
-    original_raw = path.read_bytes()
-    if len(original_raw) != EXPECTED_TED_SIZE:
-        print(f"NOTICE: size {len(original_raw)} bytes; original script expected {EXPECTED_TED_SIZE}.")
-    data = decrypt_ted(original_raw)
-
-    if args.decrypted:
-        Path(args.decrypted).write_bytes(data)
-        print(f"Decrypted debug buffer saved in: {args.decrypted}")
-
-    edits = []
-    for edit in args.set:
-        try:
-            left, value = edit.split("=", 1)
-            index_text, field_name = left.split(":", 1)
-            index = int(index_text)
-            before = extract_player_field(data, index, field_name)
-            apply_edit(data, index, field_name, value)
-            after = extract_player_field(data, index, field_name)
-            edits.append({"index": index, "field": field_name, "before": before, "after": after})
-        except Exception as exc:
-            parser.error(f"Failed to apply --set {edit!r}: {exc}")
-
-    if args.out:
-        encrypted = encrypt_ted(data, original_raw)
-        Path(args.out).write_bytes(encrypted)
-        print(f"TED file saved to: {args.out}")
-        # Verifies that the saved file retains its size and that decryption restores the edited bytes.
-        check = decrypt_ted(encrypted)
-        if check[80:] != data[80:]:
-            raise RuntimeError("Round-trip validation failed in the data region.")
-        print("Round-trip XOR validated (region starting from byte 80).")
-
-    result = {
-        "sourceFile": str(path),
-        "fileSize": len(original_raw),
-        "team": get_team_summary(data),
-        "playerCount": len(extract_players(data)),
-        "players": extract_players(data),
-        "edits": edits,
-        "notes": [
-            "The values presented apply the getter conversions from the TEditor player schema, where identified.",
-            "playerAppearance is exposed as hexadecimal bytes; the internal structure has yet to be decoded.",
-            "TEditor OVR, full tactics, and complete team fields are not yet implemented at this stage." 
-        ]
-    }
-    if args.json_out:
-        Path(args.json_out).write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
-        print(f"JSON saved to: {args.json_out}")
-    else:
-        print(json.dumps(result, ensure_ascii=False, indent=2))
-
-def extract_player_field(data, player_index, field_name):
-    if field_name not in FIELD_BY_NAME:
-        raise KeyError(f"Unknown field: {field_name}")
-    start = PLAYERS_START + player_index * PLAYER_RECORD_LEN
-    if player_index < 0 or start + PLAYER_RECORD_LEN > len(data):
-        raise IndexError("Player index out of range.")
-    rec = data[start:start + PLAYER_RECORD_LEN]
-    return get_field(rec, FIELD_BY_NAME[field_name])
-
-if __name__ == "__main__":
-    main()

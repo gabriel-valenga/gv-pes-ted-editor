@@ -1,0 +1,52 @@
+import struct
+from ted.fields import FIELD_BY_NAME, PLAYER_FIELDS, get_field, read_string
+
+
+PLAYER_RECORD_LEN = 312
+MAX_PLAYERS = 40
+PLAYERS_START = 2328
+EXPECTED_TED_SIZE = 14820
+
+def extract_players(data: bytearray):
+    players = []
+    for index in range(MAX_PLAYERS):
+        start = PLAYERS_START + index * PLAYER_RECORD_LEN
+        if start + PLAYER_RECORD_LEN > len(data):
+            break
+        rec = data[start:start + PLAYER_RECORD_LEN]
+        player_id = int.from_bytes(rec[0:4], "little")
+        if player_id == 0:
+            continue
+        item = {"index": index}
+        for field in PLAYER_FIELDS:
+            try:
+                item[field["key"]] = get_field(rec, field)
+            except Exception as exc:
+                item[field["key"]] = {"read_error": str(exc)}
+        item["_recordOffset"] = start
+        players.append(item)
+    return players
+
+
+def get_team_summary(data):
+    # Known fields from the initial script; the complete schema for the team/tactics will be a separate step.
+    team_start = 80
+    assignment = data[756:1040]
+    shirt_numbers = list(struct.unpack_from("<40H", assignment, 164)) if len(assignment) >= 244 else []
+    return {
+        "teamName": read_string(data, team_start + 104, 70),
+        "shortName": read_string(data, team_start + 174, 4),
+        "stadium": read_string(data, team_start + 178, 120),
+        "shirtNumbers": shirt_numbers,
+        "formationRaw": list(data[1044:1055]) if len(data) >= 1055 else [],
+    }
+
+
+def extract_player_field(data, player_index, field_name):
+    if field_name not in FIELD_BY_NAME:
+        raise KeyError(f"Unknown field: {field_name}")
+    start = PLAYERS_START + player_index * PLAYER_RECORD_LEN
+    if player_index < 0 or start + PLAYER_RECORD_LEN > len(data):
+        raise IndexError("Player index out of range.")
+    rec = data[start:start + PLAYER_RECORD_LEN]
+    return get_field(rec, FIELD_BY_NAME[field_name])

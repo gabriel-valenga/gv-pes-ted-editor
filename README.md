@@ -50,13 +50,13 @@ The current prototype uses Python's standard library for its core operations.
 Run the script with a TED file to inspect its contents and export parsed data:
 
 ```bash
-python gv_pes_ted_logic_v0_1.py "your_file.ted" --json output.json
+python cli.py "your_file.ted" --json output.json
 ```
 
 To modify a player's field, use the supported field-editing syntax:
 
 ```bash
-python gv_pes_ted_logic_v0_1.py "your_file.ted" --set "0:speed=90" --out "edited_file.ted"
+python cli.py "your_file.ted" --set "0:speed=90" --out "edited_file.ted"
 ```
 
 The example changes the `speed` field for the player at physical record index `0`. Player indices start at `0`.
@@ -64,8 +64,8 @@ The example changes the `speed` field for the player at physical record index `0
 For the complete list of supported fields and command-line options, run:
 
 ```bash
-python gv_pes_ted_logic_v0_1.py --help
-python gv_pes_ted_logic_v0_1.py --list-fields
+python cli.py --help
+python cli.py --list-fields
 ```
 
 > **Important:** Always work on copies of your TED files. Test modified files in TEditor and PES 2021 before using them in your main Option File.
