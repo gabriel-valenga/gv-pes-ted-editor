@@ -67,36 +67,53 @@ def load_rules(file_path: str | Path) -> dict:
 
     for index, rule in enumerate(attributes):
         if not isinstance(rule, dict):
-            raise ValueError(f"Invalid attribute rule at index {index}.")
-
+            raise ValueError(f"Invalid attribute rule at index {index}.")                
         field = rule.get("field")
-        delta = rule.get("delta")
 
         if not isinstance(field, str) or not field:
             raise ValueError(f"Invalid field in attribute rule {index}.")
 
-        if isinstance(delta, bool) or not isinstance(
-            delta, (int, float, str)
+        has_delta = "delta" in rule
+        has_value = "value" in rule
+
+        if has_delta == has_value:
+            raise ValueError(
+                f"Attribute rule {index} must contain exactly one "
+                "of 'delta' or 'value'."
+            )
+
+        operation = "delta" if has_delta else "set"
+        raw_value = rule[operation]
+
+        if isinstance(raw_value, bool) or not isinstance(
+            raw_value, (int, float, str)
         ):
-            raise ValueError(f"Invalid delta in attribute rule {index}.")
+            raise ValueError(
+                f"Invalid numeric value in attribute rule {index}."
+            )
 
         try:
-            delta = float(delta)
+            numeric_value = float(raw_value)
         except (ValueError, TypeError) as exc:
             raise ValueError(
-                f"Invalid delta in attribute rule {index}."
+                f"Invalid numeric value in attribute rule {index}."
             ) from exc
 
-        if not math.isfinite(delta):
+        if not math.isfinite(numeric_value):
             raise ValueError(
-                f"The delta in attribute rule {index} must be finite."
+                f"The value in attribute rule {index} must be finite."
+            )
+
+        if not numeric_value.is_integer():
+            raise ValueError(
+                f"The value in attribute rule {index} must be an integer."
             )
 
         normalized_attributes.append({
             "field": field,
-            "delta": delta,
+            "operation": operation,
+            "value": numeric_value,
         })
-
     skills = config.get("specialSkills")
     if not isinstance(skills, dict):
         raise ValueError("'specialSkills' must be an object.")
@@ -258,7 +275,11 @@ def apply_rules(data: bytearray, rules: dict) -> list[dict]:
                     f"for player index {player_index}."
                 )
 
-            after = round(before + rule["delta"])
+            if rule["operation"] == "delta":
+                after = round(before + rule["value"])
+            else:
+                after = int(rule["value"])
+
             after = max(40, min(99, after))
 
             if after == before:

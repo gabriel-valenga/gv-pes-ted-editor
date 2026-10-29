@@ -1,13 +1,15 @@
 
 #!/usr/bin/env python3
 # PES GV - PES 2021 TED logical reader/editor
-# Phase 1: player record fields extracted from TEditor's Jd schema.
-# Does not rebuild records: modifies only the bytes of the fields that are explicitly edited.
+# Applies editing rules to one or more TED files.
+# Only explicitly edited fields should be modified.
 
 from __future__ import annotations
+
 import argparse
 import json
 from pathlib import Path
+
 from editing.players.operations import apply_edit
 from editing.players.rules import load_rules, apply_rules
 from ted.crypto import decrypt_ted, encrypt_ted
@@ -21,129 +23,272 @@ from ted.reader import (
 from ted.writer import save_ted, validate_ted_round_trip
 
 
+def process_ted(
+    ted_path: Path,
+    rules_list: list[dict],
+    output_path: Path | None = None,
+    manual_edits: list[str] | None = None,
+    decrypted_path: Path | None = None,
+) -> dict:
+    """Read a TED file, apply all rules, and optionally save the result."""
+
+    original_raw = ted_path.read_bytes()
+
+    if len(original_raw) != EXPECTED_TED_SIZE:
+        print(
+            f"NOTICE: {ted_path.name}: file size is {len(original_raw)} bytes; "
+            f"expected {EXPECTED_TED_SIZE}."
+        )
+
+    data = decrypt_ted(original_raw)
+
+    if decrypted_path:
+        decrypted_path.parent.mkdir(parents=True, exist_ok=True)
+        decrypted_path.write_bytes(data)
+        print(f"Decrypted debug buffer saved: {decrypted_path}")
+
+    edits = []
+
+    # Apply every configuration to this TED in the specified order.
+    for rule_index, rules in enumerate(rules_list, start=1):
+        rule_edits = apply_rules(data, rules)
+        edits.extend(rule_edits)
+
+        print(
+            f"{ted_path.name}: rule {rule_index}/{len(rules_list)} "
+            f"applied ({len(rule_edits)} changes)."
+        )
+
+    # Apply manual edits after all configuration rules.
+    for edit in manual_edits or []:
+        try:
+            left, value = edit.split("=", 1)
+            index_text, field_name = left.split(":", 1)
+            index = int(index_text)
+
+            before = extract_player_field(data, index, field_name)
+            apply_edit(data, index, field_name, value)
+            after = extract_player_field(data, index, field_name)
+
+            edits.append({
+                "index": index,
+                "field": field_name,
+                "before": before,
+                "after": after,
+                "source": "manual",
+            })
+        except Exception as exc:
+            raise ValueError(
+                f"Failed to apply manual edit {edit!r} "
+                f"to {ted_path.name}: {exc}"
+            ) from exc
+
+    if output_path:
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+
+        encrypted_ted_file = encrypt_ted(data, original_raw)
+
+        save_ted(
+            path_to_save=str(output_path),
+            encrypted_ted_file=encrypted_ted_file,
+        )
+
+        validate_ted_round_trip(
+            encrypted_ted_file=encrypted_ted_file,
+            data=data,
+        )
+
+        print(f"TED saved: {output_path}")
+
+    players = extract_players(data)
+
+    return {
+        "sourceFile": str(ted_path),
+        "outputFile": str(output_path) if output_path else None,
+        "fileSize": len(original_raw),
+        "rulesApplied": len(rules_list),
+        "team": get_team_summary(data),
+        "playerCount": len(players),
+        "players": players,
+        "edits": edits,
+        "notes": [
+            "Only explicitly edited player fields are intended to change.",
+            "playerAppearance is exposed as hexadecimal bytes; its internal structure has not yet been decoded.",
+            "TEditor OVR, full tactics, and complete team fields are not yet implemented.",
+        ],
+    }
+
+
 def main():
     parser = argparse.ArgumentParser(
-        description="Reads and edits player fields in PES 2021 TED files."
+        description="Read and edit one or more PES 2021 TED files."
     )
-    parser.add_argument("ted", nargs="?", help="Path to the encrypted .ted file")
-    parser.add_argument("--json", dest="json_out", help="Save JSON dump of read operation")
-    parser.add_argument("--decrypted", help="Save decrypted buffer for debugging")
+
+    parser.add_argument(
+        "ted",
+        nargs="*",
+        help="One or more encrypted TED file paths.",
+    )
+    parser.add_argument(
+        "--input-dir",
+        help="Process all .ted files in this directory (non-recursively).",
+    )
+    parser.add_argument(
+        "--config",
+        action="append",
+        default=[],
+        metavar="JSON",
+        help="JSON rules file. Can be specified multiple times, in order.",
+    )
+    parser.add_argument(
+        "--output-dir",
+        help="Directory for processed TED files. Original filenames are preserved.",
+    )
+    parser.add_argument(
+        "--json",
+        dest="json_out",
+        help="Save the JSON result. Only available when processing one TED file.",
+    )
+    parser.add_argument(
+        "--decrypted",
+        help="Save the decrypted buffer for debugging. Only available for one TED file.",
+    )
     parser.add_argument(
         "--set",
         action="append",
         default=[],
         metavar="INDEX:FIELD=VALUE",
-        help='Edit field. Example: --set "0:speed=90"',
-    )
-    parser.add_argument(
-        "--config",
-        help="Path to a JSON file containing editing rules",
+        help='Manually edit a field. Example: --set "0:speed=90".',
     )
     parser.add_argument(
         "--out",
-        help="Save the edited, encrypted TED (use a copy for testing)",
+        help="Output path for a single TED file.",
     )
     parser.add_argument(
         "--list-fields",
         action="store_true",
-        help="List the recognized player fields",
+        help="List recognized player fields.",
     )
 
     args = parser.parse_args()
 
     if args.list_fields:
         print(json.dumps(PLAYER_FIELDS, ensure_ascii=False, indent=2))
-        if not args.ted:
+        if not args.ted and not args.input_dir:
             return
 
-    if not args.ted:
-        parser.error("Specify the TED path, or use --list-fields.")
+    if args.ted and args.input_dir:
+        parser.error("Use positional TED paths or --input-dir, not both.")
 
-    rules = None
+    if args.output_dir and args.out:
+        parser.error("Use --output-dir or --out, not both.")
 
-    if args.config:
+    if args.input_dir:
+        input_dir = Path(args.input_dir)
+
+        if not input_dir.is_dir():
+            parser.error(f"Input directory does not exist: {input_dir}")
+
+        ted_files = sorted(
+            path for path in input_dir.iterdir()
+            if path.is_file() and path.suffix.lower() == ".ted"
+        )
+    else:
+        ted_files = [Path(path) for path in args.ted]
+
+    if not ted_files:
+        parser.error("Specify at least one TED file or a directory containing TED files.")
+
+    for ted_file in ted_files:
+        if not ted_file.is_file():
+            parser.error(f"TED file does not exist: {ted_file}")
+
+    if args.out and len(ted_files) != 1:
+        parser.error("--out can only be used when processing one TED file.")
+
+    if args.json_out and len(ted_files) != 1:
+        parser.error("--json can only be used when processing one TED file.")
+
+    if args.decrypted and len(ted_files) != 1:
+        parser.error("--decrypted can only be used when processing one TED file.")
+
+    # Load each configuration once and reuse it for every TED file.
+    rules_list = []
+
+    for config_path in args.config:
         try:
-            rules = load_rules(args.config)
+            rules_list.append(load_rules(config_path))
         except (OSError, ValueError) as exc:
-            parser.error(f"Failed to load configuration: {exc}")
+            parser.error(f"Failed to load configuration {config_path!r}: {exc}")
 
-    path = Path(args.ted)
-    original_raw = path.read_bytes()
+    output_dir = Path(args.output_dir) if args.output_dir else None
 
-    if len(original_raw) != EXPECTED_TED_SIZE:
-        print(
-            f"NOTICE: size {len(original_raw)} bytes; "
-            f"original script expected {EXPECTED_TED_SIZE}."
-        )
+    if output_dir:
+        output_dir.mkdir(parents=True, exist_ok=True)
 
-    data = decrypt_ted(original_raw)
+        resolved_output_dir = output_dir.resolve()
 
-    if args.decrypted:
-        Path(args.decrypted).write_bytes(data)
-        print(f"Decrypted debug buffer saved in: {args.decrypted}")
+        if any(
+            ted_file.resolve().parent == resolved_output_dir
+            for ted_file in ted_files
+        ):
+            parser.error(
+                "The output directory must not be the same directory "
+                "as an input TED file."
+            )
 
-    edits = []
+    results = []
+    failures = []
 
-    if rules:
+    for ted_file in ted_files:
+        if output_dir:
+            output_path = output_dir / ted_file.name
+        elif args.out:
+            output_path = Path(args.out)
+        else:
+            output_path = None
+
+        decrypted_path = Path(args.decrypted) if args.decrypted else None
+
         try:
-            rule_edits = apply_rules(data, rules)
-            edits.extend(rule_edits)
-            print(f"Configuration rules applied: {len(rule_edits)} changes.")
+            result = process_ted(
+                ted_path=ted_file,
+                rules_list=rules_list,
+                output_path=output_path,
+                manual_edits=args.set,
+                decrypted_path=decrypted_path,
+            )
+            results.append(result)
+
+            if args.json_out:
+                Path(args.json_out).write_text(
+                    json.dumps(result, ensure_ascii=False, indent=2),
+                    encoding="utf-8",
+                )
+                print(f"JSON saved: {args.json_out}")
+
         except Exception as exc:
-            parser.error(f"Failed to apply configuration rules: {exc}")
-    else:
-        for edit in args.set:
-            try:
-                left, value = edit.split("=", 1)
-                index_text, field_name = left.split(":", 1)
-                index = int(index_text)
+            failures.append({
+                "sourceFile": str(ted_file),
+                "error": str(exc),
+            })
+            print(f"ERROR processing {ted_file.name}: {exc}")
 
-                before = extract_player_field(data, index, field_name)
-                apply_edit(data, index, field_name, value)
-                after = extract_player_field(data, index, field_name)
+    if not args.json_out:
+        print(json.dumps({
+            "processedCount": len(results),
+            "failureCount": len(failures),
+            "results": results,
+            "failures": failures,
+        }, ensure_ascii=False, indent=2))
 
-                edits.append({
-                    "index": index,
-                    "field": field_name,
-                    "before": before,
-                    "after": after,
-                })
-            except Exception as exc:
-                parser.error(f"Failed to apply --set {edit!r}: {exc}")
+    print(
+        f"Finished: {len(results)} succeeded, "
+        f"{len(failures)} failed out of {len(ted_files)} TED files."
+    )
 
-    if args.out:
-        encrypted_ted_file = encrypt_ted(data, original_raw)
-        save_ted(
-            path_to_save=args.out,
-            encrypted_ted_file=encrypted_ted_file
-        )
-        validate_ted_round_trip(encrypted_ted_file=encrypted_ted_file, data=data)
-
-    result = {
-        "sourceFile": str(path),
-        "fileSize": len(original_raw),
-        "configFile": str(args.config) if args.config else None,
-        "rulesLoaded": rules is not None,
-        "team": get_team_summary(data),
-        "playerCount": len(extract_players(data)),
-        "players": extract_players(data),
-        "edits": edits,
-        "notes": [
-            "The values presented apply the getter conversions from the TEditor player schema, where identified.",
-            "playerAppearance is exposed as hexadecimal bytes; the internal structure has yet to be decoded.",
-            "TEditor OVR, full tactics, and complete team fields are not yet implemented at this stage.",
-            "Configuration rules are loaded and validated but are not yet applied to players.",
-        ],
-    }
-
-    if args.json_out:
-        Path(args.json_out).write_text(
-            json.dumps(result, ensure_ascii=False, indent=2),
-            encoding="utf-8",
-        )
-        print(f"JSON saved to: {args.json_out}")
-    else:
-        print(json.dumps(result, ensure_ascii=False, indent=2))
+    if failures:
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":
