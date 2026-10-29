@@ -27,11 +27,12 @@ Not every field exposed by TEditor has been mapped yet. Team data, tactics, play
 - [x] Implement the initial TED decryption logic.
 - [x] Parse mapped player fields.
 - [x] Modify individual player attributes and skills.
-- [x] Save modified TED files.
+- [x] Save modified TED files with the correct PES 2021 encryption mask.
+- [x] Implement batch editing through configurable rules.
+- [x] Validate modified TED files in PES 2021 across multiple teams.
 - [ ] Expand field coverage to match TEditor's data model.
-- [ ] Implement batch editing and player selection.
 - [ ] Reproduce and validate TEditor's overall rating calculations.
-- [ ] Add automated tests for reading, writing, and data integrity.
+- [ ] Add automated tests for reading, writing, encryption, and data integrity.
 - [ ] Introduce a local SQLite database for player data and edit history.
 - [ ] Support CSV import and export for external analysis and editing.
 - [ ] Build a standalone desktop application.
