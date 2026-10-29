@@ -12,8 +12,8 @@ CONFIG_VERSION = 1
 VALID_LANGUAGES = {"pt-BR", "en"}
 
 VALID_POSITIONS = {
-    "GK", "CB", "DMF", "CMF", "LB",
-    "AMF", "RWF", "LWF", "RB", "CF",
+    "GK", "RB", "CB", "LB", "DMF", "CMF",
+    "AMF", "RMF", "LMF", "RWF", "LWF", "SS", "CF"
 }
 
 
