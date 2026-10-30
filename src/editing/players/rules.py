@@ -2,7 +2,6 @@
 import json
 import math
 from pathlib import Path
-
 from editing.players.calculations import calculate_player_attributes
 from editing.players.conditions import (
     evaluate_conditions,

@@ -39,6 +39,57 @@ Not every field exposed by TEditor has been mapped yet. Team data, tactics, play
 
 ## Getting Started
 
+## Environment Setup
+
+### 1. Prerequisites
+
+- Python 3.10 or higher.
+
+### 2. Clone the repository
+
+```bash
+git clone https://github.com/gabriel-valenga/gv-pes-ted-editor.git
+cd gv-pes-ted-editor
+```
+
+### 3. Create a virtual environment
+
+```bash
+python -m venv .venv
+```
+
+### 4. Activate the virtual environment
+
+**Windows (PowerShell):**
+
+```powershell
+.venv\Scripts\Activate.ps1
+```
+
+**Windows (CMD):**
+
+```cmd
+.venv\Scripts\activate.bat
+```
+
+### 5. Install dependencies
+
+```bash
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+### 6. Configure PYTHONPATH
+
+**Windows (PowerShell):**
+
+```powershell
+$env:PYTHONPATH = "src"
+```
+
+This allows Python to locate the project's modules during execution.
+
+
 ### Requirements
 
 - Python 3

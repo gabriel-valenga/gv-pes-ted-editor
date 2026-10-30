@@ -102,13 +102,13 @@ def evaluate_conditions(player, conditions, logic="AND"):
 
     Empty conditions mean that the player passes the condition filter.
     """
-    if not conditions:
-        return True
-
     logic = logic.upper()
 
     if logic not in {"AND", "OR"}:
         raise ValueError(f"Invalid condition logic: {logic}")
+
+    if not conditions:
+        return True
 
     results = [
         evaluate_condition(player, condition)
