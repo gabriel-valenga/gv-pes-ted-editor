@@ -225,7 +225,7 @@ def test_unknown_condition_field():
 
 def test_unknown_calculated_field():
     condition = {
-        "field": "calculated.overall",
+        "field": "calculated.unknown",
         "operator": "gt",
         "value": 80,
     }

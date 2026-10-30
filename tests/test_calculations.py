@@ -59,6 +59,7 @@ def test_calculate_player_attributes():
 
     assert result == {
         "bmi": 24.7,
+        "overall": None,
     }
 
 

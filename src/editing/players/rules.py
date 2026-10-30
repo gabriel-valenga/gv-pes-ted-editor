@@ -29,6 +29,11 @@ VALID_CONDITION_OPERATORS = {
     "in", "not_in", "between",
 }
 
+CALCULATED_FIELDS = {
+    "bmi",
+    "overall",
+}
+
 FIELD_BY_NAME = {
     field["key"]: field
     for field in PLAYER_FIELDS
@@ -87,7 +92,7 @@ def _validate_condition(condition):
     if field_name.startswith("calculated."):
         calculated_name = field_name.split(".", 1)[1]
 
-        if calculated_name != "bmi":
+        if calculated_name not in CALCULATED_FIELDS:
             raise ValueError(
                 f"Unknown calculated field: {field_name}"
             )
@@ -219,7 +224,7 @@ def _validate_bands(bands):
         if field_name.startswith("calculated."):
             calculated_name = field_name.split(".", 1)[1]
 
-            if calculated_name != "bmi":
+            if calculated_name not in CALCULATED_FIELDS:
                 raise ValueError(
                     f"Unknown calculated band field: {field_name}"
                 )
