@@ -61,6 +61,11 @@ BOOLEAN_SKILL_FIELDS = {
         and field.get("transform") == "j"
     )
 }
+# Player reputation field.
+# It uses a 3-bit field with logical values from 1 to 8.
+REPUTATION_FIELDS = {
+    "reputation",
+}
 
 
 def _is_finite_number(value):
@@ -192,6 +197,21 @@ def _validate_operation(operation):
         if not isinstance(value, bool):
             raise ValueError(
                 f"Boolean skill '{field_name}' requires true or false."
+            )
+
+    elif field_name in REPUTATION_FIELDS:
+        if operation_type != "set":
+            raise ValueError(
+                f"Reputation field '{field_name}' only supports 'set'."
+            )
+
+        if (
+            not isinstance(value, int)
+            or isinstance(value, bool)
+            or not 1 <= value <= 8
+        ):
+            raise ValueError(
+                f"Reputation field '{field_name}' requires an integer from 1 to 8."
             )
 
     else:
@@ -478,6 +498,20 @@ def _apply_operation(data, player, operation):
         after = _calculate_operation(before, operation)
 
     elif field_name in BOOLEAN_SKILL_FIELDS:
+        after = value
+
+    elif field_name in REPUTATION_FIELDS:
+        before = player.get(field_name)
+
+        if (
+            not isinstance(before, int)
+            or isinstance(before, bool)
+            or not 1 <= before <= 8
+        ):
+            raise ValueError(
+                f"Invalid current value for '{field_name}'."
+            )
+
         after = value
 
     else:

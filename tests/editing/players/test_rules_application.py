@@ -1,4 +1,4 @@
-
+import pytest
 import json
 from editing.players.rules import load_rules, apply_rules
 from editing.players.conditions import prepare_player
@@ -859,5 +859,171 @@ def test_overall_is_recalculated_between_rules(tmp_path):
     assert updated_overall > original_overall
     assert updated_player["finishing"] == 99
     assert updated_player["speed"] == 95
+    assert len(edits) == 2
+
+
+@pytest.mark.parametrize("reputation_value", range(1, 9))
+def test_apply_reputation_values_and_read_from_ted(
+    tmp_path,
+    reputation_value,
+):
+    initial_reputation = 8 if reputation_value == 1 else 1
+
+    data = create_ted_data([
+        {
+            "id": 1,
+            "reputation": initial_reputation,
+            "speed": 70,
+        }
+    ])
+
+    config = create_config([
+        create_rule(
+            name="Set reputation",
+            operations=[
+                {
+                    "field": "reputation",
+                    "operation": "set",
+                    "value": reputation_value,
+                }
+            ],
+        )
+    ])
+
+    rules = load_test_rules(tmp_path, config)
+    edits = apply_rules(data, rules)
+
+    player = get_player(data, 0)
+
+    assert player["reputation"] == reputation_value
+    assert player["speed"] == 70
+    assert len(edits) == 1
+    assert edits[0]["field"] == "reputation"
+    assert edits[0]["before"] == initial_reputation
+    assert edits[0]["after"] == reputation_value
+
+
+def test_reputation_is_set_from_calculated_overall_bands(tmp_path):
+    goalkeeper_data = create_overall_player(1, "GK")
+    forward_data = create_overall_player(2, "CF")
+
+    goalkeeper_data["reputation"] = 8
+    forward_data["reputation"] = 8
+
+    data = create_ted_data([
+        goalkeeper_data,
+        forward_data,
+    ])
+
+    config = create_config([
+        create_rule(
+            name="Reputation based on Overall",
+            operations=[],
+            bands=[
+                {
+                    "field": "calculated.overall",
+                    "ranges": [
+                        {
+                            "min": 0,
+                            "max": 57,
+                            "operations": [
+                                {
+                                    "field": "reputation",
+                                    "operation": "set",
+                                    "value": 1,
+                                }
+                            ],
+                        },
+                        {
+                            "min": 58,
+                            "max": 62,
+                            "operations": [
+                                {
+                                    "field": "reputation",
+                                    "operation": "set",
+                                    "value": 2,
+                                }
+                            ],
+                        },
+                        {
+                            "min": 63,
+                            "max": 67,
+                            "operations": [
+                                {
+                                    "field": "reputation",
+                                    "operation": "set",
+                                    "value": 3,
+                                }
+                            ],
+                        },
+                        {
+                            "min": 68,
+                            "max": 72,
+                            "operations": [
+                                {
+                                    "field": "reputation",
+                                    "operation": "set",
+                                    "value": 4,
+                                }
+                            ],
+                        },
+                        {
+                            "min": 73,
+                            "max": 77,
+                            "operations": [
+                                {
+                                    "field": "reputation",
+                                    "operation": "set",
+                                    "value": 5,
+                                }
+                            ],
+                        },
+                        {
+                            "min": 78,
+                            "max": 82,
+                            "operations": [
+                                {
+                                    "field": "reputation",
+                                    "operation": "set",
+                                    "value": 6,
+                                }
+                            ],
+                        },
+                        {
+                            "min": 83,
+                            "max": 87,
+                            "operations": [
+                                {
+                                    "field": "reputation",
+                                    "operation": "set",
+                                    "value": 7,
+                                }
+                            ],
+                        },
+                        {
+                            "min": 88,
+                            "max": 1000,
+                            "operations": [
+                                {
+                                    "field": "reputation",
+                                    "operation": "set",
+                                    "value": 8,
+                                }
+                            ],
+                        },
+                    ],
+                }
+            ],
+        )
+    ])
+
+    rules = load_test_rules(tmp_path, config)
+    edits = apply_rules(data, rules)
+
+    goalkeeper = get_player(data, 0)
+    forward = get_player(data, 1)
+
+    assert goalkeeper["reputation"] == 2
+    assert forward["reputation"] == 1
     assert len(edits) == 2
     

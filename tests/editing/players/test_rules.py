@@ -310,6 +310,41 @@ def test_valid_boolean_skill_operation():
     _validate_operation(operation)
 
 
+@pytest.mark.parametrize("value", [1, 2, 3, 4, 5, 6, 7, 8])
+def test_valid_reputation_operation(value):
+    operation = {
+        "field": "reputation",
+        "operation": "set",
+        "value": value,
+    }
+
+    _validate_operation(operation)
+
+
+@pytest.mark.parametrize("value", [0, 9, -1, 10, 4.5, True, False])
+def test_reputation_rejects_invalid_value(value):
+    operation = {
+        "field": "reputation",
+        "operation": "set",
+        "value": value,
+    }
+
+    with pytest.raises(ValueError):
+        _validate_operation(operation)
+
+
+@pytest.mark.parametrize("operation_type", ["delta", "percentage"])
+def test_reputation_rejects_unsupported_operations(operation_type):
+    operation = {
+        "field": "reputation",
+        "operation": operation_type,
+        "value": 1,
+    }
+
+    with pytest.raises(ValueError):
+        _validate_operation(operation)
+        
+
 def test_boolean_skill_rejects_delta():
     operation = {
         "field": "acrobaticClear",
