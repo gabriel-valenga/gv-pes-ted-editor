@@ -230,6 +230,153 @@ Player registration data, including `weight` and `height`, cannot be modified th
 
 Calculated fields are read-only.
 
+## Batch Editing with the CLI
+
+The CLI supports applying one or more JSON rule configurations to a TED file or multiple TED files.
+
+### 1. Create a Rules Configuration
+
+Create a JSON file, for example `rules/player_rules.json`:
+
+```json
+{
+  "format": "pes-gv-ted-rules-config",
+  "version": 1,
+  "language": "en",
+  "targets": {
+    "allPositions": true,
+    "positions": []
+  },
+  "rules": [
+    {
+      "name": "Increase speed",
+      "enabled": true,
+      "conditionLogic": "AND",
+      "conditions": [],
+      "operations": [
+        {
+          "field": "speed",
+          "operation": "delta",
+          "value": 5
+        }
+      ],
+      "bands": []
+    },
+    {
+      "name": "Boost finishing for fast attackers",
+      "enabled": true,
+      "conditionLogic": "AND",
+      "conditions": [
+        {
+          "field": "speed",
+          "operator": "gte",
+          "value": 80
+        }
+      ],
+      "operations": [
+        {
+          "field": "finishing",
+          "operation": "delta",
+          "value": 10
+        }
+      ],
+      "bands": []
+    }
+  ]
+}
+```
+
+This configuration contains two rules:
+
+- `Increase speed`: adds 5 points to the speed attribute of all selected players.
+- `Boost finishing for fast attackers`: adds 10 points to finishing for players whose speed is at least 80.
+
+Rules are evaluated in the order in which they appear in the configuration.
+
+### 2. Process a Single TED File
+
+Use `--config` to apply a rules configuration and `--out` to specify the output file:
+
+```bash
+python cli.py "team.ted" --config "rules/player_rules.json" --out "output/team_edited.ted"
+```
+
+### 3. Apply Multiple Configurations
+
+Multiple configuration files can be supplied using repeated `--config` arguments:
+
+```bash
+python cli.py "team.ted" \
+  --config "rules/physical_attributes.json" \
+  --config "rules/technical_attributes.json" \
+  --out "output/team_edited.ted"
+```
+
+Configurations are applied sequentially in the order provided.
+
+All rules from the first configuration are applied before the second configuration is processed.
+
+### 4. Process Multiple TED Files
+
+To process every `.ted` file in a directory, use `--input-dir` and `--output-dir`:
+
+```bash
+python cli.py \
+  --input-dir "input/teams" \
+  --config "rules/player_rules.json" \
+  --output-dir "output/teams"
+```
+
+The original filenames are preserved in the output directory.
+
+### 5. Export Processing Results to JSON
+
+For a single TED file, use `--json` to export the processing results:
+
+```bash
+python cli.py \
+  "team.ted" \
+  --config "rules/player_rules.json" \
+  --out "output/team_edited.ted" \
+  --json "output/results.json"
+```
+
+The JSON report includes player data, applied edits, team information, and processing details.
+
+### 6. Combine Rules with Manual Edits
+
+Manual field edits can also be supplied using `--set`:
+
+```bash
+python cli.py \
+  "team.ted" \
+  --config "rules/player_rules.json" \
+  --set "0:speed=95" \
+  --set "1:finishing=90" \
+  --out "output/team_edited.ted"
+```
+
+Manual edits are applied **after all configuration rules**.
+
+### CLI Options
+
+| Argument | Description |
+|---|---|
+| `--config JSON` | Rules configuration file. Can be repeated. |
+| `--input-dir DIR` | Process all `.ted` files in a directory. |
+| `--output-dir DIR` | Output directory for processed TED files. |
+| `--out FILE` | Output path for a single TED file. |
+| `--json FILE` | Export processing results as JSON. Single-file processing only. |
+| `--set EDIT` | Apply a manual player field edit. Can be repeated. |
+| `--decrypted FILE` | Save the decrypted buffer for debugging. Single-file processing only. |
+| `--list-fields` | List recognized player fields. |
+
+For additional options, run:
+
+```bash
+python cli.py --help
+```
+
 ## Design Goals
 
 The project is being developed incrementally, with an emphasis on:
