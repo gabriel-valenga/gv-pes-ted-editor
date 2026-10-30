@@ -2,7 +2,6 @@
 import json
 import math
 from pathlib import Path
-from editing.players.calculations import calculate_player_attributes
 from editing.players.conditions import (
     evaluate_conditions,
     evaluate_band,
@@ -70,6 +69,14 @@ def _is_finite_number(value):
 def _validate_condition(condition):
     if not isinstance(condition, dict):
         raise ValueError("Each condition must be an object.")
+    allowed_fields = {"field", "operator", "value"}
+
+    unknown_fields = set(condition) - allowed_fields
+
+    if unknown_fields:
+        raise ValueError(
+            f"Unknown condition fields: {sorted(unknown_fields)}"
+        )
 
     field_name = condition.get("field")
     operator = condition.get("operator")
@@ -86,6 +93,9 @@ def _validate_condition(condition):
             )
     elif field_name not in FIELD_BY_NAME:
         raise ValueError(f"Unknown condition field: {field_name}")
+
+    if not isinstance(operator, str):
+        raise ValueError("Condition operator must be a string.")
 
     if operator not in VALID_CONDITION_OPERATORS:
         raise ValueError(f"Invalid condition operator: {operator}")
@@ -129,13 +139,27 @@ def _validate_condition(condition):
 def _validate_operation(operation):
     if not isinstance(operation, dict):
         raise ValueError("Each operation must be an object.")
+    allowed_fields = {"field", "operation", "value"}
+
+    unknown_fields = set(operation) - allowed_fields
+
+    if unknown_fields:
+        raise ValueError(
+            f"Unknown operation fields: {sorted(unknown_fields)}"
+        )
 
     field_name = operation.get("field")
     operation_type = operation.get("operation")
     value = operation.get("value")
 
+    if not isinstance(field_name, str):
+        raise ValueError("Operation field must be a string.")
+
     if field_name not in FIELD_BY_NAME:
         raise ValueError(f"Unknown operation field: {field_name}")
+
+    if not isinstance(operation_type, str):
+        raise ValueError("Operation type must be a string.")
 
     if operation_type not in VALID_OPERATIONS:
         raise ValueError(
@@ -179,6 +203,14 @@ def _validate_bands(bands):
         if not isinstance(band, dict):
             raise ValueError("Each band must be an object.")
 
+        allowed_fields = {"field", "ranges"}
+        unknown_fields = set(band) - allowed_fields
+
+        if unknown_fields:
+            raise ValueError(
+                f"Unknown band fields: {sorted(unknown_fields)}"
+            )
+
         field_name = band.get("field")
 
         if not isinstance(field_name, str):
@@ -202,6 +234,17 @@ def _validate_bands(bands):
             )
 
         for value_range in ranges:
+            if not isinstance(value_range, dict):
+                raise ValueError(
+                    f"Each range in band '{field_name}' must be an object."
+                )
+            allowed_fields = {"min", "max", "operations"}
+            unknown_fields = set(value_range) - allowed_fields
+
+            if unknown_fields:
+                raise ValueError(
+                    f"Unknown range fields: {sorted(unknown_fields)}"
+                )
             minimum = value_range.get("min")
             maximum = value_range.get("max")
             operations = value_range.get("operations")
@@ -231,9 +274,25 @@ def _validate_bands(bands):
 def _validate_rule(rule):
     if not isinstance(rule, dict):
         raise ValueError("Each rule must be an object.")
+    allowed_fields = {
+        "name",
+        "enabled",
+        "conditionLogic",
+        "conditions",
+        "operations",
+        "bands",
+    }
 
-    if not isinstance(rule.get("name"), str):
-        raise ValueError("Each rule requires a name.")
+    unknown_fields = set(rule) - allowed_fields
+
+    if unknown_fields:
+        raise ValueError(
+            f"Unknown rule fields: {sorted(unknown_fields)}"
+        )
+
+    name = rule.get("name")
+    if not isinstance(name, str) or not name.strip():
+        raise ValueError("Each rule requires a non-empty name.")
 
     if not isinstance(rule.get("enabled"), bool):
         raise ValueError(
@@ -242,7 +301,7 @@ def _validate_rule(rule):
 
     logic = rule.get("conditionLogic", "AND")
 
-    if logic not in {"AND", "OR"}:
+    if not isinstance(logic, str) or logic not in {"AND", "OR"}:
         raise ValueError(
             f"Invalid conditionLogic in rule '{rule['name']}'."
         )
@@ -280,10 +339,34 @@ def load_rules(config_path):
     with config_path.open("r", encoding="utf-8") as file:
         config = json.load(file)
 
+    if not isinstance(config, dict):
+        raise ValueError("Configuration root must be a JSON object.")
+
+    allowed_fields = {
+        "format",
+        "version",
+        "language",
+        "targets",
+        "rules",
+    }
+
+    unknown_fields = set(config) - allowed_fields
+
+    if unknown_fields:
+        raise ValueError(
+            f"Unknown configuration fields: {sorted(unknown_fields)}"
+        )
+
     if config.get("format") != CONFIG_FORMAT:
         raise ValueError("Invalid configuration format.")
 
-    if config.get("version") != CONFIG_VERSION:
+    version = config.get("version")
+
+    if (
+        not isinstance(version, int)
+        or isinstance(version, bool)
+        or version != CONFIG_VERSION
+    ):
         raise ValueError(
             f"Unsupported configuration version. "
             f"Expected {CONFIG_VERSION}."
@@ -291,13 +374,20 @@ def load_rules(config_path):
 
     language = config.get("language")
 
-    if language not in VALID_LANGUAGES:
+    if not isinstance(language, str) or language not in VALID_LANGUAGES:
         raise ValueError(f"Unsupported language: {language}")
 
     targets = config.get("targets")
 
     if not isinstance(targets, dict):
         raise ValueError("'targets' must be an object.")
+
+    unknown_target_fields = set(targets) - {"allPositions", "positions"}
+
+    if unknown_target_fields:
+        raise ValueError(
+            f"Unknown target fields: {sorted(unknown_target_fields)}"
+        )
 
     all_positions = targets.get("allPositions")
     positions = targets.get("positions")
@@ -307,6 +397,9 @@ def load_rules(config_path):
 
     if not isinstance(positions, list):
         raise ValueError("'positions' must be a list.")
+
+    if not all(isinstance(position, str) for position in positions):
+        raise ValueError("Each position must be a string.")
 
     invalid_positions = set(positions) - VALID_POSITIONS
 
@@ -372,7 +465,7 @@ def _apply_operation(data, player, operation):
     before = player.get(field_name)
 
     if field_name in NUMERIC_ATTRIBUTE_FIELDS:
-        if not isinstance(before, (int, float)):
+        if not _is_finite_number(before):
             raise ValueError(
                 f"Invalid current value for '{field_name}'."
             )
