@@ -180,3 +180,105 @@ def test_prepare_player_does_not_modify_original(player):
 
     assert player == original
     assert "calculated" not in player
+
+
+def make_player_with_overall():
+    player = {
+        "playerName": "Overall Test Player",
+        "registeredPosition": "CF",
+        "weight": 80,
+        "height": 180,
+        "weakFootAccuracy": 3,
+    }
+
+    attributes = [
+        "attackingProwess",
+        "ballControl",
+        "dribbling",
+        "tightPossession",
+        "lowPass",
+        "loftedPass",
+        "finishing",
+        "headingAbility",
+        "placeKicking",
+        "curl",
+        "speed",
+        "acceleration",
+        "kickingPower",
+        "jump",
+        "physicalContact",
+        "balance",
+        "stamina",
+        "defensiveProwess",
+        "ballWinning",
+        "aggression",
+        "gkAwareness",
+        "gkCatching",
+        "gkReach",
+        "gkClearing",
+        "gkReflexes",
+    ]
+
+    player.update({field: 70 for field in attributes})
+
+    return player
+
+
+def test_get_calculated_overall():
+    player = make_player_with_overall()
+    prepared = prepare_player(player)
+
+    assert get_condition_value(prepared, "calculated.overall") == 44
+
+
+@pytest.mark.parametrize(
+    "operator, value, expected",
+    [
+        ("eq", 44, True),
+        ("gte", 44, True),
+        ("gt", 44, False),
+        ("lt", 45, True),
+        ("between", [40, 50], True),
+    ],
+)
+def test_evaluate_condition_with_calculated_overall(
+    operator,
+    value,
+    expected,
+):
+    player = make_player_with_overall()
+    prepared = prepare_player(player)
+
+    condition = {
+        "field": "calculated.overall",
+        "operator": operator,
+        "value": value,
+    }
+
+    assert evaluate_condition(prepared, condition) is expected
+
+
+def test_evaluate_band_with_calculated_overall():
+    player = make_player_with_overall()
+    prepared = prepare_player(player)
+
+    overall = get_condition_value(
+        prepared,
+        "calculated.overall",
+    )
+
+    assert evaluate_band(overall, 40, 50) is True
+    assert evaluate_band(overall, 50, 60) is False
+
+
+def test_overall_is_recalculated_after_player_changes():
+    player = make_player_with_overall()
+
+    original_overall = prepare_player(player)["calculated"]["overall"]
+
+    player["finishing"] = 40
+
+    updated_overall = prepare_player(player)["calculated"]["overall"]
+
+    assert updated_overall < original_overall
+    

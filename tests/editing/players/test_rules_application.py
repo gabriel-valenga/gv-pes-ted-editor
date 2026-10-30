@@ -1,7 +1,7 @@
 
 import json
-
 from editing.players.rules import load_rules, apply_rules
+from editing.players.conditions import prepare_player
 from ted.fields import FIELD_BY_NAME, set_field
 from ted.reader import (
     PLAYERS_START,
@@ -41,6 +41,48 @@ def create_ted_data(players):
         data[start:start + PLAYER_RECORD_LEN] = record
 
     return data
+
+
+def create_overall_player(player_id, position):
+    attributes = [
+        "attackingProwess",
+        "ballControl",
+        "dribbling",
+        "tightPossession",
+        "lowPass",
+        "loftedPass",
+        "finishing",
+        "headingAbility",
+        "placeKicking",
+        "curl",
+        "speed",
+        "acceleration",
+        "kickingPower",
+        "jump",
+        "physicalContact",
+        "balance",
+        "stamina",
+        "defensiveProwess",
+        "ballWinning",
+        "aggression",
+        "gkAwareness",
+        "gkCatching",
+        "gkReach",
+        "gkClearing",
+        "gkReflexes",
+    ]
+
+    player = {
+        "id": player_id,
+        "registeredPosition": position,
+        "weight": 80,
+        "height": 180,
+        "weakFootAccuracy": 3,
+    }
+
+    player.update({field: 70 for field in attributes})
+
+    return player
 
 
 def create_config(rules, all_positions=True, positions=None):
@@ -679,5 +721,143 @@ def test_overlapping_ranges_apply_both_operations(tmp_path):
     player = get_player(data, 0)
 
     assert player["speed"] == 90
+    assert len(edits) == 2
+
+
+def test_apply_rule_with_calculated_overall_condition(tmp_path):
+    data = create_ted_data([
+        create_overall_player(1, "GK"),
+        create_overall_player(2, "CF"),
+    ])
+
+    config = create_config([
+        create_rule(
+            name="Filter by Overall",
+            conditions=[
+                {
+                    "field": "calculated.overall",
+                    "operator": "gte",
+                    "value": 50,
+                }
+            ],
+            operations=[
+                {
+                    "field": "speed",
+                    "operation": "set",
+                    "value": 95,
+                }
+            ],
+        )
+    ])
+
+    rules = load_test_rules(tmp_path, config)
+    edits = apply_rules(data, rules)
+
+    assert len(edits) == 1
+    assert get_player(data, 0)["speed"] == 95
+    assert get_player(data, 1)["speed"] == 70
+
+
+def test_apply_rule_with_calculated_overall_band(tmp_path):
+    data = create_ted_data([
+        create_overall_player(1, "GK"),
+        create_overall_player(2, "CF"),
+    ])
+
+    config = create_config([
+        create_rule(
+            name="Overall bands",
+            operations=[],
+            bands=[
+                {
+                    "field": "calculated.overall",
+                    "ranges": [
+                        {
+                            "min": 40,
+                            "max": 50,
+                            "operations": [
+                                {
+                                    "field": "speed",
+                                    "operation": "set",
+                                    "value": 80,
+                                }
+                            ],
+                        },
+                        {
+                            "min": 60,
+                            "max": 70,
+                            "operations": [
+                                {
+                                    "field": "speed",
+                                    "operation": "set",
+                                    "value": 90,
+                                }
+                            ],
+                        },
+                    ],
+                }
+            ],
+        )
+    ])
+
+    rules = load_test_rules(tmp_path, config)
+    edits = apply_rules(data, rules)
+
+    assert len(edits) == 2
+    assert get_player(data, 0)["speed"] == 90
+    assert get_player(data, 1)["speed"] == 80
+
+
+def test_overall_is_recalculated_between_rules(tmp_path):
+    data = create_ted_data([
+        create_overall_player(1, "CF"),
+    ])
+
+    original_player = get_player(data, 0)
+    original_overall = prepare_player(
+        original_player
+    )["calculated"]["overall"]
+
+    config = create_config([
+        create_rule(
+            name="Increase finishing",
+            operations=[
+                {
+                    "field": "finishing",
+                    "operation": "set",
+                    "value": 99,
+                }
+            ],
+        ),
+        create_rule(
+            name="Apply speed bonus to improved players",
+            conditions=[
+                {
+                    "field": "calculated.overall",
+                    "operator": "gt",
+                    "value": original_overall,
+                }
+            ],
+            operations=[
+                {
+                    "field": "speed",
+                    "operation": "set",
+                    "value": 95,
+                }
+            ],
+        ),
+    ])
+
+    rules = load_test_rules(tmp_path, config)
+    edits = apply_rules(data, rules)
+
+    updated_player = get_player(data, 0)
+    updated_overall = prepare_player(
+        updated_player
+    )["calculated"]["overall"]
+
+    assert updated_overall > original_overall
+    assert updated_player["finishing"] == 99
+    assert updated_player["speed"] == 95
     assert len(edits) == 2
     
