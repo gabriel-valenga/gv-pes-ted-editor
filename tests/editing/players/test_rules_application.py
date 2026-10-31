@@ -1148,3 +1148,365 @@ def test_all_boolean_skills_are_editable(
     assert len(edits) == 1
     assert edits[0]["field"] == field_name
     assert edits[0]["after"] is skill_value
+
+
+
+# --------------------------------------------------
+# Player IDs and player settings application tests
+# --------------------------------------------------
+
+def test_apply_player_settings_to_specific_player(tmp_path):
+    data = create_ted_data([
+        {"id": 1001, "registeredPosition": "CF"},
+        {"id": 1002, "registeredPosition": "CF"},
+        {"id": 1003, "registeredPosition": "CF"},
+    ])
+
+    rule = create_rule(
+        name="Edit specific player",
+        operations=[],
+    )
+    rule["playerIds"] = [1002]
+    rule["playerSettings"] = {
+        "registeredPosition": "AMF",
+    }
+
+    config = create_config([rule])
+    rules = load_test_rules(tmp_path, config)
+
+    edits = apply_rules(data, rules)
+
+    assert len(edits) == 1
+    assert get_player(data, 0)["registeredPosition"] == "CF"
+    assert get_player(data, 1)["registeredPosition"] == "AMF"
+    assert get_player(data, 2)["registeredPosition"] == "CF"
+
+
+def test_apply_player_settings_to_multiple_players(tmp_path):
+    data = create_ted_data([
+        {"id": 1001, "registeredPosition": "CF"},
+        {"id": 1002, "registeredPosition": "CF"},
+        {"id": 1003, "registeredPosition": "CF"},
+    ])
+
+    rule = create_rule(
+        name="Edit multiple players",
+        operations=[],
+    )
+    rule["playerIds"] = [1001, 1003]
+    rule["playerSettings"] = {
+        "registeredPosition": "AMF",
+    }
+
+    config = create_config([rule])
+    rules = load_test_rules(tmp_path, config)
+
+    edits = apply_rules(data, rules)
+
+    assert len(edits) == 2
+    assert get_player(data, 0)["registeredPosition"] == "AMF"
+    assert get_player(data, 1)["registeredPosition"] == "CF"
+    assert get_player(data, 2)["registeredPosition"] == "AMF"
+
+
+def test_nonexistent_player_id_does_not_modify_other_players(tmp_path):
+    data = create_ted_data([
+        {"id": 1001, "registeredPosition": "CF"},
+        {"id": 1002, "registeredPosition": "CF"},
+    ])
+
+    rule = create_rule(
+        name="Nonexistent player",
+        operations=[],
+    )
+    rule["playerIds"] = [9999]
+    rule["playerSettings"] = {
+        "registeredPosition": "AMF",
+    }
+
+    config = create_config([rule])
+    rules = load_test_rules(tmp_path, config)
+
+    edits = apply_rules(data, rules)
+
+    assert edits == []
+    assert get_player(data, 0)["registeredPosition"] == "CF"
+    assert get_player(data, 1)["registeredPosition"] == "CF"
+
+
+def test_player_ids_respect_global_position_targets(tmp_path):
+    data = create_ted_data([
+        {"id": 1001, "registeredPosition": "CF"},
+        {"id": 1002, "registeredPosition": "GK"},
+    ])
+
+    rule = create_rule(
+        name="Player ID and global targets",
+        operations=[],
+    )
+    rule["playerIds"] = [1002]
+    rule["playerSettings"] = {
+        "registeredPosition": "AMF",
+    }
+
+    config = create_config(
+        [rule],
+        all_positions=False,
+        positions=["CF"],
+    )
+
+    rules = load_test_rules(tmp_path, config)
+    edits = apply_rules(data, rules)
+
+    # Player IDs are currently an additional filter
+    # after the global position selection.
+    assert edits == []
+    assert get_player(data, 0)["registeredPosition"] == "CF"
+    assert get_player(data, 1)["registeredPosition"] == "GK"
+
+
+def test_apply_all_three_player_settings(tmp_path):
+    data = create_ted_data([
+        {
+            "id": 1001,
+            "registeredPosition": "CF",
+            "playingStyle": "goalPoacher",
+            "positionCmf": "C",
+            "positionAmf": "C",
+            "positionSs": "C",
+        }
+    ])
+
+    rule = create_rule(
+        name="Apply all player settings",
+        operations=[],
+    )
+    rule["playerIds"] = [1001]
+    rule["playerSettings"] = {
+        "registeredPosition": "AMF",
+        "playablePositions": {
+            "CMF": "A",
+            "AMF": "B",
+            "SS": "C",
+        },
+        "playingStyle": "creativePlaymaker",
+    }
+
+    config = create_config([rule])
+    rules = load_test_rules(tmp_path, config)
+
+    edits = apply_rules(data, rules)
+    player = get_player(data, 0)
+
+    assert player["registeredPosition"] == "AMF"
+    assert player["positionCmf"] == "A"
+    assert player["positionAmf"] == "B"
+    assert player["positionSs"] == "C"
+    assert player["playingStyle"] == "creativePlaymaker"
+
+    assert len(edits) == 4
+
+
+@pytest.mark.parametrize(
+    "affinity",
+    ["C", "B", "A"],
+)
+def test_apply_playable_position_affinity_levels(
+    tmp_path,
+    affinity,
+):
+    data = create_ted_data([
+        {
+            "id": 1001,
+            "positionCmf": "C",
+        }
+    ])
+
+    rule = create_rule(
+        name="Set playable position affinity",
+        operations=[],
+    )
+    rule["playerSettings"] = {
+        "playablePositions": {
+            "CMF": affinity,
+        }
+    }
+
+    config = create_config([rule])
+    rules = load_test_rules(tmp_path, config)
+
+    edits = apply_rules(data, rules)
+    player = get_player(data, 0)
+
+    assert player["positionCmf"] == affinity
+    assert len(edits) == (1 if affinity != "C" else 0)
+
+
+def test_unmodified_playable_positions_are_preserved(tmp_path):
+    data = create_ted_data([
+        {
+            "id": 1001,
+            "positionCmf": "A",
+            "positionAmf": "B",
+            "positionSs": "C",
+            "positionCf": "A",
+        }
+    ])
+
+    rule = create_rule(
+        name="Modify only CMF",
+        operations=[],
+    )
+    rule["playerSettings"] = {
+        "playablePositions": {
+            "CMF": "C",
+        }
+    }
+
+    config = create_config([rule])
+    rules = load_test_rules(tmp_path, config)
+
+    edits = apply_rules(data, rules)
+    player = get_player(data, 0)
+
+    assert player["positionCmf"] == "C"
+    assert player["positionAmf"] == "B"
+    assert player["positionSs"] == "C"
+    assert player["positionCf"] == "A"
+
+    assert len(edits) == 1
+
+
+def test_apply_only_playing_style(tmp_path):
+    data = create_ted_data([
+        {
+            "id": 1001,
+            "registeredPosition": "CF",
+            "playingStyle": "goalPoacher",
+            "positionCmf": "A",
+        }
+    ])
+
+    rule = create_rule(
+        name="Change playing style",
+        operations=[],
+    )
+    rule["playerSettings"] = {
+        "playingStyle": "creativePlaymaker",
+    }
+
+    config = create_config([rule])
+    rules = load_test_rules(tmp_path, config)
+
+    edits = apply_rules(data, rules)
+    player = get_player(data, 0)
+
+    assert player["playingStyle"] == "creativePlaymaker"
+    assert player["registeredPosition"] == "CF"
+    assert player["positionCmf"] == "A"
+
+    assert len(edits) == 1
+
+
+def test_player_settings_are_recorded_in_edit_history(tmp_path):
+    data = create_ted_data([
+        {
+            "id": 1001,
+            "registeredPosition": "CF",
+            "playingStyle": "goalPoacher",
+            "positionCmf": "C",
+        }
+    ])
+
+    rule = create_rule(
+        name="Check edit history",
+        operations=[],
+    )
+    rule["playerSettings"] = {
+        "registeredPosition": "AMF",
+        "playablePositions": {
+            "CMF": "A",
+        },
+        "playingStyle": "creativePlaymaker",
+    }
+
+    config = create_config([rule])
+    rules = load_test_rules(tmp_path, config)
+
+    edits = apply_rules(data, rules)
+
+    assert len(edits) == 3
+
+    assert {edit["field"] for edit in edits} == {
+        "registeredPosition",
+        "positionCmf",
+        "playingStyle",
+    }
+
+    assert all(edit["playerIndex"] == 0 for edit in edits)
+
+
+def test_player_settings_respect_conditions(tmp_path):
+    data = create_ted_data([
+        {
+            "id": 1001,
+            "age": 20,
+            "registeredPosition": "CF",
+        },
+        {
+            "id": 1002,
+            "age": 30,
+            "registeredPosition": "CF",
+        },
+    ])
+
+    rule = create_rule(
+        name="Player settings with condition",
+        operations=[],
+        conditions=[
+            {
+                "field": "age",
+                "operator": "gte",
+                "value": 25,
+            }
+        ],
+    )
+    rule["playerSettings"] = {
+        "registeredPosition": "AMF",
+    }
+
+    config = create_config([rule])
+    rules = load_test_rules(tmp_path, config)
+
+    edits = apply_rules(data, rules)
+
+    assert len(edits) == 1
+    assert get_player(data, 0)["registeredPosition"] == "CF"
+    assert get_player(data, 1)["registeredPosition"] == "AMF"
+
+
+def test_player_settings_are_applied_only_once_when_unchanged(
+    tmp_path,
+):
+    data = create_ted_data([
+        {
+            "id": 1001,
+            "registeredPosition": "AMF",
+        }
+    ])
+
+    rule = create_rule(
+        name="Unchanged position",
+        operations=[],
+    )
+    rule["playerSettings"] = {
+        "registeredPosition": "AMF",
+    }
+
+    config = create_config([rule])
+    rules = load_test_rules(tmp_path, config)
+
+    edits = apply_rules(data, rules)
+
+    assert edits == []
+    assert get_player(data, 0)["registeredPosition"] == "AMF"

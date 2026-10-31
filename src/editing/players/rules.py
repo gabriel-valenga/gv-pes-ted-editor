@@ -2,6 +2,7 @@
 import json
 import math
 from pathlib import Path
+
 from editing.players.conditions import (
     evaluate_conditions,
     evaluate_band,
@@ -39,6 +40,52 @@ FIELD_BY_NAME = {
     for field in PLAYER_FIELDS
 }
 
+# Maps position codes to their corresponding TED fields.
+PLAYABLE_POSITION_FIELDS = {
+    "GK": "positionGk",
+    "CB": "positionCb",
+    "LB": "positionLb",
+    "RB": "positionRb",
+    "DMF": "positionDmf",
+    "CMF": "positionCmf",
+    "LMF": "positionLmf",
+    "RMF": "positionRmf",
+    "AMF": "positionAmf",
+    "LWF": "positionLwf",
+    "RWF": "positionRwf",
+    "SS": "positionSs",
+    "CF": "positionCf",
+}
+
+# Supported playable-position affinity levels.
+VALID_PLAYABLE_AFFINITIES = {"C", "B", "A"}
+
+# Supported playing styles and their internal field values.
+VALID_PLAYING_STYLES = {
+    None,
+    "goalPoacher",
+    "dummyRunner",
+    "foxInTheBox",
+    "targetMan",
+    "creativePlaymaker",
+    "prolificWinger",
+    "roamingFlank",
+    "crossSpecialist",
+    "classicNo10",
+    "holePlayer",
+    "boxToBox",
+    "theDestroyer",
+    "orchestrator",
+    "anchorMan",
+    "offensiveFullBack",
+    "fullBackFinisher",
+    "defensiveFullBack",
+    "buildUp",
+    "extraFrontman",
+    "offensiveGoalkeeper",
+    "defensiveGoalkeeper",
+}
+
 # Editable numeric player attributes.
 # These are the original PES attributes with values from 40 to 99.
 NUMERIC_ATTRIBUTE_FIELDS = {
@@ -61,6 +108,7 @@ BOOLEAN_SKILL_FIELDS = {
         and field.get("transform") == "j"
     )
 }
+
 # Player reputation field.
 # It uses a 3-bit field with logical values from 1 to 8.
 REPUTATION_FIELDS = {
@@ -79,8 +127,8 @@ def _is_finite_number(value):
 def _validate_condition(condition):
     if not isinstance(condition, dict):
         raise ValueError("Each condition must be an object.")
-    allowed_fields = {"field", "operator", "value"}
 
+    allowed_fields = {"field", "operator", "value"}
     unknown_fields = set(condition) - allowed_fields
 
     if unknown_fields:
@@ -149,8 +197,8 @@ def _validate_condition(condition):
 def _validate_operation(operation):
     if not isinstance(operation, dict):
         raise ValueError("Each operation must be an object.")
-    allowed_fields = {"field", "operation", "value"}
 
+    allowed_fields = {"field", "operation", "value"}
     unknown_fields = set(operation) - allowed_fields
 
     if unknown_fields:
@@ -220,6 +268,79 @@ def _validate_operation(operation):
         )
 
 
+def _validate_player_settings(settings):
+    if not isinstance(settings, dict):
+        raise ValueError("'playerSettings' must be an object.")
+
+    allowed_fields = {
+        "registeredPosition",
+        "playablePositions",
+        "playingStyle",
+    }
+
+    unknown_fields = set(settings) - allowed_fields
+
+    if unknown_fields:
+        raise ValueError(
+            f"Unknown playerSettings fields: {sorted(unknown_fields)}"
+        )
+
+    if "registeredPosition" in settings:
+        position = settings["registeredPosition"]
+
+        if not isinstance(position, str) or position not in VALID_POSITIONS:
+            raise ValueError(
+                f"Invalid registered position: {position}"
+            )
+
+    if "playablePositions" in settings:
+        playable_positions = settings["playablePositions"]
+
+        if not isinstance(playable_positions, dict):
+            raise ValueError("'playablePositions' must be an object.")
+
+        for position, affinity in playable_positions.items():
+            if position not in PLAYABLE_POSITION_FIELDS:
+                raise ValueError(
+                    f"Invalid playable position: {position}"
+                )
+
+            if affinity not in VALID_PLAYABLE_AFFINITIES:
+                raise ValueError(
+                    f"Invalid affinity '{affinity}' for position '{position}'. "
+                    f"Expected one of: {sorted(VALID_PLAYABLE_AFFINITIES)}."
+                )
+
+    if "playingStyle" in settings:
+        playing_style = settings["playingStyle"]
+
+        if playing_style not in VALID_PLAYING_STYLES:
+            raise ValueError(
+                f"Invalid playing style: {playing_style}"
+            )
+
+    if not settings:
+        raise ValueError("'playerSettings' cannot be empty.")
+
+
+def _validate_player_ids(player_ids):
+    if not isinstance(player_ids, list) or not player_ids:
+        raise ValueError("'playerIds' must be a non-empty list.")
+
+    for player_id in player_ids:
+        if (
+            not isinstance(player_id, int)
+            or isinstance(player_id, bool)
+            or not 1 <= player_id <= 4294967295
+        ):
+            raise ValueError(
+                "Each player ID must be a positive 32-bit integer."
+            )
+
+    if len(player_ids) != len(set(player_ids)):
+        raise ValueError("'playerIds' cannot contain duplicates.")
+
+
 def _validate_bands(bands):
     if not isinstance(bands, list):
         raise ValueError("'bands' must be a list.")
@@ -263,6 +384,7 @@ def _validate_bands(bands):
                 raise ValueError(
                     f"Each range in band '{field_name}' must be an object."
                 )
+
             allowed_fields = {"min", "max", "operations"}
             unknown_fields = set(value_range) - allowed_fields
 
@@ -270,6 +392,7 @@ def _validate_bands(bands):
                 raise ValueError(
                     f"Unknown range fields: {sorted(unknown_fields)}"
                 )
+
             minimum = value_range.get("min")
             maximum = value_range.get("max")
             operations = value_range.get("operations")
@@ -299,6 +422,7 @@ def _validate_bands(bands):
 def _validate_rule(rule):
     if not isinstance(rule, dict):
         raise ValueError("Each rule must be an object.")
+
     allowed_fields = {
         "name",
         "enabled",
@@ -306,6 +430,8 @@ def _validate_rule(rule):
         "conditions",
         "operations",
         "bands",
+        "playerIds",
+        "playerSettings",
     }
 
     unknown_fields = set(rule) - allowed_fields
@@ -316,6 +442,7 @@ def _validate_rule(rule):
         )
 
     name = rule.get("name")
+
     if not isinstance(name, str) or not name.strip():
         raise ValueError("Each rule requires a non-empty name.")
 
@@ -349,9 +476,15 @@ def _validate_rule(rule):
 
     _validate_bands(bands)
 
-    if not operations and not bands:
+    if "playerIds" in rule:
+        _validate_player_ids(rule["playerIds"])
+
+    if "playerSettings" in rule:
+        _validate_player_settings(rule["playerSettings"])
+
+    if not operations and not bands and not rule.get("playerSettings"):
         raise ValueError(
-            f"Rule '{rule['name']}' has no operations or bands."
+            f"Rule '{rule['name']}' has no operations, bands or player settings."
         )
 
 
@@ -484,7 +617,6 @@ def _calculate_operation(current_value, operation):
 
 def _apply_operation(data, player, operation):
     field_name = operation["field"]
-    operation_type = operation["operation"]
     value = operation["value"]
 
     before = player.get(field_name)
@@ -501,8 +633,6 @@ def _apply_operation(data, player, operation):
         after = value
 
     elif field_name in REPUTATION_FIELDS:
-        before = player.get(field_name)
-
         if (
             not isinstance(before, int)
             or isinstance(before, bool)
@@ -540,6 +670,72 @@ def _apply_operation(data, player, operation):
     }
 
 
+def _apply_player_setting(data, player, field_name, after):
+    before = player.get(field_name)
+
+    if before == after:
+        return None
+
+    apply_edit(
+        data,
+        player["index"],
+        field_name,
+        json.dumps(after),
+    )
+
+    # Keep the in-memory player synchronized with the TED.
+    player[field_name] = after
+
+    return {
+        "playerIndex": player["index"],
+        "field": field_name,
+        "before": before,
+        "after": after,
+    }
+
+
+def _apply_player_settings(data, player, settings, edits):
+    if not settings:
+        return
+
+    if "registeredPosition" in settings:
+        edit = _apply_player_setting(
+            data,
+            player,
+            "registeredPosition",
+            settings["registeredPosition"],
+        )
+
+        if edit is not None:
+            edits.append(edit)
+
+    for position, affinity in settings.get(
+        "playablePositions", {}
+    ).items():
+        field_name = PLAYABLE_POSITION_FIELDS[position]
+
+        edit = _apply_player_setting(
+            data,
+            player,
+            field_name,
+            affinity,
+        )
+
+        if edit is not None:
+            edits.append(edit)
+
+    if "playingStyle" in settings:
+        edit = _apply_player_setting(
+            data,
+            player,
+            "playingStyle",
+            settings["playingStyle"],
+        )
+
+        if edit is not None:
+            edits.append(edit)
+
+
 def _apply_operations(data, player, operations, edits):
     for operation in operations:
         edit = _apply_operation(data, player, operation)
@@ -557,7 +753,6 @@ def apply_rules(data: bytearray, rules: dict):
     edits = []
 
     players = extract_players(data)
-
     targets = rules["targets"]
 
     if targets["allPositions"]:
@@ -573,7 +768,19 @@ def apply_rules(data: bytearray, rules: dict):
         if not rule["enabled"]:
             continue
 
-        for original_player in selected_players:
+        rule_players = selected_players
+
+        # Optional player ID filter.
+        if "playerIds" in rule:
+            player_ids = set(rule["playerIds"])
+
+            rule_players = [
+                player
+                for player in selected_players
+                if player.get("playerId") in player_ids
+            ]
+
+        for original_player in rule_players:
             # Recalculate virtual attributes for each rule.
             # They are never written into the TED record.
             player = prepare_player(original_player)
@@ -590,6 +797,14 @@ def apply_rules(data: bytearray, rules: dict):
                 data,
                 original_player,
                 rule.get("operations", []),
+                edits,
+            )
+
+            # Apply player-specific settings.
+            _apply_player_settings(
+                data,
+                original_player,
+                rule.get("playerSettings", {}),
                 edits,
             )
 
