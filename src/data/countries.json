@@ -1,5 +1,5 @@
 {
-  "description": "Country names by language. Abbreviations are derived at runtime from the first three normalized letters of the matched localized name.",
+  "description": "Multilingual country and national-team names with ISO reference codes and PES 2021 TEditor country/region abbreviations. editor_code is the exact abbreviation displayed by TEditor; null means no matching option was identified in the inspected TEditor list.",
   "language_priority": [
     "en",
     "es",
@@ -31,7 +31,8 @@
         "ar": "أندورا",
         "nl": "Andorra",
         "ko": "안도라"
-      }
+      },
+      "editor_code": "AND"
     },
     {
       "code": "AE",
@@ -49,7 +50,8 @@
         "ar": "الإمارات العربية المتحدة",
         "nl": "Verenigde Arabische Emiraten",
         "ko": "아랍에미리트"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "AF",
@@ -67,7 +69,8 @@
         "ar": "أفغانستان",
         "nl": "Afghanistan",
         "ko": "아프가니스탄"
-      }
+      },
+      "editor_code": "AFG"
     },
     {
       "code": "AG",
@@ -85,7 +88,8 @@
         "ar": "أنتيغوا وبربودا",
         "nl": "Antigua en Barbuda",
         "ko": "앤티가 바부다"
-      }
+      },
+      "editor_code": "ATG"
     },
     {
       "code": "AI",
@@ -103,7 +107,8 @@
         "ar": "أنغويلا",
         "nl": "Anguilla",
         "ko": "앵귈라"
-      }
+      },
+      "editor_code": "AIA"
     },
     {
       "code": "AL",
@@ -121,7 +126,8 @@
         "ar": "ألبانيا",
         "nl": "Albanië",
         "ko": "알바니아"
-      }
+      },
+      "editor_code": "ALB"
     },
     {
       "code": "AM",
@@ -139,7 +145,8 @@
         "ar": "أرمينيا",
         "nl": "Armenië",
         "ko": "아르메니아"
-      }
+      },
+      "editor_code": "ARM"
     },
     {
       "code": "AO",
@@ -157,7 +164,8 @@
         "ar": "أنغولا",
         "nl": "Angola",
         "ko": "앙골라"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "AQ",
@@ -175,7 +183,8 @@
         "ar": "أنتاركتيكا",
         "nl": "Antarctica",
         "ko": "남극 대륙"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "AR",
@@ -193,7 +202,8 @@
         "ar": "الأرجنتين",
         "nl": "Argentinië",
         "ko": "아르헨티나"
-      }
+      },
+      "editor_code": "ARG"
     },
     {
       "code": "AS",
@@ -211,7 +221,8 @@
         "ar": "ساموا الأمريكية",
         "nl": "Amerikaans-Samoa",
         "ko": "아메리칸 사모아"
-      }
+      },
+      "editor_code": "ASA"
     },
     {
       "code": "AT",
@@ -229,7 +240,8 @@
         "ar": "النمسا",
         "nl": "Oostenrijk",
         "ko": "오스트리아"
-      }
+      },
+      "editor_code": "AUT"
     },
     {
       "code": "AU",
@@ -247,7 +259,8 @@
         "ar": "أستراليا",
         "nl": "Australië",
         "ko": "오스트레일리아"
-      }
+      },
+      "editor_code": "AUS"
     },
     {
       "code": "AW",
@@ -265,7 +278,8 @@
         "ar": "أروبا",
         "nl": "Aruba",
         "ko": "아루바"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "AX",
@@ -283,7 +297,8 @@
         "ar": "جزر آلاند",
         "nl": "Åland",
         "ko": "올란드 제도"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "AZ",
@@ -301,7 +316,8 @@
         "ar": "أذربيجان",
         "nl": "Azerbeidzjan",
         "ko": "아제르바이잔"
-      }
+      },
+      "editor_code": "AZE"
     },
     {
       "code": "BA",
@@ -319,7 +335,8 @@
         "ar": "البوسنة والهرسك",
         "nl": "Bosnië en Herzegovina",
         "ko": "보스니아 헤르체고비나"
-      }
+      },
+      "editor_code": "BIH"
     },
     {
       "code": "BB",
@@ -337,7 +354,8 @@
         "ar": "بربادوس",
         "nl": "Barbados",
         "ko": "바베이도스"
-      }
+      },
+      "editor_code": "BRB"
     },
     {
       "code": "BD",
@@ -355,7 +373,8 @@
         "ar": "بنغلاديش",
         "nl": "Bangladesh",
         "ko": "방글라데시"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "BE",
@@ -373,7 +392,8 @@
         "ar": "بلجيكا",
         "nl": "België",
         "ko": "벨기에"
-      }
+      },
+      "editor_code": "BEL"
     },
     {
       "code": "BF",
@@ -391,7 +411,8 @@
         "ar": "بوركينا فاسو",
         "nl": "Burkina Faso",
         "ko": "부르키나파소"
-      }
+      },
+      "editor_code": "BFA"
     },
     {
       "code": "BG",
@@ -409,7 +430,8 @@
         "ar": "بلغاريا",
         "nl": "Bulgarije",
         "ko": "불가리아"
-      }
+      },
+      "editor_code": "BUL"
     },
     {
       "code": "BH",
@@ -427,7 +449,8 @@
         "ar": "البحرين",
         "nl": "Bahrein",
         "ko": "바레인"
-      }
+      },
+      "editor_code": "BHR"
     },
     {
       "code": "BI",
@@ -445,7 +468,8 @@
         "ar": "بوروندي",
         "nl": "Burundi",
         "ko": "부룬디"
-      }
+      },
+      "editor_code": "BDI"
     },
     {
       "code": "BJ",
@@ -463,7 +487,8 @@
         "ar": "بنين",
         "nl": "Benin",
         "ko": "베냉"
-      }
+      },
+      "editor_code": "BEN"
     },
     {
       "code": "BL",
@@ -481,7 +506,8 @@
         "ar": "سان بارتليمي",
         "nl": "Saint-Barthélemy",
         "ko": "생바르텔레미"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "BM",
@@ -499,7 +525,8 @@
         "ar": "برمودا",
         "nl": "Bermuda",
         "ko": "버뮤다"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "BN",
@@ -517,7 +544,8 @@
         "ar": "بروناي",
         "nl": "Brunei",
         "ko": "브루나이"
-      }
+      },
+      "editor_code": "BRU"
     },
     {
       "code": "BO",
@@ -535,7 +563,8 @@
         "ar": "بوليفيا",
         "nl": "Bolivia",
         "ko": "볼리비아"
-      }
+      },
+      "editor_code": "BOL"
     },
     {
       "code": "BQ",
@@ -553,7 +582,8 @@
         "ar": "هولندا الكاريبية",
         "nl": "Caribisch Nederland",
         "ko": "네덜란드령 카리브"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "BR",
@@ -571,7 +601,8 @@
         "ar": "البرازيل",
         "nl": "Brazilië",
         "ko": "브라질"
-      }
+      },
+      "editor_code": "BRA"
     },
     {
       "code": "BS",
@@ -589,7 +620,8 @@
         "ar": "جزر البهاما",
         "nl": "Bahama’s",
         "ko": "바하마"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "BT",
@@ -607,7 +639,8 @@
         "ar": "بوتان",
         "nl": "Bhutan",
         "ko": "부탄"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "BV",
@@ -625,7 +658,8 @@
         "ar": "جزيرة بوفيه",
         "nl": "Bouveteiland",
         "ko": "부베섬"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "BW",
@@ -643,7 +677,8 @@
         "ar": "بوتسوانا",
         "nl": "Botswana",
         "ko": "보츠와나"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "BY",
@@ -661,7 +696,8 @@
         "ar": "بيلاروس",
         "nl": "Belarus",
         "ko": "벨라루스"
-      }
+      },
+      "editor_code": "BLR"
     },
     {
       "code": "BZ",
@@ -679,7 +715,8 @@
         "ar": "بليز",
         "nl": "Belize",
         "ko": "벨리즈"
-      }
+      },
+      "editor_code": "BLZ"
     },
     {
       "code": "CA",
@@ -697,7 +734,8 @@
         "ar": "كندا",
         "nl": "Canada",
         "ko": "캐나다"
-      }
+      },
+      "editor_code": "CAN"
     },
     {
       "code": "CC",
@@ -715,7 +753,8 @@
         "ar": "جزر كوكوس (كيلينغ)",
         "nl": "Cocoseilanden",
         "ko": "코코스 제도"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "CD",
@@ -733,7 +772,8 @@
         "ar": "الكونغو - كينشاسا",
         "nl": "Congo-Kinshasa",
         "ko": "콩고-킨샤사"
-      }
+      },
+      "editor_code": "COD"
     },
     {
       "code": "CF",
@@ -751,7 +791,8 @@
         "ar": "جمهورية أفريقيا الوسطى",
         "nl": "Centraal-Afrikaanse Republiek",
         "ko": "중앙 아프리카 공화국"
-      }
+      },
+      "editor_code": "CTA"
     },
     {
       "code": "CG",
@@ -769,7 +810,8 @@
         "ar": "الكونغو - برازافيل",
         "nl": "Congo-Brazzaville",
         "ko": "콩고-브라자빌"
-      }
+      },
+      "editor_code": "CGO"
     },
     {
       "code": "CH",
@@ -787,7 +829,8 @@
         "ar": "سويسرا",
         "nl": "Zwitserland",
         "ko": "스위스"
-      }
+      },
+      "editor_code": "SUI"
     },
     {
       "code": "CI",
@@ -805,7 +848,8 @@
         "ar": "ساحل العاج",
         "nl": "Ivoorkust",
         "ko": "코트디부아르"
-      }
+      },
+      "editor_code": "CIV"
     },
     {
       "code": "CK",
@@ -823,7 +867,8 @@
         "ar": "جزر كوك",
         "nl": "Cookeilanden",
         "ko": "쿡 제도"
-      }
+      },
+      "editor_code": "COK"
     },
     {
       "code": "CL",
@@ -841,7 +886,8 @@
         "ar": "تشيلي",
         "nl": "Chili",
         "ko": "칠레"
-      }
+      },
+      "editor_code": "CHI"
     },
     {
       "code": "CM",
@@ -859,7 +905,8 @@
         "ar": "الكاميرون",
         "nl": "Kameroen",
         "ko": "카메룬"
-      }
+      },
+      "editor_code": "CMR"
     },
     {
       "code": "CN",
@@ -877,7 +924,8 @@
         "ar": "الصين",
         "nl": "China",
         "ko": "중국"
-      }
+      },
+      "editor_code": "CHN"
     },
     {
       "code": "CO",
@@ -895,7 +943,8 @@
         "ar": "كولومبيا",
         "nl": "Colombia",
         "ko": "콜롬비아"
-      }
+      },
+      "editor_code": "COL"
     },
     {
       "code": "CR",
@@ -913,7 +962,8 @@
         "ar": "كوستاريكا",
         "nl": "Costa Rica",
         "ko": "코스타리카"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "CU",
@@ -931,7 +981,8 @@
         "ar": "كوبا",
         "nl": "Cuba",
         "ko": "쿠바"
-      }
+      },
+      "editor_code": "CUB"
     },
     {
       "code": "CV",
@@ -949,7 +1000,8 @@
         "ar": "الرأس الأخضر",
         "nl": "Kaapverdië",
         "ko": "카보베르데"
-      }
+      },
+      "editor_code": "CPV"
     },
     {
       "code": "CW",
@@ -967,7 +1019,8 @@
         "ar": "كوراساو",
         "nl": "Curaçao",
         "ko": "퀴라소"
-      }
+      },
+      "editor_code": "CUW"
     },
     {
       "code": "CX",
@@ -985,7 +1038,8 @@
         "ar": "جزيرة كريسماس",
         "nl": "Christmaseiland",
         "ko": "크리스마스섬"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "CY",
@@ -1003,7 +1057,8 @@
         "ar": "قبرص",
         "nl": "Cyprus",
         "ko": "키프로스"
-      }
+      },
+      "editor_code": "CYP"
     },
     {
       "code": "CZ",
@@ -1021,7 +1076,8 @@
         "ar": "التشيك",
         "nl": "Tsjechië",
         "ko": "체코"
-      }
+      },
+      "editor_code": "CZE"
     },
     {
       "code": "DE",
@@ -1039,7 +1095,8 @@
         "ar": "ألمانيا",
         "nl": "Duitsland",
         "ko": "독일"
-      }
+      },
+      "editor_code": "GER"
     },
     {
       "code": "DJ",
@@ -1057,7 +1114,8 @@
         "ar": "جيبوتي",
         "nl": "Djibouti",
         "ko": "지부티"
-      }
+      },
+      "editor_code": "DJI"
     },
     {
       "code": "DK",
@@ -1075,7 +1133,8 @@
         "ar": "الدانمرك",
         "nl": "Denemarken",
         "ko": "덴마크"
-      }
+      },
+      "editor_code": "DEN"
     },
     {
       "code": "DM",
@@ -1093,7 +1152,8 @@
         "ar": "دومينيكا",
         "nl": "Dominica",
         "ko": "도미니카"
-      }
+      },
+      "editor_code": "DMA"
     },
     {
       "code": "DO",
@@ -1111,7 +1171,8 @@
         "ar": "جمهورية الدومينيكان",
         "nl": "Dominicaanse Republiek",
         "ko": "도미니카 공화국"
-      }
+      },
+      "editor_code": "DOM"
     },
     {
       "code": "DZ",
@@ -1129,7 +1190,8 @@
         "ar": "الجزائر",
         "nl": "Algerije",
         "ko": "알제리"
-      }
+      },
+      "editor_code": "ALG"
     },
     {
       "code": "EC",
@@ -1147,7 +1209,8 @@
         "ar": "الإكوادور",
         "nl": "Ecuador",
         "ko": "에콰도르"
-      }
+      },
+      "editor_code": "ECU"
     },
     {
       "code": "EE",
@@ -1165,7 +1228,8 @@
         "ar": "إستونيا",
         "nl": "Estland",
         "ko": "에스토니아"
-      }
+      },
+      "editor_code": "EST"
     },
     {
       "code": "EG",
@@ -1183,7 +1247,8 @@
         "ar": "مصر",
         "nl": "Egypte",
         "ko": "이집트"
-      }
+      },
+      "editor_code": "EGY"
     },
     {
       "code": "EH",
@@ -1201,7 +1266,8 @@
         "ar": "الصحراء الغربية",
         "nl": "Westelijke Sahara",
         "ko": "서사하라"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "ER",
@@ -1219,7 +1285,8 @@
         "ar": "إريتريا",
         "nl": "Eritrea",
         "ko": "에리트리아"
-      }
+      },
+      "editor_code": "ERI"
     },
     {
       "code": "ES",
@@ -1237,7 +1304,8 @@
         "ar": "إسبانيا",
         "nl": "Spanje",
         "ko": "스페인"
-      }
+      },
+      "editor_code": "ESP"
     },
     {
       "code": "ET",
@@ -1255,7 +1323,8 @@
         "ar": "إثيوبيا",
         "nl": "Ethiopië",
         "ko": "에티오피아"
-      }
+      },
+      "editor_code": "ETH"
     },
     {
       "code": "FI",
@@ -1273,7 +1342,8 @@
         "ar": "فنلندا",
         "nl": "Finland",
         "ko": "핀란드"
-      }
+      },
+      "editor_code": "FIN"
     },
     {
       "code": "FJ",
@@ -1291,7 +1361,8 @@
         "ar": "فيجي",
         "nl": "Fiji",
         "ko": "피지"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "FK",
@@ -1309,7 +1380,8 @@
         "ar": "جزر فوكلاند",
         "nl": "Falklandeilanden",
         "ko": "포클랜드 제도"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "FM",
@@ -1327,7 +1399,8 @@
         "ar": "ميكرونيزيا",
         "nl": "Micronesia",
         "ko": "미크로네시아"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "FO",
@@ -1345,7 +1418,8 @@
         "ar": "جزر فارو",
         "nl": "Faeröer",
         "ko": "페로 제도"
-      }
+      },
+      "editor_code": "FRO"
     },
     {
       "code": "FR",
@@ -1363,7 +1437,8 @@
         "ar": "فرنسا",
         "nl": "Frankrijk",
         "ko": "프랑스"
-      }
+      },
+      "editor_code": "FRA"
     },
     {
       "code": "GA",
@@ -1381,7 +1456,8 @@
         "ar": "الغابون",
         "nl": "Gabon",
         "ko": "가봉"
-      }
+      },
+      "editor_code": "GAB"
     },
     {
       "code": "GB",
@@ -1399,7 +1475,8 @@
         "ar": "المملكة المتحدة",
         "nl": "Verenigd Koninkrijk",
         "ko": "영국"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "GD",
@@ -1417,7 +1494,8 @@
         "ar": "غرينادا",
         "nl": "Grenada",
         "ko": "그레나다"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "GE",
@@ -1435,7 +1513,8 @@
         "ar": "جورجيا",
         "nl": "Georgië",
         "ko": "조지아"
-      }
+      },
+      "editor_code": "GEO"
     },
     {
       "code": "GF",
@@ -1453,7 +1532,8 @@
         "ar": "غويانا الفرنسية",
         "nl": "Frans-Guyana",
         "ko": "프랑스령 기아나"
-      }
+      },
+      "editor_code": "GUF"
     },
     {
       "code": "GG",
@@ -1471,7 +1551,8 @@
         "ar": "غيرنزي",
         "nl": "Guernsey",
         "ko": "건지"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "GH",
@@ -1489,7 +1570,8 @@
         "ar": "غانا",
         "nl": "Ghana",
         "ko": "가나"
-      }
+      },
+      "editor_code": "GHA"
     },
     {
       "code": "GI",
@@ -1507,7 +1589,8 @@
         "ar": "جبل طارق",
         "nl": "Gibraltar",
         "ko": "지브롤터"
-      }
+      },
+      "editor_code": "GIB"
     },
     {
       "code": "GL",
@@ -1525,7 +1608,8 @@
         "ar": "غرينلاند",
         "nl": "Groenland",
         "ko": "그린란드"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "GM",
@@ -1543,7 +1627,8 @@
         "ar": "غامبيا",
         "nl": "Gambia",
         "ko": "감비아"
-      }
+      },
+      "editor_code": "GAM"
     },
     {
       "code": "GN",
@@ -1561,7 +1646,8 @@
         "ar": "غينيا",
         "nl": "Guinee",
         "ko": "기니"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "GP",
@@ -1579,7 +1665,8 @@
         "ar": "غوادلوب",
         "nl": "Guadeloupe",
         "ko": "과들루프"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "GQ",
@@ -1597,7 +1684,8 @@
         "ar": "غينيا الاستوائية",
         "nl": "Equatoriaal-Guinea",
         "ko": "적도 기니"
-      }
+      },
+      "editor_code": "EQG"
     },
     {
       "code": "GR",
@@ -1615,7 +1703,8 @@
         "ar": "اليونان",
         "nl": "Griekenland",
         "ko": "그리스"
-      }
+      },
+      "editor_code": "GRE"
     },
     {
       "code": "GS",
@@ -1633,7 +1722,8 @@
         "ar": "جورجيا الجنوبية وجزر ساندويتش الجنوبية",
         "nl": "Zuid-Georgia en Zuidelijke Sandwicheilanden",
         "ko": "사우스조지아 사우스샌드위치 제도"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "GT",
@@ -1651,7 +1741,8 @@
         "ar": "غواتيمالا",
         "nl": "Guatemala",
         "ko": "과테말라"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "GU",
@@ -1669,7 +1760,8 @@
         "ar": "غوام",
         "nl": "Guam",
         "ko": "괌"
-      }
+      },
+      "editor_code": "GUM"
     },
     {
       "code": "GW",
@@ -1687,7 +1779,8 @@
         "ar": "غينيا بيساو",
         "nl": "Guinee-Bissau",
         "ko": "기니비사우"
-      }
+      },
+      "editor_code": "GNB"
     },
     {
       "code": "GY",
@@ -1705,7 +1798,8 @@
         "ar": "غيانا",
         "nl": "Guyana",
         "ko": "가이아나"
-      }
+      },
+      "editor_code": "GUY"
     },
     {
       "code": "HK",
@@ -1723,7 +1817,8 @@
         "ar": "هونغ كونغ الصينية (منطقة إدارية خاصة)",
         "nl": "Hongkong SAR van China",
         "ko": "홍콩(중국 특별행정구)"
-      }
+      },
+      "editor_code": "HKG"
     },
     {
       "code": "HM",
@@ -1741,7 +1836,8 @@
         "ar": "جزيرة هيرد وجزر ماكدونالد",
         "nl": "Heard en McDonaldeilanden",
         "ko": "허드 맥도널드 제도"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "HN",
@@ -1759,7 +1855,8 @@
         "ar": "هندوراس",
         "nl": "Honduras",
         "ko": "온두라스"
-      }
+      },
+      "editor_code": "HON"
     },
     {
       "code": "HR",
@@ -1777,7 +1874,8 @@
         "ar": "كرواتيا",
         "nl": "Kroatië",
         "ko": "크로아티아"
-      }
+      },
+      "editor_code": "CRO"
     },
     {
       "code": "HT",
@@ -1795,7 +1893,8 @@
         "ar": "هايتي",
         "nl": "Haïti",
         "ko": "아이티"
-      }
+      },
+      "editor_code": "HAI"
     },
     {
       "code": "HU",
@@ -1813,7 +1912,8 @@
         "ar": "هنغاريا",
         "nl": "Hongarije",
         "ko": "헝가리"
-      }
+      },
+      "editor_code": "HUN"
     },
     {
       "code": "ID",
@@ -1831,7 +1931,8 @@
         "ar": "إندونيسيا",
         "nl": "Indonesië",
         "ko": "인도네시아"
-      }
+      },
+      "editor_code": "IDN"
     },
     {
       "code": "IE",
@@ -1849,7 +1950,8 @@
         "ar": "أيرلندا",
         "nl": "Ierland",
         "ko": "아일랜드"
-      }
+      },
+      "editor_code": "IRL"
     },
     {
       "code": "IL",
@@ -1867,7 +1969,8 @@
         "ar": "إسرائيل",
         "nl": "Israël",
         "ko": "이스라엘"
-      }
+      },
+      "editor_code": "ISR"
     },
     {
       "code": "IM",
@@ -1885,7 +1988,8 @@
         "ar": "جزيرة مان",
         "nl": "Isle of Man",
         "ko": "맨섬"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "IN",
@@ -1903,7 +2007,8 @@
         "ar": "الهند",
         "nl": "India",
         "ko": "인도"
-      }
+      },
+      "editor_code": "IND"
     },
     {
       "code": "IO",
@@ -1921,7 +2026,8 @@
         "ar": "الإقليم البريطاني في المحيط الهندي",
         "nl": "Brits Indische Oceaanterritorium",
         "ko": "영국령 인도양 지역"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "IQ",
@@ -1939,7 +2045,8 @@
         "ar": "العراق",
         "nl": "Irak",
         "ko": "이라크"
-      }
+      },
+      "editor_code": "IRQ"
     },
     {
       "code": "IR",
@@ -1957,7 +2064,8 @@
         "ar": "إيران",
         "nl": "Iran",
         "ko": "이란"
-      }
+      },
+      "editor_code": "IRN"
     },
     {
       "code": "IS",
@@ -1975,7 +2083,8 @@
         "ar": "آيسلندا",
         "nl": "IJsland",
         "ko": "아이슬란드"
-      }
+      },
+      "editor_code": "ISL"
     },
     {
       "code": "IT",
@@ -1993,7 +2102,8 @@
         "ar": "إيطاليا",
         "nl": "Italië",
         "ko": "이탈리아"
-      }
+      },
+      "editor_code": "ITA"
     },
     {
       "code": "JE",
@@ -2011,7 +2121,8 @@
         "ar": "جيرسي",
         "nl": "Jersey",
         "ko": "저지"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "JM",
@@ -2029,7 +2140,8 @@
         "ar": "جامايكا",
         "nl": "Jamaica",
         "ko": "자메이카"
-      }
+      },
+      "editor_code": "JAM"
     },
     {
       "code": "JO",
@@ -2047,7 +2159,8 @@
         "ar": "الأردن",
         "nl": "Jordanië",
         "ko": "요르단"
-      }
+      },
+      "editor_code": "JOR"
     },
     {
       "code": "JP",
@@ -2065,7 +2178,8 @@
         "ar": "اليابان",
         "nl": "Japan",
         "ko": "일본"
-      }
+      },
+      "editor_code": "JPN"
     },
     {
       "code": "KE",
@@ -2083,7 +2197,8 @@
         "ar": "كينيا",
         "nl": "Kenia",
         "ko": "케냐"
-      }
+      },
+      "editor_code": "KEN"
     },
     {
       "code": "KG",
@@ -2101,7 +2216,8 @@
         "ar": "قيرغيزستان",
         "nl": "Kirgizië",
         "ko": "키르기스스탄"
-      }
+      },
+      "editor_code": "KGZ"
     },
     {
       "code": "KH",
@@ -2119,7 +2235,8 @@
         "ar": "كمبوديا",
         "nl": "Cambodja",
         "ko": "캄보디아"
-      }
+      },
+      "editor_code": "CAM"
     },
     {
       "code": "KI",
@@ -2137,7 +2254,8 @@
         "ar": "كيريباتي",
         "nl": "Kiribati",
         "ko": "키리바시"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "KM",
@@ -2155,7 +2273,8 @@
         "ar": "جزر القمر",
         "nl": "Comoren",
         "ko": "코모로"
-      }
+      },
+      "editor_code": "COM"
     },
     {
       "code": "KN",
@@ -2173,7 +2292,8 @@
         "ar": "سانت كيتس ونيفيس",
         "nl": "Saint Kitts en Nevis",
         "ko": "세인트키츠 네비스"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "KP",
@@ -2191,7 +2311,8 @@
         "ar": "كوريا الشمالية",
         "nl": "Noord-Korea",
         "ko": "북한"
-      }
+      },
+      "editor_code": "PRK"
     },
     {
       "code": "KR",
@@ -2209,7 +2330,8 @@
         "ar": "كوريا الجنوبية",
         "nl": "Zuid-Korea",
         "ko": "대한민국"
-      }
+      },
+      "editor_code": "KOR"
     },
     {
       "code": "KW",
@@ -2227,7 +2349,8 @@
         "ar": "الكويت",
         "nl": "Koeweit",
         "ko": "쿠웨이트"
-      }
+      },
+      "editor_code": "KUW"
     },
     {
       "code": "KY",
@@ -2245,7 +2368,8 @@
         "ar": "جزر كايمان",
         "nl": "Kaaimaneilanden",
         "ko": "케이맨 제도"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "KZ",
@@ -2263,7 +2387,8 @@
         "ar": "كازاخستان",
         "nl": "Kazachstan",
         "ko": "카자흐스탄"
-      }
+      },
+      "editor_code": "KAZ"
     },
     {
       "code": "LA",
@@ -2281,7 +2406,8 @@
         "ar": "لاوس",
         "nl": "Laos",
         "ko": "라오스"
-      }
+      },
+      "editor_code": "LAO"
     },
     {
       "code": "LB",
@@ -2299,7 +2425,8 @@
         "ar": "لبنان",
         "nl": "Libanon",
         "ko": "레바논"
-      }
+      },
+      "editor_code": "LBN"
     },
     {
       "code": "LC",
@@ -2317,7 +2444,8 @@
         "ar": "سانت لوسيا",
         "nl": "Saint Lucia",
         "ko": "세인트루시아"
-      }
+      },
+      "editor_code": "LCA"
     },
     {
       "code": "LI",
@@ -2335,7 +2463,8 @@
         "ar": "ليختنشتاين",
         "nl": "Liechtenstein",
         "ko": "리히텐슈타인"
-      }
+      },
+      "editor_code": "LIE"
     },
     {
       "code": "LK",
@@ -2353,7 +2482,8 @@
         "ar": "سريلانكا",
         "nl": "Sri Lanka",
         "ko": "스리랑카"
-      }
+      },
+      "editor_code": "SRI"
     },
     {
       "code": "LR",
@@ -2371,7 +2501,8 @@
         "ar": "ليبيريا",
         "nl": "Liberia",
         "ko": "라이베리아"
-      }
+      },
+      "editor_code": "LBR"
     },
     {
       "code": "LS",
@@ -2389,7 +2520,8 @@
         "ar": "ليسوتو",
         "nl": "Lesotho",
         "ko": "레소토"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "LT",
@@ -2407,7 +2539,8 @@
         "ar": "ليتوانيا",
         "nl": "Litouwen",
         "ko": "리투아니아"
-      }
+      },
+      "editor_code": "LTU"
     },
     {
       "code": "LU",
@@ -2425,7 +2558,8 @@
         "ar": "لوكسمبورغ",
         "nl": "Luxemburg",
         "ko": "룩셈부르크"
-      }
+      },
+      "editor_code": "LUX"
     },
     {
       "code": "LV",
@@ -2443,7 +2577,8 @@
         "ar": "لاتفيا",
         "nl": "Letland",
         "ko": "라트비아"
-      }
+      },
+      "editor_code": "LVA"
     },
     {
       "code": "LY",
@@ -2461,7 +2596,8 @@
         "ar": "ليبيا",
         "nl": "Libië",
         "ko": "리비아"
-      }
+      },
+      "editor_code": "LBY"
     },
     {
       "code": "MA",
@@ -2479,7 +2615,8 @@
         "ar": "المغرب",
         "nl": "Marokko",
         "ko": "모로코"
-      }
+      },
+      "editor_code": "MAR"
     },
     {
       "code": "MC",
@@ -2497,7 +2634,8 @@
         "ar": "موناكو",
         "nl": "Monaco",
         "ko": "모나코"
-      }
+      },
+      "editor_code": "MON"
     },
     {
       "code": "MD",
@@ -2515,7 +2653,8 @@
         "ar": "مولدوفا",
         "nl": "Moldavië",
         "ko": "몰도바"
-      }
+      },
+      "editor_code": "MDA"
     },
     {
       "code": "ME",
@@ -2533,7 +2672,8 @@
         "ar": "الجبل الأسود",
         "nl": "Montenegro",
         "ko": "몬테네그로"
-      }
+      },
+      "editor_code": "MNE"
     },
     {
       "code": "MF",
@@ -2551,7 +2691,8 @@
         "ar": "سان مارتن",
         "nl": "Saint-Martin",
         "ko": "생마르탱"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "MG",
@@ -2569,7 +2710,8 @@
         "ar": "مدغشقر",
         "nl": "Madagaskar",
         "ko": "마다가스카르"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "MH",
@@ -2587,7 +2729,8 @@
         "ar": "جزر مارشال",
         "nl": "Marshalleilanden",
         "ko": "마셜 제도"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "MK",
@@ -2605,7 +2748,8 @@
         "ar": "مقدونيا الشمالية",
         "nl": "Noord-Macedonië",
         "ko": "북마케도니아"
-      }
+      },
+      "editor_code": "MKD"
     },
     {
       "code": "ML",
@@ -2623,7 +2767,8 @@
         "ar": "مالي",
         "nl": "Mali",
         "ko": "말리"
-      }
+      },
+      "editor_code": "MLI"
     },
     {
       "code": "MM",
@@ -2641,7 +2786,8 @@
         "ar": "ميانمار (بورما)",
         "nl": "Myanmar (Birma)",
         "ko": "미얀마"
-      }
+      },
+      "editor_code": "MYA"
     },
     {
       "code": "MN",
@@ -2659,7 +2805,8 @@
         "ar": "منغوليا",
         "nl": "Mongolië",
         "ko": "몽골"
-      }
+      },
+      "editor_code": "MNG"
     },
     {
       "code": "MO",
@@ -2677,7 +2824,8 @@
         "ar": "منطقة ماكاو الإدارية الخاصة",
         "nl": "Macau SAR van China",
         "ko": "마카오(중국 특별행정구)"
-      }
+      },
+      "editor_code": "MAC"
     },
     {
       "code": "MP",
@@ -2695,7 +2843,8 @@
         "ar": "جزر ماريانا الشمالية",
         "nl": "Noordelijke Marianen",
         "ko": "북마리아나제도"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "MQ",
@@ -2713,7 +2862,8 @@
         "ar": "جزر المارتينيك",
         "nl": "Martinique",
         "ko": "마르티니크"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "MR",
@@ -2731,7 +2881,8 @@
         "ar": "موريتانيا",
         "nl": "Mauritanië",
         "ko": "모리타니"
-      }
+      },
+      "editor_code": "MTN"
     },
     {
       "code": "MS",
@@ -2749,7 +2900,8 @@
         "ar": "مونتسرات",
         "nl": "Montserrat",
         "ko": "몬트세라트"
-      }
+      },
+      "editor_code": "MSR"
     },
     {
       "code": "MT",
@@ -2767,7 +2919,8 @@
         "ar": "مالطا",
         "nl": "Malta",
         "ko": "몰타"
-      }
+      },
+      "editor_code": "MLT"
     },
     {
       "code": "MU",
@@ -2785,7 +2938,8 @@
         "ar": "موريشيوس",
         "nl": "Mauritius",
         "ko": "모리셔스"
-      }
+      },
+      "editor_code": "MRI"
     },
     {
       "code": "MV",
@@ -2803,7 +2957,8 @@
         "ar": "جزر المالديف",
         "nl": "Maldiven",
         "ko": "몰디브"
-      }
+      },
+      "editor_code": "MDV"
     },
     {
       "code": "MW",
@@ -2821,7 +2976,8 @@
         "ar": "ملاوي",
         "nl": "Malawi",
         "ko": "말라위"
-      }
+      },
+      "editor_code": "MWI"
     },
     {
       "code": "MX",
@@ -2839,7 +2995,8 @@
         "ar": "المكسيك",
         "nl": "Mexico",
         "ko": "멕시코"
-      }
+      },
+      "editor_code": "MEX"
     },
     {
       "code": "MY",
@@ -2857,7 +3014,8 @@
         "ar": "ماليزيا",
         "nl": "Maleisië",
         "ko": "말레이시아"
-      }
+      },
+      "editor_code": "MAS"
     },
     {
       "code": "MZ",
@@ -2875,7 +3033,8 @@
         "ar": "موزمبيق",
         "nl": "Mozambique",
         "ko": "모잠비크"
-      }
+      },
+      "editor_code": "MOZ"
     },
     {
       "code": "NA",
@@ -2893,7 +3052,8 @@
         "ar": "ناميبيا",
         "nl": "Namibië",
         "ko": "나미비아"
-      }
+      },
+      "editor_code": "NAM"
     },
     {
       "code": "NC",
@@ -2911,7 +3071,8 @@
         "ar": "كاليدونيا الجديدة",
         "nl": "Nieuw-Caledonië",
         "ko": "뉴칼레도니아"
-      }
+      },
+      "editor_code": "NCL"
     },
     {
       "code": "NE",
@@ -2929,7 +3090,8 @@
         "ar": "النيجر",
         "nl": "Niger",
         "ko": "니제르"
-      }
+      },
+      "editor_code": "NIG"
     },
     {
       "code": "NF",
@@ -2947,7 +3109,8 @@
         "ar": "جزيرة نورفولك",
         "nl": "Norfolk",
         "ko": "노퍽섬"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "NG",
@@ -2965,7 +3128,8 @@
         "ar": "نيجيريا",
         "nl": "Nigeria",
         "ko": "나이지리아"
-      }
+      },
+      "editor_code": "NGA"
     },
     {
       "code": "NI",
@@ -2983,7 +3147,8 @@
         "ar": "نيكاراغوا",
         "nl": "Nicaragua",
         "ko": "니카라과"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "NL",
@@ -3001,7 +3166,8 @@
         "ar": "هولندا",
         "nl": "Nederland",
         "ko": "네덜란드"
-      }
+      },
+      "editor_code": "NED"
     },
     {
       "code": "NO",
@@ -3019,7 +3185,8 @@
         "ar": "النرويج",
         "nl": "Noorwegen",
         "ko": "노르웨이"
-      }
+      },
+      "editor_code": "NOR"
     },
     {
       "code": "NP",
@@ -3037,7 +3204,8 @@
         "ar": "نيبال",
         "nl": "Nepal",
         "ko": "네팔"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "NR",
@@ -3055,7 +3223,8 @@
         "ar": "ناورو",
         "nl": "Nauru",
         "ko": "나우루"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "NU",
@@ -3073,7 +3242,8 @@
         "ar": "نيوي",
         "nl": "Niue",
         "ko": "니우에"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "NZ",
@@ -3091,7 +3261,8 @@
         "ar": "نيوزيلندا",
         "nl": "Nieuw-Zeeland",
         "ko": "뉴질랜드"
-      }
+      },
+      "editor_code": "NZL"
     },
     {
       "code": "OM",
@@ -3109,7 +3280,8 @@
         "ar": "عُمان",
         "nl": "Oman",
         "ko": "오만"
-      }
+      },
+      "editor_code": "OMA"
     },
     {
       "code": "PA",
@@ -3127,7 +3299,8 @@
         "ar": "بنما",
         "nl": "Panama",
         "ko": "파나마"
-      }
+      },
+      "editor_code": "PAN"
     },
     {
       "code": "PE",
@@ -3145,7 +3318,8 @@
         "ar": "بيرو",
         "nl": "Peru",
         "ko": "페루"
-      }
+      },
+      "editor_code": "PER"
     },
     {
       "code": "PF",
@@ -3163,7 +3337,8 @@
         "ar": "بولينيزيا الفرنسية",
         "nl": "Frans-Polynesië",
         "ko": "프랑스령 폴리네시아"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "PG",
@@ -3181,7 +3356,8 @@
         "ar": "بابوا غينيا الجديدة",
         "nl": "Papoea-Nieuw-Guinea",
         "ko": "파푸아뉴기니"
-      }
+      },
+      "editor_code": "PNG"
     },
     {
       "code": "PH",
@@ -3199,7 +3375,8 @@
         "ar": "الفلبين",
         "nl": "Filipijnen",
         "ko": "필리핀"
-      }
+      },
+      "editor_code": "PHI"
     },
     {
       "code": "PK",
@@ -3217,7 +3394,8 @@
         "ar": "باكستان",
         "nl": "Pakistan",
         "ko": "파키스탄"
-      }
+      },
+      "editor_code": "PAK"
     },
     {
       "code": "PL",
@@ -3235,7 +3413,8 @@
         "ar": "بولندا",
         "nl": "Polen",
         "ko": "폴란드"
-      }
+      },
+      "editor_code": "POL"
     },
     {
       "code": "PM",
@@ -3253,7 +3432,8 @@
         "ar": "سان بيير ومكويلون",
         "nl": "Saint-Pierre en Miquelon",
         "ko": "생피에르 미클롱"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "PN",
@@ -3271,7 +3451,8 @@
         "ar": "جزر بيتكيرن",
         "nl": "Pitcairneilanden",
         "ko": "핏케언 제도"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "PR",
@@ -3289,7 +3470,8 @@
         "ar": "بورتوريكو",
         "nl": "Puerto Rico",
         "ko": "푸에르토리코"
-      }
+      },
+      "editor_code": "PUR"
     },
     {
       "code": "PS",
@@ -3307,7 +3489,8 @@
         "ar": "الأراضي الفلسطينية",
         "nl": "Palestijnse gebieden",
         "ko": "팔레스타인 지구"
-      }
+      },
+      "editor_code": "PLE"
     },
     {
       "code": "PT",
@@ -3325,7 +3508,8 @@
         "ar": "البرتغال",
         "nl": "Portugal",
         "ko": "포르투갈"
-      }
+      },
+      "editor_code": "POR"
     },
     {
       "code": "PW",
@@ -3343,7 +3527,8 @@
         "ar": "بالاو",
         "nl": "Palau",
         "ko": "팔라우"
-      }
+      },
+      "editor_code": "PLW"
     },
     {
       "code": "PY",
@@ -3361,7 +3546,8 @@
         "ar": "باراغواي",
         "nl": "Paraguay",
         "ko": "파라과이"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "QA",
@@ -3379,7 +3565,8 @@
         "ar": "قطر",
         "nl": "Qatar",
         "ko": "카타르"
-      }
+      },
+      "editor_code": "QAT"
     },
     {
       "code": "RE",
@@ -3397,7 +3584,8 @@
         "ar": "روينيون",
         "nl": "Réunion",
         "ko": "레위니옹"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "RO",
@@ -3415,7 +3603,8 @@
         "ar": "رومانيا",
         "nl": "Roemenië",
         "ko": "루마니아"
-      }
+      },
+      "editor_code": "ROU"
     },
     {
       "code": "RS",
@@ -3433,7 +3622,8 @@
         "ar": "صربيا",
         "nl": "Servië",
         "ko": "세르비아"
-      }
+      },
+      "editor_code": "SRB"
     },
     {
       "code": "RU",
@@ -3451,7 +3641,8 @@
         "ar": "روسيا",
         "nl": "Rusland",
         "ko": "러시아"
-      }
+      },
+      "editor_code": "RUS"
     },
     {
       "code": "RW",
@@ -3469,7 +3660,8 @@
         "ar": "رواندا",
         "nl": "Rwanda",
         "ko": "르완다"
-      }
+      },
+      "editor_code": "RWA"
     },
     {
       "code": "SA",
@@ -3487,7 +3679,8 @@
         "ar": "المملكة العربية السعودية",
         "nl": "Saoedi-Arabië",
         "ko": "사우디아라비아"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "SB",
@@ -3505,7 +3698,8 @@
         "ar": "جزر سليمان",
         "nl": "Salomonseilanden",
         "ko": "솔로몬 제도"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "SC",
@@ -3523,7 +3717,8 @@
         "ar": "سيشل",
         "nl": "Seychellen",
         "ko": "세이셸"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "SD",
@@ -3541,7 +3736,8 @@
         "ar": "السودان",
         "nl": "Soedan",
         "ko": "수단"
-      }
+      },
+      "editor_code": "SDN"
     },
     {
       "code": "SE",
@@ -3559,7 +3755,8 @@
         "ar": "السويد",
         "nl": "Zweden",
         "ko": "스웨덴"
-      }
+      },
+      "editor_code": "SWE"
     },
     {
       "code": "SG",
@@ -3577,7 +3774,8 @@
         "ar": "سنغافورة",
         "nl": "Singapore",
         "ko": "싱가포르"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "SH",
@@ -3595,7 +3793,8 @@
         "ar": "سانت هيلينا",
         "nl": "Sint-Helena",
         "ko": "세인트헬레나"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "SI",
@@ -3613,7 +3812,8 @@
         "ar": "سلوفينيا",
         "nl": "Slovenië",
         "ko": "슬로베니아"
-      }
+      },
+      "editor_code": "SVN"
     },
     {
       "code": "SJ",
@@ -3631,7 +3831,8 @@
         "ar": "سفالبارد وجان ماين",
         "nl": "Spitsbergen en Jan Mayen",
         "ko": "스발바르제도-얀마웬섬"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "SK",
@@ -3649,7 +3850,8 @@
         "ar": "سلوفاكيا",
         "nl": "Slowakije",
         "ko": "슬로바키아"
-      }
+      },
+      "editor_code": "SVK"
     },
     {
       "code": "SL",
@@ -3667,7 +3869,8 @@
         "ar": "سيراليون",
         "nl": "Sierra Leone",
         "ko": "시에라리온"
-      }
+      },
+      "editor_code": "SLE"
     },
     {
       "code": "SM",
@@ -3685,7 +3888,8 @@
         "ar": "سان مارينو",
         "nl": "San Marino",
         "ko": "산마리노"
-      }
+      },
+      "editor_code": "SMR"
     },
     {
       "code": "SN",
@@ -3703,7 +3907,8 @@
         "ar": "السنغال",
         "nl": "Senegal",
         "ko": "세네갈"
-      }
+      },
+      "editor_code": "SEN"
     },
     {
       "code": "SO",
@@ -3721,7 +3926,8 @@
         "ar": "الصومال",
         "nl": "Somalië",
         "ko": "소말리아"
-      }
+      },
+      "editor_code": "SOM"
     },
     {
       "code": "SR",
@@ -3739,7 +3945,8 @@
         "ar": "سورينام",
         "nl": "Suriname",
         "ko": "수리남"
-      }
+      },
+      "editor_code": "SUR"
     },
     {
       "code": "SS",
@@ -3757,7 +3964,8 @@
         "ar": "جنوب السودان",
         "nl": "Zuid-Soedan",
         "ko": "남수단"
-      }
+      },
+      "editor_code": "SSD"
     },
     {
       "code": "ST",
@@ -3775,7 +3983,8 @@
         "ar": "ساو تومي وبرينسيبي",
         "nl": "Sao Tomé en Principe",
         "ko": "상투메 프린시페"
-      }
+      },
+      "editor_code": "STP"
     },
     {
       "code": "SV",
@@ -3793,7 +4002,8 @@
         "ar": "السلفادور",
         "nl": "El Salvador",
         "ko": "엘살바도르"
-      }
+      },
+      "editor_code": "SLV"
     },
     {
       "code": "SX",
@@ -3811,7 +4021,8 @@
         "ar": "سانت مارتن",
         "nl": "Sint-Maarten",
         "ko": "신트마르턴"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "SY",
@@ -3829,7 +4040,8 @@
         "ar": "سوريا",
         "nl": "Syrië",
         "ko": "시리아"
-      }
+      },
+      "editor_code": "SYR"
     },
     {
       "code": "SZ",
@@ -3847,7 +4059,8 @@
         "ar": "إسواتيني",
         "nl": "Eswatini",
         "ko": "에스와티니"
-      }
+      },
+      "editor_code": "SWZ"
     },
     {
       "code": "TC",
@@ -3865,7 +4078,8 @@
         "ar": "جزر توركس وكايكوس",
         "nl": "Turks- en Caicoseilanden",
         "ko": "터크스 케이커스 제도"
-      }
+      },
+      "editor_code": "TCA"
     },
     {
       "code": "TD",
@@ -3883,7 +4097,8 @@
         "ar": "تشاد",
         "nl": "Tsjaad",
         "ko": "차드"
-      }
+      },
+      "editor_code": "CHA"
     },
     {
       "code": "TF",
@@ -3901,7 +4116,8 @@
         "ar": "الأقاليم الجنوبية الفرنسية",
         "nl": "Franse Gebieden in de zuidelijke Indische Oceaan",
         "ko": "프랑스령 남방 지역"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "TG",
@@ -3919,7 +4135,8 @@
         "ar": "توغو",
         "nl": "Togo",
         "ko": "토고"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "TH",
@@ -3937,7 +4154,8 @@
         "ar": "تايلاند",
         "nl": "Thailand",
         "ko": "태국"
-      }
+      },
+      "editor_code": "THA"
     },
     {
       "code": "TJ",
@@ -3955,7 +4173,8 @@
         "ar": "طاجيكستان",
         "nl": "Tadzjikistan",
         "ko": "타지키스탄"
-      }
+      },
+      "editor_code": "TJK"
     },
     {
       "code": "TK",
@@ -3973,7 +4192,8 @@
         "ar": "توكيلاو",
         "nl": "Tokelau",
         "ko": "토켈라우"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "TL",
@@ -3991,7 +4211,8 @@
         "ar": "تيمور - ليشتي",
         "nl": "Oost-Timor",
         "ko": "동티모르"
-      }
+      },
+      "editor_code": "TLS"
     },
     {
       "code": "TM",
@@ -4009,7 +4230,8 @@
         "ar": "تركمانستان",
         "nl": "Turkmenistan",
         "ko": "투르크메니스탄"
-      }
+      },
+      "editor_code": "TKM"
     },
     {
       "code": "TN",
@@ -4027,7 +4249,8 @@
         "ar": "تونس",
         "nl": "Tunesië",
         "ko": "튀니지"
-      }
+      },
+      "editor_code": "TUN"
     },
     {
       "code": "TO",
@@ -4045,7 +4268,8 @@
         "ar": "تونغا",
         "nl": "Tonga",
         "ko": "통가"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "TR",
@@ -4063,7 +4287,8 @@
         "ar": "تركيا",
         "nl": "Turkije",
         "ko": "튀르키예"
-      }
+      },
+      "editor_code": "TUR"
     },
     {
       "code": "TT",
@@ -4081,7 +4306,8 @@
         "ar": "ترينيداد وتوباغو",
         "nl": "Trinidad en Tobago",
         "ko": "트리니다드 토바고"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "TV",
@@ -4099,7 +4325,8 @@
         "ar": "توفالو",
         "nl": "Tuvalu",
         "ko": "투발루"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "TW",
@@ -4117,7 +4344,8 @@
         "ar": "تايوان",
         "nl": "Taiwan",
         "ko": "대만"
-      }
+      },
+      "editor_code": "TPE"
     },
     {
       "code": "TZ",
@@ -4135,7 +4363,8 @@
         "ar": "تنزانيا",
         "nl": "Tanzania",
         "ko": "탄자니아"
-      }
+      },
+      "editor_code": "TAN"
     },
     {
       "code": "UA",
@@ -4153,7 +4382,8 @@
         "ar": "أوكرانيا",
         "nl": "Oekraïne",
         "ko": "우크라이나"
-      }
+      },
+      "editor_code": "UKR"
     },
     {
       "code": "UG",
@@ -4171,7 +4401,8 @@
         "ar": "أوغندا",
         "nl": "Oeganda",
         "ko": "우간다"
-      }
+      },
+      "editor_code": "UGA"
     },
     {
       "code": "UM",
@@ -4189,7 +4420,8 @@
         "ar": "جزر الولايات المتحدة النائية",
         "nl": "Kleine afgelegen eilanden van de Verenigde Staten",
         "ko": "미국령 해외 제도"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "US",
@@ -4207,7 +4439,8 @@
         "ar": "الولايات المتحدة",
         "nl": "Verenigde Staten",
         "ko": "미국"
-      }
+      },
+      "editor_code": "USA"
     },
     {
       "code": "UY",
@@ -4225,7 +4458,8 @@
         "ar": "أورغواي",
         "nl": "Uruguay",
         "ko": "우루과이"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "UZ",
@@ -4243,7 +4477,8 @@
         "ar": "أوزبكستان",
         "nl": "Oezbekistan",
         "ko": "우즈베키스탄"
-      }
+      },
+      "editor_code": "UZB"
     },
     {
       "code": "VA",
@@ -4261,7 +4496,8 @@
         "ar": "الفاتيكان",
         "nl": "Vaticaanstad",
         "ko": "바티칸 시국"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "VC",
@@ -4279,7 +4515,8 @@
         "ar": "سانت فنسنت وجزر غرينادين",
         "nl": "Saint Vincent en de Grenadines",
         "ko": "세인트빈센트그레나딘"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "VE",
@@ -4297,7 +4534,8 @@
         "ar": "فنزويلا",
         "nl": "Venezuela",
         "ko": "베네수엘라"
-      }
+      },
+      "editor_code": "VEN"
     },
     {
       "code": "VG",
@@ -4315,7 +4553,8 @@
         "ar": "جزر فيرجن البريطانية",
         "nl": "Britse Maagdeneilanden",
         "ko": "영국령 버진아일랜드"
-      }
+      },
+      "editor_code": "VGB"
     },
     {
       "code": "VI",
@@ -4333,7 +4572,8 @@
         "ar": "جزر فيرجن الأمريكية",
         "nl": "Amerikaanse Maagdeneilanden",
         "ko": "미국령 버진아일랜드"
-      }
+      },
+      "editor_code": "VIR"
     },
     {
       "code": "VN",
@@ -4351,7 +4591,8 @@
         "ar": "فيتنام",
         "nl": "Vietnam",
         "ko": "베트남"
-      }
+      },
+      "editor_code": "VIE"
     },
     {
       "code": "VU",
@@ -4369,7 +4610,8 @@
         "ar": "فانواتو",
         "nl": "Vanuatu",
         "ko": "바누아투"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "WF",
@@ -4387,7 +4629,8 @@
         "ar": "جزر والس وفوتونا",
         "nl": "Wallis en Futuna",
         "ko": "왈리스-푸투나 제도"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "WS",
@@ -4405,7 +4648,8 @@
         "ar": "ساموا",
         "nl": "Samoa",
         "ko": "사모아"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "YE",
@@ -4423,7 +4667,8 @@
         "ar": "اليمن",
         "nl": "Jemen",
         "ko": "예멘"
-      }
+      },
+      "editor_code": "YEM"
     },
     {
       "code": "YT",
@@ -4441,7 +4686,8 @@
         "ar": "مايوت",
         "nl": "Mayotte",
         "ko": "마요트"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "ZA",
@@ -4459,7 +4705,8 @@
         "ar": "جنوب أفريقيا",
         "nl": "Zuid-Afrika",
         "ko": "남아프리카"
-      }
+      },
+      "editor_code": null
     },
     {
       "code": "ZM",
@@ -4477,7 +4724,8 @@
         "ar": "زامبيا",
         "nl": "Zambia",
         "ko": "잠비아"
-      }
+      },
+      "editor_code": "ZAM"
     },
     {
       "code": "ZW",
@@ -4495,6 +4743,39 @@
         "ar": "زيمبابوي",
         "nl": "Zimbabwe",
         "ko": "짐바브웨"
+      },
+      "editor_code": null
+    },
+    {
+      "code": null,
+      "code_alpha3": null,
+      "editor_code": "ENG",
+      "names": {
+        "en": "England"
+      }
+    },
+    {
+      "code": null,
+      "code_alpha3": null,
+      "editor_code": "NIR",
+      "names": {
+        "en": "Northern Ireland"
+      }
+    },
+    {
+      "code": null,
+      "code_alpha3": null,
+      "editor_code": "SCO",
+      "names": {
+        "en": "Scotland"
+      }
+    },
+    {
+      "code": null,
+      "code_alpha3": null,
+      "editor_code": "WAL",
+      "names": {
+        "en": "Wales"
       }
     }
   ]

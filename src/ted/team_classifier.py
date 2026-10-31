@@ -87,7 +87,8 @@ def classify_team(
     Classify a team as 'national_team' or 'club'.
 
     A national team requires an exact localized country-name match
-    and a matching three-letter abbreviation derived from that name.
+    and a matching editor abbreviation. If editor_code is unavailable,
+    the abbreviation is derived from the localized country name.
     """
     if not isinstance(team_name, str) or not team_name.strip():
         return "club"
@@ -107,9 +108,12 @@ def classify_team(
 
     localized_name = country["names"][language]
 
-    expected_abbreviation = country_abbreviation(
-        localized_name
-    )
+    expected_abbreviation = country.get("editor_code")
+
+    if not expected_abbreviation:
+        expected_abbreviation = country_abbreviation(
+            localized_name
+        )
 
     actual_abbreviation = "".join(
         char
