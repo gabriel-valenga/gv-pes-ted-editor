@@ -339,41 +339,42 @@ def calculate_general_score(player):
     )
 
 
+
 def transform_general_score(score):
     """Transform the general score using the reconstructed lookup table."""
     if score is None:
         return None
 
     if score <= 61:
-        return -9
-    if score == 62:
-        return -6
-    if score == 63:
-        return -4
-    if score == 64:
-        return -2
-    if score == 65:
-        return 0
-    if score == 66:
-        return 1
-    if score == 67:
-        return 3
-    if score == 68:
-        return 5
-    if score == 69:
-        return 6
-    if score == 70:
-        return 7
-    if score == 71:
-        return 8
+        return score - 9
+    if score <= 62:
+        return score - 6
+    if score <= 63:
+        return score - 4
+    if score <= 64:
+        return score - 2
+    if score <= 65:
+        return score
+    if score <= 66:
+        return score + 1
+    if score <= 67:
+        return score + 3
+    if score <= 68:
+        return score + 5
+    if score <= 69:
+        return score + 6
+    if score <= 70:
+        return score + 7
+    if score <= 71:
+        return score + 8
     if score <= 73:
-        return 10
+        return score + 10
     if score <= 75:
-        return 12
+        return score + 12
     if score <= 77:
-        return 13
+        return score + 13
 
-    return 14
+    return score + 14
 
 
 def calculate_position_score(player, position):
