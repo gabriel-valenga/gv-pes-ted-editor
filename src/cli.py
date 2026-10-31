@@ -26,19 +26,12 @@ from ted.writer import save_ted, validate_ted_round_trip
 
 
 def find_option_file_teds(option_file_dir: Path) -> list[Path]:
-    """Find all TED files inside directories named '_ted'."""
-
-    ted_files = set()
-
-    for ted_dir in option_file_dir.rglob("_ted"):
-        if not ted_dir.is_dir():
-            continue
-
-        for ted_file in ted_dir.rglob("*"):
-            if ted_file.is_file() and ted_file.suffix.lower() == ".ted":
-                ted_files.add(ted_file)
-
-    return sorted(ted_files)
+    """Find all TED files recursively inside an Option File directory."""
+    return sorted(
+        path
+        for path in option_file_dir.rglob("*")
+        if path.is_file() and path.suffix.casefold() == ".ted"
+    )
 
 
 def process_ted(
