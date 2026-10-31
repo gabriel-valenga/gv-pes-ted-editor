@@ -1,6 +1,11 @@
 import pytest
 import json
-from editing.players.rules import load_rules, apply_rules
+from editing.players.rules import (
+    load_rules,
+    apply_rules,
+    NUMERIC_ATTRIBUTE_FIELDS,
+    BOOLEAN_SKILL_FIELDS,
+)
 from editing.players.conditions import prepare_player
 from ted.fields import FIELD_BY_NAME, set_field
 from ted.reader import (
@@ -753,9 +758,16 @@ def test_apply_rule_with_calculated_overall_condition(tmp_path):
     rules = load_test_rules(tmp_path, config)
     edits = apply_rules(data, rules)
 
-    assert len(edits) == 1
-    assert get_player(data, 0)["speed"] == 95
-    assert get_player(data, 1)["speed"] == 70
+    assert len(edits) == 2
+
+    assert edits[0]["playerIndex"] == 0
+    assert edits[1]["playerIndex"] == 1
+
+    goalkeeper = get_player(data, 0)
+    forward = get_player(data, 1)
+
+    assert goalkeeper["speed"] == 95
+    assert forward["speed"] == 95
 
 
 def test_apply_rule_with_calculated_overall_band(tmp_path):
@@ -773,8 +785,8 @@ def test_apply_rule_with_calculated_overall_band(tmp_path):
                     "field": "calculated.overall",
                     "ranges": [
                         {
-                            "min": 40,
-                            "max": 50,
+                            "min": 60,
+                            "max": 65,
                             "operations": [
                                 {
                                     "field": "speed",
@@ -784,8 +796,8 @@ def test_apply_rule_with_calculated_overall_band(tmp_path):
                             ],
                         },
                         {
-                            "min": 60,
-                            "max": 70,
+                            "min": 71,
+                            "max": 75,
                             "operations": [
                                 {
                                     "field": "speed",
@@ -804,8 +816,12 @@ def test_apply_rule_with_calculated_overall_band(tmp_path):
     edits = apply_rules(data, rules)
 
     assert len(edits) == 2
-    assert get_player(data, 0)["speed"] == 90
-    assert get_player(data, 1)["speed"] == 80
+
+    goalkeeper = get_player(data, 0)
+    forward = get_player(data, 1)
+
+    assert goalkeeper["speed"] == 80
+    assert forward["speed"] == 90
 
 
 def test_overall_is_recalculated_between_rules(tmp_path):
@@ -1024,6 +1040,111 @@ def test_reputation_is_set_from_calculated_overall_bands(tmp_path):
     forward = get_player(data, 1)
 
     assert goalkeeper["reputation"] == 2
-    assert forward["reputation"] == 1
-    assert len(edits) == 2
-    
+    assert forward["reputation"] == 4
+
+
+@pytest.mark.parametrize(
+    "field_name",
+    sorted(NUMERIC_ATTRIBUTE_FIELDS),
+)
+@pytest.mark.parametrize(
+    ("operation_type", "operation_value", "expected_value"),
+    [
+        ("set", 90, 90),
+        ("delta", 5, 75),
+        ("percentage", 10, 77),
+    ],
+)
+def test_all_numeric_attributes_are_editable(
+    tmp_path,
+    field_name,
+    operation_type,
+    operation_value,
+    expected_value,
+):
+    sentinel_field = next(
+        name
+        for name in NUMERIC_ATTRIBUTE_FIELDS
+        if name != field_name
+    )
+
+    data = create_ted_data([
+        {
+            "id": 1,
+            field_name: 70,
+            sentinel_field: 65,
+        }
+    ])
+
+    config = create_config([
+        create_rule(
+            name=f"Edit {field_name}",
+            operations=[
+                {
+                    "field": field_name,
+                    "operation": operation_type,
+                    "value": operation_value,
+                }
+            ],
+        )
+    ])
+
+    rules = load_test_rules(tmp_path, config)
+    edits = apply_rules(data, rules)
+
+    player = get_player(data, 0)
+
+    assert player[field_name] == expected_value
+    assert player[sentinel_field] == 65
+    assert len(edits) == 1
+    assert edits[0]["field"] == field_name
+    assert edits[0]["after"] == expected_value
+
+
+@pytest.mark.parametrize(
+    "field_name",
+    sorted(BOOLEAN_SKILL_FIELDS),
+)
+@pytest.mark.parametrize("skill_value", [True, False])
+def test_all_boolean_skills_are_editable(
+    tmp_path,
+    field_name,
+    skill_value,
+):
+    sentinel_field = next(
+        name
+        for name in BOOLEAN_SKILL_FIELDS
+        if name != field_name
+    )
+
+    data = create_ted_data([
+        {
+            "id": 1,
+            field_name: not skill_value,
+            sentinel_field: True,
+        }
+    ])
+
+    config = create_config([
+        create_rule(
+            name=f"Edit {field_name}",
+            operations=[
+                {
+                    "field": field_name,
+                    "operation": "set",
+                    "value": skill_value,
+                }
+            ],
+        )
+    ])
+
+    rules = load_test_rules(tmp_path, config)
+    edits = apply_rules(data, rules)
+
+    player = get_player(data, 0)
+
+    assert player[field_name] is skill_value
+    assert player[sentinel_field] is True
+    assert len(edits) == 1
+    assert edits[0]["field"] == field_name
+    assert edits[0]["after"] is skill_value

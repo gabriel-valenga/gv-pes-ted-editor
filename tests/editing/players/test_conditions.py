@@ -228,17 +228,17 @@ def test_get_calculated_overall():
     player = make_player_with_overall()
     prepared = prepare_player(player)
 
-    assert get_condition_value(prepared, "calculated.overall") == 44
+    assert get_condition_value(prepared, "calculated.overall") == 72
 
 
 @pytest.mark.parametrize(
     "operator, value, expected",
     [
-        ("eq", 44, True),
-        ("gte", 44, True),
-        ("gt", 44, False),
-        ("lt", 45, True),
-        ("between", [40, 50], True),
+        ("eq", 72, True),
+        ("gte", 72, True),
+        ("gt", 72, False),
+        ("lt", 73, True),
+        ("between", [70, 75], True),
     ],
 )
 def test_evaluate_condition_with_calculated_overall(
@@ -267,8 +267,8 @@ def test_evaluate_band_with_calculated_overall():
         "calculated.overall",
     )
 
-    assert evaluate_band(overall, 40, 50) is True
-    assert evaluate_band(overall, 50, 60) is False
+    assert evaluate_band(overall, 70, 75) is True
+    assert evaluate_band(overall, 75, 80) is False
 
 
 def test_overall_is_recalculated_after_player_changes():
