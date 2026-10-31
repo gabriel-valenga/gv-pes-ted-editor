@@ -2,352 +2,622 @@
 import json
 import math
 from pathlib import Path
+from editing.players.conditions import (
+    evaluate_conditions,
+    evaluate_band,
+    prepare_player,
+)
 from editing.players.operations import apply_edit
 from ted.fields import PLAYER_FIELDS
 from ted.reader import extract_players
 
-CONFIG_FORMAT = "pes-gv-bulk-tools-config"
+
+CONFIG_FORMAT = "pes-gv-ted-rules-config"
 CONFIG_VERSION = 1
 
 VALID_LANGUAGES = {"pt-BR", "en"}
 
 VALID_POSITIONS = {
     "GK", "RB", "CB", "LB", "DMF", "CMF",
-    "AMF", "RMF", "LMF", "RWF", "LWF", "SS", "CF"
+    "AMF", "RMF", "LMF", "RWF", "LWF", "SS", "CF",
+}
+
+VALID_OPERATIONS = {"set", "delta", "percentage"}
+
+VALID_CONDITION_OPERATORS = {
+    "eq", "ne", "gt", "gte", "lt", "lte",
+    "in", "not_in", "between",
+}
+
+CALCULATED_FIELDS = {
+    "bmi",
+    "overall",
+}
+
+FIELD_BY_NAME = {
+    field["key"]: field
+    for field in PLAYER_FIELDS
+}
+
+# Editable numeric player attributes.
+# These are the original PES attributes with values from 40 to 99.
+NUMERIC_ATTRIBUTE_FIELDS = {
+    field["key"]
+    for field in PLAYER_FIELDS
+    if (
+        field.get("type") == "bitfield"
+        and field.get("lengthInBit") == 7
+        and not field.get("transform")
+    )
+}
+
+# Boolean special skills.
+BOOLEAN_SKILL_FIELDS = {
+    field["key"]
+    for field in PLAYER_FIELDS
+    if (
+        field.get("type") == "bitfield"
+        and field.get("lengthInBit") == 1
+        and field.get("transform") == "j"
+    )
+}
+# Player reputation field.
+# It uses a 3-bit field with logical values from 1 to 8.
+REPUTATION_FIELDS = {
+    "reputation",
 }
 
 
-def load_rules(file_path: str | Path) -> dict:
-    """Load and validate a JSON editing rules file."""
-
-    path = Path(file_path)
-
-    try:
-        with path.open("r", encoding="utf-8") as file:
-            config = json.load(file)
-    except json.JSONDecodeError as exc:
-        raise ValueError(
-            f"Invalid JSON at line {exc.lineno}, column {exc.colno}."
-        ) from exc
-
-    if not isinstance(config, dict):
-        raise ValueError("The configuration must be a JSON object.")
-
-    if config.get("format") != CONFIG_FORMAT:
-        raise ValueError("Unrecognized configuration format.")
-
-    if config.get("version") != CONFIG_VERSION:
-        raise ValueError("Unsupported configuration version.")
-
-    if config.get("language") not in VALID_LANGUAGES:
-        raise ValueError("Invalid language. Use 'pt-BR' or 'en'.")
-
-    targets = config.get("targets")
-    if not isinstance(targets, dict):
-        raise ValueError("'targets' must be an object.")
-
-    if not isinstance(targets.get("allPositions"), bool):
-        raise ValueError("'targets.allPositions' must be a boolean.")
-
-    positions = targets.get("positions")
-    if not isinstance(positions, list):
-        raise ValueError("'targets.positions' must be a list.")
-
-    if any(
-        not isinstance(position, str) or position not in VALID_POSITIONS
-        for position in positions
-    ):
-        raise ValueError("The configuration contains an invalid position.")
-
-    attributes = config.get("attributes")
-    if not isinstance(attributes, list):
-        raise ValueError("'attributes' must be a list.")
-
-    normalized_attributes = []
-
-    for index, rule in enumerate(attributes):
-        if not isinstance(rule, dict):
-            raise ValueError(f"Invalid attribute rule at index {index}.")                
-        field = rule.get("field")
-
-        if not isinstance(field, str) or not field:
-            raise ValueError(f"Invalid field in attribute rule {index}.")
-
-        has_delta = "delta" in rule
-        has_value = "value" in rule
-
-        if has_delta == has_value:
-            raise ValueError(
-                f"Attribute rule {index} must contain exactly one "
-                "of 'delta' or 'value'."
-            )
-
-        operation = "delta" if has_delta else "set"
-        raw_value = rule[operation]
-
-        if isinstance(raw_value, bool) or not isinstance(
-            raw_value, (int, float, str)
-        ):
-            raise ValueError(
-                f"Invalid numeric value in attribute rule {index}."
-            )
-
-        try:
-            numeric_value = float(raw_value)
-        except (ValueError, TypeError) as exc:
-            raise ValueError(
-                f"Invalid numeric value in attribute rule {index}."
-            ) from exc
-
-        if not math.isfinite(numeric_value):
-            raise ValueError(
-                f"The value in attribute rule {index} must be finite."
-            )
-
-        if not numeric_value.is_integer():
-            raise ValueError(
-                f"The value in attribute rule {index} must be an integer."
-            )
-
-        normalized_attributes.append({
-            "field": field,
-            "operation": operation,
-            "value": numeric_value,
-        })
-    skills = config.get("specialSkills")
-    if not isinstance(skills, dict):
-        raise ValueError("'specialSkills' must be an object.")
-
-    normalized_skills = {}
-
-    for key, rule in skills.items():
-        if not isinstance(key, str) or not isinstance(rule, dict):
-            raise ValueError("Invalid special skill rule.")
-
-        if not isinstance(rule.get("checked"), bool):
-            raise ValueError(
-                f"'checked' must be a boolean for skill '{key}'."
-            )
-
-        if rule.get("action") not in {"true", "false"}:
-            raise ValueError(
-                f"Invalid 'action' for skill '{key}'."
-            )
-
-        normalized_skills[key] = {
-            "checked": rule["checked"],
-            "action": rule["action"],
-        }
-
-    reputation = config.get(
-        "reputation",
-        {"enabled": False, "bands": []},
+def _is_finite_number(value):
+    return (
+        isinstance(value, (int, float))
+        and not isinstance(value, bool)
+        and math.isfinite(value)
     )
 
-    if not isinstance(reputation, dict):
-        raise ValueError("'reputation' must be an object.")
 
-    if not isinstance(reputation.get("enabled"), bool):
-        raise ValueError("'reputation.enabled' must be a boolean.")
+def _validate_condition(condition):
+    if not isinstance(condition, dict):
+        raise ValueError("Each condition must be an object.")
+    allowed_fields = {"field", "operator", "value"}
 
-    bands = reputation.get("bands")
-    if not isinstance(bands, list):
-        raise ValueError("'reputation.bands' must be a list.")
+    unknown_fields = set(condition) - allowed_fields
 
-    normalized_bands = []
-
-    for index, band in enumerate(bands):
-        if not isinstance(band, dict):
-            raise ValueError(
-                f"Invalid reputation band at index {index}."
-            )
-
-        values = (
-            "overallStart",
-            "overallEnd",
-            "reputationStart",
-            "reputationEnd",
+    if unknown_fields:
+        raise ValueError(
+            f"Unknown condition fields: {sorted(unknown_fields)}"
         )
 
-        try:
-            normalized = {
-                key: float(band[key])
-                for key in values
-            }
-        except (KeyError, TypeError, ValueError) as exc:
-            raise ValueError(
-                f"Invalid values in reputation band {index}."
-            ) from exc
+    field_name = condition.get("field")
+    operator = condition.get("operator")
 
-        if not all(
-            math.isfinite(value)
-            for value in normalized.values()
-        ):
+    if not isinstance(field_name, str):
+        raise ValueError("Condition field must be a string.")
+
+    if field_name.startswith("calculated."):
+        calculated_name = field_name.split(".", 1)[1]
+
+        if calculated_name not in CALCULATED_FIELDS:
             raise ValueError(
-                f"Non-finite values in reputation band {index}."
+                f"Unknown calculated field: {field_name}"
+            )
+    elif field_name not in FIELD_BY_NAME:
+        raise ValueError(f"Unknown condition field: {field_name}")
+
+    if not isinstance(operator, str):
+        raise ValueError("Condition operator must be a string.")
+
+    if operator not in VALID_CONDITION_OPERATORS:
+        raise ValueError(f"Invalid condition operator: {operator}")
+
+    if "value" not in condition:
+        raise ValueError(
+            f"Condition '{field_name}' requires a value."
+        )
+
+    value = condition["value"]
+
+    if operator in {"gt", "gte", "lt", "lte"}:
+        if not _is_finite_number(value):
+            raise ValueError(
+                f"Operator '{operator}' requires a numeric value."
             )
 
-        if normalized["overallStart"] > normalized["overallEnd"]:
+    elif operator in {"in", "not_in"}:
+        if not isinstance(value, list) or not value:
             raise ValueError(
-                f"The overall range is reversed in reputation band {index}."
+                f"Operator '{operator}' requires a non-empty list."
+            )
+
+    elif operator == "between":
+        if (
+            not isinstance(value, list)
+            or len(value) != 2
+            or not all(_is_finite_number(item) for item in value)
+        ):
+            raise ValueError(
+                "Operator 'between' requires two numeric values."
+            )
+
+        if value[0] > value[1]:
+            raise ValueError(
+                "The minimum of a 'between' condition "
+                "cannot exceed its maximum."
+            )
+
+
+def _validate_operation(operation):
+    if not isinstance(operation, dict):
+        raise ValueError("Each operation must be an object.")
+    allowed_fields = {"field", "operation", "value"}
+
+    unknown_fields = set(operation) - allowed_fields
+
+    if unknown_fields:
+        raise ValueError(
+            f"Unknown operation fields: {sorted(unknown_fields)}"
+        )
+
+    field_name = operation.get("field")
+    operation_type = operation.get("operation")
+    value = operation.get("value")
+
+    if not isinstance(field_name, str):
+        raise ValueError("Operation field must be a string.")
+
+    if field_name not in FIELD_BY_NAME:
+        raise ValueError(f"Unknown operation field: {field_name}")
+
+    if not isinstance(operation_type, str):
+        raise ValueError("Operation type must be a string.")
+
+    if operation_type not in VALID_OPERATIONS:
+        raise ValueError(
+            f"Invalid operation '{operation_type}' "
+            f"for field '{field_name}'."
+        )
+
+    if field_name in NUMERIC_ATTRIBUTE_FIELDS:
+        if not _is_finite_number(value):
+            raise ValueError(
+                f"Operation on '{field_name}' requires a finite number."
+            )
+
+        if operation_type == "set" and not float(value).is_integer():
+            raise ValueError(
+                f"Operation 'set' on '{field_name}' requires an integer."
+            )
+
+    elif field_name in BOOLEAN_SKILL_FIELDS:
+        if operation_type != "set":
+            raise ValueError(
+                f"Boolean skill '{field_name}' only supports 'set'."
+            )
+
+        if not isinstance(value, bool):
+            raise ValueError(
+                f"Boolean skill '{field_name}' requires true or false."
+            )
+
+    elif field_name in REPUTATION_FIELDS:
+        if operation_type != "set":
+            raise ValueError(
+                f"Reputation field '{field_name}' only supports 'set'."
             )
 
         if (
-            normalized["reputationStart"]
-            > normalized["reputationEnd"]
+            not isinstance(value, int)
+            or isinstance(value, bool)
+            or not 1 <= value <= 8
         ):
             raise ValueError(
-                f"The reputation range is reversed in band {index}."
+                f"Reputation field '{field_name}' requires an integer from 1 to 8."
             )
 
-        normalized_bands.append(normalized)
-
-    if reputation["enabled"] and not normalized_bands:
+    else:
         raise ValueError(
-            "Reputation adjustment is enabled, but no bands are configured."
+            f"Field '{field_name}' cannot be modified by this rules engine."
         )
 
-    return {
-        "language": config["language"],
-        "targets": {
-            "allPositions": targets["allPositions"],
-            "positions": list(dict.fromkeys(positions)),
-        },
-        "attributes": normalized_attributes,
-        "specialSkills": normalized_skills,
-        "reputation": {
-            "enabled": reputation["enabled"],
-            "bands": normalized_bands,
-        },
-    }
 
+def _validate_bands(bands):
+    if not isinstance(bands, list):
+        raise ValueError("'bands' must be a list.")
 
-def apply_rules(data: bytearray, rules: dict) -> list[dict]:
-    """Apply configured attribute and special skill rules to selected players."""
+    for band in bands:
+        if not isinstance(band, dict):
+            raise ValueError("Each band must be an object.")
 
-    if rules["reputation"]["enabled"]:
-        raise NotImplementedError(
-            "Reputation rules require an overall rating calculation, "
-            "which is not implemented yet."
-        )
+        allowed_fields = {"field", "ranges"}
+        unknown_fields = set(band) - allowed_fields
 
-    fields = {field["key"]: field for field in PLAYER_FIELDS}
-
-    # Identify seven-bit numeric player attributes.
-    attribute_fields = {
-        key: field
-        for key, field in fields.items()
-        if field.get("type") == "bitfield"
-        and field.get("lengthInBit") == 7
-        and not field.get("transform")
-    }
-
-    players = extract_players(data)
-    positions = set(rules["targets"]["positions"])
-    all_positions = rules["targets"]["allPositions"]
-
-    selected_players = [
-        player
-        for player in players
-        if all_positions
-        or player.get("registeredPosition") in positions
-    ]
-
-    edits = []
-
-    for player in selected_players:
-        player_index = player["index"]
-
-        # Apply numeric attribute adjustments.
-        for rule in rules["attributes"]:
-            field_name = rule["field"]
-
-            if field_name not in attribute_fields:
-                raise ValueError(
-                    f"Unsupported numeric attribute: {field_name}"
-                )
-
-            before = player.get(field_name)
-
-            if isinstance(before, bool) or not isinstance(before, (int, float)):
-                raise ValueError(
-                    f"Attribute '{field_name}' has a non-numeric value "
-                    f"for player index {player_index}."
-                )
-
-            if rule["operation"] == "delta":
-                after = round(before + rule["value"])
-            else:
-                after = int(rule["value"])
-
-            after = max(40, min(99, after))
-
-            if after == before:
-                continue
-
-            apply_edit(
-                data,
-                player_index,
-                field_name,
-                json.dumps(after),
+        if unknown_fields:
+            raise ValueError(
+                f"Unknown band fields: {sorted(unknown_fields)}"
             )
 
-            edits.append({
-                "index": player_index,
-                "field": field_name,
-                "before": before,
-                "after": after,
-                "source": "config",
-            })
+        field_name = band.get("field")
 
-            # Keep the in-memory player data up to date for subsequent rules.
-            player[field_name] = after
+        if not isinstance(field_name, str):
+            raise ValueError("Band field must be a string.")
 
-        # Apply selected special skill rules.
-        for skill_name, skill_rule in rules["specialSkills"].items():
-            if not skill_rule["checked"]:
-                continue
+        if field_name.startswith("calculated."):
+            calculated_name = field_name.split(".", 1)[1]
 
-            field = fields.get(skill_name)
+            if calculated_name not in CALCULATED_FIELDS:
+                raise ValueError(
+                    f"Unknown calculated band field: {field_name}"
+                )
+        elif field_name not in FIELD_BY_NAME:
+            raise ValueError(f"Unknown band field: {field_name}")
+
+        ranges = band.get("ranges")
+
+        if not isinstance(ranges, list) or not ranges:
+            raise ValueError(
+                f"Band '{field_name}' requires at least one range."
+            )
+
+        for value_range in ranges:
+            if not isinstance(value_range, dict):
+                raise ValueError(
+                    f"Each range in band '{field_name}' must be an object."
+                )
+            allowed_fields = {"min", "max", "operations"}
+            unknown_fields = set(value_range) - allowed_fields
+
+            if unknown_fields:
+                raise ValueError(
+                    f"Unknown range fields: {sorted(unknown_fields)}"
+                )
+            minimum = value_range.get("min")
+            maximum = value_range.get("max")
+            operations = value_range.get("operations")
 
             if (
-                field is None
-                or field.get("type") != "bitfield"
-                or field.get("lengthInBit") != 1
-                or field.get("transform") != "j"
+                not _is_finite_number(minimum)
+                or not _is_finite_number(maximum)
             ):
                 raise ValueError(
-                    f"Unsupported special skill: {skill_name}"
+                    f"Invalid numeric range for '{field_name}'."
                 )
 
-            before = player.get(skill_name)
-            after = skill_rule["action"] == "true"
-
-            if not isinstance(before, bool):
+            if minimum > maximum:
                 raise ValueError(
-                    f"Skill '{skill_name}' has an invalid value "
-                    f"for player index {player_index}."
+                    f"Range minimum exceeds maximum for '{field_name}'."
                 )
 
-            if after == before:
-                continue
+            if not isinstance(operations, list) or not operations:
+                raise ValueError(
+                    "Each range must contain at least one operation."
+                )
 
-            apply_edit(
-                data,
-                player_index,
-                skill_name,
-                json.dumps(after),
+            for operation in operations:
+                _validate_operation(operation)
+
+
+def _validate_rule(rule):
+    if not isinstance(rule, dict):
+        raise ValueError("Each rule must be an object.")
+    allowed_fields = {
+        "name",
+        "enabled",
+        "conditionLogic",
+        "conditions",
+        "operations",
+        "bands",
+    }
+
+    unknown_fields = set(rule) - allowed_fields
+
+    if unknown_fields:
+        raise ValueError(
+            f"Unknown rule fields: {sorted(unknown_fields)}"
+        )
+
+    name = rule.get("name")
+    if not isinstance(name, str) or not name.strip():
+        raise ValueError("Each rule requires a non-empty name.")
+
+    if not isinstance(rule.get("enabled"), bool):
+        raise ValueError(
+            f"Rule '{rule['name']}' requires an enabled boolean."
+        )
+
+    logic = rule.get("conditionLogic", "AND")
+
+    if not isinstance(logic, str) or logic not in {"AND", "OR"}:
+        raise ValueError(
+            f"Invalid conditionLogic in rule '{rule['name']}'."
+        )
+
+    conditions = rule.get("conditions", [])
+    operations = rule.get("operations", [])
+    bands = rule.get("bands", [])
+
+    if not isinstance(conditions, list):
+        raise ValueError("'conditions' must be a list.")
+
+    if not isinstance(operations, list):
+        raise ValueError("'operations' must be a list.")
+
+    for condition in conditions:
+        _validate_condition(condition)
+
+    for operation in operations:
+        _validate_operation(operation)
+
+    _validate_bands(bands)
+
+    if not operations and not bands:
+        raise ValueError(
+            f"Rule '{rule['name']}' has no operations or bands."
+        )
+
+
+def load_rules(config_path):
+    """
+    Load and validate a PES GV 2.0 configuration.
+    """
+    config_path = Path(config_path)
+
+    with config_path.open("r", encoding="utf-8") as file:
+        config = json.load(file)
+
+    if not isinstance(config, dict):
+        raise ValueError("Configuration root must be a JSON object.")
+
+    allowed_fields = {
+        "format",
+        "version",
+        "language",
+        "targets",
+        "rules",
+    }
+
+    unknown_fields = set(config) - allowed_fields
+
+    if unknown_fields:
+        raise ValueError(
+            f"Unknown configuration fields: {sorted(unknown_fields)}"
+        )
+
+    if config.get("format") != CONFIG_FORMAT:
+        raise ValueError("Invalid configuration format.")
+
+    version = config.get("version")
+
+    if (
+        not isinstance(version, int)
+        or isinstance(version, bool)
+        or version != CONFIG_VERSION
+    ):
+        raise ValueError(
+            f"Unsupported configuration version. "
+            f"Expected {CONFIG_VERSION}."
+        )
+
+    language = config.get("language")
+
+    if not isinstance(language, str) or language not in VALID_LANGUAGES:
+        raise ValueError(f"Unsupported language: {language}")
+
+    targets = config.get("targets")
+
+    if not isinstance(targets, dict):
+        raise ValueError("'targets' must be an object.")
+
+    unknown_target_fields = set(targets) - {"allPositions", "positions"}
+
+    if unknown_target_fields:
+        raise ValueError(
+            f"Unknown target fields: {sorted(unknown_target_fields)}"
+        )
+
+    all_positions = targets.get("allPositions")
+    positions = targets.get("positions")
+
+    if not isinstance(all_positions, bool):
+        raise ValueError("'allPositions' must be a boolean.")
+
+    if not isinstance(positions, list):
+        raise ValueError("'positions' must be a list.")
+
+    if not all(isinstance(position, str) for position in positions):
+        raise ValueError("Each position must be a string.")
+
+    invalid_positions = set(positions) - VALID_POSITIONS
+
+    if invalid_positions:
+        raise ValueError(
+            f"Invalid positions: {sorted(invalid_positions)}"
+        )
+
+    if not all_positions and not positions:
+        raise ValueError(
+            "Select all positions or at least one position."
+        )
+
+    rules = config.get("rules")
+
+    if not isinstance(rules, list):
+        raise ValueError("'rules' must be a list.")
+
+    for rule in rules:
+        _validate_rule(rule)
+
+    return {
+        "format": CONFIG_FORMAT,
+        "version": CONFIG_VERSION,
+        "language": language,
+        "targets": {
+            "allPositions": all_positions,
+            "positions": positions,
+        },
+        "rules": rules,
+    }
+
+
+def _calculate_operation(current_value, operation):
+    operation_type = operation["operation"]
+    value = operation["value"]
+
+    if operation_type == "set":
+        result = int(value)
+
+    elif operation_type == "delta":
+        result = round(current_value + value)
+
+    elif operation_type == "percentage":
+        result = round(
+            current_value * (1 + value / 100)
+        )
+
+    else:
+        raise ValueError(
+            f"Unsupported operation: {operation_type}"
+        )
+
+    # PES numeric attributes are limited to 40..99.
+    return max(40, min(99, int(result)))
+
+
+def _apply_operation(data, player, operation):
+    field_name = operation["field"]
+    operation_type = operation["operation"]
+    value = operation["value"]
+
+    before = player.get(field_name)
+
+    if field_name in NUMERIC_ATTRIBUTE_FIELDS:
+        if not _is_finite_number(before):
+            raise ValueError(
+                f"Invalid current value for '{field_name}'."
             )
 
-            edits.append({
-                "index": player_index,
-                "field": skill_name,
-                "before": before,
-                "after": after,
-                "source": "config",
-            })
+        after = _calculate_operation(before, operation)
 
-            player[skill_name] = after
+    elif field_name in BOOLEAN_SKILL_FIELDS:
+        after = value
+
+    elif field_name in REPUTATION_FIELDS:
+        before = player.get(field_name)
+
+        if (
+            not isinstance(before, int)
+            or isinstance(before, bool)
+            or not 1 <= before <= 8
+        ):
+            raise ValueError(
+                f"Invalid current value for '{field_name}'."
+            )
+
+        after = value
+
+    else:
+        raise ValueError(
+            f"Unsupported editable field: {field_name}"
+        )
+
+    if before == after:
+        return None
+
+    apply_edit(
+        data,
+        player["index"],
+        field_name,
+        json.dumps(after),
+    )
+
+    # Keep the in-memory player synchronized with the TED.
+    player[field_name] = after
+
+    return {
+        "playerIndex": player["index"],
+        "field": field_name,
+        "before": before,
+        "after": after,
+    }
+
+
+def _apply_operations(data, player, operations, edits):
+    for operation in operations:
+        edit = _apply_operation(data, player, operation)
+
+        if edit is not None:
+            edits.append(edit)
+
+
+def apply_rules(data: bytearray, rules: dict):
+    """
+    Apply a PES GV 2.0 configuration to TED player records.
+
+    Rules and operations are executed sequentially.
+    """
+    edits = []
+
+    players = extract_players(data)
+
+    targets = rules["targets"]
+
+    if targets["allPositions"]:
+        selected_players = players
+    else:
+        selected_players = [
+            player
+            for player in players
+            if player.get("registeredPosition") in targets["positions"]
+        ]
+
+    for rule in rules["rules"]:
+        if not rule["enabled"]:
+            continue
+
+        for original_player in selected_players:
+            # Recalculate virtual attributes for each rule.
+            # They are never written into the TED record.
+            player = prepare_player(original_player)
+
+            if not evaluate_conditions(
+                player,
+                rule.get("conditions", []),
+                rule.get("conditionLogic", "AND"),
+            ):
+                continue
+
+            # General operations are applied first.
+            _apply_operations(
+                data,
+                original_player,
+                rule.get("operations", []),
+                edits,
+            )
+
+            # Bands are evaluated using the player's current values.
+            # The calculated attributes are refreshed before each band.
+            for band in rule.get("bands", []):
+                current_player = prepare_player(original_player)
+
+                band_value = band["field"]
+
+                if band_value.startswith("calculated."):
+                    value = current_player["calculated"].get(
+                        band_value.split(".", 1)[1]
+                    )
+                else:
+                    value = current_player.get(band_value)
+
+                for value_range in band["ranges"]:
+                    if evaluate_band(
+                        value,
+                        value_range["min"],
+                        value_range["max"],
+                    ):
+                        _apply_operations(
+                            data,
+                            original_player,
+                            value_range["operations"],
+                            edits,
+                        )
 
     return edits
-
