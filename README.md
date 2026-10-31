@@ -16,18 +16,23 @@ The project aims to provide an independent way to inspect and modify TED data, s
 - Apply batch player edits through configurable rules.
 - Filter players by registered position.
 - Apply conditional operations and attribute-based ranges.
-- Support calculated player attributes, currently including BMI.
+- Support calculated player attributes, including BMI and Overall.
 - Validate rule configurations before applying changes.
+- Validate rule application across all supported editable numeric attributes and boolean special skills.
+- Process multiple TED files using the command-line interface.
+- Combine multiple rule configurations and manual edits in a single processing operation.
 
 ## Project Status
 
-**Core functionality implemented — automated testing in progress.**
+**Core functionality implemented — automated test suite passing.**
 
 The project currently supports TED decryption, player data extraction, individual editing, and batch editing through a configurable rules engine.
 
-The rules engine currently has **115 automated tests** covering calculations, conditions, operations, configuration validation, and rule application.
+The rules engine has automated tests covering calculations, conditions, operations, configuration validation, and rule application. The test suite validates the application of rules to all supported editable numeric attributes and boolean special skills.
 
-Not every field exposed by TEditor has been mapped yet. Team data, tactics, player appearance data, and other structures require further investigation and testing.
+The Overall rating calculation has also been reproduced and validated against TEditor's behavior.
+
+The current field coverage is focused on the player data required by the project. Additional TED structures and fields may be investigated as future requirements arise.
 
 ## Roadmap
 
@@ -38,8 +43,7 @@ Not every field exposed by TEditor has been mapped yet. Team data, tactics, play
 - [x] Implement batch editing through configurable rules.
 - [x] Validate modified TED files in PES 2021 across multiple teams.
 - [x] Implement automated tests for the rules engine.
-- [ ] Expand field coverage to match TEditor's data model.
-- [ ] Reproduce and validate TEditor's overall rating calculations.
+- [x] Reproduce and validate TEditor's Overall rating calculations.
 - [ ] Expand automated tests for reading, writing, encryption, and data integrity.
 - [ ] Introduce a local SQLite database for player data and edit history.
 - [ ] Support CSV import and export for external analysis and editing.
@@ -124,7 +128,7 @@ python cli.py --list-fields
 
 The rules engine allows multiple player edits to be applied automatically through a JSON configuration file.
 
-It supports player selection, conditional evaluation, numeric operations, boolean skill changes, and attribute-based ranges.
+It supports player selection, conditional evaluation, numeric operations, boolean skill changes, reputation updates, and attribute-based ranges.
 
 ### Configuration Format
 
@@ -178,7 +182,7 @@ The rules engine supports the following comparison operators:
 | `not_in` | Value does not belong to a list |
 | `between` | Value falls within an inclusive range |
 
-Conditions can reference original player fields and supported calculated fields, such as `calculated.bmi`.
+Conditions can reference original player fields and supported calculated fields, such as `calculated.bmi` and `calculated.overall`.
 
 Multiple conditions are combined using `AND` or `OR`, according to `conditionLogic`.
 
@@ -198,6 +202,8 @@ For `set`, the supplied value must be an integer.
 
 Boolean special skills support only the `set` operation, using `true` or `false`.
 
+The `reputation` field also supports the `set` operation, with integer values from `1` to `8`.
+
 ### Attribute-Based Ranges (Bands)
 
 Bands allow operations to be applied according to a player's attribute value.
@@ -214,17 +220,18 @@ Range boundaries are inclusive.
 
 ### Calculated Fields
 
-The rules engine currently supports the calculated field:
+The rules engine currently supports the following calculated fields:
 
 - `calculated.bmi`: Body Mass Index, calculated from the player's weight and height.
+- `calculated.overall`: Player Overall rating, calculated using the position-specific and general score calculations reproduced from TEditor's implementation.
 
 Calculated fields can be used in conditions and bands.
 
-BMI is virtual and is not written to the TED file.
+Both fields are virtual and are not written to the TED file.
 
 ### Field Restrictions
 
-The rules engine only modifies supported numeric player attributes and boolean special skills.
+The rules engine modifies supported numeric player attributes, boolean special skills, and the `reputation` field.
 
 Player registration data, including `weight` and `height`, cannot be modified through rules.
 
@@ -318,7 +325,7 @@ All rules from the first configuration are applied before the second configurati
 
 ### 4. Process Multiple TED Files
 
-To process every `.ted` file in a directory, use `--input-dir` and `--output-dir`:
+To process every `.ted` file directly inside a directory, use `--input-dir` and `--output-dir`:
 
 ```bash
 python cli.py \
@@ -328,6 +335,10 @@ python cli.py \
 ```
 
 The original filenames are preserved in the output directory.
+
+**Directory processing is non-recursive:** subdirectories are not searched.
+
+Individual processing failures do not stop the remaining files from being processed. The CLI reports successful and failed files at the end and exits with a non-zero status if any file fails.
 
 ### 5. Export Processing Results to JSON
 
@@ -342,6 +353,10 @@ python cli.py \
 ```
 
 The JSON report includes player data, applied edits, team information, and processing details.
+
+The `--json` option is available only when processing a single TED file. When it is omitted, the processing report is printed to the terminal as JSON.
+
+The output directory for the JSON file must already exist.
 
 ### 6. Combine Rules with Manual Edits
 
@@ -358,18 +373,38 @@ python cli.py \
 
 Manual edits are applied **after all configuration rules**.
 
+Multiple `--set` arguments are supported.
+
+### 7. Save the Decrypted Buffer
+
+For debugging, use `--decrypted` to save the decrypted TED buffer:
+
+```bash
+python cli.py \
+  "team.ted" \
+  --decrypted "debug/team_decrypted.bin"
+```
+
+The decrypted buffer is saved before rules and manual edits are applied.
+
+This option is available only when processing a single TED file. The parent directory must already exist or be creatable by the application.
+
 ### CLI Options
 
 | Argument | Description |
 |---|---|
-| `--config JSON` | Rules configuration file. Can be repeated. |
-| `--input-dir DIR` | Process all `.ted` files in a directory. |
-| `--output-dir DIR` | Output directory for processed TED files. |
+| `TED` | One or more encrypted TED file paths. |
+| `--config JSON` | Rules configuration file. Can be repeated; configurations are applied sequentially. |
+| `--input-dir DIR` | Process all `.ted` files directly inside a directory (non-recursively). |
+| `--output-dir DIR` | Output directory for processed TED files. Original filenames are preserved. |
 | `--out FILE` | Output path for a single TED file. |
-| `--json FILE` | Export processing results as JSON. Single-file processing only. |
-| `--set EDIT` | Apply a manual player field edit. Can be repeated. |
-| `--decrypted FILE` | Save the decrypted buffer for debugging. Single-file processing only. |
-| `--list-fields` | List recognized player fields. |
+| `--json FILE` | Export the processing result as JSON. Single-file processing only. |
+| `--set INDEX:FIELD=VALUE` | Apply a manual player field edit. Can be repeated. Manual edits are applied after all configuration rules. |
+| `--decrypted FILE` | Save the decrypted buffer before edits are applied. Single-file processing only. Intended for debugging. |
+| `--list-fields` | Print all recognized player fields as JSON. Can be combined with processing arguments. |
+| `--help` | Display command-line usage and available options. |
+
+Use `--output-dir` or `--out`, not both.
 
 For additional options, run:
 
@@ -382,7 +417,7 @@ python cli.py --help
 The project is being developed incrementally, with an emphasis on:
 
 - Preserving binary data that is not explicitly modified.
-- Keeping field definitions and value conversions consistent with the data model exposed by TEditor.
+- Keeping field definitions and value conversions consistent with the currently supported data model.
 - Validating changes against real TED files.
 - Separating binary editing, data storage, and CSV import/export into distinct components.
 - Building a reliable foundation before implementing the desktop interface.
