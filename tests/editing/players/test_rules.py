@@ -9,9 +9,9 @@ from editing.players.rules import (
     load_rules,
     _validate_condition,
     _validate_operation,
-    _validate_bands,
-    _validate_rule,
     _calculate_operation,
+    _validate_player_ids,
+    _validate_player_settings
 )
 
 
@@ -460,3 +460,264 @@ def test_calculate_operation_uses_python_rounding():
     }
 
     assert _calculate_operation(80, operation) == 80
+
+
+
+# --------------------------------------------------
+# Player IDs validation
+# --------------------------------------------------
+
+@pytest.mark.parametrize(
+    "player_ids",
+    [
+        [1],
+        [1, 2, 3],
+        [12345, 67890],
+        [1, 2**32 - 1],
+    ],
+)
+def test_valid_player_ids(player_ids):
+    _validate_player_ids(player_ids)
+
+
+@pytest.mark.parametrize(
+    "player_ids",
+    [
+        [],
+        [0],
+        [-1],
+        [1, 1],
+        [1, 2, 1],
+        [2**32],
+        "123",
+        123,
+        None,
+        {},
+    ],
+)
+def test_invalid_player_ids(player_ids):
+    with pytest.raises(ValueError):
+        _validate_player_ids(player_ids)
+
+
+# --------------------------------------------------
+# Player settings validation
+# --------------------------------------------------
+
+def test_valid_registered_position_setting():
+    _validate_player_settings({
+        "registeredPosition": "CF",
+    })
+
+
+@pytest.mark.parametrize(
+    "position",
+    [
+        "GK",
+        "CB",
+        "LB",
+        "RB",
+        "DMF",
+        "CMF",
+        "LMF",
+        "RMF",
+        "AMF",
+        "LWF",
+        "RWF",
+        "SS",
+        "CF",
+    ],
+)
+def test_all_registered_positions_are_valid(position):
+    _validate_player_settings({
+        "registeredPosition": position,
+    })
+
+
+@pytest.mark.parametrize(
+    "position",
+    [
+        "INVALID",
+        "B3",
+        "",
+        None,
+        1,
+    ],
+)
+def test_invalid_registered_position_setting(position):
+    with pytest.raises(ValueError):
+        _validate_player_settings({
+            "registeredPosition": position,
+        })
+
+
+def test_valid_playable_positions_setting():
+    _validate_player_settings({
+        "playablePositions": {
+            "GK": "C",
+            "CB": "B",
+            "CF": "A",
+        },
+    })
+
+
+@pytest.mark.parametrize(
+    "affinity",
+    ["C", "B", "A"],
+)
+def test_all_playable_position_affinities_are_valid(affinity):
+    _validate_player_settings({
+        "playablePositions": {
+            "CMF": affinity,
+        },
+    })
+
+
+@pytest.mark.parametrize(
+    "affinity",
+    [
+        "B3",
+        "D",
+        "1",
+        1,
+        True,
+        None,
+    ],
+)
+def test_invalid_playable_position_affinity(affinity):
+    with pytest.raises(ValueError):
+        _validate_player_settings({
+            "playablePositions": {
+                "CMF": affinity,
+            },
+        })
+
+
+@pytest.mark.parametrize(
+    "position",
+    [
+        "INVALID",
+        "GK ",
+        "",
+        "CF2",
+    ],
+)
+def test_invalid_playable_position_name(position):
+    with pytest.raises(ValueError):
+        _validate_player_settings({
+            "playablePositions": {
+                position: "A",
+            },
+        })
+
+
+@pytest.mark.parametrize(
+    "playable_positions",
+    [
+        [],
+        "CMF",
+        "A",
+        123,
+        None,
+    ],
+)
+def test_playable_positions_must_be_an_object(playable_positions):
+    with pytest.raises(ValueError):
+        _validate_player_settings({
+            "playablePositions": playable_positions,
+        })
+
+
+# --------------------------------------------------
+# Playing style validation
+# --------------------------------------------------
+
+@pytest.mark.parametrize(
+    "playing_style",
+    [
+        "goalPoacher",
+        "dummyRunner",
+        "foxInTheBox",
+        "targetMan",
+        "creativePlaymaker",
+        "prolificWinger",
+        "roamingFlank",
+        "crossSpecialist",
+        "classicNo10",
+        "holePlayer",
+        "boxToBox",
+        "theDestroyer",
+        "orchestrator",
+        "anchorMan",
+        "offensiveFullBack",
+        "fullBackFinisher",
+        "defensiveFullBack",
+        "buildUp",
+        "extraFrontman",
+        "offensiveGoalkeeper",
+        "defensiveGoalkeeper",
+        None,
+    ],
+)
+def test_valid_playing_style_setting(playing_style):
+    _validate_player_settings({
+        "playingStyle": playing_style,
+    })
+
+
+@pytest.mark.parametrize(
+    "playing_style",
+    [
+        "invalidStyle",
+        "",
+        "GoalPoacher",
+        1,
+        True,
+    ],
+)
+def test_invalid_playing_style_setting(playing_style):
+    with pytest.raises(ValueError):
+        _validate_player_settings({
+            "playingStyle": playing_style,
+        })
+
+
+# --------------------------------------------------
+# General player settings validation
+# --------------------------------------------------
+
+def test_multiple_player_settings_are_valid():
+    _validate_player_settings({
+        "registeredPosition": "AMF",
+        "playablePositions": {
+            "CMF": "A",
+            "SS": "B",
+        },
+        "playingStyle": "creativePlaymaker",
+    })
+
+
+def test_empty_player_settings_are_invalid():
+    with pytest.raises(ValueError):
+        _validate_player_settings({})
+
+
+@pytest.mark.parametrize(
+    "settings",
+    [
+        [],
+        "invalid",
+        123,
+        None,
+    ],
+)
+def test_player_settings_must_be_an_object(settings):
+    with pytest.raises(ValueError):
+        _validate_player_settings(settings)
+
+
+def test_unknown_player_setting_is_invalid():
+    with pytest.raises(ValueError):
+        _validate_player_settings({
+            "unknownSetting": "value",
+        })
