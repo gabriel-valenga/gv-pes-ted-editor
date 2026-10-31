@@ -617,6 +617,20 @@ When multiple rules are applied to the same TED during one execution, they produ
 
 All applicable entities must have consistent timestamp management.
 
+### SQLite Date and Time Storage
+
+SQLite does not provide a dedicated DATETIME storage class. Therefore, all date and time columns must use the `TEXT` storage type.
+
+Timestamps must follow the ISO 8601 format in UTC, using the following representation:
+
+`YYYY-MM-DDTHH:MM:SS.SSSZ`
+
+Example:
+
+`2026-10-31T14:30:45.123Z`
+
+The application must consistently generate and parse timestamps using UTC. This standard ensures consistent chronological sorting and interoperability across the application.
+
 ### Standard timestamps
 
 - `created_at`: when a record was created.
