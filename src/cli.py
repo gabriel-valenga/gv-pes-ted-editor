@@ -8,6 +8,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
+import tempfile
 from pathlib import Path
 
 from editing.players.operations import apply_edit
@@ -21,6 +23,22 @@ from ted.reader import (
     get_team_summary,
 )
 from ted.writer import save_ted, validate_ted_round_trip
+
+
+def find_option_file_teds(option_file_dir: Path) -> list[Path]:
+    """Find all TED files inside directories named '_ted'."""
+
+    ted_files = set()
+
+    for ted_dir in option_file_dir.rglob("_ted"):
+        if not ted_dir.is_dir():
+            continue
+
+        for ted_file in ted_dir.rglob("*"):
+            if ted_file.is_file() and ted_file.suffix.lower() == ".ted":
+                ted_files.add(ted_file)
+
+    return sorted(ted_files)
 
 
 def process_ted(
@@ -77,6 +95,7 @@ def process_ted(
                 "after": after,
                 "source": "manual",
             })
+
         except Exception as exc:
             raise ValueError(
                 f"Failed to apply manual edit {edit!r} "
@@ -88,15 +107,34 @@ def process_ted(
 
         encrypted_ted_file = encrypt_ted(data, original_raw)
 
-        save_ted(
-            path_to_save=str(output_path),
-            encrypted_ted_file=encrypted_ted_file,
-        )
-
+        # Validate the encrypted data before writing or replacing the file.
         validate_ted_round_trip(
             encrypted_ted_file=encrypted_ted_file,
             data=data,
         )
+
+        # Create a unique temporary file in the destination directory.
+        file_descriptor, temp_file = tempfile.mkstemp(
+            prefix=f".{output_path.name}.",
+            suffix=".tmp",
+            dir=output_path.parent,
+        )
+
+        os.close(file_descriptor)
+        temp_output_path = Path(temp_file)
+
+        try:
+            save_ted(
+                path_to_save=str(temp_output_path),
+                encrypted_ted_file=encrypted_ted_file,
+            )
+
+            # Replace the destination only after successful validation and writing.
+            os.replace(temp_output_path, output_path)
+
+        finally:
+            if temp_output_path.exists():
+                temp_output_path.unlink()
 
         print(f"TED saved: {output_path}")
 
@@ -132,6 +170,15 @@ def main():
     parser.add_argument(
         "--input-dir",
         help="Process all .ted files in this directory (non-recursively).",
+    )
+    parser.add_argument(
+        "--option-file",
+        help="Process all .ted files inside '_ted' directories of an Option File.",
+    )
+    parser.add_argument(
+        "--in-place",
+        action="store_true",
+        help="Replace original TED files after successful processing and validation.",
     )
     parser.add_argument(
         "--config",
@@ -172,18 +219,58 @@ def main():
 
     args = parser.parse_args()
 
-    if args.list_fields:
-        print(json.dumps(PLAYER_FIELDS, ensure_ascii=False, indent=2))
-        if not args.ted and not args.input_dir:
-            return
+    # Validate processing modes.
+    if args.option_file and (args.ted or args.input_dir):
+        parser.error(
+            "Use --option-file, positional TED paths, or --input-dir, not multiple modes."
+        )
 
-    if args.ted and args.input_dir:
-        parser.error("Use positional TED paths or --input-dir, not both.")
+    if args.in_place and not args.option_file:
+        parser.error("--in-place can only be used with --option-file.")
+
+    if args.option_file and args.out:
+        parser.error("--out cannot be used with --option-file.")
+
+    if args.option_file and not args.in_place and not args.output_dir:
+        parser.error(
+            "--option-file requires --in-place or --output-dir."
+        )
+
+    if args.option_file and args.in_place and args.output_dir:
+        parser.error(
+            "Use --in-place or --output-dir with --option-file, not both."
+        )
 
     if args.output_dir and args.out:
         parser.error("Use --output-dir or --out, not both.")
 
-    if args.input_dir:
+    if args.ted and args.input_dir:
+        parser.error("Use positional TED paths or --input-dir, not both.")
+
+    # List recognized fields.
+    if args.list_fields:
+        print(json.dumps(PLAYER_FIELDS, ensure_ascii=False, indent=2))
+
+        if not args.ted and not args.input_dir and not args.option_file:
+            return
+
+    # Discover input TED files.
+    if args.option_file:
+        option_file_dir = Path(args.option_file)
+
+        if not option_file_dir.is_dir():
+            parser.error(
+                f"Option File directory does not exist: {option_file_dir}"
+            )
+
+        ted_files = find_option_file_teds(option_file_dir)
+
+        if not ted_files:
+            parser.error(
+                f"No TED files found inside '_ted' directories: {option_file_dir}"
+            )
+
+    elif args.input_dir:
         input_dir = Path(args.input_dir)
 
         if not input_dir.is_dir():
@@ -193,16 +280,20 @@ def main():
             path for path in input_dir.iterdir()
             if path.is_file() and path.suffix.lower() == ".ted"
         )
+
     else:
         ted_files = [Path(path) for path in args.ted]
 
     if not ted_files:
-        parser.error("Specify at least one TED file or a directory containing TED files.")
+        parser.error(
+            "Specify at least one TED file or a directory containing TED files."
+        )
 
     for ted_file in ted_files:
         if not ted_file.is_file():
             parser.error(f"TED file does not exist: {ted_file}")
 
+    # Validate single-file output options.
     if args.out and len(ted_files) != 1:
         parser.error("--out can only be used when processing one TED file.")
 
@@ -219,32 +310,55 @@ def main():
         try:
             rules_list.append(load_rules(config_path))
         except (OSError, ValueError) as exc:
-            parser.error(f"Failed to load configuration {config_path!r}: {exc}")
+            parser.error(
+                f"Failed to load configuration {config_path!r}: {exc}"
+            )
 
     output_dir = Path(args.output_dir) if args.output_dir else None
 
     if output_dir:
-        output_dir.mkdir(parents=True, exist_ok=True)
-
         resolved_output_dir = output_dir.resolve()
 
-        if any(
-            ted_file.resolve().parent == resolved_output_dir
-            for ted_file in ted_files
-        ):
-            parser.error(
-                "The output directory must not be the same directory "
-                "as an input TED file."
-            )
+        if args.option_file:
+            resolved_option_file_dir = Path(args.option_file).resolve()
+
+            # Prevent output files from being created inside the source Option File.
+            if resolved_output_dir.is_relative_to(resolved_option_file_dir):
+                parser.error(
+                    "The output directory must not be inside the source Option File directory."
+                )
+
+        else:
+            if any(
+                ted_file.resolve().parent == resolved_output_dir
+                for ted_file in ted_files
+            ):
+                parser.error(
+                    "The output directory must not be the same directory "
+                    "as an input TED file."
+                )
+
+        output_dir.mkdir(parents=True, exist_ok=True)
 
     results = []
     failures = []
 
     for ted_file in ted_files:
-        if output_dir:
-            output_path = output_dir / ted_file.name
+
+        # Determine the destination path.
+        if args.in_place:
+            output_path = ted_file
+
+        elif output_dir:
+            if args.option_file:
+                relative_path = ted_file.relative_to(Path(args.option_file))
+                output_path = output_dir / relative_path
+            else:
+                output_path = output_dir / ted_file.name
+
         elif args.out:
             output_path = Path(args.out)
+
         else:
             output_path = None
 
@@ -258,6 +372,7 @@ def main():
                 manual_edits=args.set,
                 decrypted_path=decrypted_path,
             )
+
             results.append(result)
 
             if args.json_out:
@@ -272,6 +387,7 @@ def main():
                 "sourceFile": str(ted_file),
                 "error": str(exc),
             })
+
             print(f"ERROR processing {ted_file.name}: {exc}")
 
     if not args.json_out:
