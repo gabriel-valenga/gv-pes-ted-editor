@@ -1,78 +1,99 @@
+
 import json
+
 import pytest
+
 from ted.team_classifier import classify_team
 
 
 @pytest.fixture
-def catalog_path(tmp_path):
-    """Create a temporary country catalog for classifier tests."""
+def country_catalog(tmp_path):
     catalog = {
         "language_priority": ["en"],
         "countries": [
             {
-                "code": "FR",
-                "code_alpha3": "FRA",
-                "editor_code": "FRA",
-                "names": {
-                    "en": "France",
-                },
+                "code": "BR",
+                "editor_code": "BRA",
+                "editor_id": 146,
+                "names": {"en": "Brazil"},
             },
             {
-                "code": "DE",
-                "code_alpha3": "DEU",
-                "editor_code": None,
-                "names": {
-                    "en": "Germany",
-                },
+                "code": "FR",
+                "editor_code": "FRA",
+                "editor_id": 208,
+                "names": {"en": "France"},
             },
         ],
     }
 
-    path = tmp_path / "countries.json"
-    path.write_text(
-        json.dumps(catalog, ensure_ascii=False),
+    catalog_path = tmp_path / "countries.json"
+    catalog_path.write_text(
+        json.dumps(catalog),
         encoding="utf-8",
     )
 
-    return path
-
-
-def test_classify_country_using_editor_code(catalog_path):
-    assert classify_team("France", "FRA", catalog_path) == "national_team"
-
-
-def test_editor_code_mismatch_returns_club(catalog_path):
-    assert classify_team("France", "GER", catalog_path) == "club"
-
-
-def test_classify_country_using_fallback(catalog_path):
-    assert classify_team("Germany", "GER", catalog_path) == "national_team"
-
-
-def test_fallback_mismatch_returns_club(catalog_path):
-    assert classify_team("Germany", "FRA", catalog_path) == "club"
-
-
-def test_non_country_name_returns_club(catalog_path):
-    assert classify_team("Manchester United", "ENG", catalog_path) == "club"
+    return catalog_path
 
 
 @pytest.mark.parametrize(
-    ("team_name", "country_region"),
+    ("team_name", "country_id"),
     [
-        ("", "FRA"),
-        ("France", ""),
-        ("   ", "FRA"),
-        ("France", "   "),
+        ("Brazil", 146),
+        ("France", 208),
+        (" brazil ", 146),
+        ("FRANCE", 208),
     ],
 )
-def test_empty_values_return_club(
+def test_classify_matching_country(
+    country_catalog,
     team_name,
-    country_region,
-    catalog_path,
+    country_id,
 ):
     assert classify_team(
         team_name,
-        country_region,
-        catalog_path,
+        country_id,
+        country_catalog,
+    ) == "national_team"
+
+
+@pytest.mark.parametrize(
+    ("team_name", "country_id"),
+    [
+        ("Chelsea", 204),
+        ("Atlético Mineiro", 150),
+        ("Brazil", 204),
+        ("France", 146),
+        ("Unknown Team", 146),
+    ],
+)
+def test_non_matching_country_returns_club(
+    country_catalog,
+    team_name,
+    country_id,
+):
+    assert classify_team(
+        team_name,
+        country_id,
+        country_catalog,
+    ) == "club"
+
+
+@pytest.mark.parametrize(
+    ("team_name", "country_id"),
+    [
+        ("", 146),
+        ("   ", 146),
+        ("Brazil", None),
+        ("Brazil", 0),
+    ],
+)
+def test_empty_or_invalid_values_return_club(
+    country_catalog,
+    team_name,
+    country_id,
+):
+    assert classify_team(
+        team_name,
+        country_id,
+        country_catalog,
     ) == "club"
