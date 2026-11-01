@@ -178,6 +178,7 @@ def _get_database_path() -> Path:
     return project_root / "data" / "database.db"
 
 
+
 def _find_registered_ted(
     connection: sqlite3.Connection,
     ted_path: Path,
@@ -185,16 +186,51 @@ def _find_registered_ted(
 ) -> sqlite3.Row | None:
     """Find a TED file in the most recent matching Option File import."""
 
-    if option_file_dir is None:
-        return None
-
-    option_file_dir = option_file_dir.resolve()
     ted_path = ted_path.resolve()
 
-    try:
-        relative_path = ted_path.relative_to(option_file_dir).as_posix()
-    except ValueError:
-        return None
+    if option_file_dir is not None:
+        source_dir = option_file_dir.resolve()
+
+        try:
+            relative_path = ted_path.relative_to(source_dir).as_posix()
+        except ValueError:
+            return None
+
+        source_paths = [str(source_dir)]
+
+    else:
+        # Find imported Option Files that contain the individual TED path.
+        imports = connection.execute(
+            """
+            SELECT DISTINCT source_path
+            FROM option_file_imports
+            WHERE source_path IS NOT NULL
+            """
+        ).fetchall()
+
+        matching_sources = []
+
+        for imported in imports:
+            source_path = imported["source_path"]
+
+            try:
+                source_dir = Path(source_path).resolve()
+                relative_path = ted_path.relative_to(source_dir).as_posix()
+            except (ValueError, OSError):
+                continue
+
+            matching_sources.append(
+                (len(str(source_dir)), str(source_dir), relative_path)
+            )
+
+        if not matching_sources:
+            return None
+
+        # Prefer the most specific matching imported directory.
+        matching_sources.sort(reverse=True)
+
+        _, source_path, relative_path = matching_sources[0]
+        source_paths = [source_path]
 
     return connection.execute(
         """
@@ -213,7 +249,7 @@ def _find_registered_ted(
         LIMIT 1
         """,
         (
-            str(option_file_dir),
+            source_paths[0],
             relative_path,
         ),
     ).fetchone()
