@@ -7,6 +7,7 @@
 from __future__ import annotations
 
 import argparse
+import copy
 import hashlib
 import json
 import os
@@ -15,7 +16,11 @@ import tempfile
 from pathlib import Path
 
 from editing.players.operations import apply_edit
-from editing.players.rules import load_rules, apply_rules
+from editing.players.rules import (
+    load_rules,
+    apply_rules,
+    build_rule_hash,
+)
 from ted.crypto import decrypt_ted, encrypt_ted
 from ted.fields import PLAYER_FIELDS
 from ted.reader import (
@@ -218,43 +223,105 @@ def _build_rule_records(
     connection: sqlite3.Connection,
     edit_run_id: int,
     rules_list: list[dict],
-) -> dict[str, int | None]:
-    """Register rules and map unique rule names to their database IDs."""
+) -> dict[str, int]:
+    """Register rules and map their hashes to database IDs."""
 
-    rule_ids_by_name = {}
-    ambiguous_names = set()
-
+    rule_ids_by_hash = {}
     rule_order = 0
 
-    for config_index, config in enumerate(rules_list, start=1):
-        for rule_index, rule in enumerate(
-            config.get("rules", []),
-            start=1,
-        ):
+    for config in rules_list:
+        for rule in config.get("rules", []):
             rule_order += 1
 
-            rule_name = rule.get("name")
+            rule_hash = build_rule_hash(rule)
 
             rule_id = create_edit_run_rule(
                 connection=connection,
                 edit_run_id=edit_run_id,
                 rule_order=rule_order,
                 rule=rule,
-                rule_name=rule_name,
+                rule_name=rule.get("name"),
             )
 
-            if not isinstance(rule_name, str):
+            connection.execute(
+                """
+                UPDATE edit_run_rules
+                SET rule_hash = ?
+                WHERE id = ?
+                """,
+                (rule_hash, rule_id),
+            )
+
+            rule_ids_by_hash.setdefault(rule_hash, rule_id)
+
+    return rule_ids_by_hash
+
+
+def _prepare_rules_for_ted(
+    connection: sqlite3.Connection,
+    ted_path: Path,
+    rules_list: list[dict],
+) -> list[dict]:
+    """
+    Exclude players that already received the same rule in a previous TED.
+    """
+    encrypted_content = ted_path.read_bytes()
+    decrypted_data = decrypt_ted(encrypted_content)
+    players = extract_players(decrypted_data)
+
+    player_ids = {
+        player.get("playerId")
+        for player in players
+        if isinstance(player.get("playerId"), int)
+    }
+
+    prepared_rules = []
+
+    for config in rules_list:
+        prepared_config = copy.deepcopy(config)
+        prepared_config["rules"] = []
+
+        for rule in config.get("rules", []):
+            prepared_rule = copy.deepcopy(rule)
+
+            if not rule.get("enabled", False):
+                prepared_config["rules"].append(prepared_rule)
                 continue
 
-            if rule_name in rule_ids_by_name:
-                ambiguous_names.add(rule_name)
-            else:
-                rule_ids_by_name[rule_name] = rule_id
+            rule_hash = build_rule_hash(rule)
 
-    for name in ambiguous_names:
-        rule_ids_by_name[name] = None
+            applied_rows = connection.execute(
+                """
+                SELECT player_id
+                FROM player_rule_applications
+                WHERE rule_hash = ?
+                """,
+                (rule_hash,),
+            ).fetchall()
 
-    return rule_ids_by_name
+            blocked_player_ids = {
+                row["player_id"]
+                for row in applied_rows
+            }
+
+            allowed_player_ids = player_ids - blocked_player_ids
+
+            # Preserve an existing player ID restriction.
+            if "playerIds" in rule:
+                allowed_player_ids &= set(rule["playerIds"])
+
+            prepared_rule["playerIds"] = sorted(
+                allowed_player_ids
+            )
+
+            # Preserve the original rule identity after filtering.
+            prepared_rule["_originalRuleHash"] = rule_hash
+
+            prepared_config["rules"].append(prepared_rule)
+
+        prepared_rules.append(prepared_config)
+
+    return prepared_rules
 
 
 def _get_source_version_id(
@@ -328,7 +395,7 @@ def _register_ted_edit_history(
     result: dict,
     output_path: Path | None,
     source_content: bytes,
-    rule_ids_by_name: dict[str, int | None],
+    rule_ids_by_hash: dict[str, int],
 ) -> None:
     """Persist one TED editing result inside the current transaction."""
 
@@ -356,6 +423,8 @@ def _register_ted_edit_history(
         if isinstance(player.get("index"), int)
     }
 
+    successful_applications = {}
+
     for edit in result.get("edits", []):
         player_index = edit.get(
             "playerIndex",
@@ -371,15 +440,16 @@ def _register_ted_edit_history(
             continue
 
         player = players_by_index.get(player_index, {})
-        player_id = player.get("playerId")
+        player_id = edit.get("playerId", player.get("playerId"))
 
         rule_id = None
+        rule_hash = None
 
         if edit.get("source") == "rule":
-            rule_name = edit.get("ruleName")
+            rule_hash = edit.get("ruleHash")
 
-            if isinstance(rule_name, str):
-                rule_id = rule_ids_by_name.get(rule_name)
+            if isinstance(rule_hash, str):
+                rule_id = rule_ids_by_hash.get(rule_hash)
 
         create_edit_change(
             connection=connection,
@@ -390,6 +460,41 @@ def _register_ted_edit_history(
             new_value=edit.get("after"),
             player_id=player_id,
             rule_id=rule_id,
+        )
+
+        if (
+            isinstance(player_id, int)
+            and isinstance(rule_hash, str)
+            and rule_id is not None
+        ):
+            successful_applications[
+                (player_id, rule_hash)
+            ] = rule_id
+
+    # Persist only rules that effectively changed a player.
+    for (player_id, rule_hash), rule_id in successful_applications.items():
+        connection.execute(
+            """
+            INSERT OR IGNORE INTO player_rule_applications (
+                player_id,
+                rule_hash,
+                first_ted_file_id,
+                first_edit_run_id,
+                first_edit_run_rule_id,
+                created_at
+            )
+            VALUES (
+                ?, ?, ?, ?, ?,
+                strftime('%Y-%m-%dT%H:%M:%fZ', 'now')
+            )
+            """,
+            (
+                player_id,
+                rule_hash,
+                ted_file_id,
+                edit_run_id,
+                rule_id,
+            ),
         )
 
     update_edit_run_ted_file(
@@ -572,6 +677,8 @@ def main():
             return
 
     # Discover input TED files.
+    option_file_dir = None
+
     if args.option_file:
         option_file_dir = Path(args.option_file).resolve()
 
@@ -637,12 +744,8 @@ def main():
     if output_dir:
         resolved_output_dir = output_dir.resolve()
 
-        if args.option_file:
-            resolved_option_file_dir = Path(args.option_file).resolve()
-
-            if resolved_output_dir.is_relative_to(
-                resolved_option_file_dir
-            ):
+        if option_file_dir:
+            if resolved_output_dir.is_relative_to(option_file_dir):
                 parser.error(
                     "The output directory must not be inside "
                     "the source Option File directory."
@@ -662,7 +765,7 @@ def main():
     database_path = _get_database_path()
     connection = None
     edit_run_id = None
-    rule_ids_by_name = {}
+    rule_ids_by_hash = {}
     registered_teds = {}
 
     # Database integration is optional for files that have not been imported.
@@ -674,11 +777,7 @@ def main():
             registered_ted = _find_registered_ted(
                 connection=connection,
                 ted_path=ted_file,
-                option_file_dir=(
-                    Path(args.option_file)
-                    if args.option_file
-                    else None
-                ),
+                option_file_dir=option_file_dir,
             )
 
             if registered_ted is not None:
@@ -688,8 +787,8 @@ def main():
             run_config = {
                 "command": "ted-edit",
                 "optionFile": (
-                    str(Path(args.option_file).resolve())
-                    if args.option_file
+                    str(option_file_dir)
+                    if option_file_dir
                     else None
                 ),
                 "configFiles": args.config,
@@ -710,7 +809,7 @@ def main():
                     status="running",
                 )
 
-                rule_ids_by_name = _build_rule_records(
+                rule_ids_by_hash = _build_rule_records(
                     connection=connection,
                     edit_run_id=edit_run_id,
                     rules_list=rules_list,
@@ -742,9 +841,9 @@ def main():
             output_path = ted_file
 
         elif output_dir:
-            if args.option_file:
-                relative_path = ted_file.relative_to(
-                    Path(args.option_file)
+            if option_file_dir:
+                relative_path = ted_file.resolve().relative_to(
+                    option_file_dir
                 )
                 output_path = output_dir / relative_path
             else:
@@ -765,16 +864,29 @@ def main():
         try:
             source_content = ted_file.read_bytes()
 
+            registered_ted = registered_teds.get(
+                str(ted_file.resolve())
+            )
+
+            ted_rules_list = rules_list
+
+            if (
+                connection is not None
+                and edit_run_id is not None
+                and registered_ted is not None
+            ):
+                ted_rules_list = _prepare_rules_for_ted(
+                    connection=connection,
+                    ted_path=ted_file,
+                    rules_list=rules_list,
+                )
+
             result = process_ted(
                 ted_path=ted_file,
-                rules_list=rules_list,
+                rules_list=ted_rules_list,
                 output_path=output_path,
                 manual_edits=args.set,
                 decrypted_path=decrypted_path,
-            )
-
-            registered_ted = registered_teds.get(
-                str(ted_file.resolve())
             )
 
             if (
@@ -798,11 +910,12 @@ def main():
                             result=result,
                             output_path=output_path,
                             source_content=source_content,
-                            rule_ids_by_name=rule_ids_by_name,
+                            rule_ids_by_hash=rule_ids_by_hash,
                         )
 
                     result["databaseHistory"] = {
                         "registered": True,
+                        "saved": True,
                         "tedFileId": registered_ted["ted_file_id"],
                         "editRunId": edit_run_id,
                         "sourceVersionId": source_version_id,

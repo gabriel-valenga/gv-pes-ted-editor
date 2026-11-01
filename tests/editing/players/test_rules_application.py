@@ -1,5 +1,8 @@
 import pytest
 import json
+import sqlite3
+import cli
+from editing.players.rules import build_rule_hash
 from editing.players.rules import (
     load_rules,
     apply_rules,
@@ -1510,3 +1513,204 @@ def test_player_settings_are_applied_only_once_when_unchanged(
 
     assert edits == []
     assert get_player(data, 0)["registeredPosition"] == "AMF"
+
+
+
+def test_prepare_rules_excludes_players_already_processed(
+    tmp_path,
+    monkeypatch,
+):
+    rule = create_rule(
+        name="Increase speed",
+        operations=[
+            {
+                "field": "speed",
+                "operation": "delta",
+                "value": 5,
+            }
+        ],
+    )
+
+    config = load_test_rules(
+        tmp_path,
+        create_config([rule]),
+    )
+
+    rule_hash = build_rule_hash(
+        config["rules"][0]
+    )
+
+    connection = sqlite3.connect(":memory:")
+    connection.row_factory = sqlite3.Row
+
+    connection.execute("""
+        CREATE TABLE player_rule_applications (
+            player_id INTEGER NOT NULL,
+            rule_hash TEXT NOT NULL
+        )
+    """)
+
+    connection.execute("""
+        INSERT INTO player_rule_applications (
+            player_id,
+            rule_hash
+        )
+        VALUES (?, ?)
+    """, (1001, rule_hash))
+
+    monkeypatch.setattr(
+        cli,
+        "decrypt_ted",
+        lambda content: b"decrypted",
+    )
+
+    monkeypatch.setattr(
+        cli,
+        "extract_players",
+        lambda data: [
+            {"playerId": 1001, "index": 0},
+            {"playerId": 1002, "index": 1},
+            {"playerId": 1003, "index": 2},
+        ],
+    )
+
+    ted_path = tmp_path / "second_team.ted"
+    ted_path.write_bytes(b"fake ted")
+
+    prepared = cli._prepare_rules_for_ted(
+    connection=connection,
+    ted_path=ted_path,
+    rules_list=[config],
+)
+
+    prepared_player_ids = prepared[0]["rules"][0]["playerIds"]
+
+    assert prepared_player_ids == [1002, 1003]
+
+    connection.close()
+
+
+def test_prepare_rules_preserves_existing_player_restrictions(
+    tmp_path,
+    monkeypatch,
+):
+    rule = create_rule(
+        name="Increase speed",
+        operations=[
+            {
+                "field": "speed",
+                "operation": "delta",
+                "value": 5,
+            }
+        ],
+    )
+
+    rule["playerIds"] = [1001, 1002]
+
+    config = load_test_rules(
+        tmp_path,
+        create_config([rule]),
+    )
+
+    connection = sqlite3.connect(":memory:")
+    connection.row_factory = sqlite3.Row
+
+    connection.execute("""
+        CREATE TABLE player_rule_applications (
+            player_id INTEGER NOT NULL,
+            rule_hash TEXT NOT NULL
+        )
+    """)
+
+    monkeypatch.setattr(
+        cli,
+        "decrypt_ted",
+        lambda content: b"decrypted",
+    )
+
+    monkeypatch.setattr(
+        cli,
+        "extract_players",
+        lambda data: [
+            {"playerId": 1001, "index": 0},
+            {"playerId": 1002, "index": 1},
+            {"playerId": 1003, "index": 2},
+        ],
+    )
+
+    ted_path = tmp_path / "second_team.ted"
+    ted_path.write_bytes(b"fake ted")
+
+    prepared = cli._prepare_rules_for_ted(
+    connection=connection,
+    ted_path=ted_path,
+    rules_list=[config],
+)
+
+    prepared_player_ids = prepared[0]["rules"][0]["playerIds"]
+
+    assert prepared_player_ids == [1001, 1002]
+
+    connection.close()
+
+
+def test_prepare_rules_preserves_original_hash(
+    tmp_path,
+    monkeypatch,
+):
+    rule = create_rule(
+        name="Increase speed",
+        operations=[
+            {
+                "field": "speed",
+                "operation": "delta",
+                "value": 5,
+            }
+        ],
+    )
+
+    config = load_test_rules(
+        tmp_path,
+        create_config([rule]),
+    )
+
+    original_hash = build_rule_hash(config["rules"][0])
+
+    connection = sqlite3.connect(":memory:")
+    connection.row_factory = sqlite3.Row
+
+    connection.execute("""
+        CREATE TABLE player_rule_applications (
+            player_id INTEGER NOT NULL,
+            rule_hash TEXT NOT NULL
+        )
+    """)
+
+    monkeypatch.setattr(
+        cli,
+        "decrypt_ted",
+        lambda content: b"decrypted",
+    )
+
+    monkeypatch.setattr(
+        cli,
+        "extract_players",
+        lambda data: [
+            {"playerId": 1001, "index": 0},
+        ],
+    )
+
+    ted_path = tmp_path / "second_team.ted"
+    ted_path.write_bytes(b"fake ted")
+
+    prepared = cli._prepare_rules_for_ted(
+    connection=connection,
+    ted_path=ted_path,
+    rules_list=[config],
+)
+
+    prepared_rule = prepared[0]["rules"][0]
+
+    assert prepared_rule["_originalRuleHash"] == original_hash
+
+    connection.close()
