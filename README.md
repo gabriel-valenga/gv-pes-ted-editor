@@ -44,8 +44,8 @@ The current field coverage is focused on the player data required by the project
 - [x] Validate modified TED files in PES 2021 across multiple teams.
 - [x] Implement automated tests for the rules engine.
 - [x] Reproduce and validate TEditor's Overall rating calculations.
-- [ ] Expand automated tests for reading, writing, encryption, and data integrity.
-- [ ] Introduce a local SQLite database for player data and edit history.
+- [x] Expand automated tests for reading, writing, encryption, and data integrity.
+- [x] Introduce a local SQLite database for player data and edit history.
 - [ ] Support CSV import and export for external analysis and editing.
 - [ ] Build a standalone desktop application.
 
