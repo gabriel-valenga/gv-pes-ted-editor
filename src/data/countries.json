@@ -1,0 +1,5035 @@
+{
+  "description": "Multilingual country and national-team names with ISO reference codes and PES 2021 TEditor country/region abbreviations. editor_code is the exact abbreviation displayed by TEditor; null means no matching option was identified in the inspected TEditor list.",
+  "language_priority": [
+    "en",
+    "es",
+    "pt",
+    "fr",
+    "it",
+    "de",
+    "zh",
+    "ja",
+    "ru",
+    "ar",
+    "nl",
+    "ko"
+  ],
+  "countries": [
+    {
+      "code": "AD",
+      "code_alpha3": "AND",
+      "names": {
+        "en": "Andorra",
+        "es": "Andorra",
+        "pt": "Andorra",
+        "fr": "Andorre",
+        "it": "Andorra",
+        "de": "Andorra",
+        "zh": "安道尔",
+        "ja": "アンドラ",
+        "ru": "Андорра",
+        "ar": "أندورا",
+        "nl": "Andorra",
+        "ko": "안도라"
+      },
+      "editor_code": "AND",
+      "editor_id": 192
+    },
+    {
+      "code": "AE",
+      "code_alpha3": "ARE",
+      "names": {
+        "en": "United Arab Emirates",
+        "es": "Emiratos Árabes Unidos",
+        "pt": "Emirados Árabes Unidos",
+        "fr": "Émirats arabes unis",
+        "it": "Emirati Arabi Uniti",
+        "de": "Vereinigte Arabische Emirate",
+        "zh": "阿拉伯联合酋长国",
+        "ja": "アラブ首長国連邦",
+        "ru": "ОАЭ",
+        "ar": "الإمارات العربية المتحدة",
+        "nl": "Verenigde Arabische Emiraten",
+        "ko": "아랍에미리트"
+      },
+      "editor_code": "UAE",
+      "editor_id": 37
+    },
+    {
+      "code": "AF",
+      "code_alpha3": "AFG",
+      "names": {
+        "en": "Afghanistan",
+        "es": "Afganistán",
+        "pt": "Afeganistão",
+        "fr": "Afghanistan",
+        "it": "Afghanistan",
+        "de": "Afghanistan",
+        "zh": "阿富汗",
+        "ja": "アフガニスタン",
+        "ru": "Афганистан",
+        "ar": "أفغانستان",
+        "nl": "Afghanistan",
+        "ko": "아프가니스탄"
+      },
+      "editor_code": "AFG",
+      "editor_id": 1
+    },
+    {
+      "code": "AG",
+      "code_alpha3": "ATG",
+      "names": {
+        "en": "Antigua & Barbuda",
+        "es": "Antigua y Barbuda",
+        "pt": "Antígua e Barbuda",
+        "fr": "Antigua-et-Barbuda",
+        "it": "Antigua e Barbuda",
+        "de": "Antigua und Barbuda",
+        "zh": "安提瓜和巴布达",
+        "ja": "アンティグア・バーブーダ",
+        "ru": "Антигуа и Барбуда",
+        "ar": "أنتيغوا وبربودا",
+        "nl": "Antigua en Barbuda",
+        "ko": "앤티가 바부다"
+      },
+      "editor_code": "ATG",
+      "editor_id": 104
+    },
+    {
+      "code": "AI",
+      "code_alpha3": "AIA",
+      "names": {
+        "en": "Anguilla",
+        "es": "Anguila",
+        "pt": "Anguila",
+        "fr": "Anguilla",
+        "it": "Anguilla",
+        "de": "Anguilla",
+        "zh": "安圭拉",
+        "ja": "アンギラ",
+        "ru": "Ангилья",
+        "ar": "أنغويلا",
+        "nl": "Anguilla",
+        "ko": "앵귈라"
+      },
+      "editor_code": "AIA",
+      "editor_id": 103
+    },
+    {
+      "code": "AL",
+      "code_alpha3": "ALB",
+      "names": {
+        "en": "Albania",
+        "es": "Albania",
+        "pt": "Albânia",
+        "fr": "Albanie",
+        "it": "Albania",
+        "de": "Albanien",
+        "zh": "阿尔巴尼亚",
+        "ja": "アルバニア",
+        "ru": "Албания",
+        "ar": "ألبانيا",
+        "nl": "Albanië",
+        "ko": "알바니아"
+      },
+      "editor_code": "ALB",
+      "editor_id": 191
+    },
+    {
+      "code": "AM",
+      "code_alpha3": "ARM",
+      "names": {
+        "en": "Armenia",
+        "es": "Armenia",
+        "pt": "Armênia",
+        "fr": "Arménie",
+        "it": "Armenia",
+        "de": "Armenien",
+        "zh": "亚美尼亚",
+        "ja": "アルメニア",
+        "ru": "Армения",
+        "ar": "أرمينيا",
+        "nl": "Armenië",
+        "ko": "아르메니아"
+      },
+      "editor_code": "ARM",
+      "editor_id": 193
+    },
+    {
+      "code": "AO",
+      "code_alpha3": "AGO",
+      "names": {
+        "en": "Angola",
+        "es": "Angola",
+        "pt": "Angola",
+        "fr": "Angola",
+        "it": "Angola",
+        "de": "Angola",
+        "zh": "安哥拉",
+        "ja": "アンゴラ",
+        "ru": "Ангола",
+        "ar": "أنغولا",
+        "nl": "Angola",
+        "ko": "앙골라"
+      },
+      "editor_code": "ANG",
+      "editor_id": 45
+    },
+    {
+      "code": "AQ",
+      "code_alpha3": "ATA",
+      "names": {
+        "en": "Antarctica",
+        "es": "Antártida",
+        "pt": "Antártida",
+        "fr": "Antarctique",
+        "it": "Antartide",
+        "de": "Antarktis",
+        "zh": "南极洲",
+        "ja": "南極",
+        "ru": "Антарктида",
+        "ar": "أنتاركتيكا",
+        "nl": "Antarctica",
+        "ko": "남극 대륙"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "AR",
+      "code_alpha3": "ARG",
+      "names": {
+        "en": "Argentina",
+        "es": "Argentina",
+        "pt": "Argentina",
+        "fr": "Argentine",
+        "it": "Argentina",
+        "de": "Argentinien",
+        "zh": "阿根廷",
+        "ja": "アルゼンチン",
+        "ru": "Аргентина",
+        "ar": "الأرجنتين",
+        "nl": "Argentinië",
+        "ko": "아르헨티나"
+      },
+      "editor_code": "ARG",
+      "editor_id": 144
+    },
+    {
+      "code": "AS",
+      "code_alpha3": "ASM",
+      "names": {
+        "en": "American Samoa",
+        "es": "Samoa Americana",
+        "pt": "Samoa Americana",
+        "fr": "Samoa américaines",
+        "it": "Samoa Americane",
+        "de": "Amerikanisch-Samoa",
+        "zh": "美属萨摩亚",
+        "ja": "米領サモア",
+        "ru": "Американское Самоа",
+        "ar": "ساموا الأمريكية",
+        "nl": "Amerikaans-Samoa",
+        "ko": "아메리칸 사모아"
+      },
+      "editor_code": "ASA",
+      "editor_id": 161
+    },
+    {
+      "code": "AT",
+      "code_alpha3": "AUT",
+      "names": {
+        "en": "Austria",
+        "es": "Austria",
+        "pt": "Áustria",
+        "fr": "Autriche",
+        "it": "Austria",
+        "de": "Österreich",
+        "zh": "奥地利",
+        "ja": "オーストリア",
+        "ru": "Австрия",
+        "ar": "النمسا",
+        "nl": "Oostenrijk",
+        "ko": "오스트리아"
+      },
+      "editor_code": "AUT",
+      "editor_id": 194
+    },
+    {
+      "code": "AU",
+      "code_alpha3": "AUS",
+      "names": {
+        "en": "Australia",
+        "es": "Australia",
+        "pt": "Austrália",
+        "fr": "Australie",
+        "it": "Australia",
+        "de": "Australien",
+        "zh": "澳大利亚",
+        "ja": "オーストラリア",
+        "ru": "Австралия",
+        "ar": "أستراليا",
+        "nl": "Australië",
+        "ko": "오스트레일리아"
+      },
+      "editor_code": "AUS",
+      "editor_id": 162
+    },
+    {
+      "code": "AW",
+      "code_alpha3": "ABW",
+      "names": {
+        "en": "Aruba",
+        "es": "Aruba",
+        "pt": "Aruba",
+        "fr": "Aruba",
+        "it": "Aruba",
+        "de": "Aruba",
+        "zh": "阿鲁巴",
+        "ja": "アルバ",
+        "ru": "Аруба",
+        "ar": "أروبا",
+        "nl": "Aruba",
+        "ko": "아루바"
+      },
+      "editor_code": "ARU",
+      "editor_id": 105
+    },
+    {
+      "code": "AX",
+      "code_alpha3": "ALA",
+      "names": {
+        "en": "Åland Islands",
+        "es": "Islas Aland",
+        "pt": "Ilhas Aland",
+        "fr": "Îles Åland",
+        "it": "Isole Åland",
+        "de": "Ålandinseln",
+        "zh": "奥兰群岛",
+        "ja": "オーランド諸島",
+        "ru": "Аландские о-ва",
+        "ar": "جزر آلاند",
+        "nl": "Åland",
+        "ko": "올란드 제도"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "AZ",
+      "code_alpha3": "AZE",
+      "names": {
+        "en": "Azerbaijan",
+        "es": "Azerbaiyán",
+        "pt": "Azerbaijão",
+        "fr": "Azerbaïdjan",
+        "it": "Azerbaigian",
+        "de": "Aserbaidschan",
+        "zh": "阿塞拜疆",
+        "ja": "アゼルバイジャン",
+        "ru": "Азербайджан",
+        "ar": "أذربيجان",
+        "nl": "Azerbeidzjan",
+        "ko": "아제르바이잔"
+      },
+      "editor_code": "AZE",
+      "editor_id": 195
+    },
+    {
+      "code": "BA",
+      "code_alpha3": "BIH",
+      "names": {
+        "en": "Bosnia & Herzegovina",
+        "es": "Bosnia y Herzegovina",
+        "pt": "Bósnia e Herzegovina",
+        "fr": "Bosnie-Herzégovine",
+        "it": "Bosnia ed Erzegovina",
+        "de": "Bosnien und Herzegowina",
+        "zh": "波斯尼亚和黑塞哥维那",
+        "ja": "ボスニア・ヘルツェゴビナ",
+        "ru": "Босния и Герцеговина",
+        "ar": "البوسنة والهرسك",
+        "nl": "Bosnië en Herzegovina",
+        "ko": "보스니아 헤르체고비나"
+      },
+      "editor_code": "BIH",
+      "editor_id": 198
+    },
+    {
+      "code": "BB",
+      "code_alpha3": "BRB",
+      "names": {
+        "en": "Barbados",
+        "es": "Barbados",
+        "pt": "Barbados",
+        "fr": "Barbade",
+        "it": "Barbados",
+        "de": "Barbados",
+        "zh": "巴巴多斯",
+        "ja": "バルバドス",
+        "ru": "Барбадос",
+        "ar": "بربادوس",
+        "nl": "Barbados",
+        "ko": "바베이도스"
+      },
+      "editor_code": "BRB",
+      "editor_id": 107
+    },
+    {
+      "code": "BD",
+      "code_alpha3": "BGD",
+      "names": {
+        "en": "Bangladesh",
+        "es": "Bangladés",
+        "pt": "Bangladesh",
+        "fr": "Bangladesh",
+        "it": "Bangladesh",
+        "de": "Bangladesch",
+        "zh": "孟加拉国",
+        "ja": "バングラデシュ",
+        "ru": "Бангладеш",
+        "ar": "بنغلاديش",
+        "nl": "Bangladesh",
+        "ko": "방글라데시"
+      },
+      "editor_code": "BAN",
+      "editor_id": 3
+    },
+    {
+      "code": "BE",
+      "code_alpha3": "BEL",
+      "names": {
+        "en": "Belgium",
+        "es": "Bélgica",
+        "pt": "Bélgica",
+        "fr": "Belgique",
+        "it": "Belgio",
+        "de": "Belgien",
+        "zh": "比利时",
+        "ja": "ベルギー",
+        "ru": "Бельгия",
+        "ar": "بلجيكا",
+        "nl": "België",
+        "ko": "벨기에"
+      },
+      "editor_code": "BEL",
+      "editor_id": 197
+    },
+    {
+      "code": "BF",
+      "code_alpha3": "BFA",
+      "names": {
+        "en": "Burkina Faso",
+        "es": "Burkina Faso",
+        "pt": "Burquina Faso",
+        "fr": "Burkina Faso",
+        "it": "Burkina Faso",
+        "de": "Burkina Faso",
+        "zh": "布基纳法索",
+        "ja": "ブルキナファソ",
+        "ru": "Буркина-Фасо",
+        "ar": "بوركينا فاسو",
+        "nl": "Burkina Faso",
+        "ko": "부르키나파소"
+      },
+      "editor_code": "BFA",
+      "editor_id": 48
+    },
+    {
+      "code": "BG",
+      "code_alpha3": "BGR",
+      "names": {
+        "en": "Bulgaria",
+        "es": "Bulgaria",
+        "pt": "Bulgária",
+        "fr": "Bulgarie",
+        "it": "Bulgaria",
+        "de": "Bulgarien",
+        "zh": "保加利亚",
+        "ja": "ブルガリア",
+        "ru": "Болгария",
+        "ar": "بلغاريا",
+        "nl": "Bulgarije",
+        "ko": "불가리아"
+      },
+      "editor_code": "BUL",
+      "editor_id": 199
+    },
+    {
+      "code": "BH",
+      "code_alpha3": "BHR",
+      "names": {
+        "en": "Bahrain",
+        "es": "Baréin",
+        "pt": "Barein",
+        "fr": "Bahreïn",
+        "it": "Bahrein",
+        "de": "Bahrain",
+        "zh": "巴林",
+        "ja": "バーレーン",
+        "ru": "Бахрейн",
+        "ar": "البحرين",
+        "nl": "Bahrein",
+        "ko": "바레인"
+      },
+      "editor_code": "BHR",
+      "editor_id": 2
+    },
+    {
+      "code": "BI",
+      "code_alpha3": "BDI",
+      "names": {
+        "en": "Burundi",
+        "es": "Burundi",
+        "pt": "Burundi",
+        "fr": "Burundi",
+        "it": "Burundi",
+        "de": "Burundi",
+        "zh": "布隆迪",
+        "ja": "ブルンジ",
+        "ru": "Бурунди",
+        "ar": "بوروندي",
+        "nl": "Burundi",
+        "ko": "부룬디"
+      },
+      "editor_code": "BDI",
+      "editor_id": 49
+    },
+    {
+      "code": "BJ",
+      "code_alpha3": "BEN",
+      "names": {
+        "en": "Benin",
+        "es": "Benín",
+        "pt": "Benin",
+        "fr": "Bénin",
+        "it": "Benin",
+        "de": "Benin",
+        "zh": "贝宁",
+        "ja": "ベナン",
+        "ru": "Бенин",
+        "ar": "بنين",
+        "nl": "Benin",
+        "ko": "베냉"
+      },
+      "editor_code": "BEN",
+      "editor_id": 46
+    },
+    {
+      "code": "BL",
+      "code_alpha3": "BLM",
+      "names": {
+        "en": "St. Barthélemy",
+        "es": "San Bartolomé",
+        "pt": "São Bartolomeu",
+        "fr": "Saint-Barthélemy",
+        "it": "Saint-Barthélemy",
+        "de": "St. Barthélemy",
+        "zh": "圣巴泰勒米",
+        "ja": "サン・バルテルミー",
+        "ru": "Сен-Бартелеми",
+        "ar": "سان بارتليمي",
+        "nl": "Saint-Barthélemy",
+        "ko": "생바르텔레미"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "BM",
+      "code_alpha3": "BMU",
+      "names": {
+        "en": "Bermuda",
+        "es": "Bermudas",
+        "pt": "Bermudas",
+        "fr": "Bermudes",
+        "it": "Bermuda",
+        "de": "Bermuda",
+        "zh": "百慕大",
+        "ja": "バミューダ",
+        "ru": "Бермудские о-ва",
+        "ar": "برمودا",
+        "nl": "Bermuda",
+        "ko": "버뮤다"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "BN",
+      "code_alpha3": "BRN",
+      "names": {
+        "en": "Brunei",
+        "es": "Brunéi",
+        "pt": "Brunei",
+        "fr": "Brunei",
+        "it": "Brunei",
+        "de": "Brunei Darussalam",
+        "zh": "文莱",
+        "ja": "ブルネイ",
+        "ru": "Бруней",
+        "ar": "بروناي",
+        "nl": "Brunei",
+        "ko": "브루나이"
+      },
+      "editor_code": "BRU",
+      "editor_id": 5
+    },
+    {
+      "code": "BO",
+      "code_alpha3": "BOL",
+      "names": {
+        "en": "Bolivia",
+        "es": "Bolivia",
+        "pt": "Bolívia",
+        "fr": "Bolivie",
+        "it": "Bolivia",
+        "de": "Bolivien",
+        "zh": "玻利维亚",
+        "ja": "ボリビア",
+        "ru": "Боливия",
+        "ar": "بوليفيا",
+        "nl": "Bolivia",
+        "ko": "볼리비아"
+      },
+      "editor_code": "BOL",
+      "editor_id": 145
+    },
+    {
+      "code": "BQ",
+      "code_alpha3": "BES",
+      "names": {
+        "en": "Caribbean Netherlands",
+        "es": "Caribe neerlandés",
+        "pt": "Países Baixos Caribenhos",
+        "fr": "Pays-Bas caribéens",
+        "it": "Caraibi Olandesi",
+        "de": "Karibische Niederlande",
+        "zh": "荷属加勒比区",
+        "ja": "オランダ領カリブ",
+        "ru": "Бонэйр, Синт-Эстатиус и Саба",
+        "ar": "هولندا الكاريبية",
+        "nl": "Caribisch Nederland",
+        "ko": "네덜란드령 카리브"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "BR",
+      "code_alpha3": "BRA",
+      "names": {
+        "en": "Brazil",
+        "es": "Brasil",
+        "pt": "Brasil",
+        "fr": "Brésil",
+        "it": "Brasile",
+        "de": "Brasilien",
+        "zh": "巴西",
+        "ja": "ブラジル",
+        "ru": "Бразилия",
+        "ar": "البرازيل",
+        "nl": "Brazilië",
+        "ko": "브라질"
+      },
+      "editor_code": "BRA",
+      "editor_id": 146
+    },
+    {
+      "code": "BS",
+      "code_alpha3": "BHS",
+      "names": {
+        "en": "Bahamas",
+        "es": "Bahamas",
+        "pt": "Bahamas",
+        "fr": "Bahamas",
+        "it": "Bahamas",
+        "de": "Bahamas",
+        "zh": "巴哈马",
+        "ja": "バハマ",
+        "ru": "Багамы",
+        "ar": "جزر البهاما",
+        "nl": "Bahama’s",
+        "ko": "바하마"
+      },
+      "editor_code": "BAH",
+      "editor_id": 106
+    },
+    {
+      "code": "BT",
+      "code_alpha3": "BTN",
+      "names": {
+        "en": "Bhutan",
+        "es": "Bután",
+        "pt": "Butão",
+        "fr": "Bhoutan",
+        "it": "Bhutan",
+        "de": "Bhutan",
+        "zh": "不丹",
+        "ja": "ブータン",
+        "ru": "Бутан",
+        "ar": "بوتان",
+        "nl": "Bhutan",
+        "ko": "부탄"
+      },
+      "editor_code": "BHU",
+      "editor_id": 4
+    },
+    {
+      "code": "BV",
+      "code_alpha3": "BVT",
+      "names": {
+        "en": "Bouvet Island",
+        "es": "Isla Bouvet",
+        "pt": "Ilha Bouvet",
+        "fr": "Île Bouvet",
+        "it": "Isola Bouvet",
+        "de": "Bouvetinsel",
+        "zh": "布韦岛",
+        "ja": "ブーベ島",
+        "ru": "о-в Буве",
+        "ar": "جزيرة بوفيه",
+        "nl": "Bouveteiland",
+        "ko": "부베섬"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "BW",
+      "code_alpha3": "BWA",
+      "names": {
+        "en": "Botswana",
+        "es": "Botsuana",
+        "pt": "Botsuana",
+        "fr": "Botswana",
+        "it": "Botswana",
+        "de": "Botsuana",
+        "zh": "博茨瓦纳",
+        "ja": "ボツワナ",
+        "ru": "Ботсвана",
+        "ar": "بوتسوانا",
+        "nl": "Botswana",
+        "ko": "보츠와나"
+      },
+      "editor_code": "BOT",
+      "editor_id": 47
+    },
+    {
+      "code": "BY",
+      "code_alpha3": "BLR",
+      "names": {
+        "en": "Belarus",
+        "es": "Bielorrusia",
+        "pt": "Bielorrússia",
+        "fr": "Biélorussie",
+        "it": "Bielorussia",
+        "de": "Belarus",
+        "zh": "白俄罗斯",
+        "ja": "ベラルーシ",
+        "ru": "Беларусь",
+        "ar": "بيلاروس",
+        "nl": "Belarus",
+        "ko": "벨라루스"
+      },
+      "editor_code": "BLR",
+      "editor_id": 196
+    },
+    {
+      "code": "BZ",
+      "code_alpha3": "BLZ",
+      "names": {
+        "en": "Belize",
+        "es": "Belice",
+        "pt": "Belize",
+        "fr": "Belize",
+        "it": "Belize",
+        "de": "Belize",
+        "zh": "伯利兹",
+        "ja": "ベリーズ",
+        "ru": "Белиз",
+        "ar": "بليز",
+        "nl": "Belize",
+        "ko": "벨리즈"
+      },
+      "editor_code": "BLZ",
+      "editor_id": 108
+    },
+    {
+      "code": "CA",
+      "code_alpha3": "CAN",
+      "names": {
+        "en": "Canada",
+        "es": "Canadá",
+        "pt": "Canadá",
+        "fr": "Canada",
+        "it": "Canada",
+        "de": "Kanada",
+        "zh": "加拿大",
+        "ja": "カナダ",
+        "ru": "Канада",
+        "ar": "كندا",
+        "nl": "Canada",
+        "ko": "캐나다"
+      },
+      "editor_code": "CAN",
+      "editor_id": 110
+    },
+    {
+      "code": "CC",
+      "code_alpha3": "CCK",
+      "names": {
+        "en": "Cocos (Keeling) Islands",
+        "es": "Islas Cocos",
+        "pt": "Ilhas Cocos (Keeling)",
+        "fr": "Îles Cocos",
+        "it": "Isole Cocos (Keeling)",
+        "de": "Kokosinseln",
+        "zh": "科科斯（基林）群岛",
+        "ja": "ココス(キーリング)諸島",
+        "ru": "Кокосовые о-ва",
+        "ar": "جزر كوكوس (كيلينغ)",
+        "nl": "Cocoseilanden",
+        "ko": "코코스 제도"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "CD",
+      "code_alpha3": "COD",
+      "names": {
+        "en": "Congo - Kinshasa",
+        "es": "República Democrática del Congo",
+        "pt": "Congo - Kinshasa",
+        "fr": "Congo-Kinshasa",
+        "it": "Congo - Kinshasa",
+        "de": "Kongo-Kinshasa",
+        "zh": "刚果（金）",
+        "ja": "コンゴ民主共和国(キンシャサ)",
+        "ru": "Конго - Киншаса",
+        "ar": "الكونغو - كينشاسا",
+        "nl": "Congo-Kinshasa",
+        "ko": "콩고-킨샤사"
+      },
+      "editor_code": "COD",
+      "editor_id": 55
+    },
+    {
+      "code": "CF",
+      "code_alpha3": "CAF",
+      "names": {
+        "en": "Central African Republic",
+        "es": "República Centroafricana",
+        "pt": "República Centro-Africana",
+        "fr": "République centrafricaine",
+        "it": "Repubblica Centrafricana",
+        "de": "Zentralafrikanische Republik",
+        "zh": "中非共和国",
+        "ja": "中央アフリカ共和国",
+        "ru": "Центрально-Африканская Республика",
+        "ar": "جمهورية أفريقيا الوسطى",
+        "nl": "Centraal-Afrikaanse Republiek",
+        "ko": "중앙 아프리카 공화국"
+      },
+      "editor_code": "CTA",
+      "editor_id": 52
+    },
+    {
+      "code": "CG",
+      "code_alpha3": "COG",
+      "names": {
+        "en": "Congo - Brazzaville",
+        "es": "Congo",
+        "pt": "República do Congo",
+        "fr": "Congo-Brazzaville",
+        "it": "Congo-Brazzaville",
+        "de": "Kongo-Brazzaville",
+        "zh": "刚果（布）",
+        "ja": "コンゴ共和国(ブラザビル)",
+        "ru": "Конго - Браззавиль",
+        "ar": "الكونغو - برازافيل",
+        "nl": "Congo-Brazzaville",
+        "ko": "콩고-브라자빌"
+      },
+      "editor_code": "CGO",
+      "editor_id": 98
+    },
+    {
+      "code": "CH",
+      "code_alpha3": "CHE",
+      "names": {
+        "en": "Switzerland",
+        "es": "Suiza",
+        "pt": "Suíça",
+        "fr": "Suisse",
+        "it": "Svizzera",
+        "de": "Schweiz",
+        "zh": "瑞士",
+        "ja": "スイス",
+        "ru": "Швейцария",
+        "ar": "سويسرا",
+        "nl": "Zwitserland",
+        "ko": "스위스"
+      },
+      "editor_code": "SUI",
+      "editor_id": 238
+    },
+    {
+      "code": "CI",
+      "code_alpha3": "CIV",
+      "names": {
+        "en": "Côte d’Ivoire",
+        "es": "Côte d’Ivoire",
+        "pt": "Costa do Marfim",
+        "fr": "Côte d’Ivoire",
+        "it": "Costa d’Avorio",
+        "de": "Côte d’Ivoire",
+        "zh": "科特迪瓦",
+        "ja": "コートジボワール",
+        "ru": "Кот-д’Ивуар",
+        "ar": "ساحل العاج",
+        "nl": "Ivoorkust",
+        "ko": "코트디부아르"
+      },
+      "editor_code": "CIV",
+      "editor_id": 56
+    },
+    {
+      "code": "CK",
+      "code_alpha3": "COK",
+      "names": {
+        "en": "Cook Islands",
+        "es": "Islas Cook",
+        "pt": "Ilhas Cook",
+        "fr": "Îles Cook",
+        "it": "Isole Cook",
+        "de": "Cookinseln",
+        "zh": "库克群岛",
+        "ja": "クック諸島",
+        "ru": "о-ва Кука",
+        "ar": "جزر كوك",
+        "nl": "Cookeilanden",
+        "ko": "쿡 제도"
+      },
+      "editor_code": "COK",
+      "editor_id": 163
+    },
+    {
+      "code": "CL",
+      "code_alpha3": "CHL",
+      "names": {
+        "en": "Chile",
+        "es": "Chile",
+        "pt": "Chile",
+        "fr": "Chili",
+        "it": "Cile",
+        "de": "Chile",
+        "zh": "智利",
+        "ja": "チリ",
+        "ru": "Чили",
+        "ar": "تشيلي",
+        "nl": "Chili",
+        "ko": "칠레"
+      },
+      "editor_code": "CHI",
+      "editor_id": 147
+    },
+    {
+      "code": "CM",
+      "code_alpha3": "CMR",
+      "names": {
+        "en": "Cameroon",
+        "es": "Camerún",
+        "pt": "Camarões",
+        "fr": "Cameroun",
+        "it": "Camerun",
+        "de": "Kamerun",
+        "zh": "喀麦隆",
+        "ja": "カメルーン",
+        "ru": "Камерун",
+        "ar": "الكاميرون",
+        "nl": "Kameroen",
+        "ko": "카메룬"
+      },
+      "editor_code": "CMR",
+      "editor_id": 50
+    },
+    {
+      "code": "CN",
+      "code_alpha3": "CHN",
+      "names": {
+        "en": "China",
+        "es": "China",
+        "pt": "China",
+        "fr": "Chine",
+        "it": "Cina",
+        "de": "China",
+        "zh": "中国",
+        "ja": "中国",
+        "ru": "Китай",
+        "ar": "الصين",
+        "nl": "China",
+        "ko": "중국"
+      },
+      "editor_code": "CHN",
+      "editor_id": 7
+    },
+    {
+      "code": "CO",
+      "code_alpha3": "COL",
+      "names": {
+        "en": "Colombia",
+        "es": "Colombia",
+        "pt": "Colômbia",
+        "fr": "Colombie",
+        "it": "Colombia",
+        "de": "Kolumbien",
+        "zh": "哥伦比亚",
+        "ja": "コロンビア",
+        "ru": "Колумбия",
+        "ar": "كولومبيا",
+        "nl": "Colombia",
+        "ko": "콜롬비아"
+      },
+      "editor_code": "COL",
+      "editor_id": 148
+    },
+    {
+      "code": "CR",
+      "code_alpha3": "CRI",
+      "names": {
+        "en": "Costa Rica",
+        "es": "Costa Rica",
+        "pt": "Costa Rica",
+        "fr": "Costa Rica",
+        "it": "Costa Rica",
+        "de": "Costa Rica",
+        "zh": "哥斯达黎加",
+        "ja": "コスタリカ",
+        "ru": "Коста-Рика",
+        "ar": "كوستاريكا",
+        "nl": "Costa Rica",
+        "ko": "코스타리카"
+      },
+      "editor_code": "CRC",
+      "editor_id": 112
+    },
+    {
+      "code": "CU",
+      "code_alpha3": "CUB",
+      "names": {
+        "en": "Cuba",
+        "es": "Cuba",
+        "pt": "Cuba",
+        "fr": "Cuba",
+        "it": "Cuba",
+        "de": "Kuba",
+        "zh": "古巴",
+        "ja": "キューバ",
+        "ru": "Куба",
+        "ar": "كوبا",
+        "nl": "Cuba",
+        "ko": "쿠바"
+      },
+      "editor_code": "CUB",
+      "editor_id": 113
+    },
+    {
+      "code": "CV",
+      "code_alpha3": "CPV",
+      "names": {
+        "en": "Cape Verde",
+        "es": "Cabo Verde",
+        "pt": "Cabo Verde",
+        "fr": "Cap-Vert",
+        "it": "Capo Verde",
+        "de": "Cabo Verde",
+        "zh": "佛得角",
+        "ja": "カーボベルデ",
+        "ru": "Кабо-Верде",
+        "ar": "الرأس الأخضر",
+        "nl": "Kaapverdië",
+        "ko": "카보베르데"
+      },
+      "editor_code": "CPV",
+      "editor_id": 51
+    },
+    {
+      "code": "CW",
+      "code_alpha3": "CUW",
+      "names": {
+        "en": "Curaçao",
+        "es": "Curazao",
+        "pt": "Curaçao",
+        "fr": "Curaçao",
+        "it": "Curaçao",
+        "de": "Curaçao",
+        "zh": "库拉索",
+        "ja": "キュラソー",
+        "ru": "Кюрасао",
+        "ar": "كوراساو",
+        "nl": "Curaçao",
+        "ko": "퀴라소"
+      },
+      "editor_code": "CUW",
+      "editor_id": 140
+    },
+    {
+      "code": "CX",
+      "code_alpha3": "CXR",
+      "names": {
+        "en": "Christmas Island",
+        "es": "Isla de Navidad",
+        "pt": "Ilha Christmas",
+        "fr": "Île Christmas",
+        "it": "Isola Christmas",
+        "de": "Weihnachtsinsel",
+        "zh": "圣诞岛",
+        "ja": "クリスマス島",
+        "ru": "о-в Рождества",
+        "ar": "جزيرة كريسماس",
+        "nl": "Christmaseiland",
+        "ko": "크리스마스섬"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "CY",
+      "code_alpha3": "CYP",
+      "names": {
+        "en": "Cyprus",
+        "es": "Chipre",
+        "pt": "Chipre",
+        "fr": "Chypre",
+        "it": "Cipro",
+        "de": "Zypern",
+        "zh": "塞浦路斯",
+        "ja": "キプロス",
+        "ru": "Кипр",
+        "ar": "قبرص",
+        "nl": "Cyprus",
+        "ko": "키프로스"
+      },
+      "editor_code": "CYP",
+      "editor_id": 201
+    },
+    {
+      "code": "CZ",
+      "code_alpha3": "CZE",
+      "names": {
+        "en": "Czechia",
+        "es": "Chequia",
+        "pt": "Tchéquia",
+        "fr": "Tchéquie",
+        "it": "Cechia",
+        "de": "Tschechien",
+        "zh": "捷克",
+        "ja": "チェコ",
+        "ru": "Чехия",
+        "ar": "التشيك",
+        "nl": "Tsjechië",
+        "ko": "체코"
+      },
+      "editor_code": "CZE",
+      "editor_id": 202
+    },
+    {
+      "code": "DE",
+      "code_alpha3": "DEU",
+      "names": {
+        "en": "Germany",
+        "es": "Alemania",
+        "pt": "Alemanha",
+        "fr": "Allemagne",
+        "it": "Germania",
+        "de": "Deutschland",
+        "zh": "德国",
+        "ja": "ドイツ",
+        "ru": "Германия",
+        "ar": "ألمانيا",
+        "nl": "Duitsland",
+        "ko": "독일"
+      },
+      "editor_code": "GER",
+      "editor_id": 210
+    },
+    {
+      "code": "DJ",
+      "code_alpha3": "DJI",
+      "names": {
+        "en": "Djibouti",
+        "es": "Yibuti",
+        "pt": "Djibuti",
+        "fr": "Djibouti",
+        "it": "Gibuti",
+        "de": "Dschibuti",
+        "zh": "吉布提",
+        "ja": "ジブチ",
+        "ru": "Джибути",
+        "ar": "جيبوتي",
+        "nl": "Djibouti",
+        "ko": "지부티"
+      },
+      "editor_code": "DJI",
+      "editor_id": 57
+    },
+    {
+      "code": "DK",
+      "code_alpha3": "DNK",
+      "names": {
+        "en": "Denmark",
+        "es": "Dinamarca",
+        "pt": "Dinamarca",
+        "fr": "Danemark",
+        "it": "Danimarca",
+        "de": "Dänemark",
+        "zh": "丹麦",
+        "ja": "デンマーク",
+        "ru": "Дания",
+        "ar": "الدانمرك",
+        "nl": "Denemarken",
+        "ko": "덴마크"
+      },
+      "editor_code": "DEN",
+      "editor_id": 203
+    },
+    {
+      "code": "DM",
+      "code_alpha3": "DMA",
+      "names": {
+        "en": "Dominica",
+        "es": "Dominica",
+        "pt": "Dominica",
+        "fr": "Dominique",
+        "it": "Dominica",
+        "de": "Dominica",
+        "zh": "多米尼克",
+        "ja": "ドミニカ国",
+        "ru": "Доминика",
+        "ar": "دومينيكا",
+        "nl": "Dominica",
+        "ko": "도미니카"
+      },
+      "editor_code": "DMA",
+      "editor_id": 114
+    },
+    {
+      "code": "DO",
+      "code_alpha3": "DOM",
+      "names": {
+        "en": "Dominican Republic",
+        "es": "República Dominicana",
+        "pt": "República Dominicana",
+        "fr": "République dominicaine",
+        "it": "Repubblica Dominicana",
+        "de": "Dominikanische Republik",
+        "zh": "多米尼加共和国",
+        "ja": "ドミニカ共和国",
+        "ru": "Доминиканская Республика",
+        "ar": "جمهورية الدومينيكان",
+        "nl": "Dominicaanse Republiek",
+        "ko": "도미니카 공화국"
+      },
+      "editor_code": "DOM",
+      "editor_id": 115
+    },
+    {
+      "code": "DZ",
+      "code_alpha3": "DZA",
+      "names": {
+        "en": "Algeria",
+        "es": "Argelia",
+        "pt": "Argélia",
+        "fr": "Algérie",
+        "it": "Algeria",
+        "de": "Algerien",
+        "zh": "阿尔及利亚",
+        "ja": "アルジェリア",
+        "ru": "Алжир",
+        "ar": "الجزائر",
+        "nl": "Algerije",
+        "ko": "알제리"
+      },
+      "editor_code": "ALG",
+      "editor_id": 44
+    },
+    {
+      "code": "EC",
+      "code_alpha3": "ECU",
+      "names": {
+        "en": "Ecuador",
+        "es": "Ecuador",
+        "pt": "Equador",
+        "fr": "Équateur",
+        "it": "Ecuador",
+        "de": "Ecuador",
+        "zh": "厄瓜多尔",
+        "ja": "エクアドル",
+        "ru": "Эквадор",
+        "ar": "الإكوادور",
+        "nl": "Ecuador",
+        "ko": "에콰도르"
+      },
+      "editor_code": "ECU",
+      "editor_id": 149
+    },
+    {
+      "code": "EE",
+      "code_alpha3": "EST",
+      "names": {
+        "en": "Estonia",
+        "es": "Estonia",
+        "pt": "Estônia",
+        "fr": "Estonie",
+        "it": "Estonia",
+        "de": "Estland",
+        "zh": "爱沙尼亚",
+        "ja": "エストニア",
+        "ru": "Эстония",
+        "ar": "إستونيا",
+        "nl": "Estland",
+        "ko": "에스토니아"
+      },
+      "editor_code": "EST",
+      "editor_id": 205
+    },
+    {
+      "code": "EG",
+      "code_alpha3": "EGY",
+      "names": {
+        "en": "Egypt",
+        "es": "Egipto",
+        "pt": "Egito",
+        "fr": "Égypte",
+        "it": "Egitto",
+        "de": "Ägypten",
+        "zh": "埃及",
+        "ja": "エジプト",
+        "ru": "Египет",
+        "ar": "مصر",
+        "nl": "Egypte",
+        "ko": "이집트"
+      },
+      "editor_code": "EGY",
+      "editor_id": 58
+    },
+    {
+      "code": "EH",
+      "code_alpha3": "ESH",
+      "names": {
+        "en": "Western Sahara",
+        "es": "Sáhara Occidental",
+        "pt": "Saara Ocidental",
+        "fr": "Sahara occidental",
+        "it": "Sahara Occidentale",
+        "de": "Westsahara",
+        "zh": "西撒哈拉",
+        "ja": "西サハラ",
+        "ru": "Западная Сахара",
+        "ar": "الصحراء الغربية",
+        "nl": "Westelijke Sahara",
+        "ko": "서사하라"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "ER",
+      "code_alpha3": "ERI",
+      "names": {
+        "en": "Eritrea",
+        "es": "Eritrea",
+        "pt": "Eritreia",
+        "fr": "Érythrée",
+        "it": "Eritrea",
+        "de": "Eritrea",
+        "zh": "厄立特里亚",
+        "ja": "エリトリア",
+        "ru": "Эритрея",
+        "ar": "إريتريا",
+        "nl": "Eritrea",
+        "ko": "에리트리아"
+      },
+      "editor_code": "ERI",
+      "editor_id": 60
+    },
+    {
+      "code": "ES",
+      "code_alpha3": "ESP",
+      "names": {
+        "en": "Spain",
+        "es": "España",
+        "pt": "Espanha",
+        "fr": "Espagne",
+        "it": "Spagna",
+        "de": "Spanien",
+        "zh": "西班牙",
+        "ja": "スペイン",
+        "ru": "Испания",
+        "ar": "إسبانيا",
+        "nl": "Spanje",
+        "ko": "스페인"
+      },
+      "editor_code": "ESP",
+      "editor_id": 236
+    },
+    {
+      "code": "ET",
+      "code_alpha3": "ETH",
+      "names": {
+        "en": "Ethiopia",
+        "es": "Etiopía",
+        "pt": "Etiópia",
+        "fr": "Éthiopie",
+        "it": "Etiopia",
+        "de": "Äthiopien",
+        "zh": "埃塞俄比亚",
+        "ja": "エチオピア",
+        "ru": "Эфиопия",
+        "ar": "إثيوبيا",
+        "nl": "Ethiopië",
+        "ko": "에티오피아"
+      },
+      "editor_code": "ETH",
+      "editor_id": 61
+    },
+    {
+      "code": "FI",
+      "code_alpha3": "FIN",
+      "names": {
+        "en": "Finland",
+        "es": "Finlandia",
+        "pt": "Finlândia",
+        "fr": "Finlande",
+        "it": "Finlandia",
+        "de": "Finnland",
+        "zh": "芬兰",
+        "ja": "フィンランド",
+        "ru": "Финляндия",
+        "ar": "فنلندا",
+        "nl": "Finland",
+        "ko": "핀란드"
+      },
+      "editor_code": "FIN",
+      "editor_id": 207
+    },
+    {
+      "code": "FJ",
+      "code_alpha3": "FJI",
+      "names": {
+        "en": "Fiji",
+        "es": "Fiyi",
+        "pt": "Fiji",
+        "fr": "Fidji",
+        "it": "Figi",
+        "de": "Fidschi",
+        "zh": "斐济",
+        "ja": "フィジー",
+        "ru": "Фиджи",
+        "ar": "فيجي",
+        "nl": "Fiji",
+        "ko": "피지"
+      },
+      "editor_code": "FIJ",
+      "editor_id": 164
+    },
+    {
+      "code": "FK",
+      "code_alpha3": "FLK",
+      "names": {
+        "en": "Falkland Islands",
+        "es": "Islas Malvinas",
+        "pt": "Ilhas Malvinas",
+        "fr": "Îles Malouines",
+        "it": "Isole Falkland",
+        "de": "Falklandinseln",
+        "zh": "福克兰群岛",
+        "ja": "フォークランド諸島",
+        "ru": "Фолклендские о-ва",
+        "ar": "جزر فوكلاند",
+        "nl": "Falklandeilanden",
+        "ko": "포클랜드 제도"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "FM",
+      "code_alpha3": "FSM",
+      "names": {
+        "en": "Micronesia",
+        "es": "Micronesia",
+        "pt": "Micronésia",
+        "fr": "Micronésie",
+        "it": "Micronesia",
+        "de": "Mikronesien",
+        "zh": "密克罗尼西亚",
+        "ja": "ミクロネシア連邦",
+        "ru": "Федеративные Штаты Микронезии",
+        "ar": "ميكرونيزيا",
+        "nl": "Micronesia",
+        "ko": "미크로네시아"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "FO",
+      "code_alpha3": "FRO",
+      "names": {
+        "en": "Faroe Islands",
+        "es": "Islas Feroe",
+        "pt": "Ilhas Faroé",
+        "fr": "Îles Féroé",
+        "it": "Isole Fær Øer",
+        "de": "Färöer",
+        "zh": "法罗群岛",
+        "ja": "フェロー諸島",
+        "ru": "Фарерские о-ва",
+        "ar": "جزر فارو",
+        "nl": "Faeröer",
+        "ko": "페로 제도"
+      },
+      "editor_code": "FRO",
+      "editor_id": 206
+    },
+    {
+      "code": "FR",
+      "code_alpha3": "FRA",
+      "names": {
+        "en": "France",
+        "es": "Francia",
+        "pt": "França",
+        "fr": "France",
+        "it": "Francia",
+        "de": "Frankreich",
+        "zh": "法国",
+        "ja": "フランス",
+        "ru": "Франция",
+        "ar": "فرنسا",
+        "nl": "Frankrijk",
+        "ko": "프랑스"
+      },
+      "editor_code": "FRA",
+      "editor_id": 208
+    },
+    {
+      "code": "GA",
+      "code_alpha3": "GAB",
+      "names": {
+        "en": "Gabon",
+        "es": "Gabón",
+        "pt": "Gabão",
+        "fr": "Gabon",
+        "it": "Gabon",
+        "de": "Gabun",
+        "zh": "加蓬",
+        "ja": "ガボン",
+        "ru": "Габон",
+        "ar": "الغابون",
+        "nl": "Gabon",
+        "ko": "가봉"
+      },
+      "editor_code": "GAB",
+      "editor_id": 62
+    },
+    {
+      "code": "GB",
+      "code_alpha3": "GBR",
+      "names": {
+        "en": "United Kingdom",
+        "es": "Reino Unido",
+        "pt": "Reino Unido",
+        "fr": "Royaume-Uni",
+        "it": "Regno Unito",
+        "de": "Vereinigtes Königreich",
+        "zh": "英国",
+        "ja": "イギリス",
+        "ru": "Великобритания",
+        "ar": "المملكة المتحدة",
+        "nl": "Verenigd Koninkrijk",
+        "ko": "영국"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "GD",
+      "code_alpha3": "GRD",
+      "names": {
+        "en": "Grenada",
+        "es": "Granada",
+        "pt": "Granada",
+        "fr": "Grenade",
+        "it": "Grenada",
+        "de": "Grenada",
+        "zh": "格林纳达",
+        "ja": "グレナダ",
+        "ru": "Гренада",
+        "ar": "غرينادا",
+        "nl": "Grenada",
+        "ko": "그레나다"
+      },
+      "editor_code": "GRN",
+      "editor_id": 117
+    },
+    {
+      "code": "GE",
+      "code_alpha3": "GEO",
+      "names": {
+        "en": "Georgia",
+        "es": "Georgia",
+        "pt": "Geórgia",
+        "fr": "Géorgie",
+        "it": "Georgia",
+        "de": "Georgien",
+        "zh": "格鲁吉亚",
+        "ja": "ジョージア",
+        "ru": "Грузия",
+        "ar": "جورجيا",
+        "nl": "Georgië",
+        "ko": "조지아"
+      },
+      "editor_code": "GEO",
+      "editor_id": 209
+    },
+    {
+      "code": "GF",
+      "code_alpha3": "GUF",
+      "names": {
+        "en": "French Guiana",
+        "es": "Guayana Francesa",
+        "pt": "Guiana Francesa",
+        "fr": "Guyane française",
+        "it": "Guyana Francese",
+        "de": "Französisch-Guayana",
+        "zh": "法属圭亚那",
+        "ja": "仏領ギアナ",
+        "ru": "Французская Гвиана",
+        "ar": "غويانا الفرنسية",
+        "nl": "Frans-Guyana",
+        "ko": "프랑스령 기아나"
+      },
+      "editor_code": "GUF",
+      "editor_id": 138
+    },
+    {
+      "code": "GG",
+      "code_alpha3": "GGY",
+      "names": {
+        "en": "Guernsey",
+        "es": "Guernesey",
+        "pt": "Guernsey",
+        "fr": "Guernesey",
+        "it": "Guernsey",
+        "de": "Guernsey",
+        "zh": "根西岛",
+        "ja": "ガーンジー",
+        "ru": "Гернси",
+        "ar": "غيرنزي",
+        "nl": "Guernsey",
+        "ko": "건지"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "GH",
+      "code_alpha3": "GHA",
+      "names": {
+        "en": "Ghana",
+        "es": "Ghana",
+        "pt": "Gana",
+        "fr": "Ghana",
+        "it": "Ghana",
+        "de": "Ghana",
+        "zh": "加纳",
+        "ja": "ガーナ",
+        "ru": "Гана",
+        "ar": "غانا",
+        "nl": "Ghana",
+        "ko": "가나"
+      },
+      "editor_code": "GHA",
+      "editor_id": 64
+    },
+    {
+      "code": "GI",
+      "code_alpha3": "GIB",
+      "names": {
+        "en": "Gibraltar",
+        "es": "Gibraltar",
+        "pt": "Gibraltar",
+        "fr": "Gibraltar",
+        "it": "Gibilterra",
+        "de": "Gibraltar",
+        "zh": "直布罗陀",
+        "ja": "ジブラルタル",
+        "ru": "Гибралтар",
+        "ar": "جبل طارق",
+        "nl": "Gibraltar",
+        "ko": "지브롤터"
+      },
+      "editor_code": "GIB",
+      "editor_id": 245
+    },
+    {
+      "code": "GL",
+      "code_alpha3": "GRL",
+      "names": {
+        "en": "Greenland",
+        "es": "Groenlandia",
+        "pt": "Groenlândia",
+        "fr": "Groenland",
+        "it": "Groenlandia",
+        "de": "Grönland",
+        "zh": "格陵兰",
+        "ja": "グリーンランド",
+        "ru": "Гренландия",
+        "ar": "غرينلاند",
+        "nl": "Groenland",
+        "ko": "그린란드"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "GM",
+      "code_alpha3": "GMB",
+      "names": {
+        "en": "Gambia",
+        "es": "Gambia",
+        "pt": "Gâmbia",
+        "fr": "Gambie",
+        "it": "Gambia",
+        "de": "Gambia",
+        "zh": "冈比亚",
+        "ja": "ガンビア",
+        "ru": "Гамбия",
+        "ar": "غامبيا",
+        "nl": "Gambia",
+        "ko": "감비아"
+      },
+      "editor_code": "GAM",
+      "editor_id": 63
+    },
+    {
+      "code": "GN",
+      "code_alpha3": "GIN",
+      "names": {
+        "en": "Guinea",
+        "es": "Guinea",
+        "pt": "Guiné",
+        "fr": "Guinée",
+        "it": "Guinea",
+        "de": "Guinea",
+        "zh": "几内亚",
+        "ja": "ギニア",
+        "ru": "Гвинея",
+        "ar": "غينيا",
+        "nl": "Guinee",
+        "ko": "기니"
+      },
+      "editor_code": "GUI",
+      "editor_id": 65
+    },
+    {
+      "code": "GP",
+      "code_alpha3": "GLP",
+      "names": {
+        "en": "Guadeloupe",
+        "es": "Guadalupe",
+        "pt": "Guadalupe",
+        "fr": "Guadeloupe",
+        "it": "Guadalupa",
+        "de": "Guadeloupe",
+        "zh": "瓜德罗普",
+        "ja": "グアドループ",
+        "ru": "Гваделупа",
+        "ar": "غوادلوب",
+        "nl": "Guadeloupe",
+        "ko": "과들루프"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "GQ",
+      "code_alpha3": "GNQ",
+      "names": {
+        "en": "Equatorial Guinea",
+        "es": "Guinea Ecuatorial",
+        "pt": "Guiné Equatorial",
+        "fr": "Guinée équatoriale",
+        "it": "Guinea Equatoriale",
+        "de": "Äquatorialguinea",
+        "zh": "赤道几内亚",
+        "ja": "赤道ギニア",
+        "ru": "Экваториальная Гвинея",
+        "ar": "غينيا الاستوائية",
+        "nl": "Equatoriaal-Guinea",
+        "ko": "적도 기니"
+      },
+      "editor_code": "EQG",
+      "editor_id": 59
+    },
+    {
+      "code": "GR",
+      "code_alpha3": "GRC",
+      "names": {
+        "en": "Greece",
+        "es": "Grecia",
+        "pt": "Grécia",
+        "fr": "Grèce",
+        "it": "Grecia",
+        "de": "Griechenland",
+        "zh": "希腊",
+        "ja": "ギリシャ",
+        "ru": "Греция",
+        "ar": "اليونان",
+        "nl": "Griekenland",
+        "ko": "그리스"
+      },
+      "editor_code": "GRE",
+      "editor_id": 211
+    },
+    {
+      "code": "GS",
+      "code_alpha3": "SGS",
+      "names": {
+        "en": "South Georgia & South Sandwich Islands",
+        "es": "Islas Georgia del Sur y Sandwich del Sur",
+        "pt": "Ilhas Geórgia do Sul e Sandwich do Sul",
+        "fr": "Géorgie du Sud-et-les Îles Sandwich du Sud",
+        "it": "Georgia del Sud e Sandwich Australi",
+        "de": "Südgeorgien und die Südlichen Sandwichinseln",
+        "zh": "南乔治亚和南桑威奇群岛",
+        "ja": "サウスジョージア・サウスサンドウィッチ諸島",
+        "ru": "Южная Георгия и Южные Сандвичевы о-ва",
+        "ar": "جورجيا الجنوبية وجزر ساندويتش الجنوبية",
+        "nl": "Zuid-Georgia en Zuidelijke Sandwicheilanden",
+        "ko": "사우스조지아 사우스샌드위치 제도"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "GT",
+      "code_alpha3": "GTM",
+      "names": {
+        "en": "Guatemala",
+        "es": "Guatemala",
+        "pt": "Guatemala",
+        "fr": "Guatemala",
+        "it": "Guatemala",
+        "de": "Guatemala",
+        "zh": "危地马拉",
+        "ja": "グアテマラ",
+        "ru": "Гватемала",
+        "ar": "غواتيمالا",
+        "nl": "Guatemala",
+        "ko": "과테말라"
+      },
+      "editor_code": "GUA",
+      "editor_id": 119
+    },
+    {
+      "code": "GU",
+      "code_alpha3": "GUM",
+      "names": {
+        "en": "Guam",
+        "es": "Guam",
+        "pt": "Guam",
+        "fr": "Guam",
+        "it": "Guam",
+        "de": "Guam",
+        "zh": "关岛",
+        "ja": "グアム",
+        "ru": "Гуам",
+        "ar": "غوام",
+        "nl": "Guam",
+        "ko": "괌"
+      },
+      "editor_code": "GUM",
+      "editor_id": 176
+    },
+    {
+      "code": "GW",
+      "code_alpha3": "GNB",
+      "names": {
+        "en": "Guinea-Bissau",
+        "es": "Guinea-Bisáu",
+        "pt": "Guiné-Bissau",
+        "fr": "Guinée-Bissau",
+        "it": "Guinea-Bissau",
+        "de": "Guinea-Bissau",
+        "zh": "几内亚比绍",
+        "ja": "ギニアビサウ",
+        "ru": "Гвинея-Бисау",
+        "ar": "غينيا بيساو",
+        "nl": "Guinee-Bissau",
+        "ko": "기니비사우"
+      },
+      "editor_code": "GNB",
+      "editor_id": 66
+    },
+    {
+      "code": "GY",
+      "code_alpha3": "GUY",
+      "names": {
+        "en": "Guyana",
+        "es": "Guyana",
+        "pt": "Guiana",
+        "fr": "Guyana",
+        "it": "Guyana",
+        "de": "Guyana",
+        "zh": "圭亚那",
+        "ja": "ガイアナ",
+        "ru": "Гайана",
+        "ar": "غيانا",
+        "nl": "Guyana",
+        "ko": "가이아나"
+      },
+      "editor_code": "GUY",
+      "editor_id": 159
+    },
+    {
+      "code": "HK",
+      "code_alpha3": "HKG",
+      "names": {
+        "en": "Hong Kong SAR China",
+        "es": "RAE de Hong Kong (China)",
+        "pt": "Hong Kong, RAE da China",
+        "fr": "R.A.S. chinoise de Hong Kong",
+        "it": "RAS di Hong Kong",
+        "de": "Sonderverwaltungsregion Hongkong",
+        "zh": "中国香港特别行政区",
+        "ja": "中華人民共和国香港特別行政区",
+        "ru": "Гонконг (САР)",
+        "ar": "هونغ كونغ الصينية (منطقة إدارية خاصة)",
+        "nl": "Hongkong SAR van China",
+        "ko": "홍콩(중국 특별행정구)"
+      },
+      "editor_code": "HKG",
+      "editor_id": 8
+    },
+    {
+      "code": "HM",
+      "code_alpha3": "HMD",
+      "names": {
+        "en": "Heard & McDonald Islands",
+        "es": "Islas Heard y McDonald",
+        "pt": "Ilhas Heard e McDonald",
+        "fr": "Îles Heard-et-MacDonald",
+        "it": "Isole Heard e McDonald",
+        "de": "Heard und McDonaldinseln",
+        "zh": "赫德岛和麦克唐纳群岛",
+        "ja": "ハード島・マクドナルド諸島",
+        "ru": "о-ва Херд и Макдональд",
+        "ar": "جزيرة هيرد وجزر ماكدونالد",
+        "nl": "Heard en McDonaldeilanden",
+        "ko": "허드 맥도널드 제도"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "HN",
+      "code_alpha3": "HND",
+      "names": {
+        "en": "Honduras",
+        "es": "Honduras",
+        "pt": "Honduras",
+        "fr": "Honduras",
+        "it": "Honduras",
+        "de": "Honduras",
+        "zh": "洪都拉斯",
+        "ja": "ホンジュラス",
+        "ru": "Гондурас",
+        "ar": "هندوراس",
+        "nl": "Honduras",
+        "ko": "온두라스"
+      },
+      "editor_code": "HON",
+      "editor_id": 121
+    },
+    {
+      "code": "HR",
+      "code_alpha3": "HRV",
+      "names": {
+        "en": "Croatia",
+        "es": "Croacia",
+        "pt": "Croácia",
+        "fr": "Croatie",
+        "it": "Croazia",
+        "de": "Kroatien",
+        "zh": "克罗地亚",
+        "ja": "クロアチア",
+        "ru": "Хорватия",
+        "ar": "كرواتيا",
+        "nl": "Kroatië",
+        "ko": "크로아티아"
+      },
+      "editor_code": "CRO",
+      "editor_id": 200
+    },
+    {
+      "code": "HT",
+      "code_alpha3": "HTI",
+      "names": {
+        "en": "Haiti",
+        "es": "Haití",
+        "pt": "Haiti",
+        "fr": "Haïti",
+        "it": "Haiti",
+        "de": "Haiti",
+        "zh": "海地",
+        "ja": "ハイチ",
+        "ru": "Гаити",
+        "ar": "هايتي",
+        "nl": "Haïti",
+        "ko": "아이티"
+      },
+      "editor_code": "HAI",
+      "editor_id": 120
+    },
+    {
+      "code": "HU",
+      "code_alpha3": "HUN",
+      "names": {
+        "en": "Hungary",
+        "es": "Hungría",
+        "pt": "Hungria",
+        "fr": "Hongrie",
+        "it": "Ungheria",
+        "de": "Ungarn",
+        "zh": "匈牙利",
+        "ja": "ハンガリー",
+        "ru": "Венгрия",
+        "ar": "هنغاريا",
+        "nl": "Hongarije",
+        "ko": "헝가리"
+      },
+      "editor_code": "HUN",
+      "editor_id": 212
+    },
+    {
+      "code": "ID",
+      "code_alpha3": "IDN",
+      "names": {
+        "en": "Indonesia",
+        "es": "Indonesia",
+        "pt": "Indonésia",
+        "fr": "Indonésie",
+        "it": "Indonesia",
+        "de": "Indonesien",
+        "zh": "印度尼西亚",
+        "ja": "インドネシア",
+        "ru": "Индонезия",
+        "ar": "إندونيسيا",
+        "nl": "Indonesië",
+        "ko": "인도네시아"
+      },
+      "editor_code": "IDN",
+      "editor_id": 10
+    },
+    {
+      "code": "IE",
+      "code_alpha3": "IRL",
+      "names": {
+        "en": "Ireland",
+        "es": "Irlanda",
+        "pt": "Irlanda",
+        "fr": "Irlande",
+        "it": "Irlanda",
+        "de": "Irland",
+        "zh": "爱尔兰",
+        "ja": "アイルランド",
+        "ru": "Ирландия",
+        "ar": "أيرلندا",
+        "nl": "Ierland",
+        "ko": "아일랜드"
+      },
+      "editor_code": "IRL",
+      "editor_id": 214
+    },
+    {
+      "code": "IL",
+      "code_alpha3": "ISR",
+      "names": {
+        "en": "Israel",
+        "es": "Israel",
+        "pt": "Israel",
+        "fr": "Israël",
+        "it": "Israele",
+        "de": "Israel",
+        "zh": "以色列",
+        "ja": "イスラエル",
+        "ru": "Израиль",
+        "ar": "إسرائيل",
+        "nl": "Israël",
+        "ko": "이스라엘"
+      },
+      "editor_code": "ISR",
+      "editor_id": 189
+    },
+    {
+      "code": "IM",
+      "code_alpha3": "IMN",
+      "names": {
+        "en": "Isle of Man",
+        "es": "Isla de Man",
+        "pt": "Ilha de Man",
+        "fr": "Île de Man",
+        "it": "Isola di Man",
+        "de": "Isle of Man",
+        "zh": "马恩岛",
+        "ja": "マン島",
+        "ru": "о-в Мэн",
+        "ar": "جزيرة مان",
+        "nl": "Isle of Man",
+        "ko": "맨섬"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "IN",
+      "code_alpha3": "IND",
+      "names": {
+        "en": "India",
+        "es": "India",
+        "pt": "Índia",
+        "fr": "Inde",
+        "it": "India",
+        "de": "Indien",
+        "zh": "印度",
+        "ja": "インド",
+        "ru": "Индия",
+        "ar": "الهند",
+        "nl": "India",
+        "ko": "인도"
+      },
+      "editor_code": "IND",
+      "editor_id": 9
+    },
+    {
+      "code": "IO",
+      "code_alpha3": "IOT",
+      "names": {
+        "en": "British Indian Ocean Territory",
+        "es": "Territorio Británico del Océano Índico",
+        "pt": "Território Britânico do Oceano Índico",
+        "fr": "Territoire britannique de l’océan Indien",
+        "it": "Territorio Britannico dell’Oceano Indiano",
+        "de": "Britisches Territorium im Indischen Ozean",
+        "zh": "英属印度洋领地",
+        "ja": "英領インド洋地域",
+        "ru": "Британская территория в Индийском океане",
+        "ar": "الإقليم البريطاني في المحيط الهندي",
+        "nl": "Brits Indische Oceaanterritorium",
+        "ko": "영국령 인도양 지역"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "IQ",
+      "code_alpha3": "IRQ",
+      "names": {
+        "en": "Iraq",
+        "es": "Irak",
+        "pt": "Iraque",
+        "fr": "Irak",
+        "it": "Iraq",
+        "de": "Irak",
+        "zh": "伊拉克",
+        "ja": "イラク",
+        "ru": "Ирак",
+        "ar": "العراق",
+        "nl": "Irak",
+        "ko": "이라크"
+      },
+      "editor_code": "IRQ",
+      "editor_id": 12
+    },
+    {
+      "code": "IR",
+      "code_alpha3": "IRN",
+      "names": {
+        "en": "Iran",
+        "es": "Irán",
+        "pt": "Irã",
+        "fr": "Iran",
+        "it": "Iran",
+        "de": "Iran",
+        "zh": "伊朗",
+        "ja": "イラン",
+        "ru": "Иран",
+        "ar": "إيران",
+        "nl": "Iran",
+        "ko": "이란"
+      },
+      "editor_code": "IRN",
+      "editor_id": 11
+    },
+    {
+      "code": "IS",
+      "code_alpha3": "ISL",
+      "names": {
+        "en": "Iceland",
+        "es": "Islandia",
+        "pt": "Islândia",
+        "fr": "Islande",
+        "it": "Islanda",
+        "de": "Island",
+        "zh": "冰岛",
+        "ja": "アイスランド",
+        "ru": "Исландия",
+        "ar": "آيسلندا",
+        "nl": "IJsland",
+        "ko": "아이슬란드"
+      },
+      "editor_code": "ISL",
+      "editor_id": 213
+    },
+    {
+      "code": "IT",
+      "code_alpha3": "ITA",
+      "names": {
+        "en": "Italy",
+        "es": "Italia",
+        "pt": "Itália",
+        "fr": "Italie",
+        "it": "Italia",
+        "de": "Italien",
+        "zh": "意大利",
+        "ja": "イタリア",
+        "ru": "Италия",
+        "ar": "إيطاليا",
+        "nl": "Italië",
+        "ko": "이탈리아"
+      },
+      "editor_code": "ITA",
+      "editor_id": 215
+    },
+    {
+      "code": "JE",
+      "code_alpha3": "JEY",
+      "names": {
+        "en": "Jersey",
+        "es": "Jersey",
+        "pt": "Jersey",
+        "fr": "Jersey",
+        "it": "Jersey",
+        "de": "Jersey",
+        "zh": "泽西岛",
+        "ja": "ジャージー",
+        "ru": "Джерси",
+        "ar": "جيرسي",
+        "nl": "Jersey",
+        "ko": "저지"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "JM",
+      "code_alpha3": "JAM",
+      "names": {
+        "en": "Jamaica",
+        "es": "Jamaica",
+        "pt": "Jamaica",
+        "fr": "Jamaïque",
+        "it": "Giamaica",
+        "de": "Jamaika",
+        "zh": "牙买加",
+        "ja": "ジャマイカ",
+        "ru": "Ямайка",
+        "ar": "جامايكا",
+        "nl": "Jamaica",
+        "ko": "자메이카"
+      },
+      "editor_code": "JAM",
+      "editor_id": 122
+    },
+    {
+      "code": "JO",
+      "code_alpha3": "JOR",
+      "names": {
+        "en": "Jordan",
+        "es": "Jordania",
+        "pt": "Jordânia",
+        "fr": "Jordanie",
+        "it": "Giordania",
+        "de": "Jordanien",
+        "zh": "约旦",
+        "ja": "ヨルダン",
+        "ru": "Иордания",
+        "ar": "الأردن",
+        "nl": "Jordanië",
+        "ko": "요르단"
+      },
+      "editor_code": "JOR",
+      "editor_id": 14
+    },
+    {
+      "code": "JP",
+      "code_alpha3": "JPN",
+      "names": {
+        "en": "Japan",
+        "es": "Japón",
+        "pt": "Japão",
+        "fr": "Japon",
+        "it": "Giappone",
+        "de": "Japan",
+        "zh": "日本",
+        "ja": "日本",
+        "ru": "Япония",
+        "ar": "اليابان",
+        "nl": "Japan",
+        "ko": "일본"
+      },
+      "editor_code": "JPN",
+      "editor_id": 13
+    },
+    {
+      "code": "KE",
+      "code_alpha3": "KEN",
+      "names": {
+        "en": "Kenya",
+        "es": "Kenia",
+        "pt": "Quênia",
+        "fr": "Kenya",
+        "it": "Kenya",
+        "de": "Kenia",
+        "zh": "肯尼亚",
+        "ja": "ケニア",
+        "ru": "Кения",
+        "ar": "كينيا",
+        "nl": "Kenia",
+        "ko": "케냐"
+      },
+      "editor_code": "KEN",
+      "editor_id": 67
+    },
+    {
+      "code": "KG",
+      "code_alpha3": "KGZ",
+      "names": {
+        "en": "Kyrgyzstan",
+        "es": "Kirguistán",
+        "pt": "Quirguistão",
+        "fr": "Kirghizstan",
+        "it": "Kirghizistan",
+        "de": "Kirgisistan",
+        "zh": "吉尔吉斯斯坦",
+        "ja": "キルギス",
+        "ru": "Киргизия",
+        "ar": "قيرغيزستان",
+        "nl": "Kirgizië",
+        "ko": "키르기스스탄"
+      },
+      "editor_code": "KGZ",
+      "editor_id": 40
+    },
+    {
+      "code": "KH",
+      "code_alpha3": "KHM",
+      "names": {
+        "en": "Cambodia",
+        "es": "Camboya",
+        "pt": "Camboja",
+        "fr": "Cambodge",
+        "it": "Cambogia",
+        "de": "Kambodscha",
+        "zh": "柬埔寨",
+        "ja": "カンボジア",
+        "ru": "Камбоджа",
+        "ar": "كمبوديا",
+        "nl": "Cambodja",
+        "ko": "캄보디아"
+      },
+      "editor_code": "CAM",
+      "editor_id": 6
+    },
+    {
+      "code": "KI",
+      "code_alpha3": "KIR",
+      "names": {
+        "en": "Kiribati",
+        "es": "Kiribati",
+        "pt": "Quiribati",
+        "fr": "Kiribati",
+        "it": "Kiribati",
+        "de": "Kiribati",
+        "zh": "基里巴斯",
+        "ja": "キリバス",
+        "ru": "Кирибати",
+        "ar": "كيريباتي",
+        "nl": "Kiribati",
+        "ko": "키리바시"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "KM",
+      "code_alpha3": "COM",
+      "names": {
+        "en": "Comoros",
+        "es": "Comoras",
+        "pt": "Comores",
+        "fr": "Comores",
+        "it": "Comore",
+        "de": "Komoren",
+        "zh": "科摩罗",
+        "ja": "コモロ",
+        "ru": "Коморы",
+        "ar": "جزر القمر",
+        "nl": "Comoren",
+        "ko": "코모로"
+      },
+      "editor_code": "COM",
+      "editor_id": 54
+    },
+    {
+      "code": "KN",
+      "code_alpha3": "KNA",
+      "names": {
+        "en": "St. Kitts & Nevis",
+        "es": "San Cristóbal y Nieves",
+        "pt": "São Cristóvão e Névis",
+        "fr": "Saint-Christophe-et-Niévès",
+        "it": "Saint Kitts e Nevis",
+        "de": "St. Kitts und Nevis",
+        "zh": "圣基茨和尼维斯",
+        "ja": "セントクリストファー・ネーヴィス",
+        "ru": "Сент-Китс и Невис",
+        "ar": "سانت كيتس ونيفيس",
+        "nl": "Saint Kitts en Nevis",
+        "ko": "세인트키츠 네비스"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "KP",
+      "code_alpha3": "PRK",
+      "names": {
+        "en": "North Korea",
+        "es": "Corea del Norte",
+        "pt": "Coreia do Norte",
+        "fr": "Corée du Nord",
+        "it": "Corea del Nord",
+        "de": "Nordkorea",
+        "zh": "朝鲜",
+        "ja": "北朝鮮",
+        "ru": "КНДР",
+        "ar": "كوريا الشمالية",
+        "nl": "Noord-Korea",
+        "ko": "북한"
+      },
+      "editor_code": "PRK",
+      "editor_id": 15
+    },
+    {
+      "code": "KR",
+      "code_alpha3": "KOR",
+      "names": {
+        "en": "South Korea",
+        "es": "Corea del Sur",
+        "pt": "Coreia do Sul",
+        "fr": "Corée du Sud",
+        "it": "Corea del Sud",
+        "de": "Südkorea",
+        "zh": "韩国",
+        "ja": "韓国",
+        "ru": "Республика Корея",
+        "ar": "كوريا الجنوبية",
+        "nl": "Zuid-Korea",
+        "ko": "대한민국"
+      },
+      "editor_code": "KOR",
+      "editor_id": 16
+    },
+    {
+      "code": "KW",
+      "code_alpha3": "KWT",
+      "names": {
+        "en": "Kuwait",
+        "es": "Kuwait",
+        "pt": "Kuwait",
+        "fr": "Koweït",
+        "it": "Kuwait",
+        "de": "Kuwait",
+        "zh": "科威特",
+        "ja": "クウェート",
+        "ru": "Кувейт",
+        "ar": "الكويت",
+        "nl": "Koeweit",
+        "ko": "쿠웨이트"
+      },
+      "editor_code": "KUW",
+      "editor_id": 17
+    },
+    {
+      "code": "KY",
+      "code_alpha3": "CYM",
+      "names": {
+        "en": "Cayman Islands",
+        "es": "Islas Caimán",
+        "pt": "Ilhas Cayman",
+        "fr": "Îles Caïmans",
+        "it": "Isole Cayman",
+        "de": "Kaimaninseln",
+        "zh": "开曼群岛",
+        "ja": "ケイマン諸島",
+        "ru": "о-ва Кайман",
+        "ar": "جزر كايمان",
+        "nl": "Kaaimaneilanden",
+        "ko": "케이맨 제도"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "KZ",
+      "code_alpha3": "KAZ",
+      "names": {
+        "en": "Kazakhstan",
+        "es": "Kazajistán",
+        "pt": "Cazaquistão",
+        "fr": "Kazakhstan",
+        "it": "Kazakistan",
+        "de": "Kasachstan",
+        "zh": "哈萨克斯坦",
+        "ja": "カザフスタン",
+        "ru": "Казахстан",
+        "ar": "كازاخستان",
+        "nl": "Kazachstan",
+        "ko": "카자흐스탄"
+      },
+      "editor_code": "KAZ",
+      "editor_id": 216
+    },
+    {
+      "code": "LA",
+      "code_alpha3": "LAO",
+      "names": {
+        "en": "Laos",
+        "es": "Laos",
+        "pt": "Laos",
+        "fr": "Laos",
+        "it": "Laos",
+        "de": "Laos",
+        "zh": "老挝",
+        "ja": "ラオス",
+        "ru": "Лаос",
+        "ar": "لاوس",
+        "nl": "Laos",
+        "ko": "라오스"
+      },
+      "editor_code": "LAO",
+      "editor_id": 18
+    },
+    {
+      "code": "LB",
+      "code_alpha3": "LBN",
+      "names": {
+        "en": "Lebanon",
+        "es": "Líbano",
+        "pt": "Líbano",
+        "fr": "Liban",
+        "it": "Libano",
+        "de": "Libanon",
+        "zh": "黎巴嫩",
+        "ja": "レバノン",
+        "ru": "Ливан",
+        "ar": "لبنان",
+        "nl": "Libanon",
+        "ko": "레바논"
+      },
+      "editor_code": "LBN",
+      "editor_id": 19
+    },
+    {
+      "code": "LC",
+      "code_alpha3": "LCA",
+      "names": {
+        "en": "St. Lucia",
+        "es": "Santa Lucía",
+        "pt": "Santa Lúcia",
+        "fr": "Sainte-Lucie",
+        "it": "Saint Lucia",
+        "de": "St. Lucia",
+        "zh": "圣卢西亚",
+        "ja": "セントルシア",
+        "ru": "Сент-Люсия",
+        "ar": "سانت لوسيا",
+        "nl": "Saint Lucia",
+        "ko": "세인트루시아"
+      },
+      "editor_code": "LCA",
+      "editor_id": 131
+    },
+    {
+      "code": "LI",
+      "code_alpha3": "LIE",
+      "names": {
+        "en": "Liechtenstein",
+        "es": "Liechtenstein",
+        "pt": "Liechtenstein",
+        "fr": "Liechtenstein",
+        "it": "Liechtenstein",
+        "de": "Liechtenstein",
+        "zh": "列支敦士登",
+        "ja": "リヒテンシュタイン",
+        "ru": "Лихтенштейн",
+        "ar": "ليختنشتاين",
+        "nl": "Liechtenstein",
+        "ko": "리히텐슈타인"
+      },
+      "editor_code": "LIE",
+      "editor_id": 218
+    },
+    {
+      "code": "LK",
+      "code_alpha3": "LKA",
+      "names": {
+        "en": "Sri Lanka",
+        "es": "Sri Lanka",
+        "pt": "Sri Lanka",
+        "fr": "Sri Lanka",
+        "it": "Sri Lanka",
+        "de": "Sri Lanka",
+        "zh": "斯里兰卡",
+        "ja": "スリランカ",
+        "ru": "Шри-Ланка",
+        "ar": "سريلانكا",
+        "nl": "Sri Lanka",
+        "ko": "스리랑카"
+      },
+      "editor_code": "SRI",
+      "editor_id": 33
+    },
+    {
+      "code": "LR",
+      "code_alpha3": "LBR",
+      "names": {
+        "en": "Liberia",
+        "es": "Liberia",
+        "pt": "Libéria",
+        "fr": "Liberia",
+        "it": "Liberia",
+        "de": "Liberia",
+        "zh": "利比里亚",
+        "ja": "リベリア",
+        "ru": "Либерия",
+        "ar": "ليبيريا",
+        "nl": "Liberia",
+        "ko": "라이베리아"
+      },
+      "editor_code": "LBR",
+      "editor_id": 69
+    },
+    {
+      "code": "LS",
+      "code_alpha3": "LSO",
+      "names": {
+        "en": "Lesotho",
+        "es": "Lesoto",
+        "pt": "Lesoto",
+        "fr": "Lesotho",
+        "it": "Lesotho",
+        "de": "Lesotho",
+        "zh": "莱索托",
+        "ja": "レソト",
+        "ru": "Лесото",
+        "ar": "ليسوتو",
+        "nl": "Lesotho",
+        "ko": "레소토"
+      },
+      "editor_code": "LES",
+      "editor_id": 68
+    },
+    {
+      "code": "LT",
+      "code_alpha3": "LTU",
+      "names": {
+        "en": "Lithuania",
+        "es": "Lituania",
+        "pt": "Lituânia",
+        "fr": "Lituanie",
+        "it": "Lituania",
+        "de": "Litauen",
+        "zh": "立陶宛",
+        "ja": "リトアニア",
+        "ru": "Литва",
+        "ar": "ليتوانيا",
+        "nl": "Litouwen",
+        "ko": "리투아니아"
+      },
+      "editor_code": "LTU",
+      "editor_id": 219
+    },
+    {
+      "code": "LU",
+      "code_alpha3": "LUX",
+      "names": {
+        "en": "Luxembourg",
+        "es": "Luxemburgo",
+        "pt": "Luxemburgo",
+        "fr": "Luxembourg",
+        "it": "Lussemburgo",
+        "de": "Luxemburg",
+        "zh": "卢森堡",
+        "ja": "ルクセンブルク",
+        "ru": "Люксембург",
+        "ar": "لوكسمبورغ",
+        "nl": "Luxemburg",
+        "ko": "룩셈부르크"
+      },
+      "editor_code": "LUX",
+      "editor_id": 220
+    },
+    {
+      "code": "LV",
+      "code_alpha3": "LVA",
+      "names": {
+        "en": "Latvia",
+        "es": "Letonia",
+        "pt": "Letônia",
+        "fr": "Lettonie",
+        "it": "Lettonia",
+        "de": "Lettland",
+        "zh": "拉脱维亚",
+        "ja": "ラトビア",
+        "ru": "Латвия",
+        "ar": "لاتفيا",
+        "nl": "Letland",
+        "ko": "라트비아"
+      },
+      "editor_code": "LVA",
+      "editor_id": 217
+    },
+    {
+      "code": "LY",
+      "code_alpha3": "LBY",
+      "names": {
+        "en": "Libya",
+        "es": "Libia",
+        "pt": "Líbia",
+        "fr": "Libye",
+        "it": "Libia",
+        "de": "Libyen",
+        "zh": "利比亚",
+        "ja": "リビア",
+        "ru": "Ливия",
+        "ar": "ليبيا",
+        "nl": "Libië",
+        "ko": "리비아"
+      },
+      "editor_code": "LBY",
+      "editor_id": 70
+    },
+    {
+      "code": "MA",
+      "code_alpha3": "MAR",
+      "names": {
+        "en": "Morocco",
+        "es": "Marruecos",
+        "pt": "Marrocos",
+        "fr": "Maroc",
+        "it": "Marocco",
+        "de": "Marokko",
+        "zh": "摩洛哥",
+        "ja": "モロッコ",
+        "ru": "Марокко",
+        "ar": "المغرب",
+        "nl": "Marokko",
+        "ko": "모로코"
+      },
+      "editor_code": "MAR",
+      "editor_id": 76
+    },
+    {
+      "code": "MC",
+      "code_alpha3": "MCO",
+      "names": {
+        "en": "Monaco",
+        "es": "Mónaco",
+        "pt": "Mônaco",
+        "fr": "Monaco",
+        "it": "Monaco",
+        "de": "Monaco",
+        "zh": "摩纳哥",
+        "ja": "モナコ",
+        "ru": "Монако",
+        "ar": "موناكو",
+        "nl": "Monaco",
+        "ko": "모나코"
+      },
+      "editor_code": "MON",
+      "editor_id": 250
+    },
+    {
+      "code": "MD",
+      "code_alpha3": "MDA",
+      "names": {
+        "en": "Moldova",
+        "es": "Moldavia",
+        "pt": "Moldávia",
+        "fr": "Moldavie",
+        "it": "Moldavia",
+        "de": "Republik Moldau",
+        "zh": "摩尔多瓦",
+        "ja": "モルドバ",
+        "ru": "Молдова",
+        "ar": "مولدوفا",
+        "nl": "Moldavië",
+        "ko": "몰도바"
+      },
+      "editor_code": "MDA",
+      "editor_id": 223
+    },
+    {
+      "code": "ME",
+      "code_alpha3": "MNE",
+      "names": {
+        "en": "Montenegro",
+        "es": "Montenegro",
+        "pt": "Montenegro",
+        "fr": "Monténégro",
+        "it": "Montenegro",
+        "de": "Montenegro",
+        "zh": "黑山",
+        "ja": "モンテネグロ",
+        "ru": "Черногория",
+        "ar": "الجبل الأسود",
+        "nl": "Montenegro",
+        "ko": "몬테네그로"
+      },
+      "editor_code": "MNE",
+      "editor_id": 304
+    },
+    {
+      "code": "MF",
+      "code_alpha3": "MAF",
+      "names": {
+        "en": "St. Martin",
+        "es": "San Martín",
+        "pt": "São Martinho",
+        "fr": "Saint-Martin",
+        "it": "Saint Martin",
+        "de": "St. Martin",
+        "zh": "法属圣马丁",
+        "ja": "サン・マルタン",
+        "ru": "Сен-Мартен",
+        "ar": "سان مارتن",
+        "nl": "Saint-Martin",
+        "ko": "생마르탱"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "MG",
+      "code_alpha3": "MDG",
+      "names": {
+        "en": "Madagascar",
+        "es": "Madagascar",
+        "pt": "Madagascar",
+        "fr": "Madagascar",
+        "it": "Madagascar",
+        "de": "Madagaskar",
+        "zh": "马达加斯加",
+        "ja": "マダガスカル",
+        "ru": "Мадагаскар",
+        "ar": "مدغشقر",
+        "nl": "Madagaskar",
+        "ko": "마다가스카르"
+      },
+      "editor_code": "MAD",
+      "editor_id": 71
+    },
+    {
+      "code": "MH",
+      "code_alpha3": "MHL",
+      "names": {
+        "en": "Marshall Islands",
+        "es": "Islas Marshall",
+        "pt": "Ilhas Marshall",
+        "fr": "Îles Marshall",
+        "it": "Isole Marshall",
+        "de": "Marshallinseln",
+        "zh": "马绍尔群岛",
+        "ja": "マーシャル諸島",
+        "ru": "Маршалловы о-ва",
+        "ar": "جزر مارشال",
+        "nl": "Marshalleilanden",
+        "ko": "마셜 제도"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "MK",
+      "code_alpha3": "MKD",
+      "names": {
+        "en": "North Macedonia",
+        "es": "Macedonia del Norte",
+        "pt": "Macedônia do Norte",
+        "fr": "Macédoine du Nord",
+        "it": "Macedonia del Nord",
+        "de": "Nordmazedonien",
+        "zh": "北马其顿",
+        "ja": "北マケドニア",
+        "ru": "Северная Македония",
+        "ar": "مقدونيا الشمالية",
+        "nl": "Noord-Macedonië",
+        "ko": "북마케도니아"
+      },
+      "editor_code": "MKD",
+      "editor_id": 221
+    },
+    {
+      "code": "ML",
+      "code_alpha3": "MLI",
+      "names": {
+        "en": "Mali",
+        "es": "Mali",
+        "pt": "Mali",
+        "fr": "Mali",
+        "it": "Mali",
+        "de": "Mali",
+        "zh": "马里",
+        "ja": "マリ",
+        "ru": "Мали",
+        "ar": "مالي",
+        "nl": "Mali",
+        "ko": "말리"
+      },
+      "editor_code": "MLI",
+      "editor_id": 73
+    },
+    {
+      "code": "MM",
+      "code_alpha3": "MMR",
+      "names": {
+        "en": "Myanmar (Burma)",
+        "es": "Myanmar (Birmania)",
+        "pt": "Mianmar (Birmânia)",
+        "fr": "Myanmar (Birmanie)",
+        "it": "Myanmar (Birmania)",
+        "de": "Myanmar",
+        "zh": "缅甸",
+        "ja": "ミャンマー (ビルマ)",
+        "ru": "Мьянма (Бирма)",
+        "ar": "ميانمار (بورما)",
+        "nl": "Myanmar (Birma)",
+        "ko": "미얀마"
+      },
+      "editor_code": "MYA",
+      "editor_id": 24
+    },
+    {
+      "code": "MN",
+      "code_alpha3": "MNG",
+      "names": {
+        "en": "Mongolia",
+        "es": "Mongolia",
+        "pt": "Mongólia",
+        "fr": "Mongolie",
+        "it": "Mongolia",
+        "de": "Mongolei",
+        "zh": "蒙古",
+        "ja": "モンゴル",
+        "ru": "Монголия",
+        "ar": "منغوليا",
+        "nl": "Mongolië",
+        "ko": "몽골"
+      },
+      "editor_code": "MNG",
+      "editor_id": 23
+    },
+    {
+      "code": "MO",
+      "code_alpha3": "MAC",
+      "names": {
+        "en": "Macao SAR China",
+        "es": "RAE de Macao (China)",
+        "pt": "Macau, RAE da China",
+        "fr": "R.A.S. chinoise de Macao",
+        "it": "RAS di Macao",
+        "de": "Sonderverwaltungsregion Macau",
+        "zh": "中国澳门特别行政区",
+        "ja": "中華人民共和国マカオ特別行政区",
+        "ru": "Макао (САР)",
+        "ar": "منطقة ماكاو الإدارية الخاصة",
+        "nl": "Macau SAR van China",
+        "ko": "마카오(중국 특별행정구)"
+      },
+      "editor_code": "MAC",
+      "editor_id": 20
+    },
+    {
+      "code": "MP",
+      "code_alpha3": "MNP",
+      "names": {
+        "en": "Northern Mariana Islands",
+        "es": "Islas Marianas del Norte",
+        "pt": "Ilhas Marianas do Norte",
+        "fr": "Îles Mariannes du Nord",
+        "it": "Isole Marianne Settentrionali",
+        "de": "Nördliche Marianen",
+        "zh": "北马里亚纳群岛",
+        "ja": "北マリアナ諸島",
+        "ru": "Северные Марианские о-ва",
+        "ar": "جزر ماريانا الشمالية",
+        "nl": "Noordelijke Marianen",
+        "ko": "북마리아나제도"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "MQ",
+      "code_alpha3": "MTQ",
+      "names": {
+        "en": "Martinique",
+        "es": "Martinica",
+        "pt": "Martinica",
+        "fr": "Martinique",
+        "it": "Martinica",
+        "de": "Martinique",
+        "zh": "马提尼克",
+        "ja": "マルティニーク",
+        "ru": "Мартиника",
+        "ar": "جزر المارتينيك",
+        "nl": "Martinique",
+        "ko": "마르티니크"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "MR",
+      "code_alpha3": "MRT",
+      "names": {
+        "en": "Mauritania",
+        "es": "Mauritania",
+        "pt": "Mauritânia",
+        "fr": "Mauritanie",
+        "it": "Mauritania",
+        "de": "Mauretanien",
+        "zh": "毛里塔尼亚",
+        "ja": "モーリタニア",
+        "ru": "Мавритания",
+        "ar": "موريتانيا",
+        "nl": "Mauritanië",
+        "ko": "모리타니"
+      },
+      "editor_code": "MTN",
+      "editor_id": 74
+    },
+    {
+      "code": "MS",
+      "code_alpha3": "MSR",
+      "names": {
+        "en": "Montserrat",
+        "es": "Montserrat",
+        "pt": "Montserrat",
+        "fr": "Montserrat",
+        "it": "Montserrat",
+        "de": "Montserrat",
+        "zh": "蒙特塞拉特",
+        "ja": "モントセラト",
+        "ru": "Монтсеррат",
+        "ar": "مونتسرات",
+        "nl": "Montserrat",
+        "ko": "몬트세라트"
+      },
+      "editor_code": "MSR",
+      "editor_id": 125
+    },
+    {
+      "code": "MT",
+      "code_alpha3": "MLT",
+      "names": {
+        "en": "Malta",
+        "es": "Malta",
+        "pt": "Malta",
+        "fr": "Malte",
+        "it": "Malta",
+        "de": "Malta",
+        "zh": "马耳他",
+        "ja": "マルタ",
+        "ru": "Мальта",
+        "ar": "مالطا",
+        "nl": "Malta",
+        "ko": "몰타"
+      },
+      "editor_code": "MLT",
+      "editor_id": 222
+    },
+    {
+      "code": "MU",
+      "code_alpha3": "MUS",
+      "names": {
+        "en": "Mauritius",
+        "es": "Mauricio",
+        "pt": "Maurício",
+        "fr": "Maurice",
+        "it": "Mauritius",
+        "de": "Mauritius",
+        "zh": "毛里求斯",
+        "ja": "モーリシャス",
+        "ru": "Маврикий",
+        "ar": "موريشيوس",
+        "nl": "Mauritius",
+        "ko": "모리셔스"
+      },
+      "editor_code": "MRI",
+      "editor_id": 75
+    },
+    {
+      "code": "MV",
+      "code_alpha3": "MDV",
+      "names": {
+        "en": "Maldives",
+        "es": "Maldivas",
+        "pt": "Maldivas",
+        "fr": "Maldives",
+        "it": "Maldive",
+        "de": "Malediven",
+        "zh": "马尔代夫",
+        "ja": "モルディブ",
+        "ru": "Мальдивы",
+        "ar": "جزر المالديف",
+        "nl": "Maldiven",
+        "ko": "몰디브"
+      },
+      "editor_code": "MDV",
+      "editor_id": 22
+    },
+    {
+      "code": "MW",
+      "code_alpha3": "MWI",
+      "names": {
+        "en": "Malawi",
+        "es": "Malaui",
+        "pt": "Malaui",
+        "fr": "Malawi",
+        "it": "Malawi",
+        "de": "Malawi",
+        "zh": "马拉维",
+        "ja": "マラウイ",
+        "ru": "Малави",
+        "ar": "ملاوي",
+        "nl": "Malawi",
+        "ko": "말라위"
+      },
+      "editor_code": "MWI",
+      "editor_id": 72
+    },
+    {
+      "code": "MX",
+      "code_alpha3": "MEX",
+      "names": {
+        "en": "Mexico",
+        "es": "México",
+        "pt": "México",
+        "fr": "Mexique",
+        "it": "Messico",
+        "de": "Mexiko",
+        "zh": "墨西哥",
+        "ja": "メキシコ",
+        "ru": "Мексика",
+        "ar": "المكسيك",
+        "nl": "Mexico",
+        "ko": "멕시코"
+      },
+      "editor_code": "MEX",
+      "editor_id": 124
+    },
+    {
+      "code": "MY",
+      "code_alpha3": "MYS",
+      "names": {
+        "en": "Malaysia",
+        "es": "Malasia",
+        "pt": "Malásia",
+        "fr": "Malaisie",
+        "it": "Malaysia",
+        "de": "Malaysia",
+        "zh": "马来西亚",
+        "ja": "マレーシア",
+        "ru": "Малайзия",
+        "ar": "ماليزيا",
+        "nl": "Maleisië",
+        "ko": "말레이시아"
+      },
+      "editor_code": "MAS",
+      "editor_id": 21
+    },
+    {
+      "code": "MZ",
+      "code_alpha3": "MOZ",
+      "names": {
+        "en": "Mozambique",
+        "es": "Mozambique",
+        "pt": "Moçambique",
+        "fr": "Mozambique",
+        "it": "Mozambico",
+        "de": "Mosambik",
+        "zh": "莫桑比克",
+        "ja": "モザンビーク",
+        "ru": "Мозамбик",
+        "ar": "موزمبيق",
+        "nl": "Mozambique",
+        "ko": "모잠비크"
+      },
+      "editor_code": "MOZ",
+      "editor_id": 77
+    },
+    {
+      "code": "NA",
+      "code_alpha3": "NAM",
+      "names": {
+        "en": "Namibia",
+        "es": "Namibia",
+        "pt": "Namíbia",
+        "fr": "Namibie",
+        "it": "Namibia",
+        "de": "Namibia",
+        "zh": "纳米比亚",
+        "ja": "ナミビア",
+        "ru": "Намибия",
+        "ar": "ناميبيا",
+        "nl": "Namibië",
+        "ko": "나미비아"
+      },
+      "editor_code": "NAM",
+      "editor_id": 78
+    },
+    {
+      "code": "NC",
+      "code_alpha3": "NCL",
+      "names": {
+        "en": "New Caledonia",
+        "es": "Nueva Caledonia",
+        "pt": "Nova Caledônia",
+        "fr": "Nouvelle-Calédonie",
+        "it": "Nuova Caledonia",
+        "de": "Neukaledonien",
+        "zh": "新喀里多尼亚",
+        "ja": "ニューカレドニア",
+        "ru": "Новая Каледония",
+        "ar": "كاليدونيا الجديدة",
+        "nl": "Nieuw-Caledonië",
+        "ko": "뉴칼레도니아"
+      },
+      "editor_code": "NCL",
+      "editor_id": 165
+    },
+    {
+      "code": "NE",
+      "code_alpha3": "NER",
+      "names": {
+        "en": "Niger",
+        "es": "Níger",
+        "pt": "Níger",
+        "fr": "Niger",
+        "it": "Niger",
+        "de": "Niger",
+        "zh": "尼日尔",
+        "ja": "ニジェール",
+        "ru": "Нигер",
+        "ar": "النيجر",
+        "nl": "Niger",
+        "ko": "니제르"
+      },
+      "editor_code": "NIG",
+      "editor_id": 79
+    },
+    {
+      "code": "NF",
+      "code_alpha3": "NFK",
+      "names": {
+        "en": "Norfolk Island",
+        "es": "Isla Norfolk",
+        "pt": "Ilha Norfolk",
+        "fr": "Île Norfolk",
+        "it": "Isola Norfolk",
+        "de": "Norfolkinsel",
+        "zh": "诺福克岛",
+        "ja": "ノーフォーク島",
+        "ru": "о-в Норфолк",
+        "ar": "جزيرة نورفولك",
+        "nl": "Norfolk",
+        "ko": "노퍽섬"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "NG",
+      "code_alpha3": "NGA",
+      "names": {
+        "en": "Nigeria",
+        "es": "Nigeria",
+        "pt": "Nigéria",
+        "fr": "Nigeria",
+        "it": "Nigeria",
+        "de": "Nigeria",
+        "zh": "尼日利亚",
+        "ja": "ナイジェリア",
+        "ru": "Нигерия",
+        "ar": "نيجيريا",
+        "nl": "Nigeria",
+        "ko": "나이지리아"
+      },
+      "editor_code": "NGA",
+      "editor_id": 80
+    },
+    {
+      "code": "NI",
+      "code_alpha3": "NIC",
+      "names": {
+        "en": "Nicaragua",
+        "es": "Nicaragua",
+        "pt": "Nicarágua",
+        "fr": "Nicaragua",
+        "it": "Nicaragua",
+        "de": "Nicaragua",
+        "zh": "尼加拉瓜",
+        "ja": "ニカラグア",
+        "ru": "Никарагуа",
+        "ar": "نيكاراغوا",
+        "nl": "Nicaragua",
+        "ko": "니카라과"
+      },
+      "editor_code": "NCA",
+      "editor_id": 127
+    },
+    {
+      "code": "NL",
+      "code_alpha3": "NLD",
+      "names": {
+        "en": "Netherlands",
+        "es": "Países Bajos",
+        "pt": "Países Baixos",
+        "fr": "Pays-Bas",
+        "it": "Paesi Bassi",
+        "de": "Niederlande",
+        "zh": "荷兰",
+        "ja": "オランダ",
+        "ru": "Нидерланды",
+        "ar": "هولندا",
+        "nl": "Nederland",
+        "ko": "네덜란드"
+      },
+      "editor_code": "NED",
+      "editor_id": 224
+    },
+    {
+      "code": "NO",
+      "code_alpha3": "NOR",
+      "names": {
+        "en": "Norway",
+        "es": "Noruega",
+        "pt": "Noruega",
+        "fr": "Norvège",
+        "it": "Norvegia",
+        "de": "Norwegen",
+        "zh": "挪威",
+        "ja": "ノルウェー",
+        "ru": "Норвегия",
+        "ar": "النرويج",
+        "nl": "Noorwegen",
+        "ko": "노르웨이"
+      },
+      "editor_code": "NOR",
+      "editor_id": 226
+    },
+    {
+      "code": "NP",
+      "code_alpha3": "NPL",
+      "names": {
+        "en": "Nepal",
+        "es": "Nepal",
+        "pt": "Nepal",
+        "fr": "Népal",
+        "it": "Nepal",
+        "de": "Nepal",
+        "zh": "尼泊尔",
+        "ja": "ネパール",
+        "ru": "Непал",
+        "ar": "نيبال",
+        "nl": "Nepal",
+        "ko": "네팔"
+      },
+      "editor_code": "NEP",
+      "editor_id": 25
+    },
+    {
+      "code": "NR",
+      "code_alpha3": "NRU",
+      "names": {
+        "en": "Nauru",
+        "es": "Nauru",
+        "pt": "Nauru",
+        "fr": "Nauru",
+        "it": "Nauru",
+        "de": "Nauru",
+        "zh": "瑙鲁",
+        "ja": "ナウル",
+        "ru": "Науру",
+        "ar": "ناورو",
+        "nl": "Nauru",
+        "ko": "나우루"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "NU",
+      "code_alpha3": "NIU",
+      "names": {
+        "en": "Niue",
+        "es": "Niue",
+        "pt": "Niue",
+        "fr": "Niue",
+        "it": "Niue",
+        "de": "Niue",
+        "zh": "纽埃",
+        "ja": "ニウエ",
+        "ru": "Ниуэ",
+        "ar": "نيوي",
+        "nl": "Niue",
+        "ko": "니우에"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "NZ",
+      "code_alpha3": "NZL",
+      "names": {
+        "en": "New Zealand",
+        "es": "Nueva Zelanda",
+        "pt": "Nova Zelândia",
+        "fr": "Nouvelle-Zélande",
+        "it": "Nuova Zelanda",
+        "de": "Neuseeland",
+        "zh": "新西兰",
+        "ja": "ニュージーランド",
+        "ru": "Новая Зеландия",
+        "ar": "نيوزيلندا",
+        "nl": "Nieuw-Zeeland",
+        "ko": "뉴질랜드"
+      },
+      "editor_code": "NZL",
+      "editor_id": 166
+    },
+    {
+      "code": "OM",
+      "code_alpha3": "OMN",
+      "names": {
+        "en": "Oman",
+        "es": "Omán",
+        "pt": "Omã",
+        "fr": "Oman",
+        "it": "Oman",
+        "de": "Oman",
+        "zh": "阿曼",
+        "ja": "オマーン",
+        "ru": "Оман",
+        "ar": "عُمان",
+        "nl": "Oman",
+        "ko": "오만"
+      },
+      "editor_code": "OMA",
+      "editor_id": 26
+    },
+    {
+      "code": "PA",
+      "code_alpha3": "PAN",
+      "names": {
+        "en": "Panama",
+        "es": "Panamá",
+        "pt": "Panamá",
+        "fr": "Panama",
+        "it": "Panama",
+        "de": "Panama",
+        "zh": "巴拿马",
+        "ja": "パナマ",
+        "ru": "Панама",
+        "ar": "بنما",
+        "nl": "Panama",
+        "ko": "파나마"
+      },
+      "editor_code": "PAN",
+      "editor_id": 128
+    },
+    {
+      "code": "PE",
+      "code_alpha3": "PER",
+      "names": {
+        "en": "Peru",
+        "es": "Perú",
+        "pt": "Peru",
+        "fr": "Pérou",
+        "it": "Perù",
+        "de": "Peru",
+        "zh": "秘鲁",
+        "ja": "ペルー",
+        "ru": "Перу",
+        "ar": "بيرو",
+        "nl": "Peru",
+        "ko": "페루"
+      },
+      "editor_code": "PER",
+      "editor_id": 151
+    },
+    {
+      "code": "PF",
+      "code_alpha3": "PYF",
+      "names": {
+        "en": "French Polynesia",
+        "es": "Polinesia Francesa",
+        "pt": "Polinésia Francesa",
+        "fr": "Polynésie française",
+        "it": "Polinesia Francese",
+        "de": "Französisch-Polynesien",
+        "zh": "法属波利尼西亚",
+        "ja": "仏領ポリネシア",
+        "ru": "Французская Полинезия",
+        "ar": "بولينيزيا الفرنسية",
+        "nl": "Frans-Polynesië",
+        "ko": "프랑스령 폴리네시아"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "PG",
+      "code_alpha3": "PNG",
+      "names": {
+        "en": "Papua New Guinea",
+        "es": "Papúa Nueva Guinea",
+        "pt": "Papua-Nova Guiné",
+        "fr": "Papouasie-Nouvelle-Guinée",
+        "it": "Papua Nuova Guinea",
+        "de": "Papua-Neuguinea",
+        "zh": "巴布亚新几内亚",
+        "ja": "パプアニューギニア",
+        "ru": "Папуа — Новая Гвинея",
+        "ar": "بابوا غينيا الجديدة",
+        "nl": "Papoea-Nieuw-Guinea",
+        "ko": "파푸아뉴기니"
+      },
+      "editor_code": "PNG",
+      "editor_id": 167
+    },
+    {
+      "code": "PH",
+      "code_alpha3": "PHL",
+      "names": {
+        "en": "Philippines",
+        "es": "Filipinas",
+        "pt": "Filipinas",
+        "fr": "Philippines",
+        "it": "Filippine",
+        "de": "Philippinen",
+        "zh": "菲律宾",
+        "ja": "フィリピン",
+        "ru": "Филиппины",
+        "ar": "الفلبين",
+        "nl": "Filipijnen",
+        "ko": "필리핀"
+      },
+      "editor_code": "PHI",
+      "editor_id": 29
+    },
+    {
+      "code": "PK",
+      "code_alpha3": "PAK",
+      "names": {
+        "en": "Pakistan",
+        "es": "Pakistán",
+        "pt": "Paquistão",
+        "fr": "Pakistan",
+        "it": "Pakistan",
+        "de": "Pakistan",
+        "zh": "巴基斯坦",
+        "ja": "パキスタン",
+        "ru": "Пакистан",
+        "ar": "باكستان",
+        "nl": "Pakistan",
+        "ko": "파키스탄"
+      },
+      "editor_code": "PAK",
+      "editor_id": 27
+    },
+    {
+      "code": "PL",
+      "code_alpha3": "POL",
+      "names": {
+        "en": "Poland",
+        "es": "Polonia",
+        "pt": "Polônia",
+        "fr": "Pologne",
+        "it": "Polonia",
+        "de": "Polen",
+        "zh": "波兰",
+        "ja": "ポーランド",
+        "ru": "Польша",
+        "ar": "بولندا",
+        "nl": "Polen",
+        "ko": "폴란드"
+      },
+      "editor_code": "POL",
+      "editor_id": 227
+    },
+    {
+      "code": "PM",
+      "code_alpha3": "SPM",
+      "names": {
+        "en": "St. Pierre & Miquelon",
+        "es": "San Pedro y Miquelón",
+        "pt": "São Pedro e Miquelão",
+        "fr": "Saint-Pierre-et-Miquelon",
+        "it": "Saint-Pierre e Miquelon",
+        "de": "St. Pierre und Miquelon",
+        "zh": "圣皮埃尔和密克隆群岛",
+        "ja": "サンピエール島・ミクロン島",
+        "ru": "Сен-Пьер и Микелон",
+        "ar": "سان بيير ومكويلون",
+        "nl": "Saint-Pierre en Miquelon",
+        "ko": "생피에르 미클롱"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "PN",
+      "code_alpha3": "PCN",
+      "names": {
+        "en": "Pitcairn Islands",
+        "es": "Islas Pitcairn",
+        "pt": "Ilhas Pitcairn",
+        "fr": "Îles Pitcairn",
+        "it": "Isole Pitcairn",
+        "de": "Pitcairninseln",
+        "zh": "皮特凯恩群岛",
+        "ja": "ピトケアン諸島",
+        "ru": "о-ва Питкэрн",
+        "ar": "جزر بيتكيرن",
+        "nl": "Pitcairneilanden",
+        "ko": "핏케언 제도"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "PR",
+      "code_alpha3": "PRI",
+      "names": {
+        "en": "Puerto Rico",
+        "es": "Puerto Rico",
+        "pt": "Porto Rico",
+        "fr": "Porto Rico",
+        "it": "Portorico",
+        "de": "Puerto Rico",
+        "zh": "波多黎各",
+        "ja": "プエルトリコ",
+        "ru": "Пуэрто-Рико",
+        "ar": "بورتوريكو",
+        "nl": "Puerto Rico",
+        "ko": "푸에르토리코"
+      },
+      "editor_code": "PUR",
+      "editor_id": 129
+    },
+    {
+      "code": "PS",
+      "code_alpha3": "PSE",
+      "names": {
+        "en": "Palestinian Territories",
+        "es": "Territorios Palestinos",
+        "pt": "Territórios palestinos",
+        "fr": "Territoires palestiniens",
+        "it": "Territori Palestinesi",
+        "de": "Palästinensische Autonomiegebiete",
+        "zh": "巴勒斯坦领土",
+        "ja": "パレスチナ自治区",
+        "ru": "Палестинские территории",
+        "ar": "الأراضي الفلسطينية",
+        "nl": "Palestijnse gebieden",
+        "ko": "팔레스타인 지구"
+      },
+      "editor_code": "PLE",
+      "editor_id": 28
+    },
+    {
+      "code": "PT",
+      "code_alpha3": "PRT",
+      "names": {
+        "en": "Portugal",
+        "es": "Portugal",
+        "pt": "Portugal",
+        "fr": "Portugal",
+        "it": "Portogallo",
+        "de": "Portugal",
+        "zh": "葡萄牙",
+        "ja": "ポルトガル",
+        "ru": "Португалия",
+        "ar": "البرتغال",
+        "nl": "Portugal",
+        "ko": "포르투갈"
+      },
+      "editor_code": "POR",
+      "editor_id": 228
+    },
+    {
+      "code": "PW",
+      "code_alpha3": "PLW",
+      "names": {
+        "en": "Palau",
+        "es": "Palaos",
+        "pt": "Palau",
+        "fr": "Palaos",
+        "it": "Palau",
+        "de": "Palau",
+        "zh": "帕劳",
+        "ja": "パラオ",
+        "ru": "Палау",
+        "ar": "بالاو",
+        "nl": "Palau",
+        "ko": "팔라우"
+      },
+      "editor_code": "PLW",
+      "editor_id": 184
+    },
+    {
+      "code": "PY",
+      "code_alpha3": "PRY",
+      "names": {
+        "en": "Paraguay",
+        "es": "Paraguay",
+        "pt": "Paraguai",
+        "fr": "Paraguay",
+        "it": "Paraguay",
+        "de": "Paraguay",
+        "zh": "巴拉圭",
+        "ja": "パラグアイ",
+        "ru": "Парагвай",
+        "ar": "باراغواي",
+        "nl": "Paraguay",
+        "ko": "파라과이"
+      },
+      "editor_code": "PAR",
+      "editor_id": 150
+    },
+    {
+      "code": "QA",
+      "code_alpha3": "QAT",
+      "names": {
+        "en": "Qatar",
+        "es": "Catar",
+        "pt": "Catar",
+        "fr": "Qatar",
+        "it": "Qatar",
+        "de": "Katar",
+        "zh": "卡塔尔",
+        "ja": "カタール",
+        "ru": "Катар",
+        "ar": "قطر",
+        "nl": "Qatar",
+        "ko": "카타르"
+      },
+      "editor_code": "QAT",
+      "editor_id": 30
+    },
+    {
+      "code": "RE",
+      "code_alpha3": "REU",
+      "names": {
+        "en": "Réunion",
+        "es": "Reunión",
+        "pt": "Reunião",
+        "fr": "La Réunion",
+        "it": "Riunione",
+        "de": "Réunion",
+        "zh": "留尼汪",
+        "ja": "レユニオン",
+        "ru": "Реюньон",
+        "ar": "روينيون",
+        "nl": "Réunion",
+        "ko": "레위니옹"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "RO",
+      "code_alpha3": "ROU",
+      "names": {
+        "en": "Romania",
+        "es": "Rumanía",
+        "pt": "Romênia",
+        "fr": "Roumanie",
+        "it": "Romania",
+        "de": "Rumänien",
+        "zh": "罗马尼亚",
+        "ja": "ルーマニア",
+        "ru": "Румыния",
+        "ar": "رومانيا",
+        "nl": "Roemenië",
+        "ko": "루마니아"
+      },
+      "editor_code": "ROU",
+      "editor_id": 229
+    },
+    {
+      "code": "RS",
+      "code_alpha3": "SRB",
+      "names": {
+        "en": "Serbia",
+        "es": "Serbia",
+        "pt": "Sérvia",
+        "fr": "Serbie",
+        "it": "Serbia",
+        "de": "Serbien",
+        "zh": "塞尔维亚",
+        "ja": "セルビア",
+        "ru": "Сербия",
+        "ar": "صربيا",
+        "nl": "Servië",
+        "ko": "세르비아"
+      },
+      "editor_code": "SRB",
+      "editor_id": 303
+    },
+    {
+      "code": "RU",
+      "code_alpha3": "RUS",
+      "names": {
+        "en": "Russia",
+        "es": "Rusia",
+        "pt": "Rússia",
+        "fr": "Russie",
+        "it": "Russia",
+        "de": "Russland",
+        "zh": "俄罗斯",
+        "ja": "ロシア",
+        "ru": "Россия",
+        "ar": "روسيا",
+        "nl": "Rusland",
+        "ko": "러시아"
+      },
+      "editor_code": "RUS",
+      "editor_id": 230
+    },
+    {
+      "code": "RW",
+      "code_alpha3": "RWA",
+      "names": {
+        "en": "Rwanda",
+        "es": "Ruanda",
+        "pt": "Ruanda",
+        "fr": "Rwanda",
+        "it": "Ruanda",
+        "de": "Ruanda",
+        "zh": "卢旺达",
+        "ja": "ルワンダ",
+        "ru": "Руанда",
+        "ar": "رواندا",
+        "nl": "Rwanda",
+        "ko": "르완다"
+      },
+      "editor_code": "RWA",
+      "editor_id": 81
+    },
+    {
+      "code": "SA",
+      "code_alpha3": "SAU",
+      "names": {
+        "en": "Saudi Arabia",
+        "es": "Arabia Saudí",
+        "pt": "Arábia Saudita",
+        "fr": "Arabie saoudite",
+        "it": "Arabia Saudita",
+        "de": "Saudi-Arabien",
+        "zh": "沙特阿拉伯",
+        "ja": "サウジアラビア",
+        "ru": "Саудовская Аравия",
+        "ar": "المملكة العربية السعودية",
+        "nl": "Saoedi-Arabië",
+        "ko": "사우디아라비아"
+      },
+      "editor_code": "KSA",
+      "editor_id": 31
+    },
+    {
+      "code": "SB",
+      "code_alpha3": "SLB",
+      "names": {
+        "en": "Solomon Islands",
+        "es": "Islas Salomón",
+        "pt": "Ilhas Salomão",
+        "fr": "Îles Salomon",
+        "it": "Isole Salomone",
+        "de": "Salomonen",
+        "zh": "所罗门群岛",
+        "ja": "ソロモン諸島",
+        "ru": "Соломоновы о-ва",
+        "ar": "جزر سليمان",
+        "nl": "Salomonseilanden",
+        "ko": "솔로몬 제도"
+      },
+      "editor_code": "SOL",
+      "editor_id": 169
+    },
+    {
+      "code": "SC",
+      "code_alpha3": "SYC",
+      "names": {
+        "en": "Seychelles",
+        "es": "Seychelles",
+        "pt": "Seicheles",
+        "fr": "Seychelles",
+        "it": "Seychelles",
+        "de": "Seychellen",
+        "zh": "塞舌尔",
+        "ja": "セーシェル",
+        "ru": "Сейшельские о-ва",
+        "ar": "سيشل",
+        "nl": "Seychellen",
+        "ko": "세이셸"
+      },
+      "editor_code": "SEY",
+      "editor_id": 84
+    },
+    {
+      "code": "SD",
+      "code_alpha3": "SDN",
+      "names": {
+        "en": "Sudan",
+        "es": "Sudán",
+        "pt": "Sudão",
+        "fr": "Soudan",
+        "it": "Sudan",
+        "de": "Sudan",
+        "zh": "苏丹",
+        "ja": "スーダン",
+        "ru": "Судан",
+        "ar": "السودان",
+        "nl": "Soedan",
+        "ko": "수단"
+      },
+      "editor_code": "SDN",
+      "editor_id": 88
+    },
+    {
+      "code": "SE",
+      "code_alpha3": "SWE",
+      "names": {
+        "en": "Sweden",
+        "es": "Suecia",
+        "pt": "Suécia",
+        "fr": "Suède",
+        "it": "Svezia",
+        "de": "Schweden",
+        "zh": "瑞典",
+        "ja": "スウェーデン",
+        "ru": "Швеция",
+        "ar": "السويد",
+        "nl": "Zweden",
+        "ko": "스웨덴"
+      },
+      "editor_code": "SWE",
+      "editor_id": 237
+    },
+    {
+      "code": "SG",
+      "code_alpha3": "SGP",
+      "names": {
+        "en": "Singapore",
+        "es": "Singapur",
+        "pt": "Singapura",
+        "fr": "Singapour",
+        "it": "Singapore",
+        "de": "Singapur",
+        "zh": "新加坡",
+        "ja": "シンガポール",
+        "ru": "Сингапур",
+        "ar": "سنغافورة",
+        "nl": "Singapore",
+        "ko": "싱가포르"
+      },
+      "editor_code": "SIN",
+      "editor_id": 32
+    },
+    {
+      "code": "SH",
+      "code_alpha3": "SHN",
+      "names": {
+        "en": "St. Helena",
+        "es": "Santa Elena",
+        "pt": "Santa Helena",
+        "fr": "Sainte-Hélène",
+        "it": "Sant’Elena",
+        "de": "St. Helena",
+        "zh": "圣赫勒拿",
+        "ja": "セントヘレナ",
+        "ru": "о-в Св. Елены",
+        "ar": "سانت هيلينا",
+        "nl": "Sint-Helena",
+        "ko": "세인트헬레나"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "SI",
+      "code_alpha3": "SVN",
+      "names": {
+        "en": "Slovenia",
+        "es": "Eslovenia",
+        "pt": "Eslovênia",
+        "fr": "Slovénie",
+        "it": "Slovenia",
+        "de": "Slowenien",
+        "zh": "斯洛文尼亚",
+        "ja": "スロベニア",
+        "ru": "Словения",
+        "ar": "سلوفينيا",
+        "nl": "Slovenië",
+        "ko": "슬로베니아"
+      },
+      "editor_code": "SVN",
+      "editor_id": 235
+    },
+    {
+      "code": "SJ",
+      "code_alpha3": "SJM",
+      "names": {
+        "en": "Svalbard & Jan Mayen",
+        "es": "Svalbard y Jan Mayen",
+        "pt": "Svalbard e Jan Mayen",
+        "fr": "Svalbard et Jan Mayen",
+        "it": "Svalbard e Jan Mayen",
+        "de": "Spitzbergen und Jan Mayen",
+        "zh": "斯瓦尔巴和扬马延",
+        "ja": "スバールバル諸島・ヤンマイエン島",
+        "ru": "Шпицберген и Ян-Майен",
+        "ar": "سفالبارد وجان ماين",
+        "nl": "Spitsbergen en Jan Mayen",
+        "ko": "스발바르제도-얀마웬섬"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "SK",
+      "code_alpha3": "SVK",
+      "names": {
+        "en": "Slovakia",
+        "es": "Eslovaquia",
+        "pt": "Eslováquia",
+        "fr": "Slovaquie",
+        "it": "Slovacchia",
+        "de": "Slowakei",
+        "zh": "斯洛伐克",
+        "ja": "スロバキア",
+        "ru": "Словакия",
+        "ar": "سلوفاكيا",
+        "nl": "Slowakije",
+        "ko": "슬로바키아"
+      },
+      "editor_code": "SVK",
+      "editor_id": 234
+    },
+    {
+      "code": "SL",
+      "code_alpha3": "SLE",
+      "names": {
+        "en": "Sierra Leone",
+        "es": "Sierra Leona",
+        "pt": "Serra Leoa",
+        "fr": "Sierra Leone",
+        "it": "Sierra Leone",
+        "de": "Sierra Leone",
+        "zh": "塞拉利昂",
+        "ja": "シエラレオネ",
+        "ru": "Сьерра-Леоне",
+        "ar": "سيراليون",
+        "nl": "Sierra Leone",
+        "ko": "시에라리온"
+      },
+      "editor_code": "SLE",
+      "editor_id": 85
+    },
+    {
+      "code": "SM",
+      "code_alpha3": "SMR",
+      "names": {
+        "en": "San Marino",
+        "es": "San Marino",
+        "pt": "San Marino",
+        "fr": "Saint-Marin",
+        "it": "San Marino",
+        "de": "San Marino",
+        "zh": "圣马力诺",
+        "ja": "サンマリノ",
+        "ru": "Сан-Марино",
+        "ar": "سان مارينو",
+        "nl": "San Marino",
+        "ko": "산마리노"
+      },
+      "editor_code": "SMR",
+      "editor_id": 231
+    },
+    {
+      "code": "SN",
+      "code_alpha3": "SEN",
+      "names": {
+        "en": "Senegal",
+        "es": "Senegal",
+        "pt": "Senegal",
+        "fr": "Sénégal",
+        "it": "Senegal",
+        "de": "Senegal",
+        "zh": "塞内加尔",
+        "ja": "セネガル",
+        "ru": "Сенегал",
+        "ar": "السنغال",
+        "nl": "Senegal",
+        "ko": "세네갈"
+      },
+      "editor_code": "SEN",
+      "editor_id": 83
+    },
+    {
+      "code": "SO",
+      "code_alpha3": "SOM",
+      "names": {
+        "en": "Somalia",
+        "es": "Somalia",
+        "pt": "Somália",
+        "fr": "Somalie",
+        "it": "Somalia",
+        "de": "Somalia",
+        "zh": "索马里",
+        "ja": "ソマリア",
+        "ru": "Сомали",
+        "ar": "الصومال",
+        "nl": "Somalië",
+        "ko": "소말리아"
+      },
+      "editor_code": "SOM",
+      "editor_id": 86
+    },
+    {
+      "code": "SR",
+      "code_alpha3": "SUR",
+      "names": {
+        "en": "Suriname",
+        "es": "Surinam",
+        "pt": "Suriname",
+        "fr": "Suriname",
+        "it": "Suriname",
+        "de": "Suriname",
+        "zh": "苏里南",
+        "ja": "スリナム",
+        "ru": "Суринам",
+        "ar": "سورينام",
+        "nl": "Suriname",
+        "ko": "수리남"
+      },
+      "editor_code": "SUR",
+      "editor_id": 139
+    },
+    {
+      "code": "SS",
+      "code_alpha3": "SSD",
+      "names": {
+        "en": "South Sudan",
+        "es": "Sudán del Sur",
+        "pt": "Sudão do Sul",
+        "fr": "Soudan du Sud",
+        "it": "Sud Sudan",
+        "de": "Südsudan",
+        "zh": "南苏丹",
+        "ja": "南スーダン",
+        "ru": "Южный Судан",
+        "ar": "جنوب السودان",
+        "nl": "Zuid-Soedan",
+        "ko": "남수단"
+      },
+      "editor_code": "SSD",
+      "editor_id": 312
+    },
+    {
+      "code": "ST",
+      "code_alpha3": "STP",
+      "names": {
+        "en": "São Tomé & Príncipe",
+        "es": "Santo Tomé y Príncipe",
+        "pt": "São Tomé e Príncipe",
+        "fr": "Sao Tomé-et-Principe",
+        "it": "São Tomé e Príncipe",
+        "de": "São Tomé und Príncipe",
+        "zh": "圣多美和普林西比",
+        "ja": "サントメ・プリンシペ",
+        "ru": "Сан-Томе и Принсипи",
+        "ar": "ساو تومي وبرينسيبي",
+        "nl": "Sao Tomé en Principe",
+        "ko": "상투메 프린시페"
+      },
+      "editor_code": "STP",
+      "editor_id": 82
+    },
+    {
+      "code": "SV",
+      "code_alpha3": "SLV",
+      "names": {
+        "en": "El Salvador",
+        "es": "El Salvador",
+        "pt": "El Salvador",
+        "fr": "Salvador",
+        "it": "El Salvador",
+        "de": "El Salvador",
+        "zh": "萨尔瓦多",
+        "ja": "エルサルバドル",
+        "ru": "Сальвадор",
+        "ar": "السلفادور",
+        "nl": "El Salvador",
+        "ko": "엘살바도르"
+      },
+      "editor_code": "SLV",
+      "editor_id": 116
+    },
+    {
+      "code": "SX",
+      "code_alpha3": "SXM",
+      "names": {
+        "en": "Sint Maarten",
+        "es": "Sint Maarten",
+        "pt": "Sint Maarten",
+        "fr": "Saint-Martin (partie néerlandaise)",
+        "it": "Sint Maarten",
+        "de": "Sint Maarten",
+        "zh": "荷属圣马丁",
+        "ja": "シント・マールテン",
+        "ru": "Синт-Мартен",
+        "ar": "سانت مارتن",
+        "nl": "Sint-Maarten",
+        "ko": "신트마르턴"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "SY",
+      "code_alpha3": "SYR",
+      "names": {
+        "en": "Syria",
+        "es": "Siria",
+        "pt": "Síria",
+        "fr": "Syrie",
+        "it": "Siria",
+        "de": "Syrien",
+        "zh": "叙利亚",
+        "ja": "シリア",
+        "ru": "Сирия",
+        "ar": "سوريا",
+        "nl": "Syrië",
+        "ko": "시리아"
+      },
+      "editor_code": "SYR",
+      "editor_id": 34
+    },
+    {
+      "code": "SZ",
+      "code_alpha3": "SWZ",
+      "names": {
+        "en": "Eswatini",
+        "es": "Esuatini",
+        "pt": "Essuatíni",
+        "fr": "Eswatini",
+        "it": "Eswatini",
+        "de": "Eswatini",
+        "zh": "斯威士兰",
+        "ja": "エスワティニ",
+        "ru": "Эсватини",
+        "ar": "إسواتيني",
+        "nl": "Eswatini",
+        "ko": "에스와티니"
+      },
+      "editor_code": "SWZ",
+      "editor_id": 89
+    },
+    {
+      "code": "TC",
+      "code_alpha3": "TCA",
+      "names": {
+        "en": "Turks & Caicos Islands",
+        "es": "Islas Turcas y Caicos",
+        "pt": "Ilhas Turcas e Caicos",
+        "fr": "Îles Turques-et-Caïques",
+        "it": "Isole Turks e Caicos",
+        "de": "Turks- und Caicosinseln",
+        "zh": "特克斯和凯科斯群岛",
+        "ja": "タークス・カイコス諸島",
+        "ru": "Тёркс и Кайкос",
+        "ar": "جزر توركس وكايكوس",
+        "nl": "Turks- en Caicoseilanden",
+        "ko": "터크스 케이커스 제도"
+      },
+      "editor_code": "TCA",
+      "editor_id": 134
+    },
+    {
+      "code": "TD",
+      "code_alpha3": "TCD",
+      "names": {
+        "en": "Chad",
+        "es": "Chad",
+        "pt": "Chade",
+        "fr": "Tchad",
+        "it": "Ciad",
+        "de": "Tschad",
+        "zh": "乍得",
+        "ja": "チャド",
+        "ru": "Чад",
+        "ar": "تشاد",
+        "nl": "Tsjaad",
+        "ko": "차드"
+      },
+      "editor_code": "CHA",
+      "editor_id": 53
+    },
+    {
+      "code": "TF",
+      "code_alpha3": "ATF",
+      "names": {
+        "en": "French Southern Territories",
+        "es": "Territorios Australes Franceses",
+        "pt": "Territórios Franceses do Sul",
+        "fr": "Terres australes françaises",
+        "it": "Terre Australi Francesi",
+        "de": "Französische Süd- und Antarktisgebiete",
+        "zh": "法属南部领地",
+        "ja": "仏領極南諸島",
+        "ru": "Французские Южные территории",
+        "ar": "الأقاليم الجنوبية الفرنسية",
+        "nl": "Franse Gebieden in de zuidelijke Indische Oceaan",
+        "ko": "프랑스령 남방 지역"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "TG",
+      "code_alpha3": "TGO",
+      "names": {
+        "en": "Togo",
+        "es": "Togo",
+        "pt": "Togo",
+        "fr": "Togo",
+        "it": "Togo",
+        "de": "Togo",
+        "zh": "多哥",
+        "ja": "トーゴ",
+        "ru": "Того",
+        "ar": "توغو",
+        "nl": "Togo",
+        "ko": "토고"
+      },
+      "editor_code": "TOG",
+      "editor_id": 91
+    },
+    {
+      "code": "TH",
+      "code_alpha3": "THA",
+      "names": {
+        "en": "Thailand",
+        "es": "Tailandia",
+        "pt": "Tailândia",
+        "fr": "Thaïlande",
+        "it": "Thailandia",
+        "de": "Thailand",
+        "zh": "泰国",
+        "ja": "タイ",
+        "ru": "Таиланд",
+        "ar": "تايلاند",
+        "nl": "Thailand",
+        "ko": "태국"
+      },
+      "editor_code": "THA",
+      "editor_id": 36
+    },
+    {
+      "code": "TJ",
+      "code_alpha3": "TJK",
+      "names": {
+        "en": "Tajikistan",
+        "es": "Tayikistán",
+        "pt": "Tadjiquistão",
+        "fr": "Tadjikistan",
+        "it": "Tagikistan",
+        "de": "Tadschikistan",
+        "zh": "塔吉克斯坦",
+        "ja": "タジキスタン",
+        "ru": "Таджикистан",
+        "ar": "طاجيكستان",
+        "nl": "Tadzjikistan",
+        "ko": "타지키스탄"
+      },
+      "editor_code": "TJK",
+      "editor_id": 41
+    },
+    {
+      "code": "TK",
+      "code_alpha3": "TKL",
+      "names": {
+        "en": "Tokelau",
+        "es": "Tokelau",
+        "pt": "Tokelau",
+        "fr": "Tokelau",
+        "it": "Tokelau",
+        "de": "Tokelau",
+        "zh": "托克劳",
+        "ja": "トケラウ",
+        "ru": "Токелау",
+        "ar": "توكيلاو",
+        "nl": "Tokelau",
+        "ko": "토켈라우"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "TL",
+      "code_alpha3": "TLS",
+      "names": {
+        "en": "Timor-Leste",
+        "es": "Timor-Leste",
+        "pt": "Timor-Leste",
+        "fr": "Timor oriental",
+        "it": "Timor Est",
+        "de": "Timor-Leste",
+        "zh": "东帝汶",
+        "ja": "東ティモール",
+        "ru": "Восточный Тимор",
+        "ar": "تيمور - ليشتي",
+        "nl": "Oost-Timor",
+        "ko": "동티모르"
+      },
+      "editor_code": "TLS",
+      "editor_id": 43
+    },
+    {
+      "code": "TM",
+      "code_alpha3": "TKM",
+      "names": {
+        "en": "Turkmenistan",
+        "es": "Turkmenistán",
+        "pt": "Turcomenistão",
+        "fr": "Turkménistan",
+        "it": "Turkmenistan",
+        "de": "Turkmenistan",
+        "zh": "土库曼斯坦",
+        "ja": "トルクメニスタン",
+        "ru": "Туркменистан",
+        "ar": "تركمانستان",
+        "nl": "Turkmenistan",
+        "ko": "투르크메니스탄"
+      },
+      "editor_code": "TKM",
+      "editor_id": 42
+    },
+    {
+      "code": "TN",
+      "code_alpha3": "TUN",
+      "names": {
+        "en": "Tunisia",
+        "es": "Túnez",
+        "pt": "Tunísia",
+        "fr": "Tunisie",
+        "it": "Tunisia",
+        "de": "Tunesien",
+        "zh": "突尼斯",
+        "ja": "チュニジア",
+        "ru": "Тунис",
+        "ar": "تونس",
+        "nl": "Tunesië",
+        "ko": "튀니지"
+      },
+      "editor_code": "TUN",
+      "editor_id": 92
+    },
+    {
+      "code": "TO",
+      "code_alpha3": "TON",
+      "names": {
+        "en": "Tonga",
+        "es": "Tonga",
+        "pt": "Tonga",
+        "fr": "Tonga",
+        "it": "Tonga",
+        "de": "Tonga",
+        "zh": "汤加",
+        "ja": "トンガ",
+        "ru": "Тонга",
+        "ar": "تونغا",
+        "nl": "Tonga",
+        "ko": "통가"
+      },
+      "editor_code": "TGA",
+      "editor_id": 171
+    },
+    {
+      "code": "TR",
+      "code_alpha3": "TUR",
+      "names": {
+        "en": "Türkiye",
+        "es": "Turquía",
+        "pt": "Turquia",
+        "fr": "Turquie",
+        "it": "Turchia",
+        "de": "Türkei",
+        "zh": "土耳其",
+        "ja": "トルコ",
+        "ru": "Турция",
+        "ar": "تركيا",
+        "nl": "Turkije",
+        "ko": "튀르키예"
+      },
+      "editor_code": "TUR",
+      "editor_id": 190
+    },
+    {
+      "code": "TT",
+      "code_alpha3": "TTO",
+      "names": {
+        "en": "Trinidad & Tobago",
+        "es": "Trinidad y Tobago",
+        "pt": "Trinidad e Tobago",
+        "fr": "Trinité-et-Tobago",
+        "it": "Trinidad e Tobago",
+        "de": "Trinidad und Tobago",
+        "zh": "特立尼达和多巴哥",
+        "ja": "トリニダード・トバゴ",
+        "ru": "Тринидад и Тобаго",
+        "ar": "ترينيداد وتوباغو",
+        "nl": "Trinidad en Tobago",
+        "ko": "트리니다드 토바고"
+      },
+      "editor_code": "TRI",
+      "editor_id": 133
+    },
+    {
+      "code": "TV",
+      "code_alpha3": "TUV",
+      "names": {
+        "en": "Tuvalu",
+        "es": "Tuvalu",
+        "pt": "Tuvalu",
+        "fr": "Tuvalu",
+        "it": "Tuvalu",
+        "de": "Tuvalu",
+        "zh": "图瓦卢",
+        "ja": "ツバル",
+        "ru": "Тувалу",
+        "ar": "توفالو",
+        "nl": "Tuvalu",
+        "ko": "투발루"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "TW",
+      "code_alpha3": "TWN",
+      "names": {
+        "en": "Taiwan",
+        "es": "Taiwán",
+        "pt": "Taiwan",
+        "fr": "Taïwan",
+        "it": "Taiwan",
+        "de": "Taiwan",
+        "zh": "台湾",
+        "ja": "台湾",
+        "ru": "Тайвань",
+        "ar": "تايوان",
+        "nl": "Taiwan",
+        "ko": "대만"
+      },
+      "editor_code": "TPE",
+      "editor_id": 298
+    },
+    {
+      "code": "TZ",
+      "code_alpha3": "TZA",
+      "names": {
+        "en": "Tanzania",
+        "es": "Tanzania",
+        "pt": "Tanzânia",
+        "fr": "Tanzanie",
+        "it": "Tanzania",
+        "de": "Tansania",
+        "zh": "坦桑尼亚",
+        "ja": "タンザニア",
+        "ru": "Танзания",
+        "ar": "تنزانيا",
+        "nl": "Tanzania",
+        "ko": "탄자니아"
+      },
+      "editor_code": "TAN",
+      "editor_id": 90
+    },
+    {
+      "code": "UA",
+      "code_alpha3": "UKR",
+      "names": {
+        "en": "Ukraine",
+        "es": "Ucrania",
+        "pt": "Ucrânia",
+        "fr": "Ukraine",
+        "it": "Ucraina",
+        "de": "Ukraine",
+        "zh": "乌克兰",
+        "ja": "ウクライナ",
+        "ru": "Украина",
+        "ar": "أوكرانيا",
+        "nl": "Oekraïne",
+        "ko": "우크라이나"
+      },
+      "editor_code": "UKR",
+      "editor_id": 239
+    },
+    {
+      "code": "UG",
+      "code_alpha3": "UGA",
+      "names": {
+        "en": "Uganda",
+        "es": "Uganda",
+        "pt": "Uganda",
+        "fr": "Ouganda",
+        "it": "Uganda",
+        "de": "Uganda",
+        "zh": "乌干达",
+        "ja": "ウガンダ",
+        "ru": "Уганда",
+        "ar": "أوغندا",
+        "nl": "Oeganda",
+        "ko": "우간다"
+      },
+      "editor_code": "UGA",
+      "editor_id": 93
+    },
+    {
+      "code": "UM",
+      "code_alpha3": "UMI",
+      "names": {
+        "en": "U.S. Outlying Islands",
+        "es": "Islas menores alejadas de EE. UU.",
+        "pt": "Ilhas Menores Distantes dos EUA",
+        "fr": "Îles mineures éloignées des États-Unis",
+        "it": "Isole Minori Esterne degli Stati Uniti",
+        "de": "Amerikanische Überseeinseln",
+        "zh": "美国本土外小岛屿",
+        "ja": "合衆国領有小離島",
+        "ru": "Внешние малые о-ва (США)",
+        "ar": "جزر الولايات المتحدة النائية",
+        "nl": "Kleine afgelegen eilanden van de Verenigde Staten",
+        "ko": "미국령 해외 제도"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "US",
+      "code_alpha3": "USA",
+      "names": {
+        "en": "United States",
+        "es": "Estados Unidos",
+        "pt": "Estados Unidos",
+        "fr": "États-Unis",
+        "it": "Stati Uniti",
+        "de": "Vereinigte Staaten",
+        "zh": "美国",
+        "ja": "アメリカ合衆国",
+        "ru": "Соединенные Штаты",
+        "ar": "الولايات المتحدة",
+        "nl": "Verenigde Staten",
+        "ko": "미국"
+      },
+      "editor_code": "USA",
+      "editor_id": 135
+    },
+    {
+      "code": "UY",
+      "code_alpha3": "URY",
+      "names": {
+        "en": "Uruguay",
+        "es": "Uruguay",
+        "pt": "Uruguai",
+        "fr": "Uruguay",
+        "it": "Uruguay",
+        "de": "Uruguay",
+        "zh": "乌拉圭",
+        "ja": "ウルグアイ",
+        "ru": "Уругвай",
+        "ar": "أورغواي",
+        "nl": "Uruguay",
+        "ko": "우루과이"
+      },
+      "editor_code": "URU",
+      "editor_id": 152
+    },
+    {
+      "code": "UZ",
+      "code_alpha3": "UZB",
+      "names": {
+        "en": "Uzbekistan",
+        "es": "Uzbekistán",
+        "pt": "Uzbequistão",
+        "fr": "Ouzbékistan",
+        "it": "Uzbekistan",
+        "de": "Usbekistan",
+        "zh": "乌兹别克斯坦",
+        "ja": "ウズベキスタン",
+        "ru": "Узбекистан",
+        "ar": "أوزبكستان",
+        "nl": "Oezbekistan",
+        "ko": "우즈베키스탄"
+      },
+      "editor_code": "UZB",
+      "editor_id": 240
+    },
+    {
+      "code": "VA",
+      "code_alpha3": "VAT",
+      "names": {
+        "en": "Vatican City",
+        "es": "Ciudad del Vaticano",
+        "pt": "Cidade do Vaticano",
+        "fr": "État de la Cité du Vatican",
+        "it": "Città del Vaticano",
+        "de": "Vatikanstadt",
+        "zh": "梵蒂冈",
+        "ja": "バチカン市国",
+        "ru": "Ватикан",
+        "ar": "الفاتيكان",
+        "nl": "Vaticaanstad",
+        "ko": "바티칸 시국"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "VC",
+      "code_alpha3": "VCT",
+      "names": {
+        "en": "St. Vincent & Grenadines",
+        "es": "San Vicente y las Granadinas",
+        "pt": "São Vicente e Granadinas",
+        "fr": "Saint-Vincent-et-les Grenadines",
+        "it": "Saint Vincent e Grenadine",
+        "de": "St. Vincent und die Grenadinen",
+        "zh": "圣文森特和格林纳丁斯",
+        "ja": "セントビンセント及びグレナディーン諸島",
+        "ru": "Сент-Винсент и Гренадины",
+        "ar": "سانت فنسنت وجزر غرينادين",
+        "nl": "Saint Vincent en de Grenadines",
+        "ko": "세인트빈센트그레나딘"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "VE",
+      "code_alpha3": "VEN",
+      "names": {
+        "en": "Venezuela",
+        "es": "Venezuela",
+        "pt": "Venezuela",
+        "fr": "Venezuela",
+        "it": "Venezuela",
+        "de": "Venezuela",
+        "zh": "委内瑞拉",
+        "ja": "ベネズエラ",
+        "ru": "Венесуэла",
+        "ar": "فنزويلا",
+        "nl": "Venezuela",
+        "ko": "베네수엘라"
+      },
+      "editor_code": "VEN",
+      "editor_id": 153
+    },
+    {
+      "code": "VG",
+      "code_alpha3": "VGB",
+      "names": {
+        "en": "British Virgin Islands",
+        "es": "Islas Vírgenes Británicas",
+        "pt": "Ilhas Virgens Britânicas",
+        "fr": "Îles Vierges britanniques",
+        "it": "Isole Vergini Britanniche",
+        "de": "Britische Jungferninseln",
+        "zh": "英属维尔京群岛",
+        "ja": "英領ヴァージン諸島",
+        "ru": "Виргинские о-ва (Великобритания)",
+        "ar": "جزر فيرجن البريطانية",
+        "nl": "Britse Maagdeneilanden",
+        "ko": "영국령 버진아일랜드"
+      },
+      "editor_code": "VGB",
+      "editor_id": 136
+    },
+    {
+      "code": "VI",
+      "code_alpha3": "VIR",
+      "names": {
+        "en": "U.S. Virgin Islands",
+        "es": "Islas Vírgenes de EE. UU.",
+        "pt": "Ilhas Virgens Americanas",
+        "fr": "Îles Vierges des États-Unis",
+        "it": "Isole Vergini Americane",
+        "de": "Amerikanische Jungferninseln",
+        "zh": "美属维尔京群岛",
+        "ja": "米領ヴァージン諸島",
+        "ru": "Виргинские о-ва (США)",
+        "ar": "جزر فيرجن الأمريكية",
+        "nl": "Amerikaanse Maagdeneilanden",
+        "ko": "미국령 버진아일랜드"
+      },
+      "editor_code": "VIR",
+      "editor_id": 137
+    },
+    {
+      "code": "VN",
+      "code_alpha3": "VNM",
+      "names": {
+        "en": "Vietnam",
+        "es": "Vietnam",
+        "pt": "Vietnã",
+        "fr": "Viêt Nam",
+        "it": "Vietnam",
+        "de": "Vietnam",
+        "zh": "越南",
+        "ja": "ベトナム",
+        "ru": "Вьетнам",
+        "ar": "فيتنام",
+        "nl": "Vietnam",
+        "ko": "베트남"
+      },
+      "editor_code": "VIE",
+      "editor_id": 38
+    },
+    {
+      "code": "VU",
+      "code_alpha3": "VUT",
+      "names": {
+        "en": "Vanuatu",
+        "es": "Vanuatu",
+        "pt": "Vanuatu",
+        "fr": "Vanuatu",
+        "it": "Vanuatu",
+        "de": "Vanuatu",
+        "zh": "瓦努阿图",
+        "ja": "バヌアツ",
+        "ru": "Вануату",
+        "ar": "فانواتو",
+        "nl": "Vanuatu",
+        "ko": "바누아투"
+      },
+      "editor_code": "VAN",
+      "editor_id": 172
+    },
+    {
+      "code": "WF",
+      "code_alpha3": "WLF",
+      "names": {
+        "en": "Wallis & Futuna",
+        "es": "Wallis y Futuna",
+        "pt": "Wallis e Futuna",
+        "fr": "Wallis-et-Futuna",
+        "it": "Wallis e Futuna",
+        "de": "Wallis und Futuna",
+        "zh": "瓦利斯和富图纳",
+        "ja": "ウォリス・フツナ",
+        "ru": "Уоллис и Футуна",
+        "ar": "جزر والس وفوتونا",
+        "nl": "Wallis en Futuna",
+        "ko": "왈리스-푸투나 제도"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "WS",
+      "code_alpha3": "WSM",
+      "names": {
+        "en": "Samoa",
+        "es": "Samoa",
+        "pt": "Samoa",
+        "fr": "Samoa",
+        "it": "Samoa",
+        "de": "Samoa",
+        "zh": "萨摩亚",
+        "ja": "サモア",
+        "ru": "Самоа",
+        "ar": "ساموا",
+        "nl": "Samoa",
+        "ko": "사모아"
+      },
+      "editor_code": "SAM",
+      "editor_id": 168
+    },
+    {
+      "code": "YE",
+      "code_alpha3": "YEM",
+      "names": {
+        "en": "Yemen",
+        "es": "Yemen",
+        "pt": "Iêmen",
+        "fr": "Yémen",
+        "it": "Yemen",
+        "de": "Jemen",
+        "zh": "也门",
+        "ja": "イエメン",
+        "ru": "Йемен",
+        "ar": "اليمن",
+        "nl": "Jemen",
+        "ko": "예멘"
+      },
+      "editor_code": "YEM",
+      "editor_id": 39
+    },
+    {
+      "code": "YT",
+      "code_alpha3": "MYT",
+      "names": {
+        "en": "Mayotte",
+        "es": "Mayotte",
+        "pt": "Mayotte",
+        "fr": "Mayotte",
+        "it": "Mayotte",
+        "de": "Mayotte",
+        "zh": "马约特",
+        "ja": "マヨット",
+        "ru": "Майотта",
+        "ar": "مايوت",
+        "nl": "Mayotte",
+        "ko": "마요트"
+      },
+      "editor_code": null,
+      "editor_id": null
+    },
+    {
+      "code": "ZA",
+      "code_alpha3": "ZAF",
+      "names": {
+        "en": "South Africa",
+        "es": "Sudáfrica",
+        "pt": "África do Sul",
+        "fr": "Afrique du Sud",
+        "it": "Sudafrica",
+        "de": "Südafrika",
+        "zh": "南非",
+        "ja": "南アフリカ",
+        "ru": "Южно-Африканская Республика",
+        "ar": "جنوب أفريقيا",
+        "nl": "Zuid-Afrika",
+        "ko": "남아프리카"
+      },
+      "editor_code": "RSA",
+      "editor_id": 87
+    },
+    {
+      "code": "ZM",
+      "code_alpha3": "ZMB",
+      "names": {
+        "en": "Zambia",
+        "es": "Zambia",
+        "pt": "Zâmbia",
+        "fr": "Zambie",
+        "it": "Zambia",
+        "de": "Sambia",
+        "zh": "赞比亚",
+        "ja": "ザンビア",
+        "ru": "Замбия",
+        "ar": "زامبيا",
+        "nl": "Zambia",
+        "ko": "잠비아"
+      },
+      "editor_code": "ZAM",
+      "editor_id": 94
+    },
+    {
+      "code": "ZW",
+      "code_alpha3": "ZWE",
+      "names": {
+        "en": "Zimbabwe",
+        "es": "Zimbabue",
+        "pt": "Zimbábue",
+        "fr": "Zimbabwe",
+        "it": "Zimbabwe",
+        "de": "Simbabwe",
+        "zh": "津巴布韦",
+        "ja": "ジンバブエ",
+        "ru": "Зимбабве",
+        "ar": "زيمبابوي",
+        "nl": "Zimbabwe",
+        "ko": "짐바브웨"
+      },
+      "editor_code": "ZIM",
+      "editor_id": 95
+    },
+    {
+      "code": null,
+      "code_alpha3": null,
+      "editor_code": "ENG",
+      "names": {
+        "en": "England"
+      },
+      "editor_id": 204
+    },
+    {
+      "code": null,
+      "code_alpha3": null,
+      "editor_code": "NIR",
+      "names": {
+        "en": "Northern Ireland"
+      },
+      "editor_id": 225
+    },
+    {
+      "code": null,
+      "code_alpha3": null,
+      "editor_code": "SCO",
+      "names": {
+        "en": "Scotland"
+      },
+      "editor_id": 232
+    },
+    {
+      "code": null,
+      "code_alpha3": null,
+      "editor_code": "WAL",
+      "names": {
+        "en": "Wales"
+      },
+      "editor_id": 241
+    }
+  ]
+}

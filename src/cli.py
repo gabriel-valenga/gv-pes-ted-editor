@@ -7,13 +7,20 @@
 from __future__ import annotations
 
 import argparse
+import copy
+import hashlib
 import json
 import os
+import sqlite3
 import tempfile
 from pathlib import Path
 
 from editing.players.operations import apply_edit
-from editing.players.rules import load_rules, apply_rules
+from editing.players.rules import (
+    load_rules,
+    apply_rules,
+    build_rule_hash,
+)
 from ted.crypto import decrypt_ted, encrypt_ted
 from ted.fields import PLAYER_FIELDS
 from ted.reader import (
@@ -23,6 +30,21 @@ from ted.reader import (
     get_team_summary,
 )
 from ted.writer import save_ted, validate_ted_round_trip
+from database.connection import get_connection
+from database.importer import import_option_file
+from database.migration_runner import migrate_database
+from database.repositories.editing_history_repository import (
+    create_edit_run,
+    create_edit_run_rule,
+    create_edit_run_ted_file,
+    create_edit_change,
+    update_edit_run_status,
+    update_edit_run_ted_file,
+)
+from database.repositories.ted_version_repository import (
+    create_ted_version,
+    get_latest_ted_version,
+)
 
 
 def find_option_file_teds(option_file_dir: Path) -> list[Path]:
@@ -150,9 +172,379 @@ def process_ted(
     }
 
 
+def _get_database_path() -> Path:
+    """Return the project database path."""
+    project_root = Path(__file__).resolve().parents[1]
+    return project_root / "data" / "database.db"
+
+
+
+def _find_registered_ted(
+    connection: sqlite3.Connection,
+    ted_path: Path,
+    option_file_dir: Path | None,
+) -> sqlite3.Row | None:
+    """Find a TED file in the most recent matching Option File import."""
+
+    ted_path = ted_path.resolve()
+
+    if option_file_dir is not None:
+        source_dir = option_file_dir.resolve()
+
+        try:
+            relative_path = ted_path.relative_to(source_dir).as_posix()
+        except ValueError:
+            return None
+
+        source_paths = [str(source_dir)]
+
+    else:
+        # Find imported Option Files that contain the individual TED path.
+        imports = connection.execute(
+            """
+            SELECT DISTINCT source_path
+            FROM option_file_imports
+            WHERE source_path IS NOT NULL
+            """
+        ).fetchall()
+
+        matching_sources = []
+
+        for imported in imports:
+            source_path = imported["source_path"]
+
+            try:
+                source_dir = Path(source_path).resolve()
+                relative_path = ted_path.relative_to(source_dir).as_posix()
+            except (ValueError, OSError):
+                continue
+
+            matching_sources.append(
+                (len(str(source_dir)), str(source_dir), relative_path)
+            )
+
+        if not matching_sources:
+            return None
+
+        # Prefer the most specific matching imported directory.
+        matching_sources.sort(reverse=True)
+
+        _, source_path, relative_path = matching_sources[0]
+        source_paths = [source_path]
+
+    return connection.execute(
+        """
+        SELECT
+            tf.id AS ted_file_id,
+            tf.import_id,
+            tf.relative_path,
+            ofi.source_path,
+            ofi.imported_at
+        FROM ted_files AS tf
+        JOIN option_file_imports AS ofi
+            ON ofi.id = tf.import_id
+        WHERE ofi.source_path = ?
+          AND tf.relative_path = ?
+        ORDER BY ofi.imported_at DESC, ofi.id DESC
+        LIMIT 1
+        """,
+        (
+            source_paths[0],
+            relative_path,
+        ),
+    ).fetchone()
+
+
+def _build_rule_records(
+    connection: sqlite3.Connection,
+    edit_run_id: int,
+    rules_list: list[dict],
+) -> dict[str, int]:
+    """Register rules and map their hashes to database IDs."""
+
+    rule_ids_by_hash = {}
+    rule_order = 0
+
+    for config in rules_list:
+        for rule in config.get("rules", []):
+            rule_order += 1
+
+            rule_hash = build_rule_hash(rule)
+
+            rule_id = create_edit_run_rule(
+                connection=connection,
+                edit_run_id=edit_run_id,
+                rule_order=rule_order,
+                rule=rule,
+                rule_name=rule.get("name"),
+            )
+
+            connection.execute(
+                """
+                UPDATE edit_run_rules
+                SET rule_hash = ?
+                WHERE id = ?
+                """,
+                (rule_hash, rule_id),
+            )
+
+            rule_ids_by_hash.setdefault(rule_hash, rule_id)
+
+    return rule_ids_by_hash
+
+
+def _prepare_rules_for_ted(
+    connection: sqlite3.Connection,
+    ted_path: Path,
+    rules_list: list[dict],
+) -> list[dict]:
+    """
+    Exclude players that already received the same rule in a previous TED.
+    """
+    encrypted_content = ted_path.read_bytes()
+    decrypted_data = decrypt_ted(encrypted_content)
+    players = extract_players(decrypted_data)
+
+    player_ids = {
+        player.get("playerId")
+        for player in players
+        if isinstance(player.get("playerId"), int)
+    }
+
+    prepared_rules = []
+
+    for config in rules_list:
+        prepared_config = copy.deepcopy(config)
+        prepared_config["rules"] = []
+
+        for rule in config.get("rules", []):
+            prepared_rule = copy.deepcopy(rule)
+
+            if not rule.get("enabled", False):
+                prepared_config["rules"].append(prepared_rule)
+                continue
+
+            rule_hash = build_rule_hash(rule)
+
+            applied_rows = connection.execute(
+                """
+                SELECT player_id
+                FROM player_rule_applications
+                WHERE rule_hash = ?
+                """,
+                (rule_hash,),
+            ).fetchall()
+
+            blocked_player_ids = {
+                row["player_id"]
+                for row in applied_rows
+            }
+
+            allowed_player_ids = player_ids - blocked_player_ids
+
+            # Preserve an existing player ID restriction.
+            if "playerIds" in rule:
+                allowed_player_ids &= set(rule["playerIds"])
+
+            prepared_rule["playerIds"] = sorted(
+                allowed_player_ids
+            )
+
+            # Preserve the original rule identity after filtering.
+            prepared_rule["_originalRuleHash"] = rule_hash
+
+            prepared_config["rules"].append(prepared_rule)
+
+        prepared_rules.append(prepared_config)
+
+    return prepared_rules
+
+
+def _get_source_version_id(
+    connection: sqlite3.Connection,
+    ted_file_id: int,
+    source_content: bytes,
+) -> int | None:
+    """Find the database version matching the current source file."""
+
+    source_hash = hashlib.sha256(source_content).hexdigest()
+
+    row = connection.execute(
+        """
+        SELECT id
+        FROM ted_versions
+        WHERE ted_file_id = ?
+          AND sha256 = ?
+        ORDER BY version_number DESC
+        LIMIT 1
+        """,
+        (ted_file_id, source_hash),
+    ).fetchone()
+
+    return row["id"] if row else None
+
+
+def _create_output_version(
+    connection: sqlite3.Connection,
+    ted_file_id: int,
+    output_path: Path,
+    source_content: bytes,
+) -> int | None:
+    """Create a new edited version when the output differs from the source."""
+
+    if not output_path.is_file():
+        return None
+
+    output_content = output_path.read_bytes()
+
+    output_hash = hashlib.sha256(output_content).hexdigest()
+    source_hash = hashlib.sha256(source_content).hexdigest()
+
+    if output_hash == source_hash:
+        return None
+
+    latest_version = get_latest_ted_version(
+        connection,
+        ted_file_id,
+    )
+
+    version_number = (
+        latest_version["version_number"] + 1
+        if latest_version
+        else 1
+    )
+
+    return create_ted_version(
+        connection=connection,
+        ted_file_id=ted_file_id,
+        version_number=version_number,
+        version_type="edited",
+        content=output_content,
+    )
+
+
+def _register_ted_edit_history(
+    connection: sqlite3.Connection,
+    edit_run_id: int,
+    ted_file_id: int,
+    source_version_id: int | None,
+    result: dict,
+    output_path: Path | None,
+    source_content: bytes,
+    rule_ids_by_hash: dict[str, int],
+) -> None:
+    """Persist one TED editing result inside the current transaction."""
+
+    run_ted_file_id = create_edit_run_ted_file(
+        connection=connection,
+        edit_run_id=edit_run_id,
+        ted_file_id=ted_file_id,
+        status="pending",
+        source_version_id=source_version_id,
+    )
+
+    output_version_id = None
+
+    if output_path is not None:
+        output_version_id = _create_output_version(
+            connection=connection,
+            ted_file_id=ted_file_id,
+            output_path=output_path,
+            source_content=source_content,
+        )
+
+    players_by_index = {
+        player.get("index"): player
+        for player in result.get("players", [])
+        if isinstance(player.get("index"), int)
+    }
+
+    successful_applications = {}
+
+    for edit in result.get("edits", []):
+        player_index = edit.get(
+            "playerIndex",
+            edit.get("index"),
+        )
+
+        if not isinstance(player_index, int):
+            continue
+
+        field_name = edit.get("field")
+
+        if not isinstance(field_name, str):
+            continue
+
+        player = players_by_index.get(player_index, {})
+        player_id = edit.get("playerId", player.get("playerId"))
+
+        rule_id = None
+        rule_hash = None
+
+        if edit.get("source") == "rule":
+            rule_hash = edit.get("ruleHash")
+
+            if isinstance(rule_hash, str):
+                rule_id = rule_ids_by_hash.get(rule_hash)
+
+        create_edit_change(
+            connection=connection,
+            run_ted_file_id=run_ted_file_id,
+            player_index=player_index,
+            field_name=field_name,
+            old_value=edit.get("before"),
+            new_value=edit.get("after"),
+            player_id=player_id,
+            rule_id=rule_id,
+        )
+
+        if (
+            isinstance(player_id, int)
+            and isinstance(rule_hash, str)
+            and rule_id is not None
+        ):
+            successful_applications[
+                (player_id, rule_hash)
+            ] = rule_id
+
+    # Persist only rules that effectively changed a player.
+    for (player_id, rule_hash), rule_id in successful_applications.items():
+        connection.execute(
+            """
+            INSERT OR IGNORE INTO player_rule_applications (
+                player_id,
+                rule_hash,
+                first_ted_file_id,
+                first_edit_run_id,
+                first_edit_run_rule_id,
+                created_at
+            )
+            VALUES (
+                ?, ?, ?, ?, ?,
+                strftime('%Y-%m-%dT%H:%M:%fZ', 'now')
+            )
+            """,
+            (
+                player_id,
+                rule_hash,
+                ted_file_id,
+                edit_run_id,
+                rule_id,
+            ),
+        )
+
+    update_edit_run_ted_file(
+        connection=connection,
+        run_ted_file_id=run_ted_file_id,
+        status="completed",
+        source_version_id=source_version_id,
+        output_version_id=output_version_id,
+    )
+
+
 def main():
     parser = argparse.ArgumentParser(
-        description="Read and edit one or more PES 2021 TED files."
+        description="Read, edit, and import PES 2021 TED files."
     )
 
     parser.add_argument(
@@ -166,7 +558,12 @@ def main():
     )
     parser.add_argument(
         "--option-file",
-        help="Process all .ted files inside '_ted' directories of an Option File.",
+        help="Process all .ted files inside an Option File directory.",
+    )
+    parser.add_argument(
+        "--import-db",
+        action="store_true",
+        help="Import an Option File into the database without editing TED files.",
     )
     parser.add_argument(
         "--in-place",
@@ -212,10 +609,81 @@ def main():
 
     args = parser.parse_args()
 
-    # Validate processing modes.
+    # Database import mode is independent from the editing workflow.
+    if args.import_db:
+        if not args.option_file:
+            parser.error("--import-db requires --option-file.")
+
+        incompatible_options = []
+
+        if args.ted:
+            incompatible_options.append("positional TED paths")
+        if args.input_dir:
+            incompatible_options.append("--input-dir")
+        if args.in_place:
+            incompatible_options.append("--in-place")
+        if args.config:
+            incompatible_options.append("--config")
+        if args.output_dir:
+            incompatible_options.append("--output-dir")
+        if args.json_out:
+            incompatible_options.append("--json")
+        if args.decrypted:
+            incompatible_options.append("--decrypted")
+        if args.set:
+            incompatible_options.append("--set")
+        if args.out:
+            incompatible_options.append("--out")
+        if args.list_fields:
+            incompatible_options.append("--list-fields")
+
+        if incompatible_options:
+            parser.error(
+                "--import-db cannot be combined with: "
+                + ", ".join(incompatible_options)
+            )
+
+        option_file_dir = Path(args.option_file)
+
+        if not option_file_dir.is_dir():
+            parser.error(
+                f"Option File directory does not exist: {option_file_dir}"
+            )
+
+        database_path = _get_database_path()
+
+        try:
+            result = import_option_file(
+                option_file_dir=option_file_dir,
+                database_path=database_path,
+            )
+        except Exception as exc:
+            parser.error(f"Database import failed: {exc}")
+
+        print(
+            json.dumps(
+                result,
+                ensure_ascii=False,
+                indent=2,
+            )
+        )
+
+        print(
+            "Database import finished: "
+            f"{result['importedTedCount']} TED files and "
+            f"{result['importedPlayerCount']} players imported."
+        )
+
+        for warning in result["warnings"]:
+            print(f"NOTICE: {warning}")
+
+        return
+
+    # Validate regular processing modes.
     if args.option_file and (args.ted or args.input_dir):
         parser.error(
-            "Use --option-file, positional TED paths, or --input-dir, not multiple modes."
+            "Use --option-file, positional TED paths, or --input-dir, "
+            "not multiple modes."
         )
 
     if args.in_place and not args.option_file:
@@ -225,9 +693,7 @@ def main():
         parser.error("--out cannot be used with --option-file.")
 
     if args.option_file and not args.in_place and not args.output_dir:
-        parser.error(
-            "--option-file requires --in-place or --output-dir."
-        )
+        parser.error("--option-file requires --in-place or --output-dir.")
 
     if args.option_file and args.in_place and args.output_dir:
         parser.error(
@@ -243,13 +709,14 @@ def main():
     # List recognized fields.
     if args.list_fields:
         print(json.dumps(PLAYER_FIELDS, ensure_ascii=False, indent=2))
-
         if not args.ted and not args.input_dir and not args.option_file:
             return
 
     # Discover input TED files.
+    option_file_dir = None
+
     if args.option_file:
-        option_file_dir = Path(args.option_file)
+        option_file_dir = Path(args.option_file).resolve()
 
         if not option_file_dir.is_dir():
             parser.error(
@@ -260,7 +727,7 @@ def main():
 
         if not ted_files:
             parser.error(
-                f"No TED files found inside '_ted' directories: {option_file_dir}"
+                f"No TED files found inside Option File: {option_file_dir}"
             )
 
     elif args.input_dir:
@@ -270,7 +737,8 @@ def main():
             parser.error(f"Input directory does not exist: {input_dir}")
 
         ted_files = sorted(
-            path for path in input_dir.iterdir()
+            path
+            for path in input_dir.iterdir()
             if path.is_file() and path.suffix.lower() == ".ted"
         )
 
@@ -312,15 +780,12 @@ def main():
     if output_dir:
         resolved_output_dir = output_dir.resolve()
 
-        if args.option_file:
-            resolved_option_file_dir = Path(args.option_file).resolve()
-
-            # Prevent output files from being created inside the source Option File.
-            if resolved_output_dir.is_relative_to(resolved_option_file_dir):
+        if option_file_dir:
+            if resolved_output_dir.is_relative_to(option_file_dir):
                 parser.error(
-                    "The output directory must not be inside the source Option File directory."
+                    "The output directory must not be inside "
+                    "the source Option File directory."
                 )
-
         else:
             if any(
                 ted_file.resolve().parent == resolved_output_dir
@@ -333,18 +798,89 @@ def main():
 
         output_dir.mkdir(parents=True, exist_ok=True)
 
+    database_path = _get_database_path()
+    connection = None
+    edit_run_id = None
+    rule_ids_by_hash = {}
+    registered_teds = {}
+
+    # Database integration is optional for files that have not been imported.
+    try:
+        connection = get_connection(database_path)
+        migrate_database(connection)
+
+        for ted_file in ted_files:
+            registered_ted = _find_registered_ted(
+                connection=connection,
+                ted_path=ted_file,
+                option_file_dir=option_file_dir,
+            )
+
+            if registered_ted is not None:
+                registered_teds[str(ted_file.resolve())] = registered_ted
+
+        if registered_teds:
+            run_config = {
+                "command": "ted-edit",
+                "optionFile": (
+                    str(option_file_dir)
+                    if option_file_dir
+                    else None
+                ),
+                "configFiles": args.config,
+                "manualEdits": args.set,
+                "inPlace": args.in_place,
+                "outputDir": (
+                    str(output_dir.resolve())
+                    if output_dir
+                    else None
+                ),
+                "registeredTedCount": len(registered_teds),
+            }
+
+            with connection:
+                edit_run_id = create_edit_run(
+                    connection=connection,
+                    config=run_config,
+                    status="running",
+                )
+
+                rule_ids_by_hash = _build_rule_records(
+                    connection=connection,
+                    edit_run_id=edit_run_id,
+                    rules_list=rules_list,
+                )
+
+            print(
+                f"Database editing history enabled: run #{edit_run_id}."
+            )
+
+        else:
+            connection.close()
+            connection = None
+
+    except Exception as exc:
+        if connection is not None:
+            connection.close()
+            connection = None
+
+        print(
+            "NOTICE: Database history is unavailable. "
+            f"TED editing will continue without database history: {exc}"
+        )
+
     results = []
     failures = []
 
     for ted_file in ted_files:
-
-        # Determine the destination path.
         if args.in_place:
             output_path = ted_file
 
         elif output_dir:
-            if args.option_file:
-                relative_path = ted_file.relative_to(Path(args.option_file))
+            if option_file_dir:
+                relative_path = ted_file.resolve().relative_to(
+                    option_file_dir
+                )
                 output_path = output_dir / relative_path
             else:
                 output_path = output_dir / ted_file.name
@@ -355,24 +891,109 @@ def main():
         else:
             output_path = None
 
-        decrypted_path = Path(args.decrypted) if args.decrypted else None
+        decrypted_path = (
+            Path(args.decrypted)
+            if args.decrypted
+            else None
+        )
 
         try:
+            source_content = ted_file.read_bytes()
+
+            registered_ted = registered_teds.get(
+                str(ted_file.resolve())
+            )
+
+            ted_rules_list = rules_list
+
+            if (
+                connection is not None
+                and edit_run_id is not None
+                and registered_ted is not None
+            ):
+                ted_rules_list = _prepare_rules_for_ted(
+                    connection=connection,
+                    ted_path=ted_file,
+                    rules_list=rules_list,
+                )
+
             result = process_ted(
                 ted_path=ted_file,
-                rules_list=rules_list,
+                rules_list=ted_rules_list,
                 output_path=output_path,
                 manual_edits=args.set,
                 decrypted_path=decrypted_path,
             )
 
+            if (
+                connection is not None
+                and edit_run_id is not None
+                and registered_ted is not None
+            ):
+                try:
+                    with connection:
+                        source_version_id = _get_source_version_id(
+                            connection=connection,
+                            ted_file_id=registered_ted["ted_file_id"],
+                            source_content=source_content,
+                        )
+
+                        _register_ted_edit_history(
+                            connection=connection,
+                            edit_run_id=edit_run_id,
+                            ted_file_id=registered_ted["ted_file_id"],
+                            source_version_id=source_version_id,
+                            result=result,
+                            output_path=output_path,
+                            source_content=source_content,
+                            rule_ids_by_hash=rule_ids_by_hash,
+                        )
+
+                    result["databaseHistory"] = {
+                        "registered": True,
+                        "saved": True,
+                        "tedFileId": registered_ted["ted_file_id"],
+                        "editRunId": edit_run_id,
+                        "sourceVersionId": source_version_id,
+                    }
+
+                except Exception as exc:
+                    failures.append({
+                        "sourceFile": str(ted_file),
+                        "error": (
+                            "TED was processed, but database history "
+                            f"could not be saved: {exc}"
+                        ),
+                    })
+
+                    print(
+                        f"ERROR saving database history for "
+                        f"{ted_file.name}: {exc}"
+                    )
+
+                    result["databaseHistory"] = {
+                        "registered": True,
+                        "saved": False,
+                        "error": str(exc),
+                    }
+
+            elif registered_ted is None:
+                result["databaseHistory"] = {
+                    "registered": False,
+                }
+
             results.append(result)
 
             if args.json_out:
                 Path(args.json_out).write_text(
-                    json.dumps(result, ensure_ascii=False, indent=2),
+                    json.dumps(
+                        result,
+                        ensure_ascii=False,
+                        indent=2,
+                    ),
                     encoding="utf-8",
                 )
+
                 print(f"JSON saved: {args.json_out}")
 
         except Exception as exc:
@@ -383,13 +1004,38 @@ def main():
 
             print(f"ERROR processing {ted_file.name}: {exc}")
 
+    if connection is not None and edit_run_id is not None:
+        try:
+            with connection:
+                update_edit_run_status(
+                    connection=connection,
+                    edit_run_id=edit_run_id,
+                    status="failed" if failures else "completed",
+                )
+        except Exception as exc:
+            print(f"ERROR finalizing database edit run: {exc}")
+            failures.append({
+                "sourceFile": None,
+                "error": f"Failed to finalize edit run: {exc}",
+            })
+
+    if connection is not None:
+        connection.close()
+
     if not args.json_out:
-        print(json.dumps({
-            "processedCount": len(results),
-            "failureCount": len(failures),
-            "results": results,
-            "failures": failures,
-        }, ensure_ascii=False, indent=2))
+        print(
+            json.dumps(
+                {
+                    "processedCount": len(results),
+                    "failureCount": len(failures),
+                    "editRunId": edit_run_id,
+                    "results": results,
+                    "failures": failures,
+                },
+                ensure_ascii=False,
+                indent=2,
+            )
+        )
 
     print(
         f"Finished: {len(results)} succeeded, "
