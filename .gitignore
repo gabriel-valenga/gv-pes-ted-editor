@@ -220,3 +220,6 @@ __marimo__/
 .streamlit/secrets.toml
 
 .vscode
+
+# Local database and imported data
+/data/

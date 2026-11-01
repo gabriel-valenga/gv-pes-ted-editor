@@ -23,6 +23,7 @@ from ted.reader import (
     get_team_summary,
 )
 from ted.writer import save_ted, validate_ted_round_trip
+from database.importer import import_option_file
 
 
 def find_option_file_teds(option_file_dir: Path) -> list[Path]:
@@ -152,7 +153,7 @@ def process_ted(
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Read and edit one or more PES 2021 TED files."
+        description="Read, edit, and import PES 2021 TED files."
     )
 
     parser.add_argument(
@@ -166,7 +167,12 @@ def main():
     )
     parser.add_argument(
         "--option-file",
-        help="Process all .ted files inside '_ted' directories of an Option File.",
+        help="Process all .ted files inside an Option File directory.",
+    )
+    parser.add_argument(
+        "--import-db",
+        action="store_true",
+        help="Import an Option File into the database without editing TED files.",
     )
     parser.add_argument(
         "--in-place",
@@ -212,10 +218,82 @@ def main():
 
     args = parser.parse_args()
 
-    # Validate processing modes.
+    # Database import mode is independent from the editing workflow.
+    if args.import_db:
+        if not args.option_file:
+            parser.error("--import-db requires --option-file.")
+
+        incompatible_options = []
+
+        if args.ted:
+            incompatible_options.append("positional TED paths")
+        if args.input_dir:
+            incompatible_options.append("--input-dir")
+        if args.in_place:
+            incompatible_options.append("--in-place")
+        if args.config:
+            incompatible_options.append("--config")
+        if args.output_dir:
+            incompatible_options.append("--output-dir")
+        if args.json_out:
+            incompatible_options.append("--json")
+        if args.decrypted:
+            incompatible_options.append("--decrypted")
+        if args.set:
+            incompatible_options.append("--set")
+        if args.out:
+            incompatible_options.append("--out")
+        if args.list_fields:
+            incompatible_options.append("--list-fields")
+
+        if incompatible_options:
+            parser.error(
+                "--import-db cannot be combined with: "
+                + ", ".join(incompatible_options)
+            )
+
+        option_file_dir = Path(args.option_file)
+
+        if not option_file_dir.is_dir():
+            parser.error(
+                f"Option File directory does not exist: {option_file_dir}"
+            )
+
+        project_root = Path(__file__).resolve().parents[1]
+        database_path = project_root / "data" / "database.db"
+
+        try:
+            result = import_option_file(
+                option_file_dir=option_file_dir,
+                database_path=database_path,
+            )
+        except Exception as exc:
+            parser.error(f"Database import failed: {exc}")
+
+        print(
+            json.dumps(
+                result,
+                ensure_ascii=False,
+                indent=2,
+            )
+        )
+
+        print(
+            "Database import finished: "
+            f"{result['importedTedCount']} TED files and "
+            f"{result['importedPlayerCount']} players imported."
+        )
+
+        for warning in result["warnings"]:
+            print(f"NOTICE: {warning}")
+
+        return
+
+    # Validate regular processing modes.
     if args.option_file and (args.ted or args.input_dir):
         parser.error(
-            "Use --option-file, positional TED paths, or --input-dir, not multiple modes."
+            "Use --option-file, positional TED paths, or --input-dir, "
+            "not multiple modes."
         )
 
     if args.in_place and not args.option_file:
@@ -225,9 +303,7 @@ def main():
         parser.error("--out cannot be used with --option-file.")
 
     if args.option_file and not args.in_place and not args.output_dir:
-        parser.error(
-            "--option-file requires --in-place or --output-dir."
-        )
+        parser.error("--option-file requires --in-place or --output-dir.")
 
     if args.option_file and args.in_place and args.output_dir:
         parser.error(
@@ -243,7 +319,6 @@ def main():
     # List recognized fields.
     if args.list_fields:
         print(json.dumps(PLAYER_FIELDS, ensure_ascii=False, indent=2))
-
         if not args.ted and not args.input_dir and not args.option_file:
             return
 
@@ -260,7 +335,7 @@ def main():
 
         if not ted_files:
             parser.error(
-                f"No TED files found inside '_ted' directories: {option_file_dir}"
+                f"No TED files found inside Option File: {option_file_dir}"
             )
 
     elif args.input_dir:
@@ -270,7 +345,8 @@ def main():
             parser.error(f"Input directory does not exist: {input_dir}")
 
         ted_files = sorted(
-            path for path in input_dir.iterdir()
+            path
+            for path in input_dir.iterdir()
             if path.is_file() and path.suffix.lower() == ".ted"
         )
 
@@ -315,12 +391,13 @@ def main():
         if args.option_file:
             resolved_option_file_dir = Path(args.option_file).resolve()
 
-            # Prevent output files from being created inside the source Option File.
-            if resolved_output_dir.is_relative_to(resolved_option_file_dir):
+            if resolved_output_dir.is_relative_to(
+                resolved_option_file_dir
+            ):
                 parser.error(
-                    "The output directory must not be inside the source Option File directory."
+                    "The output directory must not be inside "
+                    "the source Option File directory."
                 )
-
         else:
             if any(
                 ted_file.resolve().parent == resolved_output_dir
@@ -337,14 +414,14 @@ def main():
     failures = []
 
     for ted_file in ted_files:
-
-        # Determine the destination path.
         if args.in_place:
             output_path = ted_file
 
         elif output_dir:
             if args.option_file:
-                relative_path = ted_file.relative_to(Path(args.option_file))
+                relative_path = ted_file.relative_to(
+                    Path(args.option_file)
+                )
                 output_path = output_dir / relative_path
             else:
                 output_path = output_dir / ted_file.name
@@ -355,7 +432,11 @@ def main():
         else:
             output_path = None
 
-        decrypted_path = Path(args.decrypted) if args.decrypted else None
+        decrypted_path = (
+            Path(args.decrypted)
+            if args.decrypted
+            else None
+        )
 
         try:
             result = process_ted(
@@ -370,9 +451,14 @@ def main():
 
             if args.json_out:
                 Path(args.json_out).write_text(
-                    json.dumps(result, ensure_ascii=False, indent=2),
+                    json.dumps(
+                        result,
+                        ensure_ascii=False,
+                        indent=2,
+                    ),
                     encoding="utf-8",
                 )
+
                 print(f"JSON saved: {args.json_out}")
 
         except Exception as exc:
@@ -384,12 +470,18 @@ def main():
             print(f"ERROR processing {ted_file.name}: {exc}")
 
     if not args.json_out:
-        print(json.dumps({
-            "processedCount": len(results),
-            "failureCount": len(failures),
-            "results": results,
-            "failures": failures,
-        }, ensure_ascii=False, indent=2))
+        print(
+            json.dumps(
+                {
+                    "processedCount": len(results),
+                    "failureCount": len(failures),
+                    "results": results,
+                    "failures": failures,
+                },
+                ensure_ascii=False,
+                indent=2,
+            )
+        )
 
     print(
         f"Finished: {len(results)} succeeded, "
