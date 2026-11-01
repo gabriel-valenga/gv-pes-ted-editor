@@ -32,7 +32,8 @@
         "nl": "Andorra",
         "ko": "안도라"
       },
-      "editor_code": "AND"
+      "editor_code": "AND",
+      "editor_id": 192
     },
     {
       "code": "AE",
@@ -51,7 +52,8 @@
         "nl": "Verenigde Arabische Emiraten",
         "ko": "아랍에미리트"
       },
-      "editor_code": null
+      "editor_code": "UAE",
+      "editor_id": 37
     },
     {
       "code": "AF",
@@ -70,7 +72,8 @@
         "nl": "Afghanistan",
         "ko": "아프가니스탄"
       },
-      "editor_code": "AFG"
+      "editor_code": "AFG",
+      "editor_id": 1
     },
     {
       "code": "AG",
@@ -89,7 +92,8 @@
         "nl": "Antigua en Barbuda",
         "ko": "앤티가 바부다"
       },
-      "editor_code": "ATG"
+      "editor_code": "ATG",
+      "editor_id": 104
     },
     {
       "code": "AI",
@@ -108,7 +112,8 @@
         "nl": "Anguilla",
         "ko": "앵귈라"
       },
-      "editor_code": "AIA"
+      "editor_code": "AIA",
+      "editor_id": 103
     },
     {
       "code": "AL",
@@ -127,7 +132,8 @@
         "nl": "Albanië",
         "ko": "알바니아"
       },
-      "editor_code": "ALB"
+      "editor_code": "ALB",
+      "editor_id": 191
     },
     {
       "code": "AM",
@@ -146,7 +152,8 @@
         "nl": "Armenië",
         "ko": "아르메니아"
       },
-      "editor_code": "ARM"
+      "editor_code": "ARM",
+      "editor_id": 193
     },
     {
       "code": "AO",
@@ -165,7 +172,8 @@
         "nl": "Angola",
         "ko": "앙골라"
       },
-      "editor_code": null
+      "editor_code": "ANG",
+      "editor_id": 45
     },
     {
       "code": "AQ",
@@ -184,7 +192,8 @@
         "nl": "Antarctica",
         "ko": "남극 대륙"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "AR",
@@ -203,7 +212,8 @@
         "nl": "Argentinië",
         "ko": "아르헨티나"
       },
-      "editor_code": "ARG"
+      "editor_code": "ARG",
+      "editor_id": 144
     },
     {
       "code": "AS",
@@ -222,7 +232,8 @@
         "nl": "Amerikaans-Samoa",
         "ko": "아메리칸 사모아"
       },
-      "editor_code": "ASA"
+      "editor_code": "ASA",
+      "editor_id": 161
     },
     {
       "code": "AT",
@@ -241,7 +252,8 @@
         "nl": "Oostenrijk",
         "ko": "오스트리아"
       },
-      "editor_code": "AUT"
+      "editor_code": "AUT",
+      "editor_id": 194
     },
     {
       "code": "AU",
@@ -260,7 +272,8 @@
         "nl": "Australië",
         "ko": "오스트레일리아"
       },
-      "editor_code": "AUS"
+      "editor_code": "AUS",
+      "editor_id": 162
     },
     {
       "code": "AW",
@@ -279,7 +292,8 @@
         "nl": "Aruba",
         "ko": "아루바"
       },
-      "editor_code": null
+      "editor_code": "ARU",
+      "editor_id": 105
     },
     {
       "code": "AX",
@@ -298,7 +312,8 @@
         "nl": "Åland",
         "ko": "올란드 제도"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "AZ",
@@ -317,7 +332,8 @@
         "nl": "Azerbeidzjan",
         "ko": "아제르바이잔"
       },
-      "editor_code": "AZE"
+      "editor_code": "AZE",
+      "editor_id": 195
     },
     {
       "code": "BA",
@@ -336,7 +352,8 @@
         "nl": "Bosnië en Herzegovina",
         "ko": "보스니아 헤르체고비나"
       },
-      "editor_code": "BIH"
+      "editor_code": "BIH",
+      "editor_id": 198
     },
     {
       "code": "BB",
@@ -355,7 +372,8 @@
         "nl": "Barbados",
         "ko": "바베이도스"
       },
-      "editor_code": "BRB"
+      "editor_code": "BRB",
+      "editor_id": 107
     },
     {
       "code": "BD",
@@ -374,7 +392,8 @@
         "nl": "Bangladesh",
         "ko": "방글라데시"
       },
-      "editor_code": null
+      "editor_code": "BAN",
+      "editor_id": 3
     },
     {
       "code": "BE",
@@ -393,7 +412,8 @@
         "nl": "België",
         "ko": "벨기에"
       },
-      "editor_code": "BEL"
+      "editor_code": "BEL",
+      "editor_id": 197
     },
     {
       "code": "BF",
@@ -412,7 +432,8 @@
         "nl": "Burkina Faso",
         "ko": "부르키나파소"
       },
-      "editor_code": "BFA"
+      "editor_code": "BFA",
+      "editor_id": 48
     },
     {
       "code": "BG",
@@ -431,7 +452,8 @@
         "nl": "Bulgarije",
         "ko": "불가리아"
       },
-      "editor_code": "BUL"
+      "editor_code": "BUL",
+      "editor_id": 199
     },
     {
       "code": "BH",
@@ -450,7 +472,8 @@
         "nl": "Bahrein",
         "ko": "바레인"
       },
-      "editor_code": "BHR"
+      "editor_code": "BHR",
+      "editor_id": 2
     },
     {
       "code": "BI",
@@ -469,7 +492,8 @@
         "nl": "Burundi",
         "ko": "부룬디"
       },
-      "editor_code": "BDI"
+      "editor_code": "BDI",
+      "editor_id": 49
     },
     {
       "code": "BJ",
@@ -488,7 +512,8 @@
         "nl": "Benin",
         "ko": "베냉"
       },
-      "editor_code": "BEN"
+      "editor_code": "BEN",
+      "editor_id": 46
     },
     {
       "code": "BL",
@@ -507,7 +532,8 @@
         "nl": "Saint-Barthélemy",
         "ko": "생바르텔레미"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "BM",
@@ -526,7 +552,8 @@
         "nl": "Bermuda",
         "ko": "버뮤다"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "BN",
@@ -545,7 +572,8 @@
         "nl": "Brunei",
         "ko": "브루나이"
       },
-      "editor_code": "BRU"
+      "editor_code": "BRU",
+      "editor_id": 5
     },
     {
       "code": "BO",
@@ -564,7 +592,8 @@
         "nl": "Bolivia",
         "ko": "볼리비아"
       },
-      "editor_code": "BOL"
+      "editor_code": "BOL",
+      "editor_id": 145
     },
     {
       "code": "BQ",
@@ -583,7 +612,8 @@
         "nl": "Caribisch Nederland",
         "ko": "네덜란드령 카리브"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "BR",
@@ -602,7 +632,8 @@
         "nl": "Brazilië",
         "ko": "브라질"
       },
-      "editor_code": "BRA"
+      "editor_code": "BRA",
+      "editor_id": 146
     },
     {
       "code": "BS",
@@ -621,7 +652,8 @@
         "nl": "Bahama’s",
         "ko": "바하마"
       },
-      "editor_code": null
+      "editor_code": "BAH",
+      "editor_id": 106
     },
     {
       "code": "BT",
@@ -640,7 +672,8 @@
         "nl": "Bhutan",
         "ko": "부탄"
       },
-      "editor_code": null
+      "editor_code": "BHU",
+      "editor_id": 4
     },
     {
       "code": "BV",
@@ -659,7 +692,8 @@
         "nl": "Bouveteiland",
         "ko": "부베섬"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "BW",
@@ -678,7 +712,8 @@
         "nl": "Botswana",
         "ko": "보츠와나"
       },
-      "editor_code": null
+      "editor_code": "BOT",
+      "editor_id": 47
     },
     {
       "code": "BY",
@@ -697,7 +732,8 @@
         "nl": "Belarus",
         "ko": "벨라루스"
       },
-      "editor_code": "BLR"
+      "editor_code": "BLR",
+      "editor_id": 196
     },
     {
       "code": "BZ",
@@ -716,7 +752,8 @@
         "nl": "Belize",
         "ko": "벨리즈"
       },
-      "editor_code": "BLZ"
+      "editor_code": "BLZ",
+      "editor_id": 108
     },
     {
       "code": "CA",
@@ -735,7 +772,8 @@
         "nl": "Canada",
         "ko": "캐나다"
       },
-      "editor_code": "CAN"
+      "editor_code": "CAN",
+      "editor_id": 110
     },
     {
       "code": "CC",
@@ -754,7 +792,8 @@
         "nl": "Cocoseilanden",
         "ko": "코코스 제도"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "CD",
@@ -773,7 +812,8 @@
         "nl": "Congo-Kinshasa",
         "ko": "콩고-킨샤사"
       },
-      "editor_code": "COD"
+      "editor_code": "COD",
+      "editor_id": 55
     },
     {
       "code": "CF",
@@ -792,7 +832,8 @@
         "nl": "Centraal-Afrikaanse Republiek",
         "ko": "중앙 아프리카 공화국"
       },
-      "editor_code": "CTA"
+      "editor_code": "CTA",
+      "editor_id": 52
     },
     {
       "code": "CG",
@@ -811,7 +852,8 @@
         "nl": "Congo-Brazzaville",
         "ko": "콩고-브라자빌"
       },
-      "editor_code": "CGO"
+      "editor_code": "CGO",
+      "editor_id": 98
     },
     {
       "code": "CH",
@@ -830,7 +872,8 @@
         "nl": "Zwitserland",
         "ko": "스위스"
       },
-      "editor_code": "SUI"
+      "editor_code": "SUI",
+      "editor_id": 238
     },
     {
       "code": "CI",
@@ -849,7 +892,8 @@
         "nl": "Ivoorkust",
         "ko": "코트디부아르"
       },
-      "editor_code": "CIV"
+      "editor_code": "CIV",
+      "editor_id": 56
     },
     {
       "code": "CK",
@@ -868,7 +912,8 @@
         "nl": "Cookeilanden",
         "ko": "쿡 제도"
       },
-      "editor_code": "COK"
+      "editor_code": "COK",
+      "editor_id": 163
     },
     {
       "code": "CL",
@@ -887,7 +932,8 @@
         "nl": "Chili",
         "ko": "칠레"
       },
-      "editor_code": "CHI"
+      "editor_code": "CHI",
+      "editor_id": 147
     },
     {
       "code": "CM",
@@ -906,7 +952,8 @@
         "nl": "Kameroen",
         "ko": "카메룬"
       },
-      "editor_code": "CMR"
+      "editor_code": "CMR",
+      "editor_id": 50
     },
     {
       "code": "CN",
@@ -925,7 +972,8 @@
         "nl": "China",
         "ko": "중국"
       },
-      "editor_code": "CHN"
+      "editor_code": "CHN",
+      "editor_id": 7
     },
     {
       "code": "CO",
@@ -944,7 +992,8 @@
         "nl": "Colombia",
         "ko": "콜롬비아"
       },
-      "editor_code": "COL"
+      "editor_code": "COL",
+      "editor_id": 148
     },
     {
       "code": "CR",
@@ -963,7 +1012,8 @@
         "nl": "Costa Rica",
         "ko": "코스타리카"
       },
-      "editor_code": null
+      "editor_code": "CRC",
+      "editor_id": 112
     },
     {
       "code": "CU",
@@ -982,7 +1032,8 @@
         "nl": "Cuba",
         "ko": "쿠바"
       },
-      "editor_code": "CUB"
+      "editor_code": "CUB",
+      "editor_id": 113
     },
     {
       "code": "CV",
@@ -1001,7 +1052,8 @@
         "nl": "Kaapverdië",
         "ko": "카보베르데"
       },
-      "editor_code": "CPV"
+      "editor_code": "CPV",
+      "editor_id": 51
     },
     {
       "code": "CW",
@@ -1020,7 +1072,8 @@
         "nl": "Curaçao",
         "ko": "퀴라소"
       },
-      "editor_code": "CUW"
+      "editor_code": "CUW",
+      "editor_id": 140
     },
     {
       "code": "CX",
@@ -1039,7 +1092,8 @@
         "nl": "Christmaseiland",
         "ko": "크리스마스섬"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "CY",
@@ -1058,7 +1112,8 @@
         "nl": "Cyprus",
         "ko": "키프로스"
       },
-      "editor_code": "CYP"
+      "editor_code": "CYP",
+      "editor_id": 201
     },
     {
       "code": "CZ",
@@ -1077,7 +1132,8 @@
         "nl": "Tsjechië",
         "ko": "체코"
       },
-      "editor_code": "CZE"
+      "editor_code": "CZE",
+      "editor_id": 202
     },
     {
       "code": "DE",
@@ -1096,7 +1152,8 @@
         "nl": "Duitsland",
         "ko": "독일"
       },
-      "editor_code": "GER"
+      "editor_code": "GER",
+      "editor_id": 210
     },
     {
       "code": "DJ",
@@ -1115,7 +1172,8 @@
         "nl": "Djibouti",
         "ko": "지부티"
       },
-      "editor_code": "DJI"
+      "editor_code": "DJI",
+      "editor_id": 57
     },
     {
       "code": "DK",
@@ -1134,7 +1192,8 @@
         "nl": "Denemarken",
         "ko": "덴마크"
       },
-      "editor_code": "DEN"
+      "editor_code": "DEN",
+      "editor_id": 203
     },
     {
       "code": "DM",
@@ -1153,7 +1212,8 @@
         "nl": "Dominica",
         "ko": "도미니카"
       },
-      "editor_code": "DMA"
+      "editor_code": "DMA",
+      "editor_id": 114
     },
     {
       "code": "DO",
@@ -1172,7 +1232,8 @@
         "nl": "Dominicaanse Republiek",
         "ko": "도미니카 공화국"
       },
-      "editor_code": "DOM"
+      "editor_code": "DOM",
+      "editor_id": 115
     },
     {
       "code": "DZ",
@@ -1191,7 +1252,8 @@
         "nl": "Algerije",
         "ko": "알제리"
       },
-      "editor_code": "ALG"
+      "editor_code": "ALG",
+      "editor_id": 44
     },
     {
       "code": "EC",
@@ -1210,7 +1272,8 @@
         "nl": "Ecuador",
         "ko": "에콰도르"
       },
-      "editor_code": "ECU"
+      "editor_code": "ECU",
+      "editor_id": 149
     },
     {
       "code": "EE",
@@ -1229,7 +1292,8 @@
         "nl": "Estland",
         "ko": "에스토니아"
       },
-      "editor_code": "EST"
+      "editor_code": "EST",
+      "editor_id": 205
     },
     {
       "code": "EG",
@@ -1248,7 +1312,8 @@
         "nl": "Egypte",
         "ko": "이집트"
       },
-      "editor_code": "EGY"
+      "editor_code": "EGY",
+      "editor_id": 58
     },
     {
       "code": "EH",
@@ -1267,7 +1332,8 @@
         "nl": "Westelijke Sahara",
         "ko": "서사하라"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "ER",
@@ -1286,7 +1352,8 @@
         "nl": "Eritrea",
         "ko": "에리트리아"
       },
-      "editor_code": "ERI"
+      "editor_code": "ERI",
+      "editor_id": 60
     },
     {
       "code": "ES",
@@ -1305,7 +1372,8 @@
         "nl": "Spanje",
         "ko": "스페인"
       },
-      "editor_code": "ESP"
+      "editor_code": "ESP",
+      "editor_id": 236
     },
     {
       "code": "ET",
@@ -1324,7 +1392,8 @@
         "nl": "Ethiopië",
         "ko": "에티오피아"
       },
-      "editor_code": "ETH"
+      "editor_code": "ETH",
+      "editor_id": 61
     },
     {
       "code": "FI",
@@ -1343,7 +1412,8 @@
         "nl": "Finland",
         "ko": "핀란드"
       },
-      "editor_code": "FIN"
+      "editor_code": "FIN",
+      "editor_id": 207
     },
     {
       "code": "FJ",
@@ -1362,7 +1432,8 @@
         "nl": "Fiji",
         "ko": "피지"
       },
-      "editor_code": null
+      "editor_code": "FIJ",
+      "editor_id": 164
     },
     {
       "code": "FK",
@@ -1381,7 +1452,8 @@
         "nl": "Falklandeilanden",
         "ko": "포클랜드 제도"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "FM",
@@ -1400,7 +1472,8 @@
         "nl": "Micronesia",
         "ko": "미크로네시아"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "FO",
@@ -1419,7 +1492,8 @@
         "nl": "Faeröer",
         "ko": "페로 제도"
       },
-      "editor_code": "FRO"
+      "editor_code": "FRO",
+      "editor_id": 206
     },
     {
       "code": "FR",
@@ -1438,7 +1512,8 @@
         "nl": "Frankrijk",
         "ko": "프랑스"
       },
-      "editor_code": "FRA"
+      "editor_code": "FRA",
+      "editor_id": 208
     },
     {
       "code": "GA",
@@ -1457,7 +1532,8 @@
         "nl": "Gabon",
         "ko": "가봉"
       },
-      "editor_code": "GAB"
+      "editor_code": "GAB",
+      "editor_id": 62
     },
     {
       "code": "GB",
@@ -1476,7 +1552,8 @@
         "nl": "Verenigd Koninkrijk",
         "ko": "영국"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "GD",
@@ -1495,7 +1572,8 @@
         "nl": "Grenada",
         "ko": "그레나다"
       },
-      "editor_code": null
+      "editor_code": "GRN",
+      "editor_id": 117
     },
     {
       "code": "GE",
@@ -1514,7 +1592,8 @@
         "nl": "Georgië",
         "ko": "조지아"
       },
-      "editor_code": "GEO"
+      "editor_code": "GEO",
+      "editor_id": 209
     },
     {
       "code": "GF",
@@ -1533,7 +1612,8 @@
         "nl": "Frans-Guyana",
         "ko": "프랑스령 기아나"
       },
-      "editor_code": "GUF"
+      "editor_code": "GUF",
+      "editor_id": 138
     },
     {
       "code": "GG",
@@ -1552,7 +1632,8 @@
         "nl": "Guernsey",
         "ko": "건지"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "GH",
@@ -1571,7 +1652,8 @@
         "nl": "Ghana",
         "ko": "가나"
       },
-      "editor_code": "GHA"
+      "editor_code": "GHA",
+      "editor_id": 64
     },
     {
       "code": "GI",
@@ -1590,7 +1672,8 @@
         "nl": "Gibraltar",
         "ko": "지브롤터"
       },
-      "editor_code": "GIB"
+      "editor_code": "GIB",
+      "editor_id": 245
     },
     {
       "code": "GL",
@@ -1609,7 +1692,8 @@
         "nl": "Groenland",
         "ko": "그린란드"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "GM",
@@ -1628,7 +1712,8 @@
         "nl": "Gambia",
         "ko": "감비아"
       },
-      "editor_code": "GAM"
+      "editor_code": "GAM",
+      "editor_id": 63
     },
     {
       "code": "GN",
@@ -1647,7 +1732,8 @@
         "nl": "Guinee",
         "ko": "기니"
       },
-      "editor_code": null
+      "editor_code": "GUI",
+      "editor_id": 65
     },
     {
       "code": "GP",
@@ -1666,7 +1752,8 @@
         "nl": "Guadeloupe",
         "ko": "과들루프"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "GQ",
@@ -1685,7 +1772,8 @@
         "nl": "Equatoriaal-Guinea",
         "ko": "적도 기니"
       },
-      "editor_code": "EQG"
+      "editor_code": "EQG",
+      "editor_id": 59
     },
     {
       "code": "GR",
@@ -1704,7 +1792,8 @@
         "nl": "Griekenland",
         "ko": "그리스"
       },
-      "editor_code": "GRE"
+      "editor_code": "GRE",
+      "editor_id": 211
     },
     {
       "code": "GS",
@@ -1723,7 +1812,8 @@
         "nl": "Zuid-Georgia en Zuidelijke Sandwicheilanden",
         "ko": "사우스조지아 사우스샌드위치 제도"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "GT",
@@ -1742,7 +1832,8 @@
         "nl": "Guatemala",
         "ko": "과테말라"
       },
-      "editor_code": null
+      "editor_code": "GUA",
+      "editor_id": 119
     },
     {
       "code": "GU",
@@ -1761,7 +1852,8 @@
         "nl": "Guam",
         "ko": "괌"
       },
-      "editor_code": "GUM"
+      "editor_code": "GUM",
+      "editor_id": 176
     },
     {
       "code": "GW",
@@ -1780,7 +1872,8 @@
         "nl": "Guinee-Bissau",
         "ko": "기니비사우"
       },
-      "editor_code": "GNB"
+      "editor_code": "GNB",
+      "editor_id": 66
     },
     {
       "code": "GY",
@@ -1799,7 +1892,8 @@
         "nl": "Guyana",
         "ko": "가이아나"
       },
-      "editor_code": "GUY"
+      "editor_code": "GUY",
+      "editor_id": 159
     },
     {
       "code": "HK",
@@ -1818,7 +1912,8 @@
         "nl": "Hongkong SAR van China",
         "ko": "홍콩(중국 특별행정구)"
       },
-      "editor_code": "HKG"
+      "editor_code": "HKG",
+      "editor_id": 8
     },
     {
       "code": "HM",
@@ -1837,7 +1932,8 @@
         "nl": "Heard en McDonaldeilanden",
         "ko": "허드 맥도널드 제도"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "HN",
@@ -1856,7 +1952,8 @@
         "nl": "Honduras",
         "ko": "온두라스"
       },
-      "editor_code": "HON"
+      "editor_code": "HON",
+      "editor_id": 121
     },
     {
       "code": "HR",
@@ -1875,7 +1972,8 @@
         "nl": "Kroatië",
         "ko": "크로아티아"
       },
-      "editor_code": "CRO"
+      "editor_code": "CRO",
+      "editor_id": 200
     },
     {
       "code": "HT",
@@ -1894,7 +1992,8 @@
         "nl": "Haïti",
         "ko": "아이티"
       },
-      "editor_code": "HAI"
+      "editor_code": "HAI",
+      "editor_id": 120
     },
     {
       "code": "HU",
@@ -1913,7 +2012,8 @@
         "nl": "Hongarije",
         "ko": "헝가리"
       },
-      "editor_code": "HUN"
+      "editor_code": "HUN",
+      "editor_id": 212
     },
     {
       "code": "ID",
@@ -1932,7 +2032,8 @@
         "nl": "Indonesië",
         "ko": "인도네시아"
       },
-      "editor_code": "IDN"
+      "editor_code": "IDN",
+      "editor_id": 10
     },
     {
       "code": "IE",
@@ -1951,7 +2052,8 @@
         "nl": "Ierland",
         "ko": "아일랜드"
       },
-      "editor_code": "IRL"
+      "editor_code": "IRL",
+      "editor_id": 214
     },
     {
       "code": "IL",
@@ -1970,7 +2072,8 @@
         "nl": "Israël",
         "ko": "이스라엘"
       },
-      "editor_code": "ISR"
+      "editor_code": "ISR",
+      "editor_id": 189
     },
     {
       "code": "IM",
@@ -1989,7 +2092,8 @@
         "nl": "Isle of Man",
         "ko": "맨섬"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "IN",
@@ -2008,7 +2112,8 @@
         "nl": "India",
         "ko": "인도"
       },
-      "editor_code": "IND"
+      "editor_code": "IND",
+      "editor_id": 9
     },
     {
       "code": "IO",
@@ -2027,7 +2132,8 @@
         "nl": "Brits Indische Oceaanterritorium",
         "ko": "영국령 인도양 지역"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "IQ",
@@ -2046,7 +2152,8 @@
         "nl": "Irak",
         "ko": "이라크"
       },
-      "editor_code": "IRQ"
+      "editor_code": "IRQ",
+      "editor_id": 12
     },
     {
       "code": "IR",
@@ -2065,7 +2172,8 @@
         "nl": "Iran",
         "ko": "이란"
       },
-      "editor_code": "IRN"
+      "editor_code": "IRN",
+      "editor_id": 11
     },
     {
       "code": "IS",
@@ -2084,7 +2192,8 @@
         "nl": "IJsland",
         "ko": "아이슬란드"
       },
-      "editor_code": "ISL"
+      "editor_code": "ISL",
+      "editor_id": 213
     },
     {
       "code": "IT",
@@ -2103,7 +2212,8 @@
         "nl": "Italië",
         "ko": "이탈리아"
       },
-      "editor_code": "ITA"
+      "editor_code": "ITA",
+      "editor_id": 215
     },
     {
       "code": "JE",
@@ -2122,7 +2232,8 @@
         "nl": "Jersey",
         "ko": "저지"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "JM",
@@ -2141,7 +2252,8 @@
         "nl": "Jamaica",
         "ko": "자메이카"
       },
-      "editor_code": "JAM"
+      "editor_code": "JAM",
+      "editor_id": 122
     },
     {
       "code": "JO",
@@ -2160,7 +2272,8 @@
         "nl": "Jordanië",
         "ko": "요르단"
       },
-      "editor_code": "JOR"
+      "editor_code": "JOR",
+      "editor_id": 14
     },
     {
       "code": "JP",
@@ -2179,7 +2292,8 @@
         "nl": "Japan",
         "ko": "일본"
       },
-      "editor_code": "JPN"
+      "editor_code": "JPN",
+      "editor_id": 13
     },
     {
       "code": "KE",
@@ -2198,7 +2312,8 @@
         "nl": "Kenia",
         "ko": "케냐"
       },
-      "editor_code": "KEN"
+      "editor_code": "KEN",
+      "editor_id": 67
     },
     {
       "code": "KG",
@@ -2217,7 +2332,8 @@
         "nl": "Kirgizië",
         "ko": "키르기스스탄"
       },
-      "editor_code": "KGZ"
+      "editor_code": "KGZ",
+      "editor_id": 40
     },
     {
       "code": "KH",
@@ -2236,7 +2352,8 @@
         "nl": "Cambodja",
         "ko": "캄보디아"
       },
-      "editor_code": "CAM"
+      "editor_code": "CAM",
+      "editor_id": 6
     },
     {
       "code": "KI",
@@ -2255,7 +2372,8 @@
         "nl": "Kiribati",
         "ko": "키리바시"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "KM",
@@ -2274,7 +2392,8 @@
         "nl": "Comoren",
         "ko": "코모로"
       },
-      "editor_code": "COM"
+      "editor_code": "COM",
+      "editor_id": 54
     },
     {
       "code": "KN",
@@ -2293,7 +2412,8 @@
         "nl": "Saint Kitts en Nevis",
         "ko": "세인트키츠 네비스"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "KP",
@@ -2312,7 +2432,8 @@
         "nl": "Noord-Korea",
         "ko": "북한"
       },
-      "editor_code": "PRK"
+      "editor_code": "PRK",
+      "editor_id": 15
     },
     {
       "code": "KR",
@@ -2331,7 +2452,8 @@
         "nl": "Zuid-Korea",
         "ko": "대한민국"
       },
-      "editor_code": "KOR"
+      "editor_code": "KOR",
+      "editor_id": 16
     },
     {
       "code": "KW",
@@ -2350,7 +2472,8 @@
         "nl": "Koeweit",
         "ko": "쿠웨이트"
       },
-      "editor_code": "KUW"
+      "editor_code": "KUW",
+      "editor_id": 17
     },
     {
       "code": "KY",
@@ -2369,7 +2492,8 @@
         "nl": "Kaaimaneilanden",
         "ko": "케이맨 제도"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "KZ",
@@ -2388,7 +2512,8 @@
         "nl": "Kazachstan",
         "ko": "카자흐스탄"
       },
-      "editor_code": "KAZ"
+      "editor_code": "KAZ",
+      "editor_id": 216
     },
     {
       "code": "LA",
@@ -2407,7 +2532,8 @@
         "nl": "Laos",
         "ko": "라오스"
       },
-      "editor_code": "LAO"
+      "editor_code": "LAO",
+      "editor_id": 18
     },
     {
       "code": "LB",
@@ -2426,7 +2552,8 @@
         "nl": "Libanon",
         "ko": "레바논"
       },
-      "editor_code": "LBN"
+      "editor_code": "LBN",
+      "editor_id": 19
     },
     {
       "code": "LC",
@@ -2445,7 +2572,8 @@
         "nl": "Saint Lucia",
         "ko": "세인트루시아"
       },
-      "editor_code": "LCA"
+      "editor_code": "LCA",
+      "editor_id": 131
     },
     {
       "code": "LI",
@@ -2464,7 +2592,8 @@
         "nl": "Liechtenstein",
         "ko": "리히텐슈타인"
       },
-      "editor_code": "LIE"
+      "editor_code": "LIE",
+      "editor_id": 218
     },
     {
       "code": "LK",
@@ -2483,7 +2612,8 @@
         "nl": "Sri Lanka",
         "ko": "스리랑카"
       },
-      "editor_code": "SRI"
+      "editor_code": "SRI",
+      "editor_id": 33
     },
     {
       "code": "LR",
@@ -2502,7 +2632,8 @@
         "nl": "Liberia",
         "ko": "라이베리아"
       },
-      "editor_code": "LBR"
+      "editor_code": "LBR",
+      "editor_id": 69
     },
     {
       "code": "LS",
@@ -2521,7 +2652,8 @@
         "nl": "Lesotho",
         "ko": "레소토"
       },
-      "editor_code": null
+      "editor_code": "LES",
+      "editor_id": 68
     },
     {
       "code": "LT",
@@ -2540,7 +2672,8 @@
         "nl": "Litouwen",
         "ko": "리투아니아"
       },
-      "editor_code": "LTU"
+      "editor_code": "LTU",
+      "editor_id": 219
     },
     {
       "code": "LU",
@@ -2559,7 +2692,8 @@
         "nl": "Luxemburg",
         "ko": "룩셈부르크"
       },
-      "editor_code": "LUX"
+      "editor_code": "LUX",
+      "editor_id": 220
     },
     {
       "code": "LV",
@@ -2578,7 +2712,8 @@
         "nl": "Letland",
         "ko": "라트비아"
       },
-      "editor_code": "LVA"
+      "editor_code": "LVA",
+      "editor_id": 217
     },
     {
       "code": "LY",
@@ -2597,7 +2732,8 @@
         "nl": "Libië",
         "ko": "리비아"
       },
-      "editor_code": "LBY"
+      "editor_code": "LBY",
+      "editor_id": 70
     },
     {
       "code": "MA",
@@ -2616,7 +2752,8 @@
         "nl": "Marokko",
         "ko": "모로코"
       },
-      "editor_code": "MAR"
+      "editor_code": "MAR",
+      "editor_id": 76
     },
     {
       "code": "MC",
@@ -2635,7 +2772,8 @@
         "nl": "Monaco",
         "ko": "모나코"
       },
-      "editor_code": "MON"
+      "editor_code": "MON",
+      "editor_id": 250
     },
     {
       "code": "MD",
@@ -2654,7 +2792,8 @@
         "nl": "Moldavië",
         "ko": "몰도바"
       },
-      "editor_code": "MDA"
+      "editor_code": "MDA",
+      "editor_id": 223
     },
     {
       "code": "ME",
@@ -2673,7 +2812,8 @@
         "nl": "Montenegro",
         "ko": "몬테네그로"
       },
-      "editor_code": "MNE"
+      "editor_code": "MNE",
+      "editor_id": 304
     },
     {
       "code": "MF",
@@ -2692,7 +2832,8 @@
         "nl": "Saint-Martin",
         "ko": "생마르탱"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "MG",
@@ -2711,7 +2852,8 @@
         "nl": "Madagaskar",
         "ko": "마다가스카르"
       },
-      "editor_code": null
+      "editor_code": "MAD",
+      "editor_id": 71
     },
     {
       "code": "MH",
@@ -2730,7 +2872,8 @@
         "nl": "Marshalleilanden",
         "ko": "마셜 제도"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "MK",
@@ -2749,7 +2892,8 @@
         "nl": "Noord-Macedonië",
         "ko": "북마케도니아"
       },
-      "editor_code": "MKD"
+      "editor_code": "MKD",
+      "editor_id": 221
     },
     {
       "code": "ML",
@@ -2768,7 +2912,8 @@
         "nl": "Mali",
         "ko": "말리"
       },
-      "editor_code": "MLI"
+      "editor_code": "MLI",
+      "editor_id": 73
     },
     {
       "code": "MM",
@@ -2787,7 +2932,8 @@
         "nl": "Myanmar (Birma)",
         "ko": "미얀마"
       },
-      "editor_code": "MYA"
+      "editor_code": "MYA",
+      "editor_id": 24
     },
     {
       "code": "MN",
@@ -2806,7 +2952,8 @@
         "nl": "Mongolië",
         "ko": "몽골"
       },
-      "editor_code": "MNG"
+      "editor_code": "MNG",
+      "editor_id": 23
     },
     {
       "code": "MO",
@@ -2825,7 +2972,8 @@
         "nl": "Macau SAR van China",
         "ko": "마카오(중국 특별행정구)"
       },
-      "editor_code": "MAC"
+      "editor_code": "MAC",
+      "editor_id": 20
     },
     {
       "code": "MP",
@@ -2844,7 +2992,8 @@
         "nl": "Noordelijke Marianen",
         "ko": "북마리아나제도"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "MQ",
@@ -2863,7 +3012,8 @@
         "nl": "Martinique",
         "ko": "마르티니크"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "MR",
@@ -2882,7 +3032,8 @@
         "nl": "Mauritanië",
         "ko": "모리타니"
       },
-      "editor_code": "MTN"
+      "editor_code": "MTN",
+      "editor_id": 74
     },
     {
       "code": "MS",
@@ -2901,7 +3052,8 @@
         "nl": "Montserrat",
         "ko": "몬트세라트"
       },
-      "editor_code": "MSR"
+      "editor_code": "MSR",
+      "editor_id": 125
     },
     {
       "code": "MT",
@@ -2920,7 +3072,8 @@
         "nl": "Malta",
         "ko": "몰타"
       },
-      "editor_code": "MLT"
+      "editor_code": "MLT",
+      "editor_id": 222
     },
     {
       "code": "MU",
@@ -2939,7 +3092,8 @@
         "nl": "Mauritius",
         "ko": "모리셔스"
       },
-      "editor_code": "MRI"
+      "editor_code": "MRI",
+      "editor_id": 75
     },
     {
       "code": "MV",
@@ -2958,7 +3112,8 @@
         "nl": "Maldiven",
         "ko": "몰디브"
       },
-      "editor_code": "MDV"
+      "editor_code": "MDV",
+      "editor_id": 22
     },
     {
       "code": "MW",
@@ -2977,7 +3132,8 @@
         "nl": "Malawi",
         "ko": "말라위"
       },
-      "editor_code": "MWI"
+      "editor_code": "MWI",
+      "editor_id": 72
     },
     {
       "code": "MX",
@@ -2996,7 +3152,8 @@
         "nl": "Mexico",
         "ko": "멕시코"
       },
-      "editor_code": "MEX"
+      "editor_code": "MEX",
+      "editor_id": 124
     },
     {
       "code": "MY",
@@ -3015,7 +3172,8 @@
         "nl": "Maleisië",
         "ko": "말레이시아"
       },
-      "editor_code": "MAS"
+      "editor_code": "MAS",
+      "editor_id": 21
     },
     {
       "code": "MZ",
@@ -3034,7 +3192,8 @@
         "nl": "Mozambique",
         "ko": "모잠비크"
       },
-      "editor_code": "MOZ"
+      "editor_code": "MOZ",
+      "editor_id": 77
     },
     {
       "code": "NA",
@@ -3053,7 +3212,8 @@
         "nl": "Namibië",
         "ko": "나미비아"
       },
-      "editor_code": "NAM"
+      "editor_code": "NAM",
+      "editor_id": 78
     },
     {
       "code": "NC",
@@ -3072,7 +3232,8 @@
         "nl": "Nieuw-Caledonië",
         "ko": "뉴칼레도니아"
       },
-      "editor_code": "NCL"
+      "editor_code": "NCL",
+      "editor_id": 165
     },
     {
       "code": "NE",
@@ -3091,7 +3252,8 @@
         "nl": "Niger",
         "ko": "니제르"
       },
-      "editor_code": "NIG"
+      "editor_code": "NIG",
+      "editor_id": 79
     },
     {
       "code": "NF",
@@ -3110,7 +3272,8 @@
         "nl": "Norfolk",
         "ko": "노퍽섬"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "NG",
@@ -3129,7 +3292,8 @@
         "nl": "Nigeria",
         "ko": "나이지리아"
       },
-      "editor_code": "NGA"
+      "editor_code": "NGA",
+      "editor_id": 80
     },
     {
       "code": "NI",
@@ -3148,7 +3312,8 @@
         "nl": "Nicaragua",
         "ko": "니카라과"
       },
-      "editor_code": null
+      "editor_code": "NCA",
+      "editor_id": 127
     },
     {
       "code": "NL",
@@ -3167,7 +3332,8 @@
         "nl": "Nederland",
         "ko": "네덜란드"
       },
-      "editor_code": "NED"
+      "editor_code": "NED",
+      "editor_id": 224
     },
     {
       "code": "NO",
@@ -3186,7 +3352,8 @@
         "nl": "Noorwegen",
         "ko": "노르웨이"
       },
-      "editor_code": "NOR"
+      "editor_code": "NOR",
+      "editor_id": 226
     },
     {
       "code": "NP",
@@ -3205,7 +3372,8 @@
         "nl": "Nepal",
         "ko": "네팔"
       },
-      "editor_code": null
+      "editor_code": "NEP",
+      "editor_id": 25
     },
     {
       "code": "NR",
@@ -3224,7 +3392,8 @@
         "nl": "Nauru",
         "ko": "나우루"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "NU",
@@ -3243,7 +3412,8 @@
         "nl": "Niue",
         "ko": "니우에"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "NZ",
@@ -3262,7 +3432,8 @@
         "nl": "Nieuw-Zeeland",
         "ko": "뉴질랜드"
       },
-      "editor_code": "NZL"
+      "editor_code": "NZL",
+      "editor_id": 166
     },
     {
       "code": "OM",
@@ -3281,7 +3452,8 @@
         "nl": "Oman",
         "ko": "오만"
       },
-      "editor_code": "OMA"
+      "editor_code": "OMA",
+      "editor_id": 26
     },
     {
       "code": "PA",
@@ -3300,7 +3472,8 @@
         "nl": "Panama",
         "ko": "파나마"
       },
-      "editor_code": "PAN"
+      "editor_code": "PAN",
+      "editor_id": 128
     },
     {
       "code": "PE",
@@ -3319,7 +3492,8 @@
         "nl": "Peru",
         "ko": "페루"
       },
-      "editor_code": "PER"
+      "editor_code": "PER",
+      "editor_id": 151
     },
     {
       "code": "PF",
@@ -3338,7 +3512,8 @@
         "nl": "Frans-Polynesië",
         "ko": "프랑스령 폴리네시아"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "PG",
@@ -3357,7 +3532,8 @@
         "nl": "Papoea-Nieuw-Guinea",
         "ko": "파푸아뉴기니"
       },
-      "editor_code": "PNG"
+      "editor_code": "PNG",
+      "editor_id": 167
     },
     {
       "code": "PH",
@@ -3376,7 +3552,8 @@
         "nl": "Filipijnen",
         "ko": "필리핀"
       },
-      "editor_code": "PHI"
+      "editor_code": "PHI",
+      "editor_id": 29
     },
     {
       "code": "PK",
@@ -3395,7 +3572,8 @@
         "nl": "Pakistan",
         "ko": "파키스탄"
       },
-      "editor_code": "PAK"
+      "editor_code": "PAK",
+      "editor_id": 27
     },
     {
       "code": "PL",
@@ -3414,7 +3592,8 @@
         "nl": "Polen",
         "ko": "폴란드"
       },
-      "editor_code": "POL"
+      "editor_code": "POL",
+      "editor_id": 227
     },
     {
       "code": "PM",
@@ -3433,7 +3612,8 @@
         "nl": "Saint-Pierre en Miquelon",
         "ko": "생피에르 미클롱"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "PN",
@@ -3452,7 +3632,8 @@
         "nl": "Pitcairneilanden",
         "ko": "핏케언 제도"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "PR",
@@ -3471,7 +3652,8 @@
         "nl": "Puerto Rico",
         "ko": "푸에르토리코"
       },
-      "editor_code": "PUR"
+      "editor_code": "PUR",
+      "editor_id": 129
     },
     {
       "code": "PS",
@@ -3490,7 +3672,8 @@
         "nl": "Palestijnse gebieden",
         "ko": "팔레스타인 지구"
       },
-      "editor_code": "PLE"
+      "editor_code": "PLE",
+      "editor_id": 28
     },
     {
       "code": "PT",
@@ -3509,7 +3692,8 @@
         "nl": "Portugal",
         "ko": "포르투갈"
       },
-      "editor_code": "POR"
+      "editor_code": "POR",
+      "editor_id": 228
     },
     {
       "code": "PW",
@@ -3528,7 +3712,8 @@
         "nl": "Palau",
         "ko": "팔라우"
       },
-      "editor_code": "PLW"
+      "editor_code": "PLW",
+      "editor_id": 184
     },
     {
       "code": "PY",
@@ -3547,7 +3732,8 @@
         "nl": "Paraguay",
         "ko": "파라과이"
       },
-      "editor_code": null
+      "editor_code": "PAR",
+      "editor_id": 150
     },
     {
       "code": "QA",
@@ -3566,7 +3752,8 @@
         "nl": "Qatar",
         "ko": "카타르"
       },
-      "editor_code": "QAT"
+      "editor_code": "QAT",
+      "editor_id": 30
     },
     {
       "code": "RE",
@@ -3585,7 +3772,8 @@
         "nl": "Réunion",
         "ko": "레위니옹"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "RO",
@@ -3604,7 +3792,8 @@
         "nl": "Roemenië",
         "ko": "루마니아"
       },
-      "editor_code": "ROU"
+      "editor_code": "ROU",
+      "editor_id": 229
     },
     {
       "code": "RS",
@@ -3623,7 +3812,8 @@
         "nl": "Servië",
         "ko": "세르비아"
       },
-      "editor_code": "SRB"
+      "editor_code": "SRB",
+      "editor_id": 303
     },
     {
       "code": "RU",
@@ -3642,7 +3832,8 @@
         "nl": "Rusland",
         "ko": "러시아"
       },
-      "editor_code": "RUS"
+      "editor_code": "RUS",
+      "editor_id": 230
     },
     {
       "code": "RW",
@@ -3661,7 +3852,8 @@
         "nl": "Rwanda",
         "ko": "르완다"
       },
-      "editor_code": "RWA"
+      "editor_code": "RWA",
+      "editor_id": 81
     },
     {
       "code": "SA",
@@ -3680,7 +3872,8 @@
         "nl": "Saoedi-Arabië",
         "ko": "사우디아라비아"
       },
-      "editor_code": null
+      "editor_code": "KSA",
+      "editor_id": 31
     },
     {
       "code": "SB",
@@ -3699,7 +3892,8 @@
         "nl": "Salomonseilanden",
         "ko": "솔로몬 제도"
       },
-      "editor_code": null
+      "editor_code": "SOL",
+      "editor_id": 169
     },
     {
       "code": "SC",
@@ -3718,7 +3912,8 @@
         "nl": "Seychellen",
         "ko": "세이셸"
       },
-      "editor_code": null
+      "editor_code": "SEY",
+      "editor_id": 84
     },
     {
       "code": "SD",
@@ -3737,7 +3932,8 @@
         "nl": "Soedan",
         "ko": "수단"
       },
-      "editor_code": "SDN"
+      "editor_code": "SDN",
+      "editor_id": 88
     },
     {
       "code": "SE",
@@ -3756,7 +3952,8 @@
         "nl": "Zweden",
         "ko": "스웨덴"
       },
-      "editor_code": "SWE"
+      "editor_code": "SWE",
+      "editor_id": 237
     },
     {
       "code": "SG",
@@ -3775,7 +3972,8 @@
         "nl": "Singapore",
         "ko": "싱가포르"
       },
-      "editor_code": null
+      "editor_code": "SIN",
+      "editor_id": 32
     },
     {
       "code": "SH",
@@ -3794,7 +3992,8 @@
         "nl": "Sint-Helena",
         "ko": "세인트헬레나"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "SI",
@@ -3813,7 +4012,8 @@
         "nl": "Slovenië",
         "ko": "슬로베니아"
       },
-      "editor_code": "SVN"
+      "editor_code": "SVN",
+      "editor_id": 235
     },
     {
       "code": "SJ",
@@ -3832,7 +4032,8 @@
         "nl": "Spitsbergen en Jan Mayen",
         "ko": "스발바르제도-얀마웬섬"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "SK",
@@ -3851,7 +4052,8 @@
         "nl": "Slowakije",
         "ko": "슬로바키아"
       },
-      "editor_code": "SVK"
+      "editor_code": "SVK",
+      "editor_id": 234
     },
     {
       "code": "SL",
@@ -3870,7 +4072,8 @@
         "nl": "Sierra Leone",
         "ko": "시에라리온"
       },
-      "editor_code": "SLE"
+      "editor_code": "SLE",
+      "editor_id": 85
     },
     {
       "code": "SM",
@@ -3889,7 +4092,8 @@
         "nl": "San Marino",
         "ko": "산마리노"
       },
-      "editor_code": "SMR"
+      "editor_code": "SMR",
+      "editor_id": 231
     },
     {
       "code": "SN",
@@ -3908,7 +4112,8 @@
         "nl": "Senegal",
         "ko": "세네갈"
       },
-      "editor_code": "SEN"
+      "editor_code": "SEN",
+      "editor_id": 83
     },
     {
       "code": "SO",
@@ -3927,7 +4132,8 @@
         "nl": "Somalië",
         "ko": "소말리아"
       },
-      "editor_code": "SOM"
+      "editor_code": "SOM",
+      "editor_id": 86
     },
     {
       "code": "SR",
@@ -3946,7 +4152,8 @@
         "nl": "Suriname",
         "ko": "수리남"
       },
-      "editor_code": "SUR"
+      "editor_code": "SUR",
+      "editor_id": 139
     },
     {
       "code": "SS",
@@ -3965,7 +4172,8 @@
         "nl": "Zuid-Soedan",
         "ko": "남수단"
       },
-      "editor_code": "SSD"
+      "editor_code": "SSD",
+      "editor_id": 312
     },
     {
       "code": "ST",
@@ -3984,7 +4192,8 @@
         "nl": "Sao Tomé en Principe",
         "ko": "상투메 프린시페"
       },
-      "editor_code": "STP"
+      "editor_code": "STP",
+      "editor_id": 82
     },
     {
       "code": "SV",
@@ -4003,7 +4212,8 @@
         "nl": "El Salvador",
         "ko": "엘살바도르"
       },
-      "editor_code": "SLV"
+      "editor_code": "SLV",
+      "editor_id": 116
     },
     {
       "code": "SX",
@@ -4022,7 +4232,8 @@
         "nl": "Sint-Maarten",
         "ko": "신트마르턴"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "SY",
@@ -4041,7 +4252,8 @@
         "nl": "Syrië",
         "ko": "시리아"
       },
-      "editor_code": "SYR"
+      "editor_code": "SYR",
+      "editor_id": 34
     },
     {
       "code": "SZ",
@@ -4060,7 +4272,8 @@
         "nl": "Eswatini",
         "ko": "에스와티니"
       },
-      "editor_code": "SWZ"
+      "editor_code": "SWZ",
+      "editor_id": 89
     },
     {
       "code": "TC",
@@ -4079,7 +4292,8 @@
         "nl": "Turks- en Caicoseilanden",
         "ko": "터크스 케이커스 제도"
       },
-      "editor_code": "TCA"
+      "editor_code": "TCA",
+      "editor_id": 134
     },
     {
       "code": "TD",
@@ -4098,7 +4312,8 @@
         "nl": "Tsjaad",
         "ko": "차드"
       },
-      "editor_code": "CHA"
+      "editor_code": "CHA",
+      "editor_id": 53
     },
     {
       "code": "TF",
@@ -4117,7 +4332,8 @@
         "nl": "Franse Gebieden in de zuidelijke Indische Oceaan",
         "ko": "프랑스령 남방 지역"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "TG",
@@ -4136,7 +4352,8 @@
         "nl": "Togo",
         "ko": "토고"
       },
-      "editor_code": null
+      "editor_code": "TOG",
+      "editor_id": 91
     },
     {
       "code": "TH",
@@ -4155,7 +4372,8 @@
         "nl": "Thailand",
         "ko": "태국"
       },
-      "editor_code": "THA"
+      "editor_code": "THA",
+      "editor_id": 36
     },
     {
       "code": "TJ",
@@ -4174,7 +4392,8 @@
         "nl": "Tadzjikistan",
         "ko": "타지키스탄"
       },
-      "editor_code": "TJK"
+      "editor_code": "TJK",
+      "editor_id": 41
     },
     {
       "code": "TK",
@@ -4193,7 +4412,8 @@
         "nl": "Tokelau",
         "ko": "토켈라우"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "TL",
@@ -4212,7 +4432,8 @@
         "nl": "Oost-Timor",
         "ko": "동티모르"
       },
-      "editor_code": "TLS"
+      "editor_code": "TLS",
+      "editor_id": 43
     },
     {
       "code": "TM",
@@ -4231,7 +4452,8 @@
         "nl": "Turkmenistan",
         "ko": "투르크메니스탄"
       },
-      "editor_code": "TKM"
+      "editor_code": "TKM",
+      "editor_id": 42
     },
     {
       "code": "TN",
@@ -4250,7 +4472,8 @@
         "nl": "Tunesië",
         "ko": "튀니지"
       },
-      "editor_code": "TUN"
+      "editor_code": "TUN",
+      "editor_id": 92
     },
     {
       "code": "TO",
@@ -4269,7 +4492,8 @@
         "nl": "Tonga",
         "ko": "통가"
       },
-      "editor_code": null
+      "editor_code": "TGA",
+      "editor_id": 171
     },
     {
       "code": "TR",
@@ -4288,7 +4512,8 @@
         "nl": "Turkije",
         "ko": "튀르키예"
       },
-      "editor_code": "TUR"
+      "editor_code": "TUR",
+      "editor_id": 190
     },
     {
       "code": "TT",
@@ -4307,7 +4532,8 @@
         "nl": "Trinidad en Tobago",
         "ko": "트리니다드 토바고"
       },
-      "editor_code": null
+      "editor_code": "TRI",
+      "editor_id": 133
     },
     {
       "code": "TV",
@@ -4326,7 +4552,8 @@
         "nl": "Tuvalu",
         "ko": "투발루"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "TW",
@@ -4345,7 +4572,8 @@
         "nl": "Taiwan",
         "ko": "대만"
       },
-      "editor_code": "TPE"
+      "editor_code": "TPE",
+      "editor_id": 298
     },
     {
       "code": "TZ",
@@ -4364,7 +4592,8 @@
         "nl": "Tanzania",
         "ko": "탄자니아"
       },
-      "editor_code": "TAN"
+      "editor_code": "TAN",
+      "editor_id": 90
     },
     {
       "code": "UA",
@@ -4383,7 +4612,8 @@
         "nl": "Oekraïne",
         "ko": "우크라이나"
       },
-      "editor_code": "UKR"
+      "editor_code": "UKR",
+      "editor_id": 239
     },
     {
       "code": "UG",
@@ -4402,7 +4632,8 @@
         "nl": "Oeganda",
         "ko": "우간다"
       },
-      "editor_code": "UGA"
+      "editor_code": "UGA",
+      "editor_id": 93
     },
     {
       "code": "UM",
@@ -4421,7 +4652,8 @@
         "nl": "Kleine afgelegen eilanden van de Verenigde Staten",
         "ko": "미국령 해외 제도"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "US",
@@ -4440,7 +4672,8 @@
         "nl": "Verenigde Staten",
         "ko": "미국"
       },
-      "editor_code": "USA"
+      "editor_code": "USA",
+      "editor_id": 135
     },
     {
       "code": "UY",
@@ -4459,7 +4692,8 @@
         "nl": "Uruguay",
         "ko": "우루과이"
       },
-      "editor_code": null
+      "editor_code": "URU",
+      "editor_id": 152
     },
     {
       "code": "UZ",
@@ -4478,7 +4712,8 @@
         "nl": "Oezbekistan",
         "ko": "우즈베키스탄"
       },
-      "editor_code": "UZB"
+      "editor_code": "UZB",
+      "editor_id": 240
     },
     {
       "code": "VA",
@@ -4497,7 +4732,8 @@
         "nl": "Vaticaanstad",
         "ko": "바티칸 시국"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "VC",
@@ -4516,7 +4752,8 @@
         "nl": "Saint Vincent en de Grenadines",
         "ko": "세인트빈센트그레나딘"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "VE",
@@ -4535,7 +4772,8 @@
         "nl": "Venezuela",
         "ko": "베네수엘라"
       },
-      "editor_code": "VEN"
+      "editor_code": "VEN",
+      "editor_id": 153
     },
     {
       "code": "VG",
@@ -4554,7 +4792,8 @@
         "nl": "Britse Maagdeneilanden",
         "ko": "영국령 버진아일랜드"
       },
-      "editor_code": "VGB"
+      "editor_code": "VGB",
+      "editor_id": 136
     },
     {
       "code": "VI",
@@ -4573,7 +4812,8 @@
         "nl": "Amerikaanse Maagdeneilanden",
         "ko": "미국령 버진아일랜드"
       },
-      "editor_code": "VIR"
+      "editor_code": "VIR",
+      "editor_id": 137
     },
     {
       "code": "VN",
@@ -4592,7 +4832,8 @@
         "nl": "Vietnam",
         "ko": "베트남"
       },
-      "editor_code": "VIE"
+      "editor_code": "VIE",
+      "editor_id": 38
     },
     {
       "code": "VU",
@@ -4611,7 +4852,8 @@
         "nl": "Vanuatu",
         "ko": "바누아투"
       },
-      "editor_code": null
+      "editor_code": "VAN",
+      "editor_id": 172
     },
     {
       "code": "WF",
@@ -4630,7 +4872,8 @@
         "nl": "Wallis en Futuna",
         "ko": "왈리스-푸투나 제도"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "WS",
@@ -4649,7 +4892,8 @@
         "nl": "Samoa",
         "ko": "사모아"
       },
-      "editor_code": null
+      "editor_code": "SAM",
+      "editor_id": 168
     },
     {
       "code": "YE",
@@ -4668,7 +4912,8 @@
         "nl": "Jemen",
         "ko": "예멘"
       },
-      "editor_code": "YEM"
+      "editor_code": "YEM",
+      "editor_id": 39
     },
     {
       "code": "YT",
@@ -4687,7 +4932,8 @@
         "nl": "Mayotte",
         "ko": "마요트"
       },
-      "editor_code": null
+      "editor_code": null,
+      "editor_id": null
     },
     {
       "code": "ZA",
@@ -4706,7 +4952,8 @@
         "nl": "Zuid-Afrika",
         "ko": "남아프리카"
       },
-      "editor_code": null
+      "editor_code": "RSA",
+      "editor_id": 87
     },
     {
       "code": "ZM",
@@ -4725,7 +4972,8 @@
         "nl": "Zambia",
         "ko": "잠비아"
       },
-      "editor_code": "ZAM"
+      "editor_code": "ZAM",
+      "editor_id": 94
     },
     {
       "code": "ZW",
@@ -4744,7 +4992,8 @@
         "nl": "Zimbabwe",
         "ko": "짐바브웨"
       },
-      "editor_code": null
+      "editor_code": "ZIM",
+      "editor_id": 95
     },
     {
       "code": null,
@@ -4752,7 +5001,8 @@
       "editor_code": "ENG",
       "names": {
         "en": "England"
-      }
+      },
+      "editor_id": 204
     },
     {
       "code": null,
@@ -4760,7 +5010,8 @@
       "editor_code": "NIR",
       "names": {
         "en": "Northern Ireland"
-      }
+      },
+      "editor_id": 225
     },
     {
       "code": null,
@@ -4768,7 +5019,8 @@
       "editor_code": "SCO",
       "names": {
         "en": "Scotland"
-      }
+      },
+      "editor_id": 232
     },
     {
       "code": null,
@@ -4776,7 +5028,8 @@
       "editor_code": "WAL",
       "names": {
         "en": "Wales"
-      }
+      },
+      "editor_id": 241
     }
   ]
 }

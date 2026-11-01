@@ -6,6 +6,10 @@ PLAYER_RECORD_LEN = 312
 MAX_PLAYERS = 40
 PLAYERS_START = 2328
 EXPECTED_TED_SIZE = 14820
+MANAGER_START = 0x29C
+MANAGER_RECORD_LEN = 0x58
+MANAGER_NAME_OFFSET = 0x09
+MANAGER_NAME_LEN = 79
 
 def extract_players(data: bytearray):
     players = []
@@ -29,16 +33,58 @@ def extract_players(data: bytearray):
 
 
 def get_team_summary(data):
-    # Known fields from the initial script; the complete schema for the team/tactics will be a separate step.
+    # Team fields
     team_start = 80
     assignment = data[756:1040]
-    shirt_numbers = list(struct.unpack_from("<40H", assignment, 164)) if len(assignment) >= 244 else []
+
+    shirt_numbers = (
+        list(struct.unpack_from("<40H", assignment, 164))
+        if len(assignment) >= 244
+        else []
+    )
+
+    # Manager fields
+    manager_data_available = (
+        len(data) >= MANAGER_START + MANAGER_RECORD_LEN
+    )
+
+    if manager_data_available:
+        manager_id = int.from_bytes(
+            data[MANAGER_START:MANAGER_START + 4],
+            "little",
+        )
+
+        manager_nationality = int.from_bytes(
+            data[MANAGER_START + 4:MANAGER_START + 6],
+            "little",
+        )
+
+        manager_picture_id = int.from_bytes(
+            data[MANAGER_START + 6:MANAGER_START + 8],
+            "little",
+        )
+
+        manager_name = read_string(
+            data,
+            MANAGER_START + MANAGER_NAME_OFFSET,
+            MANAGER_NAME_LEN,
+        )
+    else:
+        manager_id = None
+        manager_nationality = None
+        manager_picture_id = None
+        manager_name = None
+
     return {
         "teamName": read_string(data, team_start + 104, 70),
         "shortName": read_string(data, team_start + 174, 4),
         "stadium": read_string(data, team_start + 178, 120),
         "shirtNumbers": shirt_numbers,
         "formationRaw": list(data[1044:1055]) if len(data) >= 1055 else [],
+        "managerId": manager_id,
+        "managerNationality": manager_nationality,
+        "managerPictureId": manager_picture_id,
+        "managerName": manager_name,
     }
 
 
