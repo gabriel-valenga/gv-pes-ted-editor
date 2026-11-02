@@ -334,10 +334,12 @@ def test_first_rule_application_has_priority_across_teds_and_runs(
     second_prepared = cli._prepare_rules_for_ted(
         connection=connection,
         ted_path=second_ted_path,
+        ted_file_id=ted_ids[1],
         rules_list=rules_list,
     )
 
-    assert second_prepared[0]["rules"][0]["playerIds"] == []
+    # An application in TED 1 must not block the player in TED 2.
+    assert second_prepared[0]["rules"][0]["playerIds"] == [1001]
 
     # Start a new execution and register the same functional rule again.
     with connection:
@@ -361,10 +363,12 @@ def test_first_rule_application_has_priority_across_teds_and_runs(
     third_prepared = cli._prepare_rules_for_ted(
         connection=connection,
         ted_path=third_ted_path,
+        ted_file_id=ted_ids[2],
         rules_list=rules_list,
     )
 
-    assert third_prepared[0]["rules"][0]["playerIds"] == []
+    # The application in TED 1 must not block the player in TED 3 either.
+    assert third_prepared[0]["rules"][0]["playerIds"] == [1001]
 
     # The original application must remain the first one.
     application = connection.execute(
