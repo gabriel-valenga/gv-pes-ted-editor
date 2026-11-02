@@ -1516,6 +1516,7 @@ def test_player_settings_are_applied_only_once_when_unchanged(
 
 
 
+
 def test_prepare_rules_excludes_players_already_processed(
     tmp_path,
     monkeypatch,
@@ -1546,17 +1547,21 @@ def test_prepare_rules_excludes_players_already_processed(
     connection.execute("""
         CREATE TABLE player_rule_applications (
             player_id INTEGER NOT NULL,
-            rule_hash TEXT NOT NULL
+            rule_hash TEXT NOT NULL,
+            first_ted_file_id INTEGER NOT NULL
         )
     """)
+
+    ted_file_id = 1
 
     connection.execute("""
         INSERT INTO player_rule_applications (
             player_id,
-            rule_hash
+            rule_hash,
+            first_ted_file_id
         )
-        VALUES (?, ?)
-    """, (1001, rule_hash))
+        VALUES (?, ?, ?)
+    """, (1001, rule_hash, ted_file_id))
 
     monkeypatch.setattr(
         cli,
@@ -1578,16 +1583,18 @@ def test_prepare_rules_excludes_players_already_processed(
     ted_path.write_bytes(b"fake ted")
 
     prepared = cli._prepare_rules_for_ted(
-    connection=connection,
-    ted_path=ted_path,
-    rules_list=[config],
-)
+        connection=connection,
+        ted_path=ted_path,
+        ted_file_id=ted_file_id,
+        rules_list=[config],
+    )
 
     prepared_player_ids = prepared[0]["rules"][0]["playerIds"]
 
     assert prepared_player_ids == [1002, 1003]
 
     connection.close()
+
 
 
 def test_prepare_rules_preserves_existing_player_restrictions(
@@ -1618,9 +1625,12 @@ def test_prepare_rules_preserves_existing_player_restrictions(
     connection.execute("""
         CREATE TABLE player_rule_applications (
             player_id INTEGER NOT NULL,
-            rule_hash TEXT NOT NULL
+            rule_hash TEXT NOT NULL,
+            first_ted_file_id INTEGER NOT NULL
         )
     """)
+
+    ted_file_id = 1
 
     monkeypatch.setattr(
         cli,
@@ -1642,10 +1652,11 @@ def test_prepare_rules_preserves_existing_player_restrictions(
     ted_path.write_bytes(b"fake ted")
 
     prepared = cli._prepare_rules_for_ted(
-    connection=connection,
-    ted_path=ted_path,
-    rules_list=[config],
-)
+        connection=connection,
+        ted_path=ted_path,
+        ted_file_id=ted_file_id,
+        rules_list=[config],
+    )
 
     prepared_player_ids = prepared[0]["rules"][0]["playerIds"]
 
@@ -1682,9 +1693,12 @@ def test_prepare_rules_preserves_original_hash(
     connection.execute("""
         CREATE TABLE player_rule_applications (
             player_id INTEGER NOT NULL,
-            rule_hash TEXT NOT NULL
+            rule_hash TEXT NOT NULL,
+            first_ted_file_id INTEGER NOT NULL
         )
     """)
+
+    ted_file_id = 1
 
     monkeypatch.setattr(
         cli,
@@ -1704,10 +1718,11 @@ def test_prepare_rules_preserves_original_hash(
     ted_path.write_bytes(b"fake ted")
 
     prepared = cli._prepare_rules_for_ted(
-    connection=connection,
-    ted_path=ted_path,
-    rules_list=[config],
-)
+        connection=connection,
+        ted_path=ted_path,
+        ted_file_id=ted_file_id,
+        rules_list=[config],
+    )
 
     prepared_rule = prepared[0]["rules"][0]
 

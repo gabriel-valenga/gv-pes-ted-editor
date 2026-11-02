@@ -433,13 +433,16 @@ def calculate_position_score(player, position):
 
 
 
-def calculate_overall(player):
+def calculate_overall(player, position=None):
     """
-    Calculate the player's Overall using registeredPosition.
+    Calculate the player's Overall for a given position.
+
+    Uses registeredPosition when no position is provided.
 
     Returns None when required data is missing or invalid.
     """
-    position = player.get("registeredPosition")
+    if position is None:
+        position = player.get("registeredPosition")
 
     if position not in POSITION_WEIGHTS:
         return None

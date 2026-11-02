@@ -30,9 +30,13 @@ from ted.reader import (
     get_team_summary,
 )
 from ted.writer import save_ted, validate_ted_round_trip
+
 from database.connection import get_connection
 from database.importer import import_option_file
 from database.migration_runner import migrate_database
+from database.editing.players.overall_backfill import (
+    backfill_player_overalls
+)
 from database.repositories.editing_history_repository import (
     create_edit_run,
     create_edit_run_rule,
@@ -176,7 +180,6 @@ def _get_database_path() -> Path:
     """Return the project database path."""
     project_root = Path(__file__).resolve().parents[1]
     return project_root / "data" / "database.db"
-
 
 
 def _find_registered_ted(
@@ -568,6 +571,11 @@ def main():
         help="Import an Option File into the database without editing TED files.",
     )
     parser.add_argument(
+        "--backfill-overalls",
+        action="store_true",
+        help="Calculate and persist missing player Overalls in the database.",
+    )
+    parser.add_argument(
         "--in-place",
         action="store_true",
         help="Replace original TED files after successful processing and validation.",
@@ -610,6 +618,77 @@ def main():
     )
 
     args = parser.parse_args()
+
+    # Overall backfill mode is independent from the editing workflow.
+    if args.backfill_overalls:
+        incompatible_options = []
+
+        if args.ted:
+            incompatible_options.append("positional TED paths")
+        if args.input_dir:
+            incompatible_options.append("--input-dir")
+        if args.option_file:
+            incompatible_options.append("--option-file")
+        if args.import_db:
+            incompatible_options.append("--import-db")
+        if args.in_place:
+            incompatible_options.append("--in-place")
+        if args.config:
+            incompatible_options.append("--config")
+        if args.output_dir:
+            incompatible_options.append("--output-dir")
+        if args.json_out:
+            incompatible_options.append("--json")
+        if args.decrypted:
+            incompatible_options.append("--decrypted")
+        if args.set:
+            incompatible_options.append("--set")
+        if args.out:
+            incompatible_options.append("--out")
+        if args.list_fields:
+            incompatible_options.append("--list-fields")
+
+        if incompatible_options:
+            parser.error(
+                "--backfill-overalls cannot be combined with: "
+                + ", ".join(incompatible_options)
+            )
+
+        database_path = _get_database_path()
+        connection = None
+
+        try:
+            connection = get_connection(database_path)
+
+            migrate_database(connection)
+
+            result = backfill_player_overalls(connection)
+
+            print(
+                json.dumps(
+                    result,
+                    ensure_ascii=False,
+                    indent=2,
+                )
+            )
+
+            print(
+                "Overall backfill finished: "
+                f"{result['players_processed']} players processed, "
+                f"{result['position_overalls_inserted']} position Overalls "
+                "inserted, "
+                f"{result['registered_overalls_inserted']} registered "
+                "Overalls inserted."
+            )
+
+        except Exception as exc:
+            parser.error(f"Overall backfill failed: {exc}")
+
+        finally:
+            if connection is not None:
+                connection.close()
+
+        return
 
     # Database import mode is independent from the editing workflow.
     if args.import_db:
