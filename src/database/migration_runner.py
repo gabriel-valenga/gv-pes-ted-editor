@@ -12,7 +12,8 @@ MIGRATIONS = [
     (6, "database.migrations.006_editing_history"),
     (7, "database.migrations.007_rollback_events"),
     (8, "database.migrations.008_add_coach_external_id"),
-    (9, "database.migrations.009_prevent_duplicate_player_rules")
+    (9, "database.migrations.009_prevent_duplicate_player_rules"),
+    (10, "database.migrations.010_scope_player_rules_by_ted")
 ]
 
 LATEST_SCHEMA_VERSION = MIGRATIONS[-1][0]

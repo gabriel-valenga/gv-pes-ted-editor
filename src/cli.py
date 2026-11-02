@@ -296,10 +296,11 @@ def _build_rule_records(
 def _prepare_rules_for_ted(
     connection: sqlite3.Connection,
     ted_path: Path,
+    ted_file_id: int,
     rules_list: list[dict],
 ) -> list[dict]:
     """
-    Exclude players that already received the same rule in a previous TED.
+    Exclude players that already received the same rule in this TED.
     """
     encrypted_content = ted_path.read_bytes()
     decrypted_data = decrypt_ted(encrypted_content)
@@ -331,8 +332,9 @@ def _prepare_rules_for_ted(
                 SELECT player_id
                 FROM player_rule_applications
                 WHERE rule_hash = ?
+                  AND first_ted_file_id = ?
                 """,
-                (rule_hash,),
+                (rule_hash, ted_file_id),
             ).fetchall()
 
             blocked_player_ids = {
@@ -914,6 +916,7 @@ def main():
                 ted_rules_list = _prepare_rules_for_ted(
                     connection=connection,
                     ted_path=ted_file,
+                    ted_file_id=registered_ted["ted_file_id"],
                     rules_list=rules_list,
                 )
 
