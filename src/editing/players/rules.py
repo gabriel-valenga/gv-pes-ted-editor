@@ -110,10 +110,11 @@ BOOLEAN_SKILL_FIELDS = {
     )
 }
 
-# Player reputation field.
 # It uses a 3-bit field with logical values from 1 to 8.
-REPUTATION_FIELDS = {
+P1_TRANSFORMATION_FIELDS = {
     "reputation",
+    "form",
+    "injuryResistance"
 }
 
 
@@ -226,7 +227,7 @@ def _validate_operation(operation):
             f"for field '{field_name}'."
         )
 
-    if field_name in NUMERIC_ATTRIBUTE_FIELDS:
+    if field_name in NUMERIC_ATTRIBUTE_FIELDS or field_name in P1_TRANSFORMATION_FIELDS:
         if not _is_finite_number(value):
             raise ValueError(
                 f"Operation on '{field_name}' requires a finite number."
@@ -248,11 +249,11 @@ def _validate_operation(operation):
                 f"Boolean skill '{field_name}' requires true or false."
             )
 
-    elif field_name in REPUTATION_FIELDS:
-        if operation_type != "set":
-            raise ValueError(
-                f"Reputation field '{field_name}' only supports 'set'."
-            )
+    elif field_name in P1_TRANSFORMATION_FIELDS:
+        # if operation_type != "set":
+        #     raise ValueError(
+        #         f"Reputation field '{field_name}' only supports 'set'."
+        #     )
 
         if (
             not isinstance(value, int)
@@ -592,7 +593,7 @@ def load_rules(config_path):
     }
 
 
-def _calculate_operation(current_value, operation):
+def _calculate_operation(current_value, operation, max_value, min_value):
     operation_type = operation["operation"]
     value = operation["value"]
 
@@ -612,8 +613,7 @@ def _calculate_operation(current_value, operation):
             f"Unsupported operation: {operation_type}"
         )
 
-    # PES numeric attributes are limited to 40..99.
-    return max(40, min(99, int(result)))
+    return max(min_value, min(max_value, int(result)))
 
 
 def _apply_operation(data, player, operation):
@@ -628,12 +628,12 @@ def _apply_operation(data, player, operation):
                 f"Invalid current value for '{field_name}'."
             )
 
-        after = _calculate_operation(before, operation)
+        after = _calculate_operation(before, operation, 99, 40)
 
     elif field_name in BOOLEAN_SKILL_FIELDS:
         after = value
 
-    elif field_name in REPUTATION_FIELDS:
+    elif field_name in P1_TRANSFORMATION_FIELDS:
         if (
             not isinstance(before, int)
             or isinstance(before, bool)
@@ -642,8 +642,10 @@ def _apply_operation(data, player, operation):
             raise ValueError(
                 f"Invalid current value for '{field_name}'."
             )
-
-        after = value
+        if field_name in ('reputation', 'injuryResistance'):
+            after = _calculate_operation(before, operation, 8, 1)
+        elif field_name == 'form':
+            after = _calculate_operation(before, operation, 3, 1)
 
     else:
         raise ValueError(
