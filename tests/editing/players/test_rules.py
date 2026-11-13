@@ -333,18 +333,6 @@ def test_reputation_rejects_invalid_value(value):
         _validate_operation(operation)
 
 
-@pytest.mark.parametrize("operation_type", ["delta", "percentage"])
-def test_reputation_rejects_unsupported_operations(operation_type):
-    operation = {
-        "field": "reputation",
-        "operation": operation_type,
-        "value": 1,
-    }
-
-    with pytest.raises(ValueError):
-        _validate_operation(operation)
-        
-
 def test_boolean_skill_rejects_delta():
     operation = {
         "field": "acrobaticClear",
@@ -410,7 +398,7 @@ def test_calculate_set():
         "value": 90,
     }
 
-    assert _calculate_operation(75, operation) == 90
+    assert _calculate_operation(75, operation, max_value=99, min_value=40) == 90
 
 
 def test_calculate_delta():
@@ -419,7 +407,7 @@ def test_calculate_delta():
         "value": -10,
     }
 
-    assert _calculate_operation(85, operation) == 75
+    assert _calculate_operation(85, operation, max_value=99, min_value=40) == 75
 
 
 def test_calculate_percentage_increase():
@@ -428,7 +416,7 @@ def test_calculate_percentage_increase():
         "value": 10,
     }
 
-    assert _calculate_operation(80, operation) == 88
+    assert _calculate_operation(80, operation, max_value=99, min_value=40) == 88
 
 
 def test_calculate_percentage_decrease():
@@ -437,7 +425,7 @@ def test_calculate_percentage_decrease():
         "value": -10,
     }
 
-    assert _calculate_operation(80, operation) == 72
+    assert _calculate_operation(80, operation, max_value=99, min_value=40) == 72
 
 
 @pytest.mark.parametrize(
@@ -450,7 +438,7 @@ def test_calculate_percentage_decrease():
     ],
 )
 def test_numeric_attribute_limits(current, operation, expected):
-    assert _calculate_operation(current, operation) == expected
+    assert _calculate_operation(current, operation, max_value=99, min_value=40) == expected
 
 
 def test_calculate_operation_uses_python_rounding():
@@ -459,7 +447,7 @@ def test_calculate_operation_uses_python_rounding():
         "value": 0.5,
     }
 
-    assert _calculate_operation(80, operation) == 80
+    assert _calculate_operation(80, operation, max_value=99, min_value=40) == 80
 
 
 

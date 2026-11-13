@@ -227,7 +227,7 @@ def _validate_operation(operation):
             f"for field '{field_name}'."
         )
 
-    if field_name in NUMERIC_ATTRIBUTE_FIELDS or field_name in P1_TRANSFORMATION_FIELDS:
+    if field_name in NUMERIC_ATTRIBUTE_FIELDS:
         if not _is_finite_number(value):
             raise ValueError(
                 f"Operation on '{field_name}' requires a finite number."
@@ -250,18 +250,25 @@ def _validate_operation(operation):
             )
 
     elif field_name in P1_TRANSFORMATION_FIELDS:
-        # if operation_type != "set":
-        #     raise ValueError(
-        #         f"Reputation field '{field_name}' only supports 'set'."
-        #     )
-
+        if operation_type == "set" and not float(value).is_integer():
+            raise ValueError(
+                f"Operation 'set' on '{field_name}' requires an integer."
+            )
+        # create validation rule by field name right here
+        # reputation and injuryResistance will have a type of validation and form will have another
         if (
             not isinstance(value, int)
-            or isinstance(value, bool)
-            or not 1 <= value <= 8
+            or ( field_name in ('reputation', 'injuryResistance') and (not 1 <= value <= 8) ) 
         ):
             raise ValueError(
-                f"Reputation field '{field_name}' requires an integer from 1 to 8."
+                f"Field '{field_name}' requires an integer from 1 to 8."
+            )
+        elif (
+            ( field_name == 'form' and (not 1 <= value <= 8))
+            or isinstance(value, bool)
+        ):
+            raise ValueError(
+                f"Field '{field_name}' requires an integer from 1 to 3."
             )
 
     else:
